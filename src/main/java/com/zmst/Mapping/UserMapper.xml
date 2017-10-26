@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zmst.IDao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.zmst.Domain.User">
+    <id column="UsId" jdbcType="INTEGER" property="usid" />
+    <result column="UsName" jdbcType="VARCHAR" property="usname" />
+    <result column="UsPlace" jdbcType="VARCHAR" property="usplace" />
+    <result column="UsPassword" jdbcType="VARCHAR" property="uspassword" />
+    <result column="UsPower" jdbcType="INTEGER" property="uspower" />
+    <result column="UsStatus" jdbcType="INTEGER" property="usstatus" />
+    <result column="DaInsert" jdbcType="INTEGER" property="dainsert" />
+    <result column="DaSearch" jdbcType="INTEGER" property="dasearch" />
+    <result column="DaCheck" jdbcType="INTEGER" property="dacheck" />
+    <result column="DaMath" jdbcType="INTEGER" property="damath" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    UsId, UsName, UsPlace, UsPassword, UsPower, UsStatus, DaInsert, DaSearch, DaCheck, 
+    DaMath
+  </sql>
+  <select id="selectByUser" parameterType="com.zmst.Domain.User" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_user
+    where UsName=#{usname,jdbcType=VARCHAR} and UsPassword=#{uspassword,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByUserName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_user
+    where UsName=#{0}
+  </select>
+ 
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbl_user
+    where UsId = #{0}
+  </delete>
+  <insert id="save" parameterType="com.zmst.Domain.User">
+    insert into tbl_user (UsId, UsName, UsPlace, 
+      UsPassword, UsPower, UsStatus, 
+      DaInsert, DaSearch, DaCheck, 
+      DaMath)
+    values (#{usid,jdbcType=INTEGER}, #{usname,jdbcType=VARCHAR}, #{usplace,jdbcType=VARCHAR}, 
+      #{uspassword,jdbcType=VARCHAR}, #{uspower,jdbcType=INTEGER}, #{usstatus,jdbcType=INTEGER}, 
+      #{dainsert,jdbcType=INTEGER}, #{dasearch,jdbcType=INTEGER}, #{dacheck,jdbcType=INTEGER}, 
+      #{damath,jdbcType=INTEGER})
+  </insert>
+  
+   <update id="userUpdate" parameterType="com.zmst.Domain.User">
+    update  tbl_user
+    set   uspassword = #{uspassword,jdbcType=VARCHAR},usplace=#{usplace,jdbcType=VARCHAR}
+    where usname = #{usname,jdbcType=VARCHAR}
+  </update>
+  
+    <update id="userPowerUpdate" parameterType="com.zmst.Domain.User">
+    update tbl_user
+    set   dainsert=#{dainsert,jdbcType=INTEGER},damath=#{damath,jdbcType=INTEGER},
+    dasearch=#{dasearch,jdbcType=INTEGER},dacheck=#{dacheck,jdbcType=INTEGER}
+    where usname = #{usname,jdbcType=VARCHAR}
+  </update>
+  
+  <delete id="userDelete" parameterType = "java.lang.String">
+	delete from  tbl_user
+	where usname=#{0}
+</delete>
+  
+  <insert id="insertSelective" parameterType="com.zmst.Domain.User">
+    insert into tbl_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="usid != null">
+        UsId,
+      </if>
+      <if test="usname != null">
+        UsName,
+      </if>
+      <if test="usplace != null">
+        UsPlace,
+      </if>
+      <if test="uspassword != null">
+        UsPassword,
+      </if>
+      <if test="uspower != null">
+        UsPower,
+      </if>
+      <if test="usstatus != null">
+        UsStatus,
+      </if>
+      <if test="dainsert != null">
+        DaInsert,
+      </if>
+      <if test="dasearch != null">
+        DaSearch,
+      </if>
+      <if test="dacheck != null">
+        DaCheck,
+      </if>
+      <if test="damath != null">
+        DaMath,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="usid != null">
+        #{usid,jdbcType=INTEGER},
+      </if>
+      <if test="usname != null">
+        #{usname,jdbcType=VARCHAR},
+      </if>
+      <if test="usplace != null">
+        #{usplace,jdbcType=VARCHAR},
+      </if>
+      <if test="uspassword != null">
+        #{uspassword,jdbcType=VARCHAR},
+      </if>
+      <if test="uspower != null">
+        #{uspower,jdbcType=INTEGER},
+      </if>
+      <if test="usstatus != null">
+        #{usstatus,jdbcType=INTEGER},
+      </if>
+      <if test="dainsert != null">
+        #{dainsert,jdbcType=INTEGER},
+      </if>
+      <if test="dasearch != null">
+        #{dasearch,jdbcType=INTEGER},
+      </if>
+      <if test="dacheck != null">
+        #{dacheck,jdbcType=INTEGER},
+      </if>
+      <if test="damath != null">
+        #{damath,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zmst.Domain.User">
+    update tbl_user
+    <set>
+      <if test="usname != null">
+        UsName = #{usname,jdbcType=VARCHAR},
+      </if>
+      <if test="usplace != null">
+        UsPlace = #{usplace,jdbcType=VARCHAR},
+      </if>
+      <if test="uspassword != null">
+        UsPassword = #{uspassword,jdbcType=VARCHAR},
+      </if>
+      <if test="uspower != null">
+        UsPower = #{uspower,jdbcType=INTEGER},
+      </if>
+      <if test="usstatus != null">
+        UsStatus = #{usstatus,jdbcType=INTEGER},
+      </if>
+      <if test="dainsert != null">
+        DaInsert = #{dainsert,jdbcType=INTEGER},
+      </if>
+      <if test="dasearch != null">
+        DaSearch = #{dasearch,jdbcType=INTEGER},
+      </if>
+      <if test="dacheck != null">
+        DaCheck = #{dacheck,jdbcType=INTEGER},
+      </if>
+      <if test="damath != null">
+        DaMath = #{damath,jdbcType=INTEGER},
+      </if>
+    </set>
+    where UsId = #{usid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zmst.Domain.User">
+    update tbl_user
+    set UsName = #{usname,jdbcType=VARCHAR},
+      UsPlace = #{usplace,jdbcType=VARCHAR},
+      UsPassword = #{uspassword,jdbcType=VARCHAR},
+      UsPower = #{uspower,jdbcType=INTEGER},
+      UsStatus = #{usstatus,jdbcType=INTEGER},
+      DaInsert = #{dainsert,jdbcType=INTEGER},
+      DaSearch = #{dasearch,jdbcType=INTEGER},
+      DaCheck = #{dacheck,jdbcType=INTEGER},
+      DaMath = #{damath,jdbcType=INTEGER}
+    where UsId = #{usid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zmst.IDao.LandTaxMapper">
+  <resultMap id="BaseResultMap" type="com.zmst.Domain.LandTax">
+    <id column="LTId" jdbcType="INTEGER" property="ltid" />
+    <result column="Year" jdbcType="VARCHAR" property="year" />
+    <result column="Place" jdbcType="VARCHAR" property="place" />
+    <result column="LaCode" jdbcType="VARCHAR" property="lacode" />
+    <result column="SmCode" jdbcType="VARCHAR" property="smcode" />
+    <result column="SmName" jdbcType="VARCHAR" property="smname" />
+    <result column="LaTax" jdbcType="DOUBLE" property="latax" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    LTId, Year, Place, LaCode, SmCode, SmName, LaTax
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_landtax
+    where LTId = #{ltid,jdbcType=INTEGER}
+  </select>
+  
+  <select id="getAllLandTax"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_landtax
+    where  year = #{0} and place=#{1}
+  </select>
+  
+    <delete id="deleteByYearPlace"  >
+    delete from tbl_landtax
+    where year = #{0} and place = #{1}
+  </delete>
+  
+  <insert id="save" parameterType="com.zmst.Domain.LandTax">
+    insert into tbl_landtax (LTId, Year, Place, 
+      LaCode, SmCode, SmName, 
+      LaTax)
+    values (#{ltid,jdbcType=INTEGER}, #{year,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR}, 
+      #{lacode,jdbcType=VARCHAR}, #{smcode,jdbcType=VARCHAR}, #{smname,jdbcType=VARCHAR}, 
+      #{latax,jdbcType=DOUBLE})
+  </insert>
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbl_landtax
+    where LTId = #{ltid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zmst.Domain.LandTax">
+    insert into tbl_landtax (LTId, Year, Place, 
+      LaCode, SmCode, SmName, 
+      LaTax)
+    values (#{ltid,jdbcType=INTEGER}, #{year,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR}, 
+      #{lacode,jdbcType=VARCHAR}, #{smcode,jdbcType=VARCHAR}, #{smname,jdbcType=VARCHAR}, 
+      #{latax,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zmst.Domain.LandTax">
+    insert into tbl_landtax
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ltid != null">
+        LTId,
+      </if>
+      <if test="year != null">
+        Year,
+      </if>
+      <if test="place != null">
+        Place,
+      </if>
+      <if test="lacode != null">
+        LaCode,
+      </if>
+      <if test="smcode != null">
+        SmCode,
+      </if>
+      <if test="smname != null">
+        SmName,
+      </if>
+      <if test="latax != null">
+        LaTax,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ltid != null">
+        #{ltid,jdbcType=INTEGER},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null">
+        #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="lacode != null">
+        #{lacode,jdbcType=VARCHAR},
+      </if>
+      <if test="smcode != null">
+        #{smcode,jdbcType=VARCHAR},
+      </if>
+      <if test="smname != null">
+        #{smname,jdbcType=VARCHAR},
+      </if>
+      <if test="latax != null">
+        #{latax,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zmst.Domain.LandTax">
+    update tbl_landtax
+    <set>
+      <if test="year != null">
+        Year = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null">
+        Place = #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="lacode != null">
+        LaCode = #{lacode,jdbcType=VARCHAR},
+      </if>
+      <if test="smcode != null">
+        SmCode = #{smcode,jdbcType=VARCHAR},
+      </if>
+      <if test="smname != null">
+        SmName = #{smname,jdbcType=VARCHAR},
+      </if>
+      <if test="latax != null">
+        LaTax = #{latax,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where LTId = #{ltid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zmst.Domain.LandTax">
+    update tbl_landtax
+    set Year = #{year,jdbcType=VARCHAR},
+      Place = #{place,jdbcType=VARCHAR},
+      LaCode = #{lacode,jdbcType=VARCHAR},
+      SmCode = #{smcode,jdbcType=VARCHAR},
+      SmName = #{smname,jdbcType=VARCHAR},
+      LaTax = #{latax,jdbcType=DOUBLE}
+    where LTId = #{ltid,jdbcType=INTEGER}
+  </update>
+</mapper>

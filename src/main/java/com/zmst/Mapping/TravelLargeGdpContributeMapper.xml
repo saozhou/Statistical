@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zmst.IDao.TravelLargeGdpContributeMapper">
+  <resultMap id="BaseResultMap" type="com.zmst.Domain.TravelLargeGdpContribute">
+    <id column="ConId" jdbcType="INTEGER" property="conid" />
+    <result column="LaCode" jdbcType="VARCHAR" property="lacode" />
+    <result column="LaName" jdbcType="VARCHAR" property="laname" />
+    <result column="Gdp" jdbcType="DOUBLE" property="gdp" />
+    <result column="TrGdp" jdbcType="DOUBLE" property="trgdp" />
+    <result column="Rate" jdbcType="DOUBLE" property="rate" />
+    <result column="Year" jdbcType="VARCHAR" property="year" />
+    <result column="Place" jdbcType="VARCHAR" property="place" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ConId, LaCode, LaName, Gdp, TrGdp, Rate, Year, Place
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_travellargegdpcontribute
+    where ConId = #{conid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbl_travellargegdpcontribute
+    where ConId = #{conid,jdbcType=INTEGER}
+  </delete>
+  
+    <delete id="deleteByYearPlace" >
+    delete from tbl_travellargegdpcontribute
+    where year=#{0} and place=#{1}
+  </delete>
+  
+  
+  <insert id="insert" parameterType="com.zmst.Domain.TravelLargeGdpContribute">
+    insert into tbl_travellargegdpcontribute (ConId, LaCode, LaName, 
+      Gdp, TrGdp, Rate, Year, 
+      Place)
+    values (#{conid,jdbcType=INTEGER}, #{lacode,jdbcType=VARCHAR}, #{laname,jdbcType=VARCHAR}, 
+      #{gdp,jdbcType=DOUBLE}, #{trgdp,jdbcType=DOUBLE}, #{rate,jdbcType=DOUBLE}, #{year,jdbcType=VARCHAR}, 
+      #{place,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zmst.Domain.TravelLargeGdpContribute">
+    insert into tbl_travellargegdpcontribute
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="conid != null">
+        ConId,
+      </if>
+      <if test="lacode != null">
+        LaCode,
+      </if>
+      <if test="laname != null">
+        LaName,
+      </if>
+      <if test="gdp != null">
+        Gdp,
+      </if>
+      <if test="trgdp != null">
+        TrGdp,
+      </if>
+      <if test="rate != null">
+        Rate,
+      </if>
+      <if test="year != null">
+        Year,
+      </if>
+      <if test="place != null">
+        Place,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="conid != null">
+        #{conid,jdbcType=INTEGER},
+      </if>
+      <if test="lacode != null">
+        #{lacode,jdbcType=VARCHAR},
+      </if>
+      <if test="laname != null">
+        #{laname,jdbcType=VARCHAR},
+      </if>
+      <if test="gdp != null">
+        #{gdp,jdbcType=DOUBLE},
+      </if>
+      <if test="trgdp != null">
+        #{trgdp,jdbcType=DOUBLE},
+      </if>
+      <if test="rate != null">
+        #{rate,jdbcType=DOUBLE},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null">
+        #{place,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zmst.Domain.TravelLargeGdpContribute">
+    update tbl_travellargegdpcontribute
+    <set>
+      <if test="lacode != null">
+        LaCode = #{lacode,jdbcType=VARCHAR},
+      </if>
+      <if test="laname != null">
+        LaName = #{laname,jdbcType=VARCHAR},
+      </if>
+      <if test="gdp != null">
+        Gdp = #{gdp,jdbcType=DOUBLE},
+      </if>
+      <if test="trgdp != null">
+        TrGdp = #{trgdp,jdbcType=DOUBLE},
+      </if>
+      <if test="rate != null">
+        Rate = #{rate,jdbcType=DOUBLE},
+      </if>
+      <if test="year != null">
+        Year = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null">
+        Place = #{place,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ConId = #{conid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zmst.Domain.TravelLargeGdpContribute">
+    update tbl_travellargegdpcontribute
+    set LaCode = #{lacode,jdbcType=VARCHAR},
+      LaName = #{laname,jdbcType=VARCHAR},
+      Gdp = #{gdp,jdbcType=DOUBLE},
+      TrGdp = #{trgdp,jdbcType=DOUBLE},
+      Rate = #{rate,jdbcType=DOUBLE},
+      Year = #{year,jdbcType=VARCHAR},
+      Place = #{place,jdbcType=VARCHAR}
+    where ConId = #{conid,jdbcType=INTEGER}
+  </update>
+</mapper>

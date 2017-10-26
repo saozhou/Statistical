@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zmst.IDao.SubGdpMapper">
+  <resultMap id="BaseResultMap" type="com.zmst.Domain.SubGdp">
+    <id column="SGId" jdbcType="INTEGER" property="sgid" />
+    <result column="Year" jdbcType="VARCHAR" property="year" />
+    <result column="Place" jdbcType="VARCHAR" property="place" />
+    <result column="SmCode" jdbcType="VARCHAR" property="smcode" />
+    <result column="SmName" jdbcType="VARCHAR" property="smname" />
+    <result column="SmGdp" jdbcType="DOUBLE" property="smgdp" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    SGId, Year, Place, SmCode, SmName, SmGdp
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_subgdp
+    where SGId = #{sgid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbl_subgdp
+    where SGId = #{sgid,jdbcType=INTEGER}
+  </delete>
+  
+   <delete id="deleteByYearPlace">
+    delete from tbl_subgdp
+    where year = #{0} and place=#{1}
+    </delete> 
+  
+  <insert id="save" parameterType="com.zmst.Domain.SubGdp">
+    insert into tbl_subgdp (SGId, Year, Place, 
+      SmCode, SmName, SmGdp
+      )
+    values (#{sgid,jdbcType=INTEGER}, #{year,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR}, 
+      #{smcode,jdbcType=VARCHAR}, #{smname,jdbcType=VARCHAR}, #{smgdp,jdbcType=DOUBLE}
+      )
+  </insert>
+  
+  <insert id="insert" parameterType="com.zmst.Domain.SubGdp">
+    insert into tbl_subgdp (SGId, Year, Place, 
+      SmCode, SmName, SmGdp
+      )
+    values (#{sgid,jdbcType=INTEGER}, #{year,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR}, 
+      #{smcode,jdbcType=VARCHAR}, #{smname,jdbcType=VARCHAR}, #{smgdp,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zmst.Domain.SubGdp">
+    insert into tbl_subgdp
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sgid != null">
+        SGId,
+      </if>
+      <if test="year != null">
+        Year,
+      </if>
+      <if test="place != null">
+        Place,
+      </if>
+      <if test="smcode != null">
+        SmCode,
+      </if>
+      <if test="smname != null">
+        SmName,
+      </if>
+      <if test="smgdp != null">
+        SmGdp,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sgid != null">
+        #{sgid,jdbcType=INTEGER},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null">
+        #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="smcode != null">
+        #{smcode,jdbcType=VARCHAR},
+      </if>
+      <if test="smname != null">
+        #{smname,jdbcType=VARCHAR},
+      </if>
+      <if test="smgdp != null">
+        #{smgdp,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zmst.Domain.SubGdp">
+    update tbl_subgdp
+    <set>
+      <if test="year != null">
+        Year = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null">
+        Place = #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="smcode != null">
+        SmCode = #{smcode,jdbcType=VARCHAR},
+      </if>
+      <if test="smname != null">
+        SmName = #{smname,jdbcType=VARCHAR},
+      </if>
+      <if test="smgdp != null">
+        SmGdp = #{smgdp,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where SGId = #{sgid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zmst.Domain.SubGdp">
+    update tbl_subgdp
+    set Year = #{year,jdbcType=VARCHAR},
+      Place = #{place,jdbcType=VARCHAR},
+      SmCode = #{smcode,jdbcType=VARCHAR},
+      SmName = #{smname,jdbcType=VARCHAR},
+      SmGdp = #{smgdp,jdbcType=DOUBLE}
+    where SGId = #{sgid,jdbcType=INTEGER}
+  </update>
+</mapper>

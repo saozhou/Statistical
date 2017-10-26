@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zmst.IDao.TravelClassGdpContributeMapper">
+  <resultMap id="BaseResultMap" type="com.zmst.Domain.TravelClassGdpContribute">
+    <id column="TCCId" jdbcType="INTEGER" property="tccid" />
+    <result column="Year" jdbcType="VARCHAR" property="year" />
+    <result column="Place" jdbcType="VARCHAR" property="place" />
+    <result column="ClCode" jdbcType="VARCHAR" property="clcode" />
+    <result column="ClName" jdbcType="VARCHAR" property="clname" />
+    <result column="Gdp" jdbcType="DOUBLE" property="gdp" />
+    <result column="TrGdp" jdbcType="DOUBLE" property="trgdp" />
+    <result column="Rate" jdbcType="DOUBLE" property="rate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    TCCId, Year, Place, ClCode, ClName, Gdp, TrGdp, Rate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_travelclassgdpcontribute
+    where TCCId = #{tccid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbl_travelclassgdpcontribute
+    where TCCId = #{tccid,jdbcType=INTEGER}
+  </delete>
+  
+   <delete id="deleteByYearPlace" >
+    delete from tbl_travelclassgdpcontribute
+    where year=#{0} and place=#{1}
+  </delete>
+  
+  <insert id="insert" parameterType="com.zmst.Domain.TravelClassGdpContribute">
+    insert into tbl_travelclassgdpcontribute (TCCId, Year, Place, 
+      ClCode, ClName, Gdp, 
+      TrGdp, Rate)
+    values (#{tccid,jdbcType=INTEGER}, #{year,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR}, 
+      #{clcode,jdbcType=VARCHAR}, #{clname,jdbcType=VARCHAR}, #{gdp,jdbcType=DOUBLE}, 
+      #{trgdp,jdbcType=DOUBLE}, #{rate,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zmst.Domain.TravelClassGdpContribute">
+    insert into tbl_travelclassgdpcontribute
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tccid != null">
+        TCCId,
+      </if>
+      <if test="year != null">
+        Year,
+      </if>
+      <if test="place != null">
+        Place,
+      </if>
+      <if test="clcode != null">
+        ClCode,
+      </if>
+      <if test="clname != null">
+        ClName,
+      </if>
+      <if test="gdp != null">
+        Gdp,
+      </if>
+      <if test="trgdp != null">
+        TrGdp,
+      </if>
+      <if test="rate != null">
+        Rate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tccid != null">
+        #{tccid,jdbcType=INTEGER},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null">
+        #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="clcode != null">
+        #{clcode,jdbcType=VARCHAR},
+      </if>
+      <if test="clname != null">
+        #{clname,jdbcType=VARCHAR},
+      </if>
+      <if test="gdp != null">
+        #{gdp,jdbcType=DOUBLE},
+      </if>
+      <if test="trgdp != null">
+        #{trgdp,jdbcType=DOUBLE},
+      </if>
+      <if test="rate != null">
+        #{rate,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zmst.Domain.TravelClassGdpContribute">
+    update tbl_travelclassgdpcontribute
+    <set>
+      <if test="year != null">
+        Year = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null">
+        Place = #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="clcode != null">
+        ClCode = #{clcode,jdbcType=VARCHAR},
+      </if>
+      <if test="clname != null">
+        ClName = #{clname,jdbcType=VARCHAR},
+      </if>
+      <if test="gdp != null">
+        Gdp = #{gdp,jdbcType=DOUBLE},
+      </if>
+      <if test="trgdp != null">
+        TrGdp = #{trgdp,jdbcType=DOUBLE},
+      </if>
+      <if test="rate != null">
+        Rate = #{rate,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where TCCId = #{tccid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zmst.Domain.TravelClassGdpContribute">
+    update tbl_travelclassgdpcontribute
+    set Year = #{year,jdbcType=VARCHAR},
+      Place = #{place,jdbcType=VARCHAR},
+      ClCode = #{clcode,jdbcType=VARCHAR},
+      ClName = #{clname,jdbcType=VARCHAR},
+      Gdp = #{gdp,jdbcType=DOUBLE},
+      TrGdp = #{trgdp,jdbcType=DOUBLE},
+      Rate = #{rate,jdbcType=DOUBLE}
+    where TCCId = #{tccid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zmst.IDao.LargeTravelGdpMapper">
+  <resultMap id="BaseResultMap" type="com.zmst.Domain.LargeTravelGdp">
+    <id column="LTGId" jdbcType="INTEGER" property="ltgid" />
+    <result column="Year" jdbcType="VARCHAR" property="year" />
+    <result column="Place" jdbcType="VARCHAR" property="place" />
+    <result column="LaCode" jdbcType="VARCHAR" property="lacode" />
+    <result column="LaName" jdbcType="VARCHAR" property="laname" />
+    <result column="LTGdp" jdbcType="DOUBLE" property="ltgdp" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    LTGId, Year, Place, LaCode, LaName, LTGdp
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_largetravelgdp
+    where LTGId = #{ltgid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbl_largetravelgdp
+    where LTGId = #{ltgid,jdbcType=INTEGER}
+  </delete>
+  
+   <delete id="deleteByYearPlace" >
+    delete from tbl_largetravelgdp
+    where year=#{0} and place=#{1}
+  </delete>
+  
+  <insert id="insert" parameterType="com.zmst.Domain.LargeTravelGdp">
+    insert into tbl_largetravelgdp (LTGId, Year, Place, 
+      LaCode, LaName, LTGdp
+      )
+    values (#{ltgid,jdbcType=INTEGER}, #{year,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR}, 
+      #{lacode,jdbcType=VARCHAR}, #{laname,jdbcType=VARCHAR}, #{ltgdp,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zmst.Domain.LargeTravelGdp">
+    insert into tbl_largetravelgdp
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ltgid != null">
+        LTGId,
+      </if>
+      <if test="year != null">
+        Year,
+      </if>
+      <if test="place != null">
+        Place,
+      </if>
+      <if test="lacode != null">
+        LaCode,
+      </if>
+      <if test="laname != null">
+        LaName,
+      </if>
+      <if test="ltgdp != null">
+        LTGdp,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ltgid != null">
+        #{ltgid,jdbcType=INTEGER},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null">
+        #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="lacode != null">
+        #{lacode,jdbcType=VARCHAR},
+      </if>
+      <if test="laname != null">
+        #{laname,jdbcType=VARCHAR},
+      </if>
+      <if test="ltgdp != null">
+        #{ltgdp,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zmst.Domain.LargeTravelGdp">
+    update tbl_largetravelgdp
+    <set>
+      <if test="year != null">
+        Year = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null">
+        Place = #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="lacode != null">
+        LaCode = #{lacode,jdbcType=VARCHAR},
+      </if>
+      <if test="laname != null">
+        LaName = #{laname,jdbcType=VARCHAR},
+      </if>
+      <if test="ltgdp != null">
+        LTGdp = #{ltgdp,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where LTGId = #{ltgid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zmst.Domain.LargeTravelGdp">
+    update tbl_largetravelgdp
+    set Year = #{year,jdbcType=VARCHAR},
+      Place = #{place,jdbcType=VARCHAR},
+      LaCode = #{lacode,jdbcType=VARCHAR},
+      LaName = #{laname,jdbcType=VARCHAR},
+      LTGdp = #{ltgdp,jdbcType=DOUBLE}
+    where LTGId = #{ltgid,jdbcType=INTEGER}
+  </update>
+</mapper>

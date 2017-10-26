@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zmst.IDao.LargeGdpMapper">
+  <resultMap id="BaseResultMap" type="com.zmst.Domain.LargeGdp">
+    <id column="LCId" jdbcType="INTEGER" property="lcid" />
+    <result column="Year" jdbcType="VARCHAR" property="year" />
+    <result column="Place" jdbcType="VARCHAR" property="place" />
+    <result column="LaCode" jdbcType="VARCHAR" property="lacode" />
+    <result column="LaName" jdbcType="VARCHAR" property="laname" />
+    <result column="LaGdp" jdbcType="DOUBLE" property="lagdp" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    LCId, Year, Place, LaCode, LaName, LaGdp
+  </sql>
+  <select id="findByYearPlace"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_largegdp
+    where  year=#{0} and place = #{1}
+  </select>
+  
+  <delete id="deleteByYearPlace">
+    delete from tbl_largegdp
+    where year = #{0} and place=#{1}
+    </delete> 
+  
+    <insert id="save" parameterType="com.zmst.Domain.LargeGdp">
+    insert into tbl_largegdp (LCId, Year, Place, 
+      LaCode, LaName, LaGdp
+      )
+    values (#{lcid,jdbcType=INTEGER}, #{year,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR}, 
+      #{lacode,jdbcType=VARCHAR}, #{laname,jdbcType=VARCHAR}, #{lagdp,jdbcType=DOUBLE}
+      )
+  </insert>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbl_largegdp
+    where LCId = #{lcid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zmst.Domain.LargeGdp">
+    insert into tbl_largegdp (LCId, Year, Place, 
+      LaCode, LaName, LaGdp
+      )
+    values (#{lcid,jdbcType=INTEGER}, #{year,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR}, 
+      #{lacode,jdbcType=VARCHAR}, #{laname,jdbcType=VARCHAR}, #{lagdp,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zmst.Domain.LargeGdp">
+    insert into tbl_largegdp
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="lcid != null">
+        LCId,
+      </if>
+      <if test="year != null">
+        Year,
+      </if>
+      <if test="place != null">
+        Place,
+      </if>
+      <if test="lacode != null">
+        LaCode,
+      </if>
+      <if test="laname != null">
+        LaName,
+      </if>
+      <if test="lagdp != null">
+        LaGdp,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="lcid != null">
+        #{lcid,jdbcType=INTEGER},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null">
+        #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="lacode != null">
+        #{lacode,jdbcType=VARCHAR},
+      </if>
+      <if test="laname != null">
+        #{laname,jdbcType=VARCHAR},
+      </if>
+      <if test="lagdp != null">
+        #{lagdp,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zmst.Domain.LargeGdp">
+    update tbl_largegdp
+    <set>
+      <if test="year != null">
+        Year = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null">
+        Place = #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="lacode != null">
+        LaCode = #{lacode,jdbcType=VARCHAR},
+      </if>
+      <if test="laname != null">
+        LaName = #{laname,jdbcType=VARCHAR},
+      </if>
+      <if test="lagdp != null">
+        LaGdp = #{lagdp,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where LCId = #{lcid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zmst.Domain.LargeGdp">
+    update tbl_largegdp
+    set Year = #{year,jdbcType=VARCHAR},
+      Place = #{place,jdbcType=VARCHAR},
+      LaCode = #{lacode,jdbcType=VARCHAR},
+      LaName = #{laname,jdbcType=VARCHAR},
+      LaGdp = #{lagdp,jdbcType=DOUBLE}
+    where LCId = #{lcid,jdbcType=INTEGER}
+  </update>
+</mapper>

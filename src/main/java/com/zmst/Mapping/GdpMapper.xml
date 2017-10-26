@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zmst.IDao.GdpMapper">
+  <resultMap id="BaseResultMap" type="com.zmst.Domain.Gdp">
+    <id column="GdpId" jdbcType="INTEGER" property="gdpid" />
+    <result column="year" jdbcType="VARCHAR" property="year" />
+    <result column="place" jdbcType="VARCHAR" property="place" />
+    <result column="GdpCode" jdbcType="VARCHAR" property="gdpcode" />
+    <result column="Gdp" jdbcType="DOUBLE" property="gdp" />
+    <result column="GdpName" jdbcType="VARCHAR" property="gdpname" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    GdpId, year, place, GdpCode, Gdp, GdpName
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_gdp
+    where GdpId = #{gdpid,jdbcType=INTEGER}
+  </select>
+  
+   <select id="getAllGdp"   resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_gdp
+    where year = #{0} and place=#{1}
+  </select>
+  
+  
+    <delete id="deleteByYearPlace">
+    delete from tbl_gdp
+    where year = #{0} and place=#{1}
+    </delete> 
+  
+  <insert id="save" parameterType="com.zmst.Domain.Gdp">
+    insert into tbl_gdp (GdpId, year, place, 
+      GdpCode, Gdp, GdpName
+      )
+    values (#{gdpid,jdbcType=INTEGER}, #{year,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR}, 
+      #{gdpcode,jdbcType=VARCHAR}, #{gdp,jdbcType=DOUBLE}, #{gdpname,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbl_gdp
+    where GdpId = #{gdpid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zmst.Domain.Gdp">
+    insert into tbl_gdp (GdpId, year, place, 
+      GdpCode, Gdp, GdpName
+      )
+    values (#{gdpid,jdbcType=INTEGER}, #{year,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR}, 
+      #{gdpcode,jdbcType=VARCHAR}, #{gdp,jdbcType=DOUBLE}, #{gdpname,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zmst.Domain.Gdp">
+    insert into tbl_gdp
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="gdpid != null">
+        GdpId,
+      </if>
+      <if test="year != null">
+        year,
+      </if>
+      <if test="place != null">
+        place,
+      </if>
+      <if test="gdpcode != null">
+        GdpCode,
+      </if>
+      <if test="gdp != null">
+        Gdp,
+      </if>
+      <if test="gdpname != null">
+        GdpName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="gdpid != null">
+        #{gdpid,jdbcType=INTEGER},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null">
+        #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="gdpcode != null">
+        #{gdpcode,jdbcType=VARCHAR},
+      </if>
+      <if test="gdp != null">
+        #{gdp,jdbcType=DOUBLE},
+      </if>
+      <if test="gdpname != null">
+        #{gdpname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zmst.Domain.Gdp">
+    update tbl_gdp
+    <set>
+      <if test="year != null">
+        year = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null">
+        place = #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="gdpcode != null">
+        GdpCode = #{gdpcode,jdbcType=VARCHAR},
+      </if>
+      <if test="gdp != null">
+        Gdp = #{gdp,jdbcType=DOUBLE},
+      </if>
+      <if test="gdpname != null">
+        GdpName = #{gdpname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where GdpId = #{gdpid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zmst.Domain.Gdp">
+    update tbl_gdp
+    set year = #{year,jdbcType=VARCHAR},
+      place = #{place,jdbcType=VARCHAR},
+      GdpCode = #{gdpcode,jdbcType=VARCHAR},
+      Gdp = #{gdp,jdbcType=DOUBLE},
+      GdpName = #{gdpname,jdbcType=VARCHAR}
+    where GdpId = #{gdpid,jdbcType=INTEGER}
+  </update>
+</mapper>

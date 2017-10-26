@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zmst.IDao.GFCoefficientMapper">
+  <resultMap id="BaseResultMap" type="com.zmst.Domain.GFCoefficient">
+    <id column="GFid" jdbcType="INTEGER" property="gfid" />
+    <result column="Place" jdbcType="VARCHAR" property="place" />
+    <result column="Year" jdbcType="VARCHAR" property="year" />
+    <result column="AvSpend" jdbcType="DOUBLE" property="avspend" />
+    <result column="SpDay" jdbcType="DOUBLE" property="spday" />
+    <result column="CPASpend" jdbcType="DOUBLE" property="cpaspend" />
+    <result column="LiPeople" jdbcType="DOUBLE" property="lipeople" />
+    <result column="YSDay" jdbcType="DOUBLE" property="ysday" />
+    <result column="FSta" jdbcType="DOUBLE" property="fsta" />
+    <result column="GSta" jdbcType="DOUBLE" property="gsta" />
+    <result column="TPSum" jdbcType="DOUBLE" property="tpsum" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    GFid, Place, Year, AvSpend, SpDay, CPASpend, LiPeople, YSDay, FSta, GSta, TPSum
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_gfcoefficient
+    where GFid = #{gfid,jdbcType=INTEGER}
+  </select>
+  
+   <select id="selectByYearPlace"  resultType="com.zmst.Domain.GFCoefficient">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_gfcoefficient
+    where Year = #{0} and place=#{1}
+  </select>
+  
+   <delete id="deleteByYearPlace">
+    delete from tbl_gfcoefficient
+    where  year=#{0} and place=#{1}
+  </delete>
+  
+   <insert id="save" parameterType="com.zmst.Domain.GFCoefficient">
+    insert into tbl_gfcoefficient (GFid, Place, Year, 
+      AvSpend, SpDay, CPASpend, 
+      LiPeople, YSDay, FSta, 
+      GSta, TPSum)
+    values (#{gfid,jdbcType=INTEGER}, #{place,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR}, 
+      #{avspend,jdbcType=DOUBLE}, #{spday,jdbcType=DOUBLE}, #{cpaspend,jdbcType=DOUBLE}, 
+      #{lipeople,jdbcType=DOUBLE}, #{ysday,jdbcType=DOUBLE}, #{fsta,jdbcType=DOUBLE}, 
+      #{gsta,jdbcType=DOUBLE}, #{tpsum,jdbcType=DOUBLE})
+  </insert>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbl_gfcoefficient
+    where GFid = #{gfid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zmst.Domain.GFCoefficient">
+    insert into tbl_gfcoefficient (GFid, Place, Year, 
+      AvSpend, SpDay, CPASpend, 
+      LiPeople, YSDay, FSta, 
+      GSta, TPSum)
+    values (#{gfid,jdbcType=INTEGER}, #{place,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR}, 
+      #{avspend,jdbcType=DOUBLE}, #{spday,jdbcType=DOUBLE}, #{cpaspend,jdbcType=DOUBLE}, 
+      #{lipeople,jdbcType=DOUBLE}, #{ysday,jdbcType=DOUBLE}, #{fsta,jdbcType=DOUBLE}, 
+      #{gsta,jdbcType=DOUBLE}, #{tpsum,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zmst.Domain.GFCoefficient">
+    insert into tbl_gfcoefficient
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="gfid != null">
+        GFid,
+      </if>
+      <if test="place != null">
+        Place,
+      </if>
+      <if test="year != null">
+        Year,
+      </if>
+      <if test="avspend != null">
+        AvSpend,
+      </if>
+      <if test="spday != null">
+        SpDay,
+      </if>
+      <if test="cpaspend != null">
+        CPASpend,
+      </if>
+      <if test="lipeople != null">
+        LiPeople,
+      </if>
+      <if test="ysday != null">
+        YSDay,
+      </if>
+      <if test="fsta != null">
+        FSta,
+      </if>
+      <if test="gsta != null">
+        GSta,
+      </if>
+      <if test="tpsum != null">
+        TPSum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="gfid != null">
+        #{gfid,jdbcType=INTEGER},
+      </if>
+      <if test="place != null">
+        #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="avspend != null">
+        #{avspend,jdbcType=DOUBLE},
+      </if>
+      <if test="spday != null">
+        #{spday,jdbcType=DOUBLE},
+      </if>
+      <if test="cpaspend != null">
+        #{cpaspend,jdbcType=DOUBLE},
+      </if>
+      <if test="lipeople != null">
+        #{lipeople,jdbcType=DOUBLE},
+      </if>
+      <if test="ysday != null">
+        #{ysday,jdbcType=DOUBLE},
+      </if>
+      <if test="fsta != null">
+        #{fsta,jdbcType=DOUBLE},
+      </if>
+      <if test="gsta != null">
+        #{gsta,jdbcType=DOUBLE},
+      </if>
+      <if test="tpsum != null">
+        #{tpsum,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zmst.Domain.GFCoefficient">
+    update tbl_gfcoefficient
+    <set>
+      <if test="place != null">
+        Place = #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null">
+        Year = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="avspend != null">
+        AvSpend = #{avspend,jdbcType=DOUBLE},
+      </if>
+      <if test="spday != null">
+        SpDay = #{spday,jdbcType=DOUBLE},
+      </if>
+      <if test="cpaspend != null">
+        CPASpend = #{cpaspend,jdbcType=DOUBLE},
+      </if>
+      <if test="lipeople != null">
+        LiPeople = #{lipeople,jdbcType=DOUBLE},
+      </if>
+      <if test="ysday != null">
+        YSDay = #{ysday,jdbcType=DOUBLE},
+      </if>
+      <if test="fsta != null">
+        FSta = #{fsta,jdbcType=DOUBLE},
+      </if>
+      <if test="gsta != null">
+        GSta = #{gsta,jdbcType=DOUBLE},
+      </if>
+      <if test="tpsum != null">
+        TPSum = #{tpsum,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where GFid = #{gfid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zmst.Domain.GFCoefficient">
+    update tbl_gfcoefficient
+    set Place = #{place,jdbcType=VARCHAR},
+      Year = #{year,jdbcType=VARCHAR},
+      AvSpend = #{avspend,jdbcType=DOUBLE},
+      SpDay = #{spday,jdbcType=DOUBLE},
+      CPASpend = #{cpaspend,jdbcType=DOUBLE},
+      LiPeople = #{lipeople,jdbcType=DOUBLE},
+      YSDay = #{ysday,jdbcType=DOUBLE},
+      FSta = #{fsta,jdbcType=DOUBLE},
+      GSta = #{gsta,jdbcType=DOUBLE},
+      TPSum = #{tpsum,jdbcType=DOUBLE}
+    where GFid = #{gfid,jdbcType=INTEGER}
+  </update>
+</mapper>

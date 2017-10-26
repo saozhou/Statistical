@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zmst.IDao.ClassGdpMapper">
+  <resultMap id="BaseResultMap" type="com.zmst.Domain.ClassGdp">
+    <id column="CGId" jdbcType="INTEGER" property="cgid" />
+    <result column="Year" jdbcType="VARCHAR" property="year" />
+    <result column="Place" jdbcType="VARCHAR" property="place" />
+    <result column="ClCode" jdbcType="VARCHAR" property="clcode" />
+    <result column="ClName" jdbcType="VARCHAR" property="clname" />
+    <result column="ClGdp" jdbcType="DOUBLE" property="clgdp" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    CGId, Year, Place, ClCode, ClName, ClGdp
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_classgdp
+    where CGId = #{cgid,jdbcType=INTEGER}
+  </select>
+  
+  
+    <delete id="deleteByYearPlace">
+    delete from tbl_classgdp
+    where year = #{0} and place=#{1}
+    </delete> 
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbl_classgdp
+    where CGId = #{cgid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zmst.Domain.ClassGdp">
+    insert into tbl_classgdp (CGId, Year, Place, 
+      ClCode, ClName, ClGdp
+      )
+    values (#{cgid,jdbcType=INTEGER}, #{year,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR}, 
+      #{clcode,jdbcType=VARCHAR}, #{clname,jdbcType=VARCHAR}, #{clgdp,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zmst.Domain.ClassGdp">
+    insert into tbl_classgdp
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cgid != null">
+        CGId,
+      </if>
+      <if test="year != null">
+        Year,
+      </if>
+      <if test="place != null">
+        Place,
+      </if>
+      <if test="clcode != null">
+        ClCode,
+      </if>
+      <if test="clname != null">
+        ClName,
+      </if>
+      <if test="clgdp != null">
+        ClGdp,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cgid != null">
+        #{cgid,jdbcType=INTEGER},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null">
+        #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="clcode != null">
+        #{clcode,jdbcType=VARCHAR},
+      </if>
+      <if test="clname != null">
+        #{clname,jdbcType=VARCHAR},
+      </if>
+      <if test="clgdp != null">
+        #{clgdp,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zmst.Domain.ClassGdp">
+    update tbl_classgdp
+    <set>
+      <if test="year != null">
+        Year = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null">
+        Place = #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="clcode != null">
+        ClCode = #{clcode,jdbcType=VARCHAR},
+      </if>
+      <if test="clname != null">
+        ClName = #{clname,jdbcType=VARCHAR},
+      </if>
+      <if test="clgdp != null">
+        ClGdp = #{clgdp,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where CGId = #{cgid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zmst.Domain.ClassGdp">
+    update tbl_classgdp
+    set Year = #{year,jdbcType=VARCHAR},
+      Place = #{place,jdbcType=VARCHAR},
+      ClCode = #{clcode,jdbcType=VARCHAR},
+      ClName = #{clname,jdbcType=VARCHAR},
+      ClGdp = #{clgdp,jdbcType=DOUBLE}
+    where CGId = #{cgid,jdbcType=INTEGER}
+  </update>
+</mapper>

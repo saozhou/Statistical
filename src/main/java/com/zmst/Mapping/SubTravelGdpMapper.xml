@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zmst.IDao.SubTravelGdpMapper">
+  <resultMap id="BaseResultMap" type="com.zmst.Domain.SubTravelGdp">
+    <id column="STGId" jdbcType="INTEGER" property="stgid" />
+    <result column="Year" jdbcType="VARCHAR" property="year" />
+    <result column="Place" jdbcType="VARCHAR" property="place" />
+    <result column="SmCode" jdbcType="VARCHAR" property="smcode" />
+    <result column="SmName" jdbcType="VARCHAR" property="smname" />
+    <result column="STGdp" jdbcType="DOUBLE" property="stgdp" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    STGId, Year, Place, SmCode, SmName, STGdp
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_subtravelgdp
+    where STGId = #{stgid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbl_subtravelgdp
+    where STGId = #{stgid,jdbcType=INTEGER}
+  </delete>
+  
+    <delete id="deleteByYearPlace" >
+    delete from tbl_subtravelgdp
+    where year=#{0} and place=#{1}
+  </delete>
+  
+  <insert id="insert" parameterType="com.zmst.Domain.SubTravelGdp">
+    insert into tbl_subtravelgdp (STGId, Year, Place, 
+      SmCode, SmName, STGdp
+      )
+    values (#{stgid,jdbcType=INTEGER}, #{year,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR}, 
+      #{smcode,jdbcType=VARCHAR}, #{smname,jdbcType=VARCHAR}, #{stgdp,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zmst.Domain.SubTravelGdp">
+    insert into tbl_subtravelgdp
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="stgid != null">
+        STGId,
+      </if>
+      <if test="year != null">
+        Year,
+      </if>
+      <if test="place != null">
+        Place,
+      </if>
+      <if test="smcode != null">
+        SmCode,
+      </if>
+      <if test="smname != null">
+        SmName,
+      </if>
+      <if test="stgdp != null">
+        STGdp,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="stgid != null">
+        #{stgid,jdbcType=INTEGER},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null">
+        #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="smcode != null">
+        #{smcode,jdbcType=VARCHAR},
+      </if>
+      <if test="smname != null">
+        #{smname,jdbcType=VARCHAR},
+      </if>
+      <if test="stgdp != null">
+        #{stgdp,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zmst.Domain.SubTravelGdp">
+    update tbl_subtravelgdp
+    <set>
+      <if test="year != null">
+        Year = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null">
+        Place = #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="smcode != null">
+        SmCode = #{smcode,jdbcType=VARCHAR},
+      </if>
+      <if test="smname != null">
+        SmName = #{smname,jdbcType=VARCHAR},
+      </if>
+      <if test="stgdp != null">
+        STGdp = #{stgdp,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where STGId = #{stgid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zmst.Domain.SubTravelGdp">
+    update tbl_subtravelgdp
+    set Year = #{year,jdbcType=VARCHAR},
+      Place = #{place,jdbcType=VARCHAR},
+      SmCode = #{smcode,jdbcType=VARCHAR},
+      SmName = #{smname,jdbcType=VARCHAR},
+      STGdp = #{stgdp,jdbcType=DOUBLE}
+    where STGId = #{stgid,jdbcType=INTEGER}
+  </update>
+</mapper>

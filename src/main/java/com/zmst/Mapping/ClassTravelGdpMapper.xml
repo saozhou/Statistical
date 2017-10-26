@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zmst.IDao.ClassTravelGdpMapper">
+  <resultMap id="BaseResultMap" type="com.zmst.Domain.ClassTravelGdp">
+    <id column="CTGId" jdbcType="INTEGER" property="ctgid" />
+    <result column="Year" jdbcType="VARCHAR" property="year" />
+    <result column="Place" jdbcType="VARCHAR" property="place" />
+    <result column="ClCode" jdbcType="VARCHAR" property="clcode" />
+    <result column="ClName" jdbcType="VARCHAR" property="clname" />
+    <result column="CTGdp" jdbcType="DOUBLE" property="ctgdp" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    CTGId, Year, Place, ClCode, ClName, CTGdp
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_classtravelgdp
+    where CTGId = #{ctgid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbl_classtravelgdp
+    where CTGId = #{ctgid,jdbcType=INTEGER}
+  </delete>
+  
+    <delete id="deleteByYearPlace" >
+    delete from tbl_classtravelgdp
+    where year=#{0} and place=#{1}
+  </delete>
+  
+  <insert id="insert" parameterType="com.zmst.Domain.ClassTravelGdp">
+    insert into tbl_classtravelgdp (CTGId, Year, Place, 
+      ClCode, ClName, CTGdp
+      )
+    values (#{ctgid,jdbcType=INTEGER}, #{year,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR}, 
+      #{clcode,jdbcType=VARCHAR}, #{clname,jdbcType=VARCHAR}, #{ctgdp,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zmst.Domain.ClassTravelGdp">
+    insert into tbl_classtravelgdp
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ctgid != null">
+        CTGId,
+      </if>
+      <if test="year != null">
+        Year,
+      </if>
+      <if test="place != null">
+        Place,
+      </if>
+      <if test="clcode != null">
+        ClCode,
+      </if>
+      <if test="clname != null">
+        ClName,
+      </if>
+      <if test="ctgdp != null">
+        CTGdp,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ctgid != null">
+        #{ctgid,jdbcType=INTEGER},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null">
+        #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="clcode != null">
+        #{clcode,jdbcType=VARCHAR},
+      </if>
+      <if test="clname != null">
+        #{clname,jdbcType=VARCHAR},
+      </if>
+      <if test="ctgdp != null">
+        #{ctgdp,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zmst.Domain.ClassTravelGdp">
+    update tbl_classtravelgdp
+    <set>
+      <if test="year != null">
+        Year = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null">
+        Place = #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="clcode != null">
+        ClCode = #{clcode,jdbcType=VARCHAR},
+      </if>
+      <if test="clname != null">
+        ClName = #{clname,jdbcType=VARCHAR},
+      </if>
+      <if test="ctgdp != null">
+        CTGdp = #{ctgdp,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where CTGId = #{ctgid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zmst.Domain.ClassTravelGdp">
+    update tbl_classtravelgdp
+    set Year = #{year,jdbcType=VARCHAR},
+      Place = #{place,jdbcType=VARCHAR},
+      ClCode = #{clcode,jdbcType=VARCHAR},
+      ClName = #{clname,jdbcType=VARCHAR},
+      CTGdp = #{ctgdp,jdbcType=DOUBLE}
+    where CTGId = #{ctgid,jdbcType=INTEGER}
+  </update>
+</mapper>

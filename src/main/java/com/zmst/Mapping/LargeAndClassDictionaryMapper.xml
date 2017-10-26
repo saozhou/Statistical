@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zmst.IDao.LargeAndClassDictionaryMapper">
+  <resultMap id="BaseResultMap" type="com.zmst.Domain.LargeAndClassDictionary">
+    <id column="CLId" jdbcType="INTEGER" property="clid" />
+    <result column="LaCode" jdbcType="VARCHAR" property="lacode" />
+    <result column="ClCode" jdbcType="VARCHAR" property="clcode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    CLId, LaCode, ClCode
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_largeandclassdictionary
+    where CLId = #{clid,jdbcType=INTEGER}
+  </select>
+  
+  <select id="findAll"   resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_largeandclassdictionary
+  
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbl_largeandclassdictionary
+    where CLId = #{clid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zmst.Domain.LargeAndClassDictionary">
+    insert into tbl_largeandclassdictionary (CLId, LaCode, ClCode
+      )
+    values (#{clid,jdbcType=INTEGER}, #{lacode,jdbcType=VARCHAR}, #{clcode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zmst.Domain.LargeAndClassDictionary">
+    insert into tbl_largeandclassdictionary
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="clid != null">
+        CLId,
+      </if>
+      <if test="lacode != null">
+        LaCode,
+      </if>
+      <if test="clcode != null">
+        ClCode,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="clid != null">
+        #{clid,jdbcType=INTEGER},
+      </if>
+      <if test="lacode != null">
+        #{lacode,jdbcType=VARCHAR},
+      </if>
+      <if test="clcode != null">
+        #{clcode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zmst.Domain.LargeAndClassDictionary">
+    update tbl_largeandclassdictionary
+    <set>
+      <if test="lacode != null">
+        LaCode = #{lacode,jdbcType=VARCHAR},
+      </if>
+      <if test="clcode != null">
+        ClCode = #{clcode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CLId = #{clid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zmst.Domain.LargeAndClassDictionary">
+    update tbl_largeandclassdictionary
+    set LaCode = #{lacode,jdbcType=VARCHAR},
+      ClCode = #{clcode,jdbcType=VARCHAR}
+    where CLId = #{clid,jdbcType=INTEGER}
+  </update>
+</mapper>

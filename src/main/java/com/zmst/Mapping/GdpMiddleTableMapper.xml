@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zmst.IDao.GdpMiddleTableMapper">
+  <resultMap id="BaseResultMap" type="com.zmst.Domain.GdpMiddleTable">
+    <id column="GMId" jdbcType="INTEGER" property="gmid" />
+    <result column="Year" jdbcType="VARCHAR" property="year" />
+    <result column="Place" jdbcType="VARCHAR" property="place" />
+    <result column="UpLi" jdbcType="DOUBLE" property="upli" />
+    <result column="LoLi" jdbcType="DOUBLE" property="loli" />
+    <result column="Gdp" jdbcType="DOUBLE" property="gdp" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    GMId, Year, Place, UpLi, LoLi, Gdp
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_gdpmiddletable
+    where GMId = #{gmid,jdbcType=INTEGER}
+  </select>
+  
+  <delete id="deleteByYearPlace">
+    delete from tbl_gdpmiddletable
+    where year = #{0} and place=#{1}
+    </delete> 
+  
+   <insert id="save" parameterType="com.zmst.Domain.GdpMiddleTable">
+    insert into tbl_gdpmiddletable (GMId, Year, Place, 
+      UpLi, LoLi, Gdp)
+    values (#{gmid,jdbcType=INTEGER}, #{year,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR}, 
+      #{upli,jdbcType=DOUBLE}, #{loli,jdbcType=DOUBLE}, #{gdp,jdbcType=DOUBLE})
+  </insert>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbl_gdpmiddletable
+    where GMId = #{gmid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zmst.Domain.GdpMiddleTable">
+    insert into tbl_gdpmiddletable (GMId, Year, Place, 
+      UpLi, LoLi, Gdp)
+    values (#{gmid,jdbcType=INTEGER}, #{year,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR}, 
+      #{upli,jdbcType=DOUBLE}, #{loli,jdbcType=DOUBLE}, #{gdp,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zmst.Domain.GdpMiddleTable">
+    insert into tbl_gdpmiddletable
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="gmid != null">
+        GMId,
+      </if>
+      <if test="year != null">
+        Year,
+      </if>
+      <if test="place != null">
+        Place,
+      </if>
+      <if test="upli != null">
+        UpLi,
+      </if>
+      <if test="loli != null">
+        LoLi,
+      </if>
+      <if test="gdp != null">
+        Gdp,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="gmid != null">
+        #{gmid,jdbcType=INTEGER},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null">
+        #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="upli != null">
+        #{upli,jdbcType=DOUBLE},
+      </if>
+      <if test="loli != null">
+        #{loli,jdbcType=DOUBLE},
+      </if>
+      <if test="gdp != null">
+        #{gdp,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zmst.Domain.GdpMiddleTable">
+    update tbl_gdpmiddletable
+    <set>
+      <if test="year != null">
+        Year = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null">
+        Place = #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="upli != null">
+        UpLi = #{upli,jdbcType=DOUBLE},
+      </if>
+      <if test="loli != null">
+        LoLi = #{loli,jdbcType=DOUBLE},
+      </if>
+      <if test="gdp != null">
+        Gdp = #{gdp,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where GMId = #{gmid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zmst.Domain.GdpMiddleTable">
+    update tbl_gdpmiddletable
+    set Year = #{year,jdbcType=VARCHAR},
+      Place = #{place,jdbcType=VARCHAR},
+      UpLi = #{upli,jdbcType=DOUBLE},
+      LoLi = #{loli,jdbcType=DOUBLE},
+      Gdp = #{gdp,jdbcType=DOUBLE}
+    where GMId = #{gmid,jdbcType=INTEGER}
+  </update>
+</mapper>

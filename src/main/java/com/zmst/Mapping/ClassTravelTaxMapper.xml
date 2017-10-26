@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zmst.IDao.ClassTravelTaxMapper">
+  <resultMap id="BaseResultMap" type="com.zmst.Domain.ClassTravelTax">
+    <id column="CTTId" jdbcType="INTEGER" property="cttid" />
+    <result column="Year" jdbcType="VARCHAR" property="year" />
+    <result column="Place" jdbcType="VARCHAR" property="place" />
+    <result column="ClCode" jdbcType="VARCHAR" property="clcode" />
+    <result column="ClName" jdbcType="VARCHAR" property="clname" />
+    <result column="CTTax" jdbcType="DOUBLE" property="cttax" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    CTTId, Year, Place, ClCode, ClName, CTTax
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_classtraveltax
+    where CTTId = #{cttid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbl_classtraveltax
+    where CTTId = #{cttid,jdbcType=INTEGER}
+  
+  </delete>
+   <delete id="deleteByYearPlace" >
+    delete from tbl_classtraveltax
+    where year=#{0} and place=#{1}
+  </delete>
+  <insert id="save" parameterType="com.zmst.Domain.ClassTravelTax">
+    insert into tbl_classtraveltax (CTTId, Year, Place, 
+      ClCode, ClName, CTTax
+      )
+    values (#{cttid,jdbcType=INTEGER}, #{year,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR}, 
+      #{clcode,jdbcType=VARCHAR}, #{clname,jdbcType=VARCHAR}, #{cttax,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zmst.Domain.ClassTravelTax">
+    insert into tbl_classtraveltax
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cttid != null">
+        CTTId,
+      </if>
+      <if test="year != null">
+        Year,
+      </if>
+      <if test="place != null">
+        Place,
+      </if>
+      <if test="clcode != null">
+        ClCode,
+      </if>
+      <if test="clname != null">
+        ClName,
+      </if>
+      <if test="cttax != null">
+        CTTax,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cttid != null">
+        #{cttid,jdbcType=INTEGER},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null">
+        #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="clcode != null">
+        #{clcode,jdbcType=VARCHAR},
+      </if>
+      <if test="clname != null">
+        #{clname,jdbcType=VARCHAR},
+      </if>
+      <if test="cttax != null">
+        #{cttax,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zmst.Domain.ClassTravelTax">
+    update tbl_classtraveltax
+    <set>
+      <if test="year != null">
+        Year = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null">
+        Place = #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="clcode != null">
+        ClCode = #{clcode,jdbcType=VARCHAR},
+      </if>
+      <if test="clname != null">
+        ClName = #{clname,jdbcType=VARCHAR},
+      </if>
+      <if test="cttax != null">
+        CTTax = #{cttax,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where CTTId = #{cttid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zmst.Domain.ClassTravelTax">
+    update tbl_classtraveltax
+    set Year = #{year,jdbcType=VARCHAR},
+      Place = #{place,jdbcType=VARCHAR},
+      ClCode = #{clcode,jdbcType=VARCHAR},
+      ClName = #{clname,jdbcType=VARCHAR},
+      CTTax = #{cttax,jdbcType=DOUBLE}
+    where CTTId = #{cttid,jdbcType=INTEGER}
+  </update>
+</mapper>

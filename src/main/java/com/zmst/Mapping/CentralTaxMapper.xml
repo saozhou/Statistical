@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zmst.IDao.CentralTaxMapper">
+  <resultMap id="BaseResultMap" type="com.zmst.Domain.CentralTax">
+    <id column="CTId" jdbcType="INTEGER" property="ctid" />
+    <id column="LaCode" jdbcType="VARCHAR" property="lacode" />
+    <result column="year" jdbcType="VARCHAR" property="year" />
+    <result column="place" jdbcType="VARCHAR" property="place" />
+    <result column="SmCode" jdbcType="VARCHAR" property="smcode" />
+    <result column="SmName" jdbcType="VARCHAR" property="smname" />
+    <result column="CnTax" jdbcType="DOUBLE" property="cntax" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    CTId, LaCode, year, place, SmCode, SmName, CnTax
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.zmst.Domain.CentralTaxKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_centraltax
+    where CTId = #{ctid,jdbcType=INTEGER}
+      and LaCode = #{lacode,jdbcType=VARCHAR}
+  </select>
+  
+   <select id="getAllCentralTax"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_centraltax
+    where year = #{0}
+      and place = #{1}
+  </select>
+  
+   <delete id="deleteByYearPlace" >
+    delete from tbl_centraltax
+    where year = #{0}
+      and place = #{1}
+  </delete>
+  
+  <insert id="save" parameterType="com.zmst.Domain.CentralTax">
+    insert into tbl_centraltax (CTId, LaCode, year, 
+      place, SmCode, SmName, 
+      CnTax)
+    values (#{ctid,jdbcType=INTEGER}, #{lacode,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR}, 
+      #{place,jdbcType=VARCHAR}, #{smcode,jdbcType=VARCHAR}, #{smname,jdbcType=VARCHAR}, 
+      #{cntax,jdbcType=DOUBLE})
+  </insert>
+  
+  <delete id="deleteByPrimaryKey" parameterType="com.zmst.Domain.CentralTaxKey">
+    delete from tbl_centraltax
+    where CTId = #{ctid,jdbcType=INTEGER}
+      and LaCode = #{lacode,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zmst.Domain.CentralTax">
+    insert into tbl_centraltax (CTId, LaCode, year, 
+      place, SmCode, SmName, 
+      CnTax)
+    values (#{ctid,jdbcType=INTEGER}, #{lacode,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR}, 
+      #{place,jdbcType=VARCHAR}, #{smcode,jdbcType=VARCHAR}, #{smname,jdbcType=VARCHAR}, 
+      #{cntax,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zmst.Domain.CentralTax">
+    insert into tbl_centraltax
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ctid != null">
+        CTId,
+      </if>
+      <if test="lacode != null">
+        LaCode,
+      </if>
+      <if test="year != null">
+        year,
+      </if>
+      <if test="place != null">
+        place,
+      </if>
+      <if test="smcode != null">
+        SmCode,
+      </if>
+      <if test="smname != null">
+        SmName,
+      </if>
+      <if test="cntax != null">
+        CnTax,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ctid != null">
+        #{ctid,jdbcType=INTEGER},
+      </if>
+      <if test="lacode != null">
+        #{lacode,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null">
+        #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="smcode != null">
+        #{smcode,jdbcType=VARCHAR},
+      </if>
+      <if test="smname != null">
+        #{smname,jdbcType=VARCHAR},
+      </if>
+      <if test="cntax != null">
+        #{cntax,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zmst.Domain.CentralTax">
+    update tbl_centraltax
+    <set>
+      <if test="year != null">
+        year = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null">
+        place = #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="smcode != null">
+        SmCode = #{smcode,jdbcType=VARCHAR},
+      </if>
+      <if test="smname != null">
+        SmName = #{smname,jdbcType=VARCHAR},
+      </if>
+      <if test="cntax != null">
+        CnTax = #{cntax,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where CTId = #{ctid,jdbcType=INTEGER}
+      and LaCode = #{lacode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zmst.Domain.CentralTax">
+    update tbl_centraltax
+    set year = #{year,jdbcType=VARCHAR},
+      place = #{place,jdbcType=VARCHAR},
+      SmCode = #{smcode,jdbcType=VARCHAR},
+      SmName = #{smname,jdbcType=VARCHAR},
+      CnTax = #{cntax,jdbcType=DOUBLE}
+    where CTId = #{ctid,jdbcType=INTEGER}
+      and LaCode = #{lacode,jdbcType=VARCHAR}
+  </update>
+</mapper>

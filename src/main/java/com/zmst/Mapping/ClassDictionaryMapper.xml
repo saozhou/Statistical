@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zmst.IDao.ClassDictionaryMapper">
+  <resultMap id="BaseResultMap" type="com.zmst.Domain.ClassDictionary">
+    <id column="ClId" jdbcType="INTEGER" property="clid" />
+    <result column="ClName" jdbcType="VARCHAR" property="clname" />
+    <result column="ClCode" jdbcType="VARCHAR" property="clcode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ClId, ClName, ClCode
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_classdictionary
+    where ClId = #{clid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbl_classdictionary
+    where ClId = #{clid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zmst.Domain.ClassDictionary">
+    insert into tbl_classdictionary (ClId, ClName, ClCode
+      )
+    values (#{clid,jdbcType=INTEGER}, #{clname,jdbcType=VARCHAR}, #{clcode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zmst.Domain.ClassDictionary">
+    insert into tbl_classdictionary
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="clid != null">
+        ClId,
+      </if>
+      <if test="clname != null">
+        ClName,
+      </if>
+      <if test="clcode != null">
+        ClCode,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="clid != null">
+        #{clid,jdbcType=INTEGER},
+      </if>
+      <if test="clname != null">
+        #{clname,jdbcType=VARCHAR},
+      </if>
+      <if test="clcode != null">
+        #{clcode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zmst.Domain.ClassDictionary">
+    update tbl_classdictionary
+    <set>
+      <if test="clname != null">
+        ClName = #{clname,jdbcType=VARCHAR},
+      </if>
+      <if test="clcode != null">
+        ClCode = #{clcode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ClId = #{clid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zmst.Domain.ClassDictionary">
+    update tbl_classdictionary
+    set ClName = #{clname,jdbcType=VARCHAR},
+      ClCode = #{clcode,jdbcType=VARCHAR}
+    where ClId = #{clid,jdbcType=INTEGER}
+  </update>
+</mapper>

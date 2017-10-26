@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zmst.IDao.LargeTravelTaxMapper">
+  <resultMap id="BaseResultMap" type="com.zmst.Domain.LargeTravelTax">
+    <id column="LTTId" jdbcType="INTEGER" property="lttid" />
+    <result column="Year" jdbcType="VARCHAR" property="year" />
+    <result column="Place" jdbcType="VARCHAR" property="place" />
+    <result column="LaCode" jdbcType="VARCHAR" property="lacode" />
+    <result column="LaName" jdbcType="VARCHAR" property="laname" />
+    <result column="LTTax" jdbcType="DOUBLE" property="lttax" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    LTTId, Year, Place, LaCode, LaName, LTTax
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_largetraveltax
+    where LTTId = #{lttid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbl_largetraveltax
+    where LTTId = #{lttid,jdbcType=INTEGER}
+  </delete>
+  
+    <insert id="save" parameterType="com.zmst.Domain.LargeTravelTax">
+    insert into tbl_largetraveltax (LTTId, Year, Place, 
+      LaCode, LaName, LTTax
+      )
+    values (#{lttid,jdbcType=INTEGER}, #{year,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR}, 
+      #{lacode,jdbcType=VARCHAR}, #{laname,jdbcType=VARCHAR}, #{lttax,jdbcType=DOUBLE}
+      )
+  </insert>
+  
+  
+  <delete id="deleteByYearPlace" >
+    delete from tbl_largetraveltax
+    where year=#{0} and place=#{1}
+  </delete>
+  <insert id="insert" parameterType="com.zmst.Domain.LargeTravelTax">
+    insert into tbl_largetraveltax (LTTId, Year, Place, 
+      LaCode, LaName, LTTax
+      )
+    values (#{lttid,jdbcType=INTEGER}, #{year,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR}, 
+      #{lacode,jdbcType=VARCHAR}, #{laname,jdbcType=VARCHAR}, #{lttax,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zmst.Domain.LargeTravelTax">
+    insert into tbl_largetraveltax
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="lttid != null">
+        LTTId,
+      </if>
+      <if test="year != null">
+        Year,
+      </if>
+      <if test="place != null">
+        Place,
+      </if>
+      <if test="lacode != null">
+        LaCode,
+      </if>
+      <if test="laname != null">
+        LaName,
+      </if>
+      <if test="lttax != null">
+        LTTax,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="lttid != null">
+        #{lttid,jdbcType=INTEGER},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null">
+        #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="lacode != null">
+        #{lacode,jdbcType=VARCHAR},
+      </if>
+      <if test="laname != null">
+        #{laname,jdbcType=VARCHAR},
+      </if>
+      <if test="lttax != null">
+        #{lttax,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zmst.Domain.LargeTravelTax">
+    update tbl_largetraveltax
+    <set>
+      <if test="year != null">
+        Year = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null">
+        Place = #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="lacode != null">
+        LaCode = #{lacode,jdbcType=VARCHAR},
+      </if>
+      <if test="laname != null">
+        LaName = #{laname,jdbcType=VARCHAR},
+      </if>
+      <if test="lttax != null">
+        LTTax = #{lttax,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where LTTId = #{lttid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zmst.Domain.LargeTravelTax">
+    update tbl_largetraveltax
+    set Year = #{year,jdbcType=VARCHAR},
+      Place = #{place,jdbcType=VARCHAR},
+      LaCode = #{lacode,jdbcType=VARCHAR},
+      LaName = #{laname,jdbcType=VARCHAR},
+      LTTax = #{lttax,jdbcType=DOUBLE}
+    where LTTId = #{lttid,jdbcType=INTEGER}
+  </update>
+</mapper>

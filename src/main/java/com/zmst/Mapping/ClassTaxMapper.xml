@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zmst.IDao.ClassTaxMapper">
+  <resultMap id="BaseResultMap" type="com.zmst.Domain.ClassTax">
+    <id column="CTId" jdbcType="INTEGER" property="ctid" />
+    <result column="Year" jdbcType="VARCHAR" property="year" />
+    <result column="Place" jdbcType="VARCHAR" property="place" />
+    <result column="ClCode" jdbcType="VARCHAR" property="clcode" />
+    <result column="ClName" jdbcType="VARCHAR" property="clname" />
+    <result column="ClTax" jdbcType="DOUBLE" property="cltax" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    CTId, Year, Place, ClCode, ClName, ClTax
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_classtax
+    where CTId = #{ctid,jdbcType=INTEGER}
+  </select>
+  
+  <delete id="deleteByYearPlace">
+    delete from tbl_classtax
+    where year = #{0} and place=#{1}
+    </delete> 
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbl_classtax
+    where CTId = #{ctid,jdbcType=INTEGER}
+  </delete>
+  
+  
+    <insert id="save" parameterType="com.zmst.Domain.ClassTax">
+    insert into tbl_classtax (CTId, Year, Place, 
+      ClCode, ClName, ClTax
+      )
+    values (#{ctid,jdbcType=INTEGER}, #{year,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR}, 
+      #{clcode,jdbcType=VARCHAR}, #{clname,jdbcType=VARCHAR}, #{cltax,jdbcType=DOUBLE}
+      )
+  </insert>
+  
+  <insert id="insert" parameterType="com.zmst.Domain.ClassTax">
+    insert into tbl_classtax (CTId, Year, Place, 
+      ClCode, ClName, ClTax
+      )
+    values (#{ctid,jdbcType=INTEGER}, #{year,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR}, 
+      #{clcode,jdbcType=VARCHAR}, #{clname,jdbcType=VARCHAR}, #{cltax,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zmst.Domain.ClassTax">
+    insert into tbl_classtax
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ctid != null">
+        CTId,
+      </if>
+      <if test="year != null">
+        Year,
+      </if>
+      <if test="place != null">
+        Place,
+      </if>
+      <if test="clcode != null">
+        ClCode,
+      </if>
+      <if test="clname != null">
+        ClName,
+      </if>
+      <if test="cltax != null">
+        ClTax,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ctid != null">
+        #{ctid,jdbcType=INTEGER},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null">
+        #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="clcode != null">
+        #{clcode,jdbcType=VARCHAR},
+      </if>
+      <if test="clname != null">
+        #{clname,jdbcType=VARCHAR},
+      </if>
+      <if test="cltax != null">
+        #{cltax,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zmst.Domain.ClassTax">
+    update tbl_classtax
+    <set>
+      <if test="year != null">
+        Year = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null">
+        Place = #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="clcode != null">
+        ClCode = #{clcode,jdbcType=VARCHAR},
+      </if>
+      <if test="clname != null">
+        ClName = #{clname,jdbcType=VARCHAR},
+      </if>
+      <if test="cltax != null">
+        ClTax = #{cltax,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where CTId = #{ctid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zmst.Domain.ClassTax">
+    update tbl_classtax
+    set Year = #{year,jdbcType=VARCHAR},
+      Place = #{place,jdbcType=VARCHAR},
+      ClCode = #{clcode,jdbcType=VARCHAR},
+      ClName = #{clname,jdbcType=VARCHAR},
+      ClTax = #{cltax,jdbcType=DOUBLE}
+    where CTId = #{ctid,jdbcType=INTEGER}
+  </update>
+</mapper>

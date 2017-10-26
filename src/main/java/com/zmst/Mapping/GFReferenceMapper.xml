@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zmst.IDao.GFReferenceMapper">
+  <resultMap id="BaseResultMap" type="com.zmst.Domain.GFReference">
+    <id column="GFTId" jdbcType="INTEGER" property="gftid" />
+    <result column="InCode" jdbcType="VARCHAR" property="incode" />
+    <result column="InName" jdbcType="VARCHAR" property="inname" />
+    <result column="InCoefficient" jdbcType="VARCHAR" property="incoefficient" />
+    <result column="Place" jdbcType="VARCHAR" property="place" />
+    <result column="Year" jdbcType="VARCHAR" property="year" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    GFTId, InCode, InName, InCoefficient, Place, Year
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_gfreference
+    where GFTId = #{gftid,jdbcType=INTEGER}
+  </select>
+ 
+  <select id="selectByYearAndPlace"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_gfreference
+    where  year= #{0} and place=#{1}
+  </select>
+  
+  
+  <delete id="deleteByYearPlace" >
+    delete from tbl_gfreference
+    where year = #{0} and place=#{1}
+  </delete>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbl_gfreference
+    where GFTId = #{gftid,jdbcType=INTEGER}
+  </delete>
+  
+  <insert id="save" parameterType="com.zmst.Domain.GFReference">
+    insert into tbl_gfreference (GFTId, InCode, InName, 
+      InCoefficient, Place, Year
+      )
+    values (#{gftid,jdbcType=INTEGER}, #{incode,jdbcType=VARCHAR}, #{inname,jdbcType=VARCHAR}, 
+      #{incoefficient,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+  <insert id="insert" parameterType="com.zmst.Domain.GFReference">
+    insert into tbl_gfreference (GFTId, InCode, InName, 
+      InCoefficient, Place, Year
+      )
+    values (#{gftid,jdbcType=INTEGER}, #{incode,jdbcType=VARCHAR}, #{inname,jdbcType=VARCHAR}, 
+      #{incoefficient,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zmst.Domain.GFReference">
+    insert into tbl_gfreference
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="gftid != null">
+        GFTId,
+      </if>
+      <if test="incode != null">
+        InCode,
+      </if>
+      <if test="inname != null">
+        InName,
+      </if>
+      <if test="incoefficient != null">
+        InCoefficient,
+      </if>
+      <if test="place != null">
+        Place,
+      </if>
+      <if test="year != null">
+        Year,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="gftid != null">
+        #{gftid,jdbcType=INTEGER},
+      </if>
+      <if test="incode != null">
+        #{incode,jdbcType=VARCHAR},
+      </if>
+      <if test="inname != null">
+        #{inname,jdbcType=VARCHAR},
+      </if>
+      <if test="incoefficient != null">
+        #{incoefficient,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null">
+        #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zmst.Domain.GFReference">
+    update tbl_gfreference
+    <set>
+      <if test="incode != null">
+        InCode = #{incode,jdbcType=VARCHAR},
+      </if>
+      <if test="inname != null">
+        InName = #{inname,jdbcType=VARCHAR},
+      </if>
+      <if test="incoefficient != null">
+        InCoefficient = #{incoefficient,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null">
+        Place = #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null">
+        Year = #{year,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where GFTId = #{gftid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zmst.Domain.GFReference">
+    update tbl_gfreference
+    set InCode = #{incode,jdbcType=VARCHAR},
+      InName = #{inname,jdbcType=VARCHAR},
+      InCoefficient = #{incoefficient,jdbcType=VARCHAR},
+      Place = #{place,jdbcType=VARCHAR},
+      Year = #{year,jdbcType=VARCHAR}
+    where GFTId = #{gftid,jdbcType=INTEGER}
+  </update>
+</mapper>

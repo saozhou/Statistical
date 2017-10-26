@@ -12,11 +12,11 @@
   <sql id="Base_Column_List">
     CTId, Year, Place, ClCode, ClName, ClTax
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="findByYearPlace"  resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from tbl_classtax
-    where CTId = #{ctid,jdbcType=INTEGER}
+    where  year = #{0} and place=#{1}
   </select>
   
   <delete id="deleteByYearPlace">

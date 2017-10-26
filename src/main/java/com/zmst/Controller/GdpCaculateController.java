@@ -34,9 +34,9 @@ public class GdpCaculateController {
 
 	@Resource
 	private GdpCalculateService gdpService;
-	@RequestMapping(value="/smallkindgdpsearch",method=RequestMethod.POST)  
+	@RequestMapping(value="/subGdpCaculate",method=RequestMethod.POST)  
     @ResponseBody
-    public void smallKindGdpSearch(HttpServletRequest request,HttpServletResponse response){		 
+    public void subGdpCaculate(HttpServletRequest request,HttpServletResponse response){		 
 		 HttpSession session = request.getSession();		 
 		String year = (String) session.getAttribute("year");
 		String city =null;

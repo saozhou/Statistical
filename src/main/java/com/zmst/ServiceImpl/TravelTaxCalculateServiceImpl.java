@@ -68,7 +68,7 @@ public class TravelTaxCalculateServiceImpl implements TravelTaxCalculateService 
 		List<SubTravelTax>subTravelTaxList = null; 
 		subTravelTaxList=subTravleTaxDao.findSubTravelTaxByYearPlace(year,place);
 		if(subTravelTaxList==null){//如果总税收未计算则进行计算处理
-			subTravelTaxList = new ArrayList<SubTravelTax>();  
+			  subTravelTaxList = new ArrayList<SubTravelTax>();  
 		      List<SubTax>subTaxList = subTaxDao.findSubTaxByYearPlace(year, place);
 		      List<GFReference>gfReference=gfReferenceDao.selectByYearAndPlace(year,place);
 		      GFCoefficient coefficient = gfCoefficientDao.selectByYearPlace(year,place);

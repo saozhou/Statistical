@@ -1,5 +1,7 @@
 package com.zmst.IDao;
 
+import java.util.List;
+
 import com.zmst.Domain.ClassGdp;
 
 public interface ClassGdpMapper {
@@ -16,4 +18,8 @@ public interface ClassGdpMapper {
     int updateByPrimaryKey(ClassGdp record);
 
 	void deleteByYearPlace(String year, String place);
+
+	void save(ClassGdp cla);
+
+	List<ClassGdp> findByYearPlace(String year, String place);
 }

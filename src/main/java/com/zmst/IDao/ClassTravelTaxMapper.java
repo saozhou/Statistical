@@ -1,5 +1,7 @@
 package com.zmst.IDao;
 
+import java.util.List;
+
 import com.zmst.Domain.ClassTravelTax;
 
 public interface ClassTravelTaxMapper {
@@ -18,4 +20,6 @@ public interface ClassTravelTaxMapper {
 	void deleteByYearPlace(String year, String place);
 
 	void save(ClassTravelTax classTax);
+
+	List<ClassTravelTax> findByYearPlace(String year, String place);
 }

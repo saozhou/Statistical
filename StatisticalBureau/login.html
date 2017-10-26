@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>登录</title>
+
+		<link rel="stylesheet" href="css/login.css" />
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/login.js"></script>
+		<script type="text/javascript" src="js/getAreaInfo.js"></script>
+		<script>
+			$(document).ready(function() {
+				$("html").css("opacity", "1");
+				init();
+			});
+		</script>
+	</head>
+
+	<body>
+		<div class="container-wrap">
+			<div class="head">
+
+				<div class="login-register">
+					<button class="login">登录</button>
+					<button class="register">注册</button>
+				</div>
+			</div>
+			</br>
+			</br>
+			<p class="head-title">管理系统</p>
+			<div class="box">
+				<p>登录</p>
+				<div class="box-top">
+					<!--	选择用户类型-->
+					<div class="user-type">
+						<button class="user-type-bt">
+								<span>普通用户</span>
+								<img src="img/down_arrow.png"/>
+						</button>
+						<ul>
+							<li onclick="user_type_item_click('普通用户')">普通用户</li>
+							<li onclick="user_type_item_click('超级用户')">超级用户</li>
+							<li onclick="user_type_item_click('管理员')">管理员</li>
+						</ul>
+					</div>
+					<!--	选择年份-->
+					<div class="year">
+						<button class="year-bt">
+								<span>年份</span>
+								<img src="img/down_arrow.png"/>
+						</button>
+						<ul></ul>
+					</div>
+				</div>
+				<!--地区四级联动-->
+				<div class="area-select">
+					<!--国家-->
+					<div class="country">
+						<button class="country-bt">
+								<span>国家</span>
+								<img src="img/down_arrow.png"/>
+						</button>
+						<ul></ul>
+					</div>
+					<!--省级行政区-->
+					<div class="province">
+						<button class="province-bt">
+								<span>省份</span>
+								<img src="img/down_arrow.png"/>
+						</button>
+						<ul></ul>
+					</div>
+					<!--市级行政区-->
+					<!--省级行政区-->
+					<div class="city">
+						<button class="city-bt">
+								<span>城市</span>
+								<img src="img/down_arrow.png"/>
+						</button>
+						<ul></ul>
+					</div>
+					<!--县区-->
+					<div class="county">
+						<button class="county-bt">
+								<span>县区</span>
+								<img src="img/down_arrow.png"/>
+						</button>
+						<ul></ul>
+					</div>
+				</div>
+				<!--账号输入框-->
+				<div class="account">
+					<input type="text" placeholder="请输入账号" size="30" />
+				</div>
+				<!--密码输入框-->
+				<div class="password">
+					<input type="password" placeholder="请输入密码" />
+				</div>
+				<button class="forget-pw">忘记密码？</button>
+				<!--登录按钮-->
+				<div class="login-bt">
+					<span>登录</span>
+				</div>
+			</div>
+			<p class="footer-text">
+				张家界市统计局监制</br>
+				张家界锐聘编程科技有限公司技术支持</br>
+				(最佳显示效果:分辨率1920×1080)</br>
+				@2017
+			</p>
+
+		</div>
+		<!--	忘记密码弹窗-->
+		<div class="cover">
+			<div class="forget-pw-info">
+				<div class="head">
+					<p>忘记密码</p>
+					<img onclick="closePopWindow()" src="img/exit.png"></img>
+				</div>
+				<div class="body">
+					<span>请联系管理员</span>
+				</div>
+
+				<button onclick="closePopWindow()">我知道了</button>
+			</div>
+		</div>
+	</body>
+
+</html>

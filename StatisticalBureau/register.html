@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>注册</title>
+		<link rel="stylesheet" href="css/register.css" />
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/register.js"></script>
+		<script type="text/javascript" src="js/getAreaInfo.js"></script>
+		<script>
+			$(document).ready(function() {
+				init();
+
+			});
+		</script>
+	</head>
+
+	<body>
+		<div class="container">
+			<div class="head">
+				<div class="login-register">
+					<button class="login">登录</button>
+					<button class="register">注册</button>
+				</div>
+			</div>
+			</br>
+			</br>
+			<p class="title">管理系统</p>
+			<div class="box">
+				<p>注册</p>
+				<!--地区四级联动-->
+				<div class="area-select">
+					<!--国家-->
+					<div class="country">
+						<button class="country-bt">
+								<span>国家</span>
+								<img src="img/down_arrow.png"/>
+						</button>
+						<ul></ul>
+					</div>
+					<!--省级行政区-->
+					<div class="province">
+						<button class="province-bt">
+								<span>省份</span>
+								<img src="img/down_arrow.png"/>
+						</button>
+						<ul></ul>
+					</div>
+					<!--市级行政区-->
+					<div class="city">
+						<button class="city-bt">
+								<span>城市</span>
+								<img src="img/down_arrow.png"/>
+						</button>
+						<ul></ul>
+					</div>
+					<!--县区-->
+					<div class="county">
+						<button class="county-bt">
+								<span>县区</span>
+								<img src="img/down_arrow.png"/>
+						</button>
+						<ul></ul>
+					</div>
+				</div>
+				<!--账号输入框-->
+				<div class="account">
+					<input type="text" placeholder="请输入账号" size="30" />
+				</div>
+				<!--密码输入框-->
+				<div class="password">
+					<input type="password" placeholder="请输入密码" />
+				</div>
+				<!--确认密码输入框-->
+				<div class="assure-password">
+					<input type="password" placeholder="请再次输入密码" />
+				</div>
+				<!--登录按钮-->
+				<div class="register-bt">
+					<span>注册</span>
+				</div>
+			</div>
+			<p class="footer-text">
+				技术支持:吉首大学软件学院</br>@2017
+			</p>
+		</div>
+
+	</body>
+
+</html>

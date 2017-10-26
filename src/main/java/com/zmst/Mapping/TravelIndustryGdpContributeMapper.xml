@@ -14,12 +14,14 @@
   <sql id="Base_Column_List">
     INId, Year, Place, InCode, InName, Gdp, TrGdp, Rate
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  
+  <select id="findByYearPlace" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from tbl_travelindustrygdpcontribute
     where INId = #{inid,jdbcType=INTEGER}
   </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tbl_travelindustrygdpcontribute
     where INId = #{inid,jdbcType=INTEGER}
@@ -31,7 +33,7 @@
     where year=#{0} and place=#{1}
   </delete>
   
-  <insert id="insert" parameterType="com.zmst.Domain.TravelIndustryGdpContribute">
+  <insert id="save" parameterType="com.zmst.Domain.TravelIndustryGdpContribute">
     insert into tbl_travelindustrygdpcontribute (INId, Year, Place, 
       InCode, InName, Gdp, 
       TrGdp, Rate)

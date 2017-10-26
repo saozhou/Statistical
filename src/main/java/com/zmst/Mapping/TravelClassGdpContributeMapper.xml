@@ -14,11 +14,11 @@
   <sql id="Base_Column_List">
     TCCId, Year, Place, ClCode, ClName, Gdp, TrGdp, Rate
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="findByYearPlace"  resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from tbl_travelclassgdpcontribute
-    where TCCId = #{tccid,jdbcType=INTEGER}
+    where  year = #{0} and place = #{1} 
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tbl_travelclassgdpcontribute
@@ -30,7 +30,7 @@
     where year=#{0} and place=#{1}
   </delete>
   
-  <insert id="insert" parameterType="com.zmst.Domain.TravelClassGdpContribute">
+  <insert id="save" parameterType="com.zmst.Domain.TravelClassGdpContribute">
     insert into tbl_travelclassgdpcontribute (TCCId, Year, Place, 
       ClCode, ClName, Gdp, 
       TrGdp, Rate)
@@ -38,6 +38,8 @@
       #{clcode,jdbcType=VARCHAR}, #{clname,jdbcType=VARCHAR}, #{gdp,jdbcType=DOUBLE}, 
       #{trgdp,jdbcType=DOUBLE}, #{rate,jdbcType=DOUBLE})
   </insert>
+  
+  
   <insert id="insertSelective" parameterType="com.zmst.Domain.TravelClassGdpContribute">
     insert into tbl_travelclassgdpcontribute
     <trim prefix="(" suffix=")" suffixOverrides=",">

@@ -1,5 +1,7 @@
 package com.zmst.IDao;
 
+import java.util.List;
+
 import com.zmst.Domain.GdpMiddleTable;
 
 public interface GdpMiddleTableMapper {
@@ -18,4 +20,6 @@ public interface GdpMiddleTableMapper {
 	void deleteByYearPlace(String year, String place);
 
 	void save(GdpMiddleTable gdpMiddle);
+
+	List<GdpMiddleTable> findByYearPlace(String year, String place);
 }

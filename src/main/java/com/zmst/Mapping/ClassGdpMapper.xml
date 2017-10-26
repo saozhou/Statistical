@@ -12,11 +12,11 @@
   <sql id="Base_Column_List">
     CGId, Year, Place, ClCode, ClName, ClGdp
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="findByYearPlace"   resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from tbl_classgdp
-    where CGId = #{cgid,jdbcType=INTEGER}
+    where  year = #{0} and place=#{1}
   </select>
   
   
@@ -29,7 +29,8 @@
     delete from tbl_classgdp
     where CGId = #{cgid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.zmst.Domain.ClassGdp">
+  
+  <insert id="save" parameterType="com.zmst.Domain.ClassGdp">
     insert into tbl_classgdp (CGId, Year, Place, 
       ClCode, ClName, ClGdp
       )

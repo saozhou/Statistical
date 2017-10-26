@@ -14,11 +14,11 @@
   <sql id="Base_Column_List">
     TTCId, Year, Place, LaCode, LaName, Tax, TrTax, Rate
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="findByYearPlace"   resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from tbl_travellargetaxcontribute
-    where TTCId = #{ttcid,jdbcType=INTEGER}
+    where  year=#{0} and place = #{1}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tbl_travellargetaxcontribute
@@ -30,7 +30,7 @@
     where year=#{0} and place=#{1}
   </delete>
   
-  <insert id="insert" parameterType="com.zmst.Domain.TravelLargeTaxContribute">
+  <insert id="save" parameterType="com.zmst.Domain.TravelLargeTaxContribute">
     insert into tbl_travellargetaxcontribute (TTCId, Year, Place, 
       LaCode, LaName, Tax, 
       TrTax, Rate)

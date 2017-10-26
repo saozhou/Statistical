@@ -1,5 +1,7 @@
 package com.zmst.IDao;
 
+import java.util.List;
+
 import com.zmst.Domain.IndustryDictionary;
 
 public interface IndustryDictionaryMapper {
@@ -14,4 +16,6 @@ public interface IndustryDictionaryMapper {
     int updateByPrimaryKeySelective(IndustryDictionary record);
 
     int updateByPrimaryKey(IndustryDictionary record);
+
+	List<IndustryDictionary> findAll();
 }

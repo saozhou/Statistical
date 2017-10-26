@@ -1,0 +1,188 @@
+.right-content {
+	height: 100%;
+	min-width: 1100px;
+	min-height: 960px;
+	position: absolute;
+	left: 260px;
+	top: 0px;
+	right: 0px;
+	background-color: white;
+}
+
+.head {
+	z-index: 2;
+	height: 80px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	background-color: white;
+	border-bottom: 1px solid #ccc;
+}
+
+.head .title {
+	float: left;
+	color: rgb(252, 139, 19);
+	margin-left: 30px;
+	margin-top: 10px;
+	font-size: 42px;
+}
+
+.year {
+	z-index: 2;
+	float: right;
+	margin-right: 20px;
+	margin-top: 25px;
+}
+
+.year-bt {
+	background-color: rgb(104, 174, 0);
+	color: white;
+	font-size: 16px;
+	padding: 3px 25px;
+	border: none;
+	outline: none;
+	border-radius: 5px;
+	transition: background-color 0.5s;
+}
+
+.year ul {
+	z-index: 2;
+	max-height: 200px;
+	overflow: auto;
+	overflow-x: hidden;
+	margin-top: 5px;
+	border-radius: 5px;
+	background-color: white;
+	visibility: hidden;
+	opacity: 0;
+	transition: opacity 1s;
+}
+
+.year ul li {
+	position: relative;
+	list-style-type: none;
+	left: -40px;
+	margin-right: -40px;
+	padding: 5px 20px;
+	transition: background-color 0.5s;
+}
+
+.year ul li:hover {
+	background-color: #ccc;
+}
+
+.year-bt:hover {
+	background-color: cornflowerblue;
+	color: white;
+}
+
+.head .year-area {
+	float: left;
+	margin-top: 15px;
+}
+
+.head .cur-year,
+.head .cur-area {
+	margin: 0;
+	padding: 0;
+	margin-left: 30px;
+	color: black;
+	font-size: 18px;
+}
+
+.head .cur-area span ,
+.head .cur-year span{
+	font-size: 16px;
+	color: #777;
+}
+
+.area-select {
+	z-index: 2;
+	float: right;
+	margin-top: 25px;
+	margin-right: 20px;
+}
+
+.area-select div {
+	float: left;
+}
+
+.area-select button {
+	max-height: 50px;
+	width: 110px;
+	background-color: rgb(104, 174, 0);
+	border-radius: 5px;
+	border: none;
+	margin-right: 15px;
+	font-size: 16px;
+	padding: 3px 0;
+	color: white;
+	outline: none;
+	transition: background-color 0.5s;
+}
+
+.area-select button:hover {
+	background-color: cornflowerblue;
+}
+
+.area-select ul {
+	max-width: 115px;
+	max-height: 200px;
+	background-color: white;
+	margin-top: 5px;
+	border-radius: 5px;
+	overflow: auto;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 1s;
+}
+
+.area-select ul li {
+	position: relative;
+	left: -40px;
+	padding-left: 5px;
+	margin-right: -200px;
+	list-style-type: none;
+}
+
+.content-div {
+	position: absolute;
+	top: 80px;
+	left: 0px;
+	right: 0px;
+	bottom: 4px;
+}
+
+.content-div iframe {
+	z-index: 1;
+	width: 100%;
+	height: 100%;
+	border: none;
+	background-color: white;
+	overflow: auto;
+}
+
+.exit{
+	float: right;
+	margin-top: 25px;
+	margin-right: 20px;
+}
+
+.exit button{
+	max-height: 50px;
+	width: 80px;
+	background-color: darkgray;
+	border-radius: 5px;
+	border: none;
+	margin-right: 15px;
+	font-size: 16px;
+	padding: 3px 0;
+	color: white;
+	outline: none;
+	transition: background-color 0.5s;
+}
+
+.exit button:hover{
+	background-color: red;
+}

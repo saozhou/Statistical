@@ -1,0 +1,254 @@
+body,
+html {
+	width: 100%;
+	height: 100%;
+	min-width: 1400px;
+	min-height: 1000px;
+	margin: 0;
+	padding: 0;
+	background: url(../img/banner.jpg) no-repeat top center;
+	background-size: cover;
+	background-attachment: fixed;
+	font-family: 华文楷体;
+}
+
+.head {
+	margin-top: 30px;
+}
+
+.login-register {
+	float: right;
+	margin-right: 50px;
+}
+
+.login-register button {
+	z-index: 1;
+	padding: 10px 30px;
+	color: white;
+	font-size: 24px;
+	font-family: 华文楷体;
+	outline: none;
+}
+
+.login {
+	border: 1px solid white;
+	background-color: transparent;
+	transition: background-color 0.5s;
+}
+
+.login:hover{
+	background-color: rgb(223, 87, 153);
+	border: 1px solid  rgb(223, 87, 153);
+}
+
+.register {
+	margin-left: 20px;
+	border: 1px solid rgb(223, 87, 153);
+	background-color: rgb(223, 87, 153);
+}
+
+.title {
+	text-align: center;
+	font-size: 48px;
+	font-weight: bold;
+	color: white;
+}
+
+.box {
+	width: 800px;
+	height: 540px;
+	text-align: center;
+	margin: 0 auto;
+	margin-bottom: 100px;
+	background-color: rgba(27, 27, 27, 0.5);
+	box-shadow: 5px 10px 50px #4f4f4f;
+}
+
+.box p {
+	position: relative;
+	top: 30px;
+	color: white;
+	font-size: 28px;
+}
+
+.area-select {
+	position: relative;
+	width: 668px;
+	height: 50px;
+	float: left;
+	top: 60px;
+	margin: 0 66px;
+}
+
+.area-select div {
+	float: left;
+	border-radius: 5px;
+}
+
+.area-select button {
+	z-index: 1;
+	width: 150px;
+	background-color: transparent;
+	border: 1px solid rgb(136, 155, 160);
+	border-radius: 5px;
+	font-size: 24px;
+	font-family: 华文楷体;
+	color: white;
+	padding: 3px;
+	outline: none;
+	transition: background-color 0.5s;
+}
+
+.area-select button:hover {
+	background-color: rgb(223, 87, 153);
+	border: 1px solid rgb(223, 87, 153);
+}
+
+.province-bt,
+.city-bt,
+.county-bt {
+	margin-left: 22px;
+}
+
+.area-select img {
+	position: relative;
+	top: 5px;
+	float: right;
+}
+
+.area-select ul {
+	z-index: 2;
+	position: relative;
+	max-height: 200px;
+	top: -12px;
+	overflow: auto;
+	border-radius: 5px;
+	background-color: white;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.8s;
+}
+
+.area-select li {
+	position: relative;
+	max-width: 150px;
+	text-align: left;
+	padding: 3px;
+	padding-left: 10px;
+	list-style-type: none;
+	left: -40px;
+	margin-right: -80px;
+	color: #333;
+}
+
+.province ul,
+.city ul,
+.county ul {
+	position: relative;
+	left: 22px;
+	margin-right: 22px;
+}
+
+.area-select ul li:hover {
+	background-color: #bbb;
+	color: white;
+}
+
+.account {
+	z-index: 1;
+	margin: 0 66px;
+	position: relative;
+	height: 50px;
+	top: 130px;
+	text-align: left;
+}
+
+.password {
+	z-index: 1;
+	position: relative;
+	margin: 0 66px;
+	height: 50px;
+	top: 160px;
+}
+
+.assure-password {
+	z-index: 1;
+	position: relative;
+	margin: 0 66px;
+	height: 50px;
+	top: 190px;
+}
+
+.account input {
+	z-index: 0;
+	width: 99%;
+	position: relative;
+	top: -50px;
+	background-color: transparent;
+	border: none;
+	border-bottom: 1px solid rgb(136, 155, 160);
+	font-size: 24px;
+	font-family: 华文楷体;
+	color: white;
+	padding: 3px;
+	outline: none;
+}
+
+.password input {
+	z-index: 0;
+	width: 99%;
+	position: relative;
+	top: -10px;
+	background-color: transparent;
+	border: none;
+	border-bottom: 1px solid rgb(136, 155, 160);
+	font-size: 24px;
+	font-family: 华文楷体;
+	color: white;
+	padding: 3px;
+	outline: none;
+}
+
+.assure-password input{
+	z-index: 0;
+	width: 99%;
+	position: relative;
+	top: -15px;
+	background-color: transparent;
+	border: none;
+	border-bottom: 1px solid rgb(136, 155, 160);
+	font-size: 24px;
+	font-family: 华文楷体;
+	color: white;
+	padding: 3px;
+	outline: none;
+}
+
+.register-bt{
+	position: relative;
+	margin: 0 66px;
+	top: 220px;
+	padding: 15px;
+	text-align: center;
+	border-radius: 5px;
+	color: black;
+	font-size: 18px;
+	background-color: white;
+	transition: background-color 0.5s;
+}
+
+.register-bt:hover {
+	background-color: rgb(223, 87, 153);
+	color: white;
+}
+
+.footer-text {
+	position: relative;
+	width: 20%;
+	top: -50px;
+	min-width: 300px;
+	margin: 0 auto;
+	text-align: center;
+	font-size: 20px;
+	color: white;
+}

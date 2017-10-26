@@ -1,0 +1,424 @@
+body,
+html {
+	width: 100%;
+	height: 100%;
+	min-width: 1400px;
+	min-height: 1000px;
+	margin: 0;
+	padding: 0;
+	font-family: 华文楷体;
+}
+
+html {
+	opacity: 0;
+	transition: opacity 2s;
+}
+
+.container-wrap {
+	width: 100%;
+	height: 100%;
+	background: url(../img/banner.jpg) no-repeat top center;
+	background-size: cover;
+	background-attachment: fixed;
+}
+
+.cover {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 3;
+	width: 100%;
+	height: 100%;
+	min-width: 1400px;
+	min-height: 1000px;
+	background-color: rgba(10, 10, 10, 0.3);
+	visibility: hidden;
+}
+
+.forget-pw-info {
+	width: 400px;
+	height: 180px;
+	margin: auto auto;
+	margin-top: -200px;
+	text-align: center;
+	border-radius: 10px;
+	background-color: white;
+	transition: margin-top 1s;
+}
+
+.forget-pw-info .head {
+	position: relative;
+	padding: 5px 15px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom: 1px solid #aaa;
+	background-color: #333;
+}
+
+.forget-pw-info .head p {
+	padding: 0;
+	margin: 0;
+	text-align: left;
+	font-size: 24px;
+	font-weight: lighter;
+	color: white;
+}
+
+.forget-pw-info .head img {
+	position: relative;
+	padding: 0;
+	margin: 0;
+	top: -30px;
+	float: right;
+}
+
+.forget-pw-info .body {
+	position: relative;
+	padding: 20px 15px;
+	padding-bottom: 40px;
+	border-bottom: 1px solid #ccc;
+	text-align: center;
+}
+
+.forget-pw-info .body span {
+	font-size: 20px;
+}
+
+.forget-pw-info button {
+	position: relative;
+	top: 12px;
+	border: 1px solid #999;
+	border-radius: 5px;
+	padding: 3px 20px;
+	background-color: transparent;
+	color: #666;
+	font-size: 18px;
+	font-family: 华文楷体;
+	outline: none;
+	transition: background-color 0.5s;
+}
+
+.forget-pw-info button:hover {
+	background-color: dodgerblue;
+	color: white;
+	border: 1px solid dodgerblue;
+}
+
+.head {
+	padding-top: 30px;
+}
+
+.login-register {
+	float: right;
+	margin-right: 50px;
+}
+
+.login-register button {
+	z-index: 1;
+	padding: 10px 30px;
+	color: white;
+	font-size: 24px;
+	font-family: 华文楷体;
+	outline: none;
+}
+
+.login {
+	border: 1px solid rgb(223, 87, 153);
+	background-color: rgb(223, 87, 153);
+}
+
+.register {
+	margin-left: 20px;
+	border: 1px solid white;
+	background-color: transparent;
+	transition: background-color 0.5s;
+}
+
+.register:hover {
+	background-color: rgb(223, 87, 153);
+	border: 1px solid rgb(223, 87, 153);
+}
+
+.head-title {
+	text-align: center;
+	font-size: 48px;
+	font-weight: bold;
+	color: white;
+}
+
+.box {
+	width: 800px;
+	height: 540px;
+	text-align: center;
+	margin: 0 auto;
+	margin-bottom: 100px;
+	background-color: rgba(27, 27, 27, 0.5);
+	box-shadow: 5px 10px 50px #4f4f4f;
+}
+
+.box p {
+	position: relative;
+	top: 30px;
+	color: white;
+	font-size: 28px;
+}
+
+.box-top {
+	position: relative;
+	margin: 0 66px;
+	top: 40px;
+}
+
+.user-type {
+	height: 50px;
+	float: left;
+}
+
+.year {
+	height: 50px;
+	float: right;
+}
+
+.user-type-bt,
+.year-bt {
+	z-index: 1;
+	width: 300px;
+	font-size: 24px;
+	font-family: 华文楷体;
+	color: white;
+	background-color: transparent;
+	padding: 3px;
+	border-radius: 5px;
+	border: 1px solid rgb(136, 155, 160);
+	outline: none;
+	transition: background-color 0.5s;
+}
+
+.user-type-bt:hover,
+.year-bt:hover {
+	background-color: rgb(223, 87, 153);
+	border: 1px solid rgb(223, 87, 153);
+}
+
+.user-type img,
+.year img {
+	position: relative;
+	float: right;
+	top: 5px;
+}
+
+.user-type ul,
+.year ul {
+	z-index: 2;
+	position: relative;
+	max-height: 240px;
+	overflow: auto;
+	overflow-x: hidden;
+	top: -12px;
+	border-radius: 5px;
+	background-color: white;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.8s;
+}
+
+.user-type ul li,
+.year ul li {
+	position: relative;
+	left: -40px;
+	margin-right: -40px;
+	list-style-type: none;
+	text-align: center;
+	font-size: 18px;
+	color: #333;
+	padding: 5px;
+}
+
+.user-type ul li:hover,
+.year ul li:hover {
+	background-color: #bbb;
+	color: white;
+}
+
+.user-type-bt span,
+.year-bt span {
+	position: relative;
+	right: -10px;
+}
+
+.area-select {
+	position: relative;
+	width: 668px;
+	height: 50px;
+	float: left;
+	top: 70px;
+	margin: 0 66px;
+	transition: height 1s;
+}
+
+.area-select div {
+	float: left;
+	border-radius: 5px;
+}
+
+.area-select button {
+	z-index: 1;
+	width: 150px;
+	background-color: transparent;
+	border: 1px solid rgb(136, 155, 160);
+	border-radius: 5px;
+	font-size: 24px;
+	font-family: 华文楷体;
+	color: white;
+	padding: 3px;
+	outline: none;
+	transition: background-color 0.5s;
+}
+
+.area-select button:hover {
+	background-color: rgb(223, 87, 153);
+	border: 1px solid rgb(223, 87, 153);
+}
+
+.province-bt,
+.city-bt,
+.county-bt {
+	margin-left: 22px;
+}
+
+.area-select img {
+	position: relative;
+	top: 5px;
+	float: right;
+}
+
+.area-select ul {
+	z-index: 2;
+	position: relative;
+	max-height: 200px;
+	top: -12px;
+	overflow: auto;
+	border-radius: 5px;
+	background-color: white;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.8s;
+}
+
+.area-select li {
+	position: relative;
+	max-width: 150px;
+	text-align: left;
+	padding: 3px;
+	padding-left: 10px;
+	list-style-type: none;
+	left: -40px;
+	margin-right: -80px;
+	color: #333;
+}
+
+.province ul,
+.city ul,
+.county ul {
+	position: relative;
+	left: 22px;
+	margin-right: 22px;
+}
+
+.area-select ul li:hover {
+	background-color: #bbb;
+	color: white;
+}
+
+.account {
+	z-index: 1;
+	margin: 0 66px;
+	position: relative;
+	height: 50px;
+	top: 200px;
+	text-align: left;
+}
+
+.password {
+	z-index: 1;
+	position: relative;
+	margin: 0 66px;
+	height: 50px;
+	top: 200px;
+}
+
+.account input {
+	z-index: 0;
+	width: 99%;
+	position: relative;
+	top: -110px;
+	background-color: transparent;
+	border: none;
+	border-bottom: 1px solid rgb(136, 155, 160);
+	font-size: 24px;
+	font-family: 华文楷体;
+	color: white;
+	padding: 3px;
+	outline: none;
+}
+
+.password input {
+	z-index: 0;
+	width: 99%;
+	position: relative;
+	top: -50px;
+	background-color: transparent;
+	border: none;
+	border-bottom: 1px solid rgb(136, 155, 160);
+	font-size: 24px;
+	font-family: 华文楷体;
+	color: white;
+	padding: 3px;
+	outline: none;
+}
+
+.forget-pw {
+	position: relative;
+	width: 120px;
+	height: 30px;
+	top: 220px;
+	border: none;
+	background-color: transparent;
+	color: white;
+	font-size: 18px;
+	font-family: 华文楷体;
+	outline: none;
+}
+
+.forget-pw:hover {
+	color: rgb(223, 87, 153);
+}
+
+.login-bt {
+	position: relative;
+	margin: 0 66px;
+	top: 240px;
+	padding: 15px;
+	text-align: center;
+	border-radius: 5px;
+	color: black;
+	font-size: 18px;
+	background-color: white;
+	transition: background-color 0.5s;
+}
+
+.login-bt:hover {
+	background-color: rgb(223, 87, 153);
+	color: white;
+}
+
+.footer-text {
+	position: relative;
+	width: 20%;
+	top: -50px;
+	min-width: 300px;
+	margin: 0 auto;
+	text-align: center;
+	font-size: 18px;
+	color: white;
+}

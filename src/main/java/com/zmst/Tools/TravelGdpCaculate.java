@@ -35,9 +35,11 @@ public class TravelGdpCaculate {
 				SubTravelGdp subTravelGdp = new SubTravelGdp();
 				travelGdpdata=0;
 				 String subCorfficient =null;
-						 gfReferenceMap.get(subGdp.getSmcode());
+				 subCorfficient=gfReferenceMap.get(subGdp.getSmcode());
 				 					         
-								if(subCorfficient.equals("t")){
+				            if(subCorfficient==null){
+			    	            continue;
+			                  }else if(subCorfficient.equals("t")){
 									 
 									travelGdpdata = subGdp.getSmgdp();
 								    
@@ -80,7 +82,7 @@ public class TravelGdpCaculate {
 		for(int i=0;i<largeTravelGdpList.size();i++){
 			double gdp=0;
 			for(int j=0;j<subTravelGdpList.size();j++){
-				if(largeTravelGdpList.get(i).getLacode().equals(subTravelGdpList.get(j).getSmcode().substring(0,2)));
+				if(largeTravelGdpList.get(i).getLacode().equals(subTravelGdpList.get(j).getSmcode().substring(0,2)))
 				{
 					gdp = gdp + subTravelGdpList.get(j).getStgdp();
 				}

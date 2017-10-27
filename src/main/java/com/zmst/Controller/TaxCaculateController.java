@@ -16,6 +16,7 @@ import com.zmst.Domain.SubTax;
 import com.zmst.Service.TaxCalculateService;
 import com.zmst.Tools.HttpReturn;
  
+import javax.annotation.*;
 
 /**
  * 
@@ -26,6 +27,7 @@ import com.zmst.Tools.HttpReturn;
 @RequestMapping("/taxCaculate")
 public class TaxCaculateController {
 
+	@Resource
 	private TaxCalculateService taxService;
 	/**
 	 *小类调取及计算全部 
@@ -35,11 +37,11 @@ public class TaxCaculateController {
    
 	public void allTaxManager(HttpServletRequest request,HttpServletResponse response){
 		 HttpSession session = request.getSession();		 
-			String year = (String) session.getAttribute("year");
+			String year = "2017";//(String) session.getAttribute("year");
 			String city =null;
-			city=(String) session.getAttribute("city");
+			city="张家界";//(String) session.getAttribute("city");
 			String county=null; 
-			county= (String)session.getAttribute("county");
+			//county= (String)session.getAttribute("county");
 			String place = null;
 			if(county!=null){
 				 place=county;

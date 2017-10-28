@@ -1,4 +1,4 @@
-package com.zmst.Service;
+﻿package com.zmst.Service;
 
 import java.util.List;
 
@@ -15,12 +15,18 @@ import com.zmst.Domain.SubTax;
 import com.zmst.Domain.SubTravelGdp;
 import com.zmst.Domain.SubTravelTax;
 
+import com.zmst.Domain.CentralTax;
+import com.zmst.Domain.GFCoefficient;
+import com.zmst.Domain.Gdp;
+import com.zmst.Domain.LandTax;
+
 /**
  * 
  * @author Zhou
  *基础查询service
  */
 public interface BasedQueryService {
+
 	/*
 	 * 门类
 	 */
@@ -42,4 +48,18 @@ public interface BasedQueryService {
 	public List<SubTax> GetsTax(String year,String place);
 	public List<SubTravelGdp> GetsTravelGdp(String year,String place);
 	public List<SubTravelTax> GetsTravelTax(String year,String place);
+
+
+	 
+
+	List<LandTax> getLandTax(String year, String place);
+
+	GFCoefficient getGFCoefficient(String year, String place);
+
+	List<Gdp> getGdpTax(String year, String place);
+
+	List<CentralTax> getCentralTax(String year, String place);
+ 
+
+
 }

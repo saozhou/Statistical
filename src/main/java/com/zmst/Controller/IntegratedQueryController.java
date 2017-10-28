@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.zmst.Domain.SubGdp;
+import com.zmst.Domain.SubTax;
+import com.zmst.Domain.SubTravelGdp;
+import com.zmst.Domain.SubTravelTax;
 import com.zmst.Domain.TravelClassGdpContribute;
 import com.zmst.Domain.TravelClassTaxContribute;
 import com.zmst.Domain.TravelIndustryGdpContribute;
@@ -22,7 +26,7 @@ import com.zmst.Domain.TravelLargeGdpContribute;
 import com.zmst.Domain.TravelLargeTaxContribute;
 import com.zmst.Service.IntegratedQueryService;
 import com.zmst.Tools.HttpReturn;
- 
+import javax.annotation.*;
 
 /**
  * 
@@ -33,6 +37,7 @@ import com.zmst.Tools.HttpReturn;
 @RequestMapping("/IntegratedQuery")
 public class IntegratedQueryController {
 
+	@Resource
 	private IntegratedQueryService integratedQueryService;
 	/**
 	 * gdp大类综合查询
@@ -46,12 +51,14 @@ public class IntegratedQueryController {
 		
 		 
         HttpSession session = request.getSession();		 
-		String year = (String) session.getAttribute("year");
-		String city =null;
-		city=(String) session.getAttribute("city");
+		String year = "2017";//(String) session.getAttribute("year");
+		String city ="张家界";
 		String county=null; 
-		county= (String)session.getAttribute("county");
 		String place = null;
+		//city=(String) session.getAttribute("city");
+		 
+		//county= (String)session.getAttribute("county");
+		 
 		if(county!=null){
 			 place=county;
 		}else{
@@ -91,14 +98,16 @@ public class IntegratedQueryController {
 
 		
 		
-		 
-        HttpSession session = request.getSession();		 
-		String year = (String) session.getAttribute("year");
-		String city =null;
-		city=(String) session.getAttribute("city");
+		String city ="张家界";
 		String county=null; 
-		county= (String)session.getAttribute("county");
 		String place = null;
+        HttpSession session = request.getSession();		 
+		String year ="2017";// (String) session.getAttribute("year");
+		 
+		//city=(String) session.getAttribute("city");
+	 
+		//county= (String)session.getAttribute("county");
+		 
 		if(county!=null){
 			 place=county;
 		}else{
@@ -108,7 +117,7 @@ public class IntegratedQueryController {
          List<TravelClassGdpContribute> classGdpContributeList = new ArrayList<TravelClassGdpContribute>();
          
          classGdpContributeList = integratedQueryService.getClassGdpContribute(year,place,classGdpContributeList);
-         
+         System.out.println(classGdpContributeList.size());
 		if(classGdpContributeList.size()==0){
 			classGdpContributeList = integratedQueryService.getClassGdpContributeList(classGdpContributeList,year, place);
 			 
@@ -138,12 +147,15 @@ public class IntegratedQueryController {
 	public void industryGdpConrtibute(HttpServletRequest request,HttpServletResponse response){
 
         HttpSession session = request.getSession();		 
-		String year = (String) session.getAttribute("year");
-		String city =null;
-		city=(String) session.getAttribute("city");
-		String county=null; 
-		county= (String)session.getAttribute("county");
-		String place = null;
+        String city ="张家界";
+        String county=null; 
+        String place = null;
+		String year = "2017";//(String) session.getAttribute("year");
+		 
+		//city=(String) session.getAttribute("city");
+		 
+		//county= (String)session.getAttribute("county");
+		 
 		if(county!=null){
 			 place=county;
 		}else{
@@ -182,13 +194,16 @@ public class IntegratedQueryController {
 	@ResponseBody
 	public void largeTaxConrtibute(HttpServletRequest request,HttpServletResponse response){
 
-        HttpSession session = request.getSession();		 
-		String year = (String) session.getAttribute("year");
-		String city =null;
-		city=(String) session.getAttribute("city");
-		String county=null; 
-		county= (String)session.getAttribute("county");
-		String place = null;
+        HttpSession session = request.getSession();
+    	String city ="张家界";
+    	String county=null;
+    	String place = null;
+    	String year = "2017";//(String) session.getAttribute("year");
+	 
+		//city=(String) session.getAttribute("city");
+		  
+		//county= (String)session.getAttribute("county");
+		 
 		if(county!=null){
 			 place=county;
 		}else{
@@ -231,12 +246,14 @@ public class IntegratedQueryController {
 		
 		 
         HttpSession session = request.getSession();		 
-		String year = (String) session.getAttribute("year");
-		String city =null;
-		city=(String) session.getAttribute("city");
-		String county=null; 
-		county= (String)session.getAttribute("county");
+		String year = "2017";//(String) session.getAttribute("year");
+		String city ="张家界";
+		String county=null;
 		String place = null;
+		//city=(String) session.getAttribute("city");
+		 
+		//county= (String)session.getAttribute("county");
+		
 		if(county!=null){
 			 place=county;
 		}else{
@@ -276,12 +293,14 @@ public class IntegratedQueryController {
 	public void industryTaxConrtibute(HttpServletRequest request,HttpServletResponse response){
 
        HttpSession session = request.getSession();		 
-		String year = (String) session.getAttribute("year");
-		String city =null;
-		city=(String) session.getAttribute("city");
-		String county=null; 
-		county= (String)session.getAttribute("county");
+		String year = "2017";//(String) session.getAttribute("year");
+		String city ="张家界";
+		String county=null;
 		String place = null;
+		//city=(String) session.getAttribute("city");
+		  
+		//county= (String)session.getAttribute("county");
+		 
 		if(county!=null){
 			 place=county;
 		}else{
@@ -306,6 +325,162 @@ public class IntegratedQueryController {
 		}  //这里不设置编码会有乱码
 	      response.setContentType("text/html;charset=utf-8");
 		  String json = JSON.toJSONString(industryTaxContributeList);
+		  HttpReturn.reponseBody(response, json);
+		 
+	}
+	
+	/**
+	 * 
+	 * @param request
+	 * @param response
+	 * 小类税收
+	 * 
+	 */
+	@RequestMapping(value="/subTaxSearch",method=RequestMethod.POST)
+	@ResponseBody
+	public void subTaxSearch(HttpServletRequest request,HttpServletResponse response){
+
+       HttpSession session = request.getSession();		 
+		String year = (String) session.getAttribute("year");
+		String city =null;
+		city=(String) session.getAttribute("city");
+		String county=null; 
+		county= (String)session.getAttribute("county");
+		String place = null;
+		if(county!=null){
+			 place=county;
+		}else{
+			place=city;
+		}
+		
+		 List<SubTax> subTax =	integratedQueryService.getSubTaxt(year,place);
+			
+		
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  //杩欓噷涓嶈缃紪鐮佷細鏈変贡鐮�
+	      response.setContentType("text/html;charset=utf-8");
+		  String json = JSON.toJSONString(subTax);
+		  HttpReturn.reponseBody(response, json);
+		 
+	}
+	
+	/**
+	 * 
+	 * @param request
+	 * @param response
+	 * 小磊旅游税收查询
+	 * 
+	 */
+	@RequestMapping(value="/subTravelTaxSearch",method=RequestMethod.POST)
+	@ResponseBody
+	public void subTravelTaxSearch(HttpServletRequest request,HttpServletResponse response){
+
+       HttpSession session = request.getSession();		 
+		String year = (String) session.getAttribute("year");
+		String city =null;
+		city=(String) session.getAttribute("city");
+		String county=null; 
+		county= (String)session.getAttribute("county");
+		String place = null;
+		if(county!=null){
+			 place=county;
+		}else{
+			place=city;
+		}
+		
+		 List<SubTravelTax> subTravelTax =	integratedQueryService.getSubTravelTaxt(year,place);
+			
+		
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  //杩欓噷涓嶈缃紪鐮佷細鏈変贡鐮�
+	      response.setContentType("text/html;charset=utf-8");
+		  String json = JSON.toJSONString(subTravelTax);
+		  HttpReturn.reponseBody(response, json);
+		 
+	}
+	
+	/**
+	 * 
+	 * @param request
+	 * @param response
+	 *小类gdp
+	 * 
+	 */
+	@RequestMapping(value="/subGdpSearch",method=RequestMethod.POST)
+	@ResponseBody
+	public void subGdpSearch(HttpServletRequest request,HttpServletResponse response){
+
+       HttpSession session = request.getSession();		 
+		String year = (String) session.getAttribute("year");
+		String city =null;
+		city=(String) session.getAttribute("city");
+		String county=null; 
+		county= (String)session.getAttribute("county");
+		String place = null;
+		if(county!=null){
+			 place=county;
+		}else{
+			place=city;
+		}
+		
+		 List<SubGdp> subGdp=	integratedQueryService.getSubGdp(year,place);
+			
+		
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  //杩欓噷涓嶈缃紪鐮佷細鏈変贡鐮�
+	      response.setContentType("text/html;charset=utf-8");
+		  String json = JSON.toJSONString(subGdp);
+		  HttpReturn.reponseBody(response, json);
+		 
+	}
+	
+	/**
+	 * 
+	 * @param request
+	 * @param response
+	 * 小类旅游gdp
+	 * 
+	 */
+	@RequestMapping(value="/subTravelGdpSearch",method=RequestMethod.POST)
+	@ResponseBody
+	public void subTravelGdpSearch(HttpServletRequest request,HttpServletResponse response){
+
+       HttpSession session = request.getSession();		 
+		String year = (String) session.getAttribute("year");
+		String city =null;
+		city=(String) session.getAttribute("city");
+		String county=null; 
+		county= (String)session.getAttribute("county");
+		String place = null;
+		if(county!=null){
+			 place=county;
+		}else{
+			place=city;
+		}
+		
+		 List<SubTravelGdp> subTravelGdp=	integratedQueryService.getSubTravelGdp(year,place);
+			
+		
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  //杩欓噷涓嶈缃紪鐮佷細鏈変贡鐮�
+	      response.setContentType("text/html;charset=utf-8");
+		  String json = JSON.toJSONString(subTravelGdp);
 		  HttpReturn.reponseBody(response, json);
 		 
 	}

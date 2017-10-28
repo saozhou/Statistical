@@ -141,7 +141,7 @@ public static void getIndustryGdpContribute(List<IndustryDictionary> industryLin
 			   travelGdp= largeGdpContributeMap.get("E").getTrgdp()+travelGdp;
 			  
 		   }else if(industryLineList.get(i).getIncode().equals("三")){
-			   gdp = largeGdpContributeMap.get("5").getGdp()+gdp;
+			   gdp = largeGdpContributeMap.get("05").getGdp()+gdp;
 			   gdp = largeGdpContributeMap.get("11").getGdp()+gdp;
 			   gdp= largeGdpContributeMap.get("43").getGdp()+gdp;
 			   gdp= largeGdpContributeMap.get("F").getGdp()+gdp;
@@ -160,7 +160,7 @@ public static void getIndustryGdpContribute(List<IndustryDictionary> industryLin
 			   gdp= largeGdpContributeMap.get("R").getGdp()+gdp;
 			   gdp= largeGdpContributeMap.get("S").getGdp()+gdp;
 			   gdp= largeGdpContributeMap.get("T").getGdp()+gdp;
-			   travelGdp  = largeGdpContributeMap.get("5").getTrgdp()+travelGdp;
+			   travelGdp  = largeGdpContributeMap.get("05").getTrgdp()+travelGdp;
 			   travelGdp = largeGdpContributeMap.get("11").getTrgdp()+travelGdp;
 			   travelGdp= largeGdpContributeMap.get("43").getTrgdp()+travelGdp;
 			   travelGdp= largeGdpContributeMap.get("F").getTrgdp()+travelGdp;
@@ -305,7 +305,7 @@ public static void getIndustryTaxContribute(List<IndustryDictionary> industryLin
 			   travelTax= largeTaxContributeMap.get("E").getTrtax()+travelTax;
 			  
 		   }else if(industryLineList.get(i).getIncode().equals("三")){
-			   tax = largeTaxContributeMap.get("5").getTax()+tax;
+			   tax = largeTaxContributeMap.get("05").getTax()+tax;
 			   tax = largeTaxContributeMap.get("11").getTax()+tax;
 			   tax= largeTaxContributeMap.get("43").getTax()+tax;
 			   tax= largeTaxContributeMap.get("F").getTax()+tax;
@@ -324,7 +324,7 @@ public static void getIndustryTaxContribute(List<IndustryDictionary> industryLin
 			   tax= largeTaxContributeMap.get("R").getTax()+tax;
 			   tax= largeTaxContributeMap.get("S").getTax()+tax;
 			   tax= largeTaxContributeMap.get("T").getTax()+tax;
-			   travelTax  = largeTaxContributeMap.get("5").getTrtax()+travelTax;
+			   travelTax  = largeTaxContributeMap.get("05").getTrtax()+travelTax;
 			   travelTax = largeTaxContributeMap.get("11").getTrtax()+travelTax;
 			   travelTax= largeTaxContributeMap.get("43").getTrtax()+travelTax;
 			   travelTax= largeTaxContributeMap.get("F").getTrtax()+travelTax;

@@ -34,16 +34,20 @@ public class GdpCaculateController {
 
 	@Resource
 	private GdpCalculateService gdpService;
+	
 	@RequestMapping(value="/subGdpCaculate",method=RequestMethod.POST)  
     @ResponseBody
     public void subGdpCaculate(HttpServletRequest request,HttpServletResponse response){		 
-		 HttpSession session = request.getSession();		 
-		String year = (String) session.getAttribute("year");
-		String city =null;
-		city=(String) session.getAttribute("city");
-		String county=null; 
-		county= (String)session.getAttribute("county");
+		 HttpSession session = request.getSession();
+		 String city ="张家界";
+		 String county=null;
 		String place = null;
+		String year = "2017";//(String) session.getAttribute("year");
+		 
+	//	city=(String) session.getAttribute("city");
+		 
+		//county= (String)session.getAttribute("county");
+	 
 		if(county!=null){
 			 place=county;
 		}else{

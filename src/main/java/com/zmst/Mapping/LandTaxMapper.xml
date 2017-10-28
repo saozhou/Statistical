@@ -24,7 +24,7 @@
     select 
     <include refid="Base_Column_List" />
     from tbl_landtax
-    where  year = #{0} and place=#{1}
+    where  year = #{0} and place= #{1}
   </select>
   
     <delete id="deleteByYearPlace"  >

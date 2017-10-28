@@ -49,8 +49,8 @@ public class GdpCalculateServiceImpl implements GdpCalculateService {
 	private AllCodeDictionaryMapper codeDictionaryDao;
 	@Resource
 	private ClassGdpMapper classGdpDao;
-	@Resource
-	private LargeAndClassDictionaryMapper classDao;
+ 
+	
 	public List<SubGdp> findSubGdpByYearPlace(String year, String place) {
 		// TODO Auto-generated method stub
 		List<SubGdp>list = subGdpDao.findByYearPlace(year,place);
@@ -76,34 +76,41 @@ public class GdpCalculateServiceImpl implements GdpCalculateService {
 	 
 		
 	    List<SubTax>subTaxList = subTaxDao.findSubTaxByYearPlace(year, place);
+	    
 		
 		List<Gdp>gdpList = gdpDao.getAllGdp(year,place);
 		
+		
 		List<Gdp>middleGdpList = GdpAnalyze.getMiddleGdp(gdpList,year,place);
+		
 		
 		List<LargeTax> largeTaxList =  largeTaxDao.getByYearPlace(year,place);
 		
-		List<LargeAndClassDictionary>largeAndClass=largeAndClassDao.findAll();
 		
         List<ClassGdp>classGdpList = new ArrayList<ClassGdp>();
 		  
 		  
 	    List<AllCodeDictionary>classLineList = codeDictionaryDao.getClassLine();
+	    
 		  
-	    List<LargeAndClassDictionary>classDidctionary = classDao.findAll();
+	    List<LargeAndClassDictionary>largeAndClassDictionary = largeAndClassDao.findAll();
+	    
+	    
+		GdpAnalyze.getLargeGdp(year,place,middleGdpList,largeGdpList,largeTaxList);//获得大类gdp
 		
-		GdpAnalyze.sloveMiddleGdp(year,place,middleGdpList,largeGdpList,largeTaxList);//获得大类税收
 		
-	    GdpAnalyze.getSubGdp(subGdpList,subTaxList,largeGdpList,largeTaxList,year,place);//小类税收
+	    GdpAnalyze.getSubGdp(gdpList,subGdpList,subTaxList,largeGdpList,largeTaxList,year,place);//小类gdp
 		
 		  
-	    GdpAnalyze.getClassGdp(largeGdpList,classLineList,classDidctionary,place,year,classGdpList);
+	    GdpAnalyze.getClassGdp(largeGdpList,classLineList,largeAndClassDictionary,place,year,classGdpList);
 		 
-		for(LargeGdp largegdp:largeGdpList){
-			largeGdpDao.save(largegdp);
+	    
+	    largeGdpDao.deleteByYearPlace(year, place);
+	   for(LargeGdp largegdp:largeGdpList){
+		largeGdpDao.save(largegdp);
 		}
 		 for(SubGdp sub:subGdpList){
-			 subGdpDao.save(sub);
+	    	subGdpDao.save(sub);
 		 }
 		for(ClassGdp cla:classGdpList){
 			classGdpDao.save(cla);

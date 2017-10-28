@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.zmst.Domain.AllCodeDictionary;
 import com.zmst.Domain.ClassGdp;
-import com.zmst.Domain.ClassTax;
 import com.zmst.Domain.Gdp;
 import com.zmst.Domain.GdpCaculate;
 import com.zmst.Domain.GdpMiddleTable;
@@ -54,18 +53,31 @@ public class GdpAnalyze {
 				middleGdp.add(gdp);
 			}
 		}
+		 
+		
 		return middleGdp;
 	}
 
-	public static void sloveMiddleGdp(String year, String place, List<Gdp> middleGdpList, List<LargeGdp> largeGdpList,
+	/**
+	 * 
+	 * @param year
+	 * @param place
+	 * @param middleGdpList
+	 * @param largeGdpList
+	 * @param largeTaxList
+	 *            获得打类gdp
+	 */
+	public static void getLargeGdp(String year, String place, List<Gdp> middleGdpList, List<LargeGdp> largeGdpList,
 			List<LargeTax> largeTaxList) {
 		// TODO Auto-generated method stub
 		List<GdpCaculate> gdpLast = new ArrayList<GdpCaculate>();
 		List<GdpCaculate> largeGdpLast = new ArrayList<GdpCaculate>();
-		for (int i = 0; i < middleGdpList.size(); i++) {//
+
+		for (int i = 0; i < middleGdpList.size(); i++) {
+
 			String[] inCode = middleGdpList.get(i).getGdpcode().split("、");
 			double gdp = middleGdpList.get(i).getGdp();
-			if (inCode.length == 1) {//找出未分出的gdp集合项
+			if (inCode.length == 1) {// 单一集合项
 
 				String[] ouCode = inCode[0].split("-");
 
@@ -132,8 +144,8 @@ public class GdpAnalyze {
 			}
 
 		}
-		
-		for (int i = 0; i < gdpLast.size(); i++) {//找出集合税收
+
+		for (int i = 0; i < gdpLast.size(); i++) {// 找出集合税收
 			String[] inCode = gdpLast.get(i).getLacode().split("、");
 			double tax = 0;
 			if (inCode.length == 1) {
@@ -159,17 +171,14 @@ public class GdpAnalyze {
 					}
 
 				}
-				 
-				gdpLast.get(i).setTax(tax); 
-				 
+
+				gdpLast.get(i).setTax(tax);
 
 			} else if (inCode.length > 1) {
-
+                
 				for (int w = 0; w < inCode.length; w++) {
 					String[] ouCode = inCode[w].split("-");
-
 					for (int j = 0; j < largeTaxList.size(); j++) {
-
 						String laCode = largeTaxList.get(j).getLacode();
 						String firstnumber = laCode.substring(0, 1);
 						String secondnumber = laCode.substring(1, 2);
@@ -188,43 +197,37 @@ public class GdpAnalyze {
 
 					}
 
-				 }
-				gdpLast.get(i).setTax(tax); 
-				 
 				}
-			}
+				gdpLast.get(i).setTax(tax);
 
-		
-		
-		
-		
-		for (int j = 0; j < largeTaxList.size(); j++) {//找出未在gdp集合中大类的税收
-			
-			int log=0;
-			for(int w=0;w<largeGdpList.size();w++){
-				if(largeTaxList.get(j).getLacode().equals(largeGdpList.get(j).getLacode())){
-					log=1;
-				}
-				
-				
 			}
-			if(log==0){
-				GdpCaculate gd =  new GdpCaculate();
+		}
+
+		for (int j = 0; j < largeTaxList.size(); j++) {// 找出未在gdp集合中大类的税收
+
+			int log = 0;
+			for (int w = 0; w < largeGdpList.size(); w++) {
+				if (largeTaxList.get(j).getLacode().equals(largeGdpList.get(w).getLacode())) {
+					log = 1;
+				}
+
+			}
+			if (log == 0) {
+				GdpCaculate gd = new GdpCaculate();
 				gd.setTax(largeTaxList.get(j).getLatax());
 				gd.setLacode(largeTaxList.get(j).getLacode());
 				gd.setLaname(largeTaxList.get(j).getLaname());
 				largeGdpLast.add(gd);
+			 
 			}
-		
-		
+		 
 		}
+
 		
-		
-		for(int j=0;j<largeGdpLast.size();j++){//计算大类gdp
-			
-			
+		for (int j = 0; j < largeGdpLast.size(); j++) {// 计算大类gdp
+
 			LargeGdp gdpTag = new LargeGdp();
-			String laCode = largeTaxList.get(j).getLacode();
+			String laCode = largeGdpLast.get(j).getLacode();
 			String firstnumber = laCode.substring(0, 1);
 			String secondnumber = laCode.substring(1, 2);
 			int firstcode = Integer.valueOf(firstnumber);
@@ -233,104 +236,125 @@ public class GdpAnalyze {
 				code = Integer.valueOf(secondnumber);
 			} else {
 				code = Integer.valueOf(laCode);
-			}
-			
+			}	 
 			double gdp = 0;
 			double tax = largeGdpLast.get(j).getTax();
 			for (int i = 0; i < gdpLast.size(); i++) {
 				String[] inCode = gdpLast.get(i).getLacode().split("、");
-		 
+
 				if (inCode.length == 1) {
 
-					    String[] ouCode = inCode[0].split("-");
- 
-						int max = Integer.valueOf(ouCode[1]);
-						int min = Integer.valueOf(ouCode[0]);
-						if (code >= min && code <= max) {
-							gdp =  tax/gdpLast.get(i).getTax()*gdpLast.get(i).getGdp();
-							gdpTag.setLagdp(gdp);
-							gdpTag.setPlace(place);
-							gdpTag.setYear(year);
-							gdpTag.setLacode(largeGdpLast.get(j).getLacode());
-							gdpTag.setLaname(largeGdpLast.get(j).getLaname());
-							largeGdpList.add(gdpTag);
-						    
-						}
+					String[] ouCode = inCode[0].split("-");
 
+					int max = Integer.valueOf(ouCode[1]);
+					int min = Integer.valueOf(ouCode[0]);
+					if (code >= min && code <= max) {
+						gdp = tax / gdpLast.get(i).getTax() * gdpLast.get(i).getGdp();
+						gdpTag.setLagdp(gdp);
+						gdpTag.setPlace(place);
+						gdpTag.setYear(year);
+						gdpTag.setLacode(largeGdpLast.get(j).getLacode());
+						gdpTag.setLaname(largeGdpLast.get(j).getLaname());
+						largeGdpList.add(gdpTag);
+                        break;
+					}
 
 				} else if (inCode.length > 1) {
 
 					for (int w = 0; w < inCode.length; w++) {
 						String[] ouCode = inCode[w].split("-");
 
-							int max = Integer.valueOf(ouCode[1]);
-							int min = Integer.valueOf(ouCode[0]);
-							if (code >= min && code <= max) {
-								gdp =  tax/gdpLast.get(i).getTax()*gdpLast.get(i).getGdp();
-								gdpTag.setLagdp(gdp);
-								gdpTag.setPlace(place);
-								gdpTag.setYear(year);
-								gdpTag.setLacode(largeGdpLast.get(j).getLacode());
-								gdpTag.setLaname(largeGdpLast.get(j).getLaname());
-								largeGdpList.add(gdpTag);
-							}
-
+						int max = Integer.valueOf(ouCode[1]);
+						int min = Integer.valueOf(ouCode[0]);
+						if (code >= min && code <= max) {
+							gdp = tax / gdpLast.get(i).getTax() * gdpLast.get(i).getGdp();
+							gdpTag.setLagdp(gdp);
+							gdpTag.setPlace(place);
+							gdpTag.setYear(year);
+							gdpTag.setLacode(largeGdpLast.get(j).getLacode());
+							gdpTag.setLaname(largeGdpLast.get(j).getLaname());
+							largeGdpList.add(gdpTag);
+							break;
 						}
 
-					 
 					}
+
 				}
-			
+				 
+			}
+			 
 		}
-		
-		
+         
 	}
 
-	public static void getSubGdp(List<SubGdp> subGdpList, List<SubTax> subTaxList, List<LargeGdp> largeGdpList,
+	
+	public static void getSubGdp(List<Gdp> gdpList, List<SubGdp> subGdpList, List<SubTax> subTaxList, List<LargeGdp> largeGdpList,
 			List<LargeTax> largeTaxList, String year, String place) {
 		// TODO Auto-generated method stub
 		List<GdpCaculate> gdpCaculateList = new ArrayList<GdpCaculate>();
-		for(int i=0;i<largeGdpList.size();i++){
-			for(int j=0;j<largeTaxList.size();j++){
-				
-				if(largeGdpList.get(i).getLacode().equals(largeTaxList.get(j).getLacode())){
-					GdpCaculate gdpCaculate =new GdpCaculate();
+		List<SubGdp> smallGdplist = new ArrayList<SubGdp>();
+		for (int i = 0; i < largeGdpList.size(); i++) {
+			for (int j = 0; j < largeTaxList.size(); j++) {
+
+				if (largeGdpList.get(i).getLacode().equals(largeTaxList.get(j).getLacode())) {
+					GdpCaculate gdpCaculate = new GdpCaculate();
 					gdpCaculate.setGdp(largeGdpList.get(i).getLagdp());
 					gdpCaculate.setLacode(largeGdpList.get(i).getLacode());
 					gdpCaculate.setLaname(largeGdpList.get(i).getLaname());
 					gdpCaculate.setTax(largeTaxList.get(j).getLatax());
 					gdpCaculateList.add(gdpCaculate);
 				}
-				
+
+			}
+		}
+
+		for(int i=0;i<gdpList.size();i++){
+			if(gdpList.get(i).getGdpcode().length()==4){
+				SubGdp subGdp = new SubGdp();
+				subGdp.setPlace(place);
+				subGdp.setYear(year);
+				subGdp.setSmname(gdpList.get(i).getGdpname());
+				subGdp.setSmcode(gdpList.get(i).getGdpcode());
+				subGdp.setSmgdp(gdpList.get(i).getGdp());
 			}
 		}
 		
 		
-		for(int i=0;i<subTaxList.size();i++){
-			for(int j=0;j<gdpCaculateList.size();j++){
-				
-				if(subTaxList.get(i).getLacode().substring(0, 2).equals(gdpCaculateList.get(j).getLacode())){
+		for (int i = 0; i < subTaxList.size(); i++) {
+			for (int j = 0; j < gdpCaculateList.size(); j++) {
+
+				if (subTaxList.get(i).getLacode().substring(0, 2).equals(gdpCaculateList.get(j).getLacode())) {
 					SubGdp subGdp = new SubGdp();
-					double gdp = (subTaxList.get(i).getSmtax()/gdpCaculateList.get(j).getTax())*gdpCaculateList.get(j).getGdp();
+					double gdp = (subTaxList.get(i).getSmtax() / gdpCaculateList.get(j).getTax())
+							* gdpCaculateList.get(j).getGdp();
 					subGdp.setPlace(place);
 					subGdp.setYear(year);
 					subGdp.setSmcode(subTaxList.get(i).getSmcode());
 					subGdp.setSmname(subTaxList.get(i).getSmname());
 					subGdp.setSmgdp(gdp);
+
 					subGdpList.add(subGdp);
 				}
-				
+
 			}
 		}
 		
-		
+		for(int i=0;i<subGdpList.size();i++){
+			for(int j=0;j<gdpList.size();j++){
+				if(subGdpList.get(i).getSmcode().equals(gdpList.get(j).getGdpcode())){
+					subGdpList.get(i).setSmgdp(gdpList.get(j).getGdp());
+					break;
+				}
+			}
+		}
+
 	}
 
 	public static void getClassGdp(List<LargeGdp> largeGdpList, List<AllCodeDictionary> classLineList,
 			List<LargeAndClassDictionary> classDidctionary, String place, String year, List<ClassGdp> classGdpList) {
 		// TODO Auto-generated method stub
-		List<LargeMiddleClass>largeMiddleTax = new ArrayList<LargeMiddleClass>();
-		for(AllCodeDictionary classCode:classLineList){
+		List<LargeMiddleClass> largeMiddleGdp = new ArrayList<LargeMiddleClass>();
+		for (AllCodeDictionary classCode : classLineList) {
 			ClassGdp classGdp = new ClassGdp();
 			classGdp.setPlace(place);
 			classGdp.setYear(year);
@@ -338,37 +362,39 @@ public class GdpAnalyze {
 			classGdp.setClname(classCode.getInname());
 			classGdpList.add(classGdp);
 		}
-		
-		for(LargeAndClassDictionary lcd:classDidctionary){
-			LargeMiddleClass lm = new LargeMiddleClass();
-			lm.setClasscode(lcd.getClcode());
-			lm.setLacode(lcd.getLacode());
-			largeMiddleTax.add(lm);
-		}
-		
-		for(int i=0;i<largeMiddleTax.size();i++){
-			for(int j=0;j<largeGdpList.size();j++){
-				if(largeMiddleTax.get(i).getLacode().equals(largeGdpList.get(j).getLacode())){
-					largeMiddleTax.get(i).setLatax(largeGdpList.get(i).getLagdp());
-				}else{
+
+		for (int i = 0; i < classDidctionary.size(); i++) {
+			
+			for (int j = 0; j < largeGdpList.size(); j++) {
+				if (classDidctionary.get(i).getLacode().equals(largeGdpList.get(j).getLacode())) {
+					LargeMiddleClass lm = new LargeMiddleClass();
+					lm.setClasscode(classDidctionary.get(i).getClcode());
+					lm.setLacode(classDidctionary.get(j).getLacode());
+					lm.setLagdp(largeGdpList.get(j).getLagdp());
+					largeMiddleGdp.add(lm);
+				} else {
 					continue;
 				}
 			}
+			
+			 
 		}
-		
-		double tax=0;
-		for(int i=0;i<classGdpList.size();i++){
-		
-			tax=0;
-			for(int j=0;j<largeMiddleTax.size();j++){
-				if(classGdpList.get(i).getClcode().equals(largeMiddleTax.get(j).getClasscode())){
-					tax=tax+largeMiddleTax.get(j).getLatax();
+
+		 
+		double gdp = 0;
+		for (int i = 0; i < classGdpList.size(); i++) {
+
+			gdp = 0;
+			for (int j = 0; j < largeMiddleGdp.size(); j++) {
+				if (classGdpList.get(i).getClcode().equals(largeMiddleGdp.get(j).getClasscode())) {
+					gdp = gdp + largeMiddleGdp.get(j).getLagdp();
 				}
 			}
-			
-			classGdpList.get(i).setClgdp(tax);
+
+			classGdpList.get(i).setClgdp(gdp);
 		}
 	}
 
-	
+	 
+
 }

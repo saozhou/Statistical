@@ -59,6 +59,15 @@ public class ListChangeUtil {
 		return gfReferenceList;
 	}
 
+	/**
+	 * 
+	 * @param list
+	 * @param year
+	 * @param place
+	 * @param matchingWay
+	 * @return
+	 * 将地税stringlist转对象list
+	 */
 	public static List<LandTax> changeLandTax(List<List<String>> list, String year, String place, int matchingWay) {
 		// TODO Auto-generated method stub
 		 List<LandTax> landTaxList = new ArrayList<LandTax>();
@@ -73,6 +82,7 @@ public class ListChangeUtil {
 				 
 					 
 				landTax.setLatax(Double.valueOf(lists.get(1)) );  
+			 
 				 landTax.setYear(year);
 				 landTax.setPlace(place);
 				 landTaxList.add(landTax);
@@ -184,13 +194,13 @@ public static List<Gdp> changeGdp(List<List<String>> list, String year, String p
 		for(int i=1;i<list.size();i++){
 			List<String>lists=list.get(i);
 			Gdp gdp = new  Gdp();
-
 			gdp.setGdpname(lists.get(0));
 			gdp.setGdpcode(lists.get(1));
 			gdp.setGdp(Double.valueOf(lists.get(2)));
 			gdp.setYear(year);
 			gdp.setPlace(place);
 			gdpList.add(gdp);
+			System.out.println(lists.get(1));
 		}
 		 
 	 

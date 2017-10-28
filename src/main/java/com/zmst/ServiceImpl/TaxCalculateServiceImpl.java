@@ -46,7 +46,8 @@ public class TaxCalculateServiceImpl implements TaxCalculateService {
 		// TODO Auto-generated method stub
 		List<SubTax>subTaxList = null; 
 		subTaxList=subTaxDao.findSubTaxByYearPlace(year,place);
-		if(subTaxList==null){//如果总税收未计算则进行计算处理
+		
+		if(subTaxList.size()==0){//如果总税收未计算则进行计算处理
 			subTaxList = new ArrayList<SubTax>();  
 			  List<LandTax>landTaxList= landTaxDao.getAllLandTax(year,place);//获得当年总地税
 			  List<CentralTax>centralTaxlist=	centralTaxDao.getAllCentralTax(year,place);//获得当年国税
@@ -57,12 +58,12 @@ public class TaxCalculateServiceImpl implements TaxCalculateService {
 			  List<AllCodeDictionary>classLineList = codeDictionaryDao.getClassLine();
 			  List<LargeAndClassDictionary>classDidctionary = classDao.findAll();
 			  TaxCaculateUtil.getLargeTax(largeLineList,place,year,largeTaxList,subTaxList);
-			  TaxCaculateUtil.getClassTax(largeTaxList,classLineList,classDidctionary,place,year,classTaxList);
+			 TaxCaculateUtil.getClassTax(largeTaxList,classLineList,classDidctionary,place,year,classTaxList);
 			  
-			  for(SubTax subTax:subTaxList){
-				  subTaxDao.save(subTax);
-			  }
-			  
+		  for(SubTax subTax:subTaxList){
+			  subTaxDao.save(subTax);
+		  }
+		  
 			  for(LargeTax largeTax:largeTaxList){
 				  largeTaxDao.save(largeTax);
 			  }

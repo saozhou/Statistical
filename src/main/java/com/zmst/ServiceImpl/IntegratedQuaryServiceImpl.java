@@ -3,10 +3,10 @@ package com.zmst.ServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-import javax.annotation.*;
+import javax.annotation.Resource;
 
-import com.zmst.Domain.AllCodeDictionary;
+import org.springframework.stereotype.Service;
+
 import com.zmst.Domain.ClassGdp;
 import com.zmst.Domain.ClassTax;
 import com.zmst.Domain.ClassTravelGdp;
@@ -16,6 +16,10 @@ import com.zmst.Domain.LargeGdp;
 import com.zmst.Domain.LargeTax;
 import com.zmst.Domain.LargeTravelGdp;
 import com.zmst.Domain.LargeTravelTax;
+import com.zmst.Domain.SubGdp;
+import com.zmst.Domain.SubTax;
+import com.zmst.Domain.SubTravelGdp;
+import com.zmst.Domain.SubTravelTax;
 import com.zmst.Domain.TravelClassGdpContribute;
 import com.zmst.Domain.TravelClassTaxContribute;
 import com.zmst.Domain.TravelIndustryGdpContribute;
@@ -32,6 +36,10 @@ import com.zmst.IDao.LargeGdpMapper;
 import com.zmst.IDao.LargeTaxMapper;
 import com.zmst.IDao.LargeTravelGdpMapper;
 import com.zmst.IDao.LargeTravelTaxMapper;
+import com.zmst.IDao.SubGdpMapper;
+import com.zmst.IDao.SubTaxMapper;
+import com.zmst.IDao.SubTravelGdpMapper;
+import com.zmst.IDao.SubTravelTaxMapper;
 import com.zmst.IDao.TravelClassGdpContributeMapper;
 import com.zmst.IDao.TravelClassTaxContributeMapper;
 import com.zmst.IDao.TravelIndustryGdpContributeMapper;
@@ -77,6 +85,14 @@ public class IntegratedQuaryServiceImpl implements IntegratedQueryService {
 	private ClassTravelTaxMapper classTravelTaxDao;
 	@Resource
 	private TravelIndustryTaxContributeMapper industryTaxContributeDao;
+	@Resource
+	private SubTravelTaxMapper subTravelTaxDao;
+	@Resource
+	private SubTaxMapper subTaxDao;
+	@Resource
+	private SubGdpMapper subGdpDao;
+	@Resource
+	private SubTravelGdpMapper subTravelGdpDao;
 	/**
 	 * 数据库查询
 	 */
@@ -95,13 +111,15 @@ public class IntegratedQuaryServiceImpl implements IntegratedQueryService {
 		   List<LargeTravelGdp> largeTravelGdpList = new  ArrayList<LargeTravelGdp>();
 		   List<LargeGdp>largeGdp = new ArrayList<LargeGdp>();
 		   largeGdp = largeGdpDao.findByYearPlace(year, place);
-		   largeTravelGdpList = largeTravelGdpDao.findByYearPlace(year,place);
+		   System.out.println(largeGdp.size());
+		  
+		   largeTravelGdpList = largeTravelGdpDao.findByYearPlace(year,place);  System.out.println(largeTravelGdpList.size());
 		   ContributeUtil.getLargeGdpContribute(year,place,travelLargeGdpContributeList,largeTravelGdpList,largeGdp);
 		
 		    for(TravelLargeGdpContribute travelLargeGdpContribute:travelLargeGdpContributeList){
 		    	largeGdpContributeDao.save(travelLargeGdpContribute);
 		    }
-		   
+		   System.out.println(travelLargeGdpContributeList.size());
 		   
 		return travelLargeGdpContributeList;
 	}
@@ -123,11 +141,12 @@ public List<TravelClassGdpContribute> getClassGdpContributeList(List<TravelClass
 		String year, String place) {
 	// TODO Auto-generated method stub
 	
-	
- 
+	System.out.println(year);
+    System.out.println(place);
     List<ClassGdp> classGdpList = new ArrayList<ClassGdp>();
     List<ClassTravelGdp> classTravelGdpList = new ArrayList<ClassTravelGdp>();
     classGdpList = classGdpDao.findByYearPlace(year,place);
+    System.out.println(classGdpList.size());
     classTravelGdpList = classTravelGdpDao.findByYearPlace(year,place);
     ContributeUtil.getClassGdpContribute(classGdpList,classTravelGdpList,year,place,classGdpContributeList);
     for(TravelClassGdpContribute  classGdpContribute:classGdpContributeList){
@@ -246,6 +265,9 @@ public List<TravelIndustryTaxContribute> getIndustryTaxContributeList(
 	List<IndustryDictionary> industryLineList = industryLineDao.findAll();
 	List<TravelLargeTaxContribute>largeTaxList = largeTaxContributeDao.findByYearPlace(year, place);
 	List<TravelClassTaxContribute>classTaxList =classTaxContributeDao.findByYearPlace(year, place);
+	System.out.println(classTaxList.size());
+	System.out.println(largeTaxList.size());
+	
 	ContributeUtil.getIndustryTaxContribute(industryLineList,largeTaxList,classTaxList,industryTaxContributeList,year,place);
 	for(TravelIndustryTaxContribute inContribute:industryTaxContributeList){
 		industryTaxContributeDao.save(inContribute);
@@ -255,6 +277,31 @@ public List<TravelIndustryTaxContribute> getIndustryTaxContributeList(
 	 
 }
 	
+
+public List<SubTax> getSubTaxt(String year, String place) {
+	// TODO Auto-generated method stub
+	List<SubTax> subTaxList = subTaxDao.findSubTaxByYearPlace(year, place);
+	return subTaxList;
+}
+
+public List<SubTravelTax> getSubTravelTaxt(String year, String place) {
+	// TODO Auto-generated method stub
+	List<SubTravelTax> subTravelTax = subTravelTaxDao.findSubTravelTaxByYearPlace(year, place);
+	return subTravelTax;
+}
+
+public List<SubGdp> getSubGdp(String year, String place) {
+	// TODO Auto-generated method stub
 	
+	List<SubGdp> subGdp =subGdpDao.findByYearPlace(year, place);
+	return subGdp;
+}
+
+public List<SubTravelGdp> getSubTravelGdp(String year, String place) {
+	// TODO Auto-generated method stub
+	 List<SubTravelGdp> subTravelGdp = subTravelGdpDao.findByYearPlace(year, place);
+	return subTravelGdp;
+}
+
 
 }

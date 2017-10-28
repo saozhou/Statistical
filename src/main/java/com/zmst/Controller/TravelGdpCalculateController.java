@@ -38,12 +38,15 @@ public class TravelGdpCalculateController {
     @ResponseBody
     public void subTravelGdpCaculate(HttpServletRequest request,HttpServletResponse response){		 
 		 HttpSession session = request.getSession();		 
-		String year = (String) session.getAttribute("year");
-		String city =null;
-		city=(String) session.getAttribute("city");
-		String county=null; 
-		county= (String)session.getAttribute("county");
-		String place = null;
+			String city ="张家界";
+			String county=null;
+			String place = null;
+		 String year = "2017";//(String) session.getAttribute("year");
+	 
+//		city=(String) session.getAttribute("city");
+//		  
+//		county= (String)session.getAttribute("county");
+		 
 		if(county!=null){
 			 place=county;
 		}else{

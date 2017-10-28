@@ -4,6 +4,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.zmst.Domain.SubGdp;
+import com.zmst.Domain.SubTax;
+import com.zmst.Domain.SubTravelGdp;
+import com.zmst.Domain.SubTravelTax;
 import com.zmst.Domain.TravelClassGdpContribute;
 import com.zmst.Domain.TravelClassTaxContribute;
 import com.zmst.Domain.TravelIndustryGdpContribute;
@@ -52,5 +56,13 @@ public interface IntegratedQueryService {
 
 	List<TravelIndustryTaxContribute> getIndustryTaxContributeList(
 			List<TravelIndustryTaxContribute> industryTaxContributeList, String year, String place);
+
+	List<SubTax> getSubTaxt(String year, String place);
+
+	List<SubTravelTax> getSubTravelTaxt(String year, String place);
+
+	List<SubGdp> getSubGdp(String year, String place);
+
+	List<SubTravelGdp> getSubTravelGdp(String year, String place);
 
 }

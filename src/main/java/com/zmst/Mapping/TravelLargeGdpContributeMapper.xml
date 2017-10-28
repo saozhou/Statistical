@@ -31,7 +31,7 @@
   </delete>
   
   
-  <insert id="insert" parameterType="com.zmst.Domain.TravelLargeGdpContribute">
+  <insert id="save" parameterType="com.zmst.Domain.TravelLargeGdpContribute">
     insert into tbl_travellargegdpcontribute (ConId, LaCode, LaName, 
       Gdp, TrGdp, Rate, Year, 
       Place)

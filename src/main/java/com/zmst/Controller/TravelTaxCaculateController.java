@@ -18,6 +18,7 @@ import com.zmst.Service.TaxCalculateService;
 import com.zmst.Service.TravelTaxCalculateService;
 import com.zmst.Tools.HttpReturn;
 
+import javax.annotation.*;
 /**
  * 
  * @author Zhou
@@ -26,21 +27,26 @@ import com.zmst.Tools.HttpReturn;
 @Controller
 @RequestMapping("/TravelTaxCaculate")
 public class TravelTaxCaculateController {
+	@Resource
 	private TravelTaxCalculateService travelTaxService;
 	/**
 	 *小类旅游税收调取及计算 
 	 * 
 	 */
-	@RequestMapping(value="/subTaxGet",method=RequestMethod.POST)  
+	@RequestMapping(value="/subTravelTaxGet",method=RequestMethod.POST)  
    
 	public void allTaxManager(HttpServletRequest request,HttpServletResponse response){
-		 HttpSession session = request.getSession();		 
-			String year = (String) session.getAttribute("year");
-			String city =null;
-			city=(String) session.getAttribute("city");
-			String county=null; 
-			county= (String)session.getAttribute("county");
-			String place = null;
+		 HttpSession session = request.getSession();	
+		 String city ="张家界";
+		 String county=null; 
+		 String place = null;
+		 String year = "2017";
+			//String year = (String) session.getAttribute("year");
+			 
+			//city=(String) session.getAttribute("city");
+			 
+			//county= (String)session.getAttribute("county");
+			 
 			if(county!=null){
 				 place=county;
 			}else{

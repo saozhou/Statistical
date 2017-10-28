@@ -340,13 +340,15 @@ public class IntegratedQueryController {
 	@ResponseBody
 	public void subTaxSearch(HttpServletRequest request,HttpServletResponse response){
 
-       HttpSession session = request.getSession();		 
-		String year = (String) session.getAttribute("year");
-		String city =null;
-		city=(String) session.getAttribute("city");
-		String county=null; 
-		county= (String)session.getAttribute("county");
-		String place = null;
+
+	       HttpSession session = request.getSession();		 
+			String year = "2017";//(String) session.getAttribute("year");
+			String city ="张家界";
+			String county=null;
+			String place = null;
+			//city=(String) session.getAttribute("city");
+			  
+			//county= (String)session.getAttribute("county");
 		if(county!=null){
 			 place=county;
 		}else{
@@ -379,13 +381,14 @@ public class IntegratedQueryController {
 	@ResponseBody
 	public void subTravelTaxSearch(HttpServletRequest request,HttpServletResponse response){
 
-       HttpSession session = request.getSession();		 
-		String year = (String) session.getAttribute("year");
-		String city =null;
-		city=(String) session.getAttribute("city");
-		String county=null; 
-		county= (String)session.getAttribute("county");
-		String place = null;
+	       HttpSession session = request.getSession();		 
+			String year = "2017";//(String) session.getAttribute("year");
+			String city ="张家界";
+			String county=null;
+			String place = null;
+			//city=(String) session.getAttribute("city");
+			  
+			//county= (String)session.getAttribute("county");
 		if(county!=null){
 			 place=county;
 		}else{
@@ -418,13 +421,15 @@ public class IntegratedQueryController {
 	@ResponseBody
 	public void subGdpSearch(HttpServletRequest request,HttpServletResponse response){
 
-       HttpSession session = request.getSession();		 
-		String year = (String) session.getAttribute("year");
-		String city =null;
-		city=(String) session.getAttribute("city");
-		String county=null; 
-		county= (String)session.getAttribute("county");
-		String place = null;
+
+	       HttpSession session = request.getSession();		 
+			String year = "2017";//(String) session.getAttribute("year");
+			String city ="张家界";
+			String county=null;
+			String place = null;
+			//city=(String) session.getAttribute("city");
+			  
+			//county= (String)session.getAttribute("county");
 		if(county!=null){
 			 place=county;
 		}else{
@@ -457,13 +462,15 @@ public class IntegratedQueryController {
 	@ResponseBody
 	public void subTravelGdpSearch(HttpServletRequest request,HttpServletResponse response){
 
-       HttpSession session = request.getSession();		 
-		String year = (String) session.getAttribute("year");
-		String city =null;
-		city=(String) session.getAttribute("city");
-		String county=null; 
-		county= (String)session.getAttribute("county");
-		String place = null;
+
+	       HttpSession session = request.getSession();		 
+			String year = "2017";//(String) session.getAttribute("year");
+			String city ="张家界";
+			String county=null;
+			String place = null;
+			//city=(String) session.getAttribute("city");
+			  
+			//county= (String)session.getAttribute("county");
 		if(county!=null){
 			 place=county;
 		}else{

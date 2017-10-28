@@ -13,6 +13,11 @@
   <sql id="Base_Column_List">
     LTId, Year, Place, LaCode, SmCode, SmName, LaTax
   </sql>
+  
+  <sql id="List_First">
+     LaCode, SmCode, SmName, LaTax
+  </sql>
+  
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -23,6 +28,14 @@
   <select id="getAllLandTax"  resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
+    from tbl_landtax
+    where  year = #{0} and place= #{1}
+  </select>
+  
+  
+   <select id="find"  resultMap="BaseResultMap">
+    select 
+    <include refid="List_First" />
     from tbl_landtax
     where  year = #{0} and place= #{1}
   </select>

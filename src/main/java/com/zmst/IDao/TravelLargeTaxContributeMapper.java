@@ -22,4 +22,6 @@ public interface TravelLargeTaxContributeMapper {
 	List<TravelLargeTaxContribute> findByYearPlace(String year, String place);
 
 	void save(TravelLargeTaxContribute travelLargeTaxContribute);
+
+	List<Object> find(String year, String place);
 }

@@ -24,4 +24,6 @@ public interface GdpMapper {
 	void save(Gdp ce);
 
 	List<Gdp> findByYearPlace(String year, String place);
+
+	List<Object> find(String year, String place);
 }

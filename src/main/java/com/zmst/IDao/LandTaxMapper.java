@@ -24,4 +24,6 @@ public interface LandTaxMapper {
 	void save(LandTax la);
 
 	List<LandTax> getCityCentralTax(String year, String place);
+
+	List<Object> find(String year, String place);
 }

@@ -18,8 +18,8 @@
         <input type="submit" value="上传">  
     </form>  
     <hr>  
-     <form action="http://localhost:8080/Statistics/file/down" method="get">  
-        <input type="submit" value="下载"> enctype="multipart/form-data"  
+     <form action="http://localhost:8080/Statistic/FileDownload/fileDownLoad" method="get">  
+        <input type="submit" value="下载"> enctype="multipart/form-data"  lll
     </form>  
     	
 </body>  

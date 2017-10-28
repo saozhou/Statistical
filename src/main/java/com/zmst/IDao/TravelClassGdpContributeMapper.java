@@ -22,4 +22,6 @@ public interface TravelClassGdpContributeMapper {
 	List<TravelClassGdpContribute> findByYearPlace(String year, String place);
 
 	void save(TravelClassGdpContribute classGdpContribute);
+
+	List<Object> find(String year, String place);
 }

@@ -22,4 +22,6 @@ public interface TravelIndustryGdpContributeMapper {
 	List<TravelIndustryGdpContribute> findByYearPlace(String year, String place);
 
 	void save(TravelIndustryGdpContribute inContribute);
+
+	List<Object> find(String year, String place);
 }

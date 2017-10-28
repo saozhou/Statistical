@@ -53,8 +53,41 @@ public class GdpAnalyze {
 				middleGdp.add(gdp);
 			}
 		}
-		 
-		
+//
+//		for (int i = 0; i < middleGdp.size(); i++) {
+//			String[] inCode = middleGdp.get(i).getGdpcode().split("、");
+//			double gdp = 0;
+//			for (int j = i + 1; j < middleGdp.size(); j++) {
+//				String[] middleCode = middleGdp.get(j).getGdpcode().split("、");
+//
+//				if (inCode.length == 1) {
+//					String[] ouCode = inCode[0].split("-");
+//					int max = Integer.valueOf(ouCode[1]);
+//					int min = Integer.valueOf(ouCode[0]);
+//					if (middleCode.length == 1) {
+//
+//						String[] tou = middleCode[0].split("-");
+//						int tmax = Integer.valueOf(tou[1]);
+//						int tmin = Integer.valueOf(tou[0]);
+//						if (tmax > max || tmin < min) {
+//							continue;
+//						} else if (tmax < max && tmin == min) {
+//
+//							String maxCode = tmax + 1 + "-" + max;
+//							gdp = middleGdp.get(i).getGdp() - middleGdp.get(j).getGdp();
+//							middleGdp.get(i).setGdp(gdp);
+//							middleGdp.get(i).setGdpcode(maxCode);
+//						} else if (tmax < max && tmin > min) {
+//							String maxCode = min + "-" + (tmin-1) + "、" + (tmax + 1) + "-" + max;
+//							gdp = middleGdp.get(i).getGdp() - middleGdp.get(j).getGdp();
+//							middleGdp.get(i).setGdp(gdp);
+//							middleGdp.get(i).setGdpcode(maxCode);
+//						}
+//					} 
+//				} 
+//			}
+//		}
+
 		return middleGdp;
 	}
 
@@ -65,7 +98,7 @@ public class GdpAnalyze {
 	 * @param middleGdpList
 	 * @param largeGdpList
 	 * @param largeTaxList
-	 *            获得打类gdp
+	 *            鑾峰緱鎵撶被gdp
 	 */
 	public static void getLargeGdp(String year, String place, List<Gdp> middleGdpList, List<LargeGdp> largeGdpList,
 			List<LargeTax> largeTaxList) {
@@ -75,9 +108,9 @@ public class GdpAnalyze {
 
 		for (int i = 0; i < middleGdpList.size(); i++) {
 
-			String[] inCode = middleGdpList.get(i).getGdpcode().split("、");
+			String[] inCode = middleGdpList.get(i).getGdpcode().split("銆�");
 			double gdp = middleGdpList.get(i).getGdp();
-			if (inCode.length == 1) {// 单一集合项
+			if (inCode.length == 1) {// 鍗曚竴闆嗗悎椤�
 
 				String[] ouCode = inCode[0].split("-");
 
@@ -145,8 +178,8 @@ public class GdpAnalyze {
 
 		}
 
-		for (int i = 0; i < gdpLast.size(); i++) {// 找出集合税收
-			String[] inCode = gdpLast.get(i).getLacode().split("、");
+		for (int i = 0; i < gdpLast.size(); i++) {// 鎵惧嚭闆嗗悎绋庢敹
+			String[] inCode = gdpLast.get(i).getLacode().split("銆�");
 			double tax = 0;
 			if (inCode.length == 1) {
 
@@ -175,7 +208,7 @@ public class GdpAnalyze {
 				gdpLast.get(i).setTax(tax);
 
 			} else if (inCode.length > 1) {
-                
+
 				for (int w = 0; w < inCode.length; w++) {
 					String[] ouCode = inCode[w].split("-");
 					for (int j = 0; j < largeTaxList.size(); j++) {
@@ -203,7 +236,7 @@ public class GdpAnalyze {
 			}
 		}
 
-		for (int j = 0; j < largeTaxList.size(); j++) {// 找出未在gdp集合中大类的税收
+		for (int j = 0; j < largeTaxList.size(); j++) {// 鎵惧嚭鏈湪gdp闆嗗悎涓ぇ绫荤殑绋庢敹
 
 			int log = 0;
 			for (int w = 0; w < largeGdpList.size(); w++) {
@@ -218,13 +251,12 @@ public class GdpAnalyze {
 				gd.setLacode(largeTaxList.get(j).getLacode());
 				gd.setLaname(largeTaxList.get(j).getLaname());
 				largeGdpLast.add(gd);
-			 
+
 			}
-		 
+
 		}
 
-		
-		for (int j = 0; j < largeGdpLast.size(); j++) {// 计算大类gdp
+		for (int j = 0; j < largeGdpLast.size(); j++) {// 璁＄畻澶х被gdp
 
 			LargeGdp gdpTag = new LargeGdp();
 			String laCode = largeGdpLast.get(j).getLacode();
@@ -236,11 +268,11 @@ public class GdpAnalyze {
 				code = Integer.valueOf(secondnumber);
 			} else {
 				code = Integer.valueOf(laCode);
-			}	 
+			}
 			double gdp = 0;
 			double tax = largeGdpLast.get(j).getTax();
 			for (int i = 0; i < gdpLast.size(); i++) {
-				String[] inCode = gdpLast.get(i).getLacode().split("、");
+				String[] inCode = gdpLast.get(i).getLacode().split("銆�");
 
 				if (inCode.length == 1) {
 
@@ -256,7 +288,7 @@ public class GdpAnalyze {
 						gdpTag.setLacode(largeGdpLast.get(j).getLacode());
 						gdpTag.setLaname(largeGdpLast.get(j).getLaname());
 						largeGdpList.add(gdpTag);
-                        break;
+						break;
 					}
 
 				} else if (inCode.length > 1) {
@@ -280,16 +312,15 @@ public class GdpAnalyze {
 					}
 
 				}
-				 
+
 			}
-			 
+
 		}
-         
+
 	}
 
-	
-	public static void getSubGdp(List<Gdp> gdpList, List<SubGdp> subGdpList, List<SubTax> subTaxList, List<LargeGdp> largeGdpList,
-			List<LargeTax> largeTaxList, String year, String place) {
+	public static void getSubGdp(List<Gdp> gdpList, List<SubGdp> subGdpList, List<SubTax> subTaxList,
+			List<LargeGdp> largeGdpList, List<LargeTax> largeTaxList, String year, String place) {
 		// TODO Auto-generated method stub
 		List<GdpCaculate> gdpCaculateList = new ArrayList<GdpCaculate>();
 		List<SubGdp> smallGdplist = new ArrayList<SubGdp>();
@@ -308,8 +339,8 @@ public class GdpAnalyze {
 			}
 		}
 
-		for(int i=0;i<gdpList.size();i++){
-			if(gdpList.get(i).getGdpcode().length()==4){
+		for (int i = 0; i < gdpList.size(); i++) {
+			if (gdpList.get(i).getGdpcode().length() == 4) {
 				SubGdp subGdp = new SubGdp();
 				subGdp.setPlace(place);
 				subGdp.setYear(year);
@@ -318,8 +349,7 @@ public class GdpAnalyze {
 				subGdp.setSmgdp(gdpList.get(i).getGdp());
 			}
 		}
-		
-		
+
 		for (int i = 0; i < subTaxList.size(); i++) {
 			for (int j = 0; j < gdpCaculateList.size(); j++) {
 
@@ -338,10 +368,10 @@ public class GdpAnalyze {
 
 			}
 		}
-		
-		for(int i=0;i<subGdpList.size();i++){
-			for(int j=0;j<gdpList.size();j++){
-				if(subGdpList.get(i).getSmcode().equals(gdpList.get(j).getGdpcode())){
+
+		for (int i = 0; i < subGdpList.size(); i++) {
+			for (int j = 0; j < gdpList.size(); j++) {
+				if (subGdpList.get(i).getSmcode().equals(gdpList.get(j).getGdpcode())) {
 					subGdpList.get(i).setSmgdp(gdpList.get(j).getGdp());
 					break;
 				}
@@ -364,7 +394,7 @@ public class GdpAnalyze {
 		}
 
 		for (int i = 0; i < classDidctionary.size(); i++) {
-			
+
 			for (int j = 0; j < largeGdpList.size(); j++) {
 				if (classDidctionary.get(i).getLacode().equals(largeGdpList.get(j).getLacode())) {
 					LargeMiddleClass lm = new LargeMiddleClass();
@@ -376,11 +406,9 @@ public class GdpAnalyze {
 					continue;
 				}
 			}
-			
-			 
+
 		}
 
-		 
 		double gdp = 0;
 		for (int i = 0; i < classGdpList.size(); i++) {
 
@@ -394,7 +422,5 @@ public class GdpAnalyze {
 			classGdpList.get(i).setClgdp(gdp);
 		}
 	}
-
-	 
 
 }

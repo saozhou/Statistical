@@ -13,6 +13,11 @@
   <sql id="Base_Column_List">
     CTId, LaCode, year, place, SmCode, SmName, CnTax
   </sql>
+  
+   <sql id="List_First">
+    LaCode,SmCode, SmName, CnTax
+  </sql>
+  
   <select id="selectByPrimaryKey" parameterType="com.zmst.Domain.CentralTaxKey" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -24,6 +29,14 @@
    <select id="getAllCentralTax"  resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
+    from tbl_centraltax
+    where year = #{0}
+      and place = #{1}
+  </select>
+  
+  <select id="find"  resultMap="BaseResultMap">
+    select 
+    <include refid="List_First"/>
     from tbl_centraltax
     where year = #{0}
       and place = #{1}

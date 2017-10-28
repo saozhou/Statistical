@@ -240,15 +240,7 @@ public class FileUploadServiceImpl implements FileUploadService {
 		for(LargeGdp largegdp:largeGdpList){
 			largeGdpDao.save(largegdp);
 		}
-		 for(SubGdp sub:subGdpList){
-			 subGdpDao.save(sub);
-		 }
-		
-		 for(GdpMiddleTable gdpMiddle:gdpMiddleList){
-			 gdpMiddleDao.save(gdpMiddle);
-		 }
-		
-		
+		 
 	}
     
 	

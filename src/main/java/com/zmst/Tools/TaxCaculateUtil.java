@@ -22,7 +22,15 @@ import com.zmst.Domain.SubTravelTax;
 import LCMap.ListChnageMap;
 
 public class TaxCaculateUtil {
-
+/**
+ * 
+ * @param subTaxList
+ * @param year
+ * @param place
+ * @param landTaxList
+ * @param centralTaxList
+ * 计算得小类税收
+ */
 	public static void getSubTax(List<SubTax> subTaxList, String year, String place, List<LandTax> landTaxList,
 			List<CentralTax> centralTaxList) {
 		// TODO Auto-generated method stub
@@ -35,20 +43,23 @@ public class TaxCaculateUtil {
             subTax.setPlace(place);
             subTax.setYear(year);
             subTax.setSmtax(landTaxList.get(i).getLatax());
+          
 		    subTaxList.add(subTax);
 		} 
 			
 		int log = 0;
+		double tax;
 		for(int i=0;i<centralTaxList.size();i++){
 				  log=0;
 				  SubTax subTax = new SubTax();
-				  double tax=0;
+				  tax=0;
 			for(int j=0;j<subTaxList.size();j++){
 				
-				if(subTaxList.get(i).getSmcode().equals(centralTaxList.get(i).getSmcode())){
-					 
-					 tax= subTaxList.get(i).getSmtax()+centralTaxList.get(i).getCntax();
+				if(centralTaxList.get(i).getSmcode().equals(subTaxList.get(j).getSmcode())){
+				 
+					 tax= subTaxList.get(i).getSmtax()+centralTaxList.get(j).getCntax();
 					 subTaxList.get(i).setSmtax(tax);
+				
 					log=1;
 				}
 				
@@ -71,7 +82,15 @@ public class TaxCaculateUtil {
 		}
 		
 	}
-
+/**
+ * 
+ * @param largeLineList
+ * @param place
+ * @param year
+ * @param largeTaxList
+ * @param subTaxList
+ * 计算得大类税收
+ */
 	public static void getLargeTax(List<AllCodeDictionary> largeLineList, String place, String year,
 			List<LargeTax> largeTaxList, List<SubTax> subTaxList) {
 		// TODO Auto-generated method stub
@@ -82,22 +101,40 @@ public class TaxCaculateUtil {
 			largeTax.setLaname(code.getInname());
 			largeTax.setPlace(place);
 			largeTax.setYear(year);
+	   
 			largeTaxList.add(largeTax);
 		}
+		double tax=0;
+		 
 		
 		for(int i=0;i<largeTaxList.size();i++){
-			double tax=0;
+			System.out.println(largeTaxList.get(i).getLacode());
+		    tax=0;
 			for(int j=0;j<subTaxList.size();j++){
-				if(largeTaxList.get(i).getLacode().equals(subTaxList.get(j).getSmcode().substring(0,2)));
-				{
-					tax = tax + subTaxList.get(j).getSmtax();
-				}
+				 
+				if(largeTaxList.get(i).getLacode().equals(subTaxList.get(j).getLacode()))
+			{
+				tax = tax + subTaxList.get(j).getSmtax();
+				 
+			} 
 			}
+			 
 			largeTaxList.get(i).setLatax(tax);
 		}
 		
 	}
 
+	
+	/**
+	 * 
+	 * @param largeTaxList
+	 * @param classLineList
+	 * @param classDidctionary
+	 * @param place
+	 * @param year
+	 * @param classTaxList
+	 * 计算得门类税收
+	 */
 	public static void getClassTax(List<LargeTax> largeTaxList, List<AllCodeDictionary> classLineList, List<LargeAndClassDictionary> classDidctionary,
 			String place, String year, List<ClassTax> classTaxList) {
 		// TODO Auto-generated method stub
@@ -143,6 +180,16 @@ public class TaxCaculateUtil {
 		
 	}
 
+	/**
+	 * 
+	 * @param subTaxList
+	 * @param year
+	 * @param place
+	 * @param subTravelTaxList
+	 * @param gfReference
+	 * @param coefficient
+	 * 计算的小类旅游税收
+	 */
 	public static void getSubTravelTax(List<SubTax> subTaxList, String year, String place,
 			List<SubTravelTax> subTravelTaxList, List<GFReference> gfReference, GFCoefficient coefficient) {
 		// TODO Auto-generated method stub
@@ -156,9 +203,11 @@ public class TaxCaculateUtil {
 				SubTravelTax subTravelTax = new SubTravelTax();
 				traveltaxdata=0;
 				 String subCorfficient =null;
-						 gfReferenceMap.get(subTax.getSmcode());
-				 					         
-								if(subCorfficient.equals("t")){
+				 subCorfficient= gfReferenceMap.get(subTax.getSmcode());
+				 					
+						       if(subCorfficient==null){
+						    	   continue;
+						       }else if(subCorfficient.equals("t")){
 									 
 						      		traveltaxdata = subTax.getSmtax();
 								    
@@ -199,15 +248,17 @@ public class TaxCaculateUtil {
 			largeTravelTax.setYear(year);
 			largeTravelTaxList.add(largeTravelTax);
 		}
-		
+		double tax=0;
 		for(int i=0;i<largeTravelTaxList.size();i++){
-			double tax=0;
+		 tax=0;
 			for(int j=0;j<subTravelTaxList.size();j++){
-				if(largeTravelTaxList.get(i).getLacode().equals(subTravelTaxList.get(j).getSmcode().substring(0,2)));
+				
+				if(largeTravelTaxList.get(i).getLacode().equals(subTravelTaxList.get(j).getLacode()))
 				{
 					tax = tax + subTravelTaxList.get(j).getSttax();
 				}
 			}
+			
 			largeTravelTaxList.get(i).setLttax(tax);
 		}
 	}

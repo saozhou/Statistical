@@ -12,11 +12,11 @@
   <sql id="Base_Column_List">
     GdpId, year, place, GdpCode, Gdp, GdpName
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="findByYearPlace"   resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from tbl_gdp
-    where GdpId = #{gdpid,jdbcType=INTEGER}
+    where  year = #{0} and place=#{1}
   </select>
   
    <select id="getAllGdp"   resultMap="BaseResultMap">

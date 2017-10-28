@@ -1,5 +1,7 @@
 package com.zmst.IDao;
 
+import java.util.List;
+
 import com.zmst.Domain.SubTravelGdp;
 
 public interface SubTravelGdpMapper {
@@ -16,4 +18,8 @@ public interface SubTravelGdpMapper {
     int updateByPrimaryKey(SubTravelGdp record);
 
 	void deleteByYearPlace(String year, String place);
+
+	List<SubTravelGdp> findByYearPlace(String year, String place);
+
+	void save(SubTravelGdp subTravelGdp);
 }

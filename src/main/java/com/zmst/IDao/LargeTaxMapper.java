@@ -1,5 +1,7 @@
 package com.zmst.IDao;
 
+import java.util.List;
+
 import com.zmst.Domain.LargeTax;
 
 public interface LargeTaxMapper {
@@ -18,4 +20,6 @@ public interface LargeTaxMapper {
 	void deleteByYearPlace(String year, String place);
 
 	void save(LargeTax largeTax);
+
+	List<LargeTax> getByYearPlace(String year, String place);
 }

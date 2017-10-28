@@ -23,25 +23,17 @@
     delete from tbl_largegdp
     where year = #{0} and place=#{1}
     </delete> 
-  
-    <insert id="save" parameterType="com.zmst.Domain.LargeGdp">
-    insert into tbl_largegdp (LCId, Year, Place, 
-      LaCode, LaName, LaGdp
-      )
-    values (#{lcid,jdbcType=INTEGER}, #{year,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR}, 
-      #{lacode,jdbcType=VARCHAR}, #{laname,jdbcType=VARCHAR}, #{lagdp,jdbcType=DOUBLE}
-      )
-  </insert>
+   
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tbl_largegdp
     where LCId = #{lcid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.zmst.Domain.LargeGdp">
-    insert into tbl_largegdp (LCId, Year, Place, 
+  <insert id="save"  parameterType="com.zmst.Domain.LargeGdp">
+    insert into tbl_largegdp (Year, Place, 
       LaCode, LaName, LaGdp
       )
-    values (#{lcid,jdbcType=INTEGER}, #{year,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR}, 
+    values ( #{year,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR}, 
       #{lacode,jdbcType=VARCHAR}, #{laname,jdbcType=VARCHAR}, #{lagdp,jdbcType=DOUBLE}
       )
   </insert>

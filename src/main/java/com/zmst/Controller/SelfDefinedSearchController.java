@@ -3,6 +3,7 @@ package com.zmst.Controller;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.Response;
 
@@ -33,11 +34,12 @@ public class SelfDefinedSearchController {
 	private SelfDefinedSearchService sf;
 	@RequestMapping(value="/ClassSearche",method=RequestMethod.POST)
 	@ResponseBody
-	public void ClassSearche( @RequestBody String data,HttpServletResponse response){
+	public void ClassSearche( @RequestBody String data,HttpServletRequest request,HttpServletResponse response){
 		Map<String, String> json = Json2Map.JSON2Map(data);
 		int type = Integer.parseInt(json.get("type"));
 		String year = json.get("year");
 		String place = json.get("place");
+		
 		if((type&64)!=0){
 			HttpReturn.reponseBody(response, sf.GetDoor(type, year, place));			
 		}else if ((type&32)!=0){

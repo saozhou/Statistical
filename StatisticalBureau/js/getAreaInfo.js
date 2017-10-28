@@ -1,6 +1,10 @@
 //地区联动下拉框
 var country_name_array = new Array();
 var area_info_data;
+var cur_country='';
+var cur_province='';
+var cur_city='';
+var cur_county='';
 
 function area_ganged_spinner() {
 	register_select_event();
@@ -108,6 +112,7 @@ function register_select_event() {
 //国家选择列表选项被点击修改显示值
 function country_list_item_click(pos) {
 	var content = $(".country ul li").eq(pos).text();
+	cur_country=content;
 	if(content.length > 4)
 		content = content.substring(0, 5);
 	$(".country span").eq(0).text(content);
@@ -123,6 +128,7 @@ function country_list_item_click(pos) {
 //省级行政区选择列表选项被点击修改显示值
 function province_list_item_click(pos) {
 	var content = $(".province ul li").eq(pos).text();
+	cur_province=content;
 	if(content.length > 4)
 		content = content.substring(0, 5);
 	$(".province span").eq(0).text(content);
@@ -136,6 +142,7 @@ function province_list_item_click(pos) {
 //市级行政区选择列表选项被点击修改显示值
 function city_list_item_click(pos) {
 	var content = $(".city ul li").eq(pos).text();
+	cur_city=content;
 	if(content.length > 4)
 		content = content.substring(0, 5);
 	$(".city span").eq(0).text(content);
@@ -148,6 +155,7 @@ function city_list_item_click(pos) {
 //县级行政区选择列表选项被点击修改显示值
 function county_list_item_click(pos) {
 	var content = $(".county ul li").eq(pos).text();
+	cur_county=content;
 	if(content.length > 4)
 		content = content.substring(0, 5);
 	$(".county span").eq(0).text(content);

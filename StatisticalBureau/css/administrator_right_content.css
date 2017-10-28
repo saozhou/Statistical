@@ -31,7 +31,7 @@
 .year {
 	z-index: 2;
 	float: right;
-	margin-right: 20px;
+	margin-right: 30px;
 	margin-top: 25px;
 }
 
@@ -54,9 +54,7 @@
 	margin-top: 5px;
 	border-radius: 5px;
 	background-color: white;
-	visibility: hidden;
-	opacity: 0;
-	transition: opacity 1s;
+	display: none;
 }
 
 .year ul li {
@@ -91,8 +89,8 @@
 	font-size: 18px;
 }
 
-.head .cur-area span ,
-.head .cur-year span{
+.head .cur-area span,
+.head .cur-year span {
 	font-size: 16px;
 	color: #777;
 }
@@ -110,7 +108,7 @@
 
 .area-select button {
 	max-height: 50px;
-	width: 110px;
+	width: 100px;
 	background-color: rgb(104, 174, 0);
 	border-radius: 5px;
 	border: none;
@@ -127,15 +125,13 @@
 }
 
 .area-select ul {
-	max-width: 115px;
+	max-width: 100px;
 	max-height: 200px;
 	background-color: white;
 	margin-top: 5px;
 	border-radius: 5px;
 	overflow: auto;
-	opacity: 0;
-	visibility: hidden;
-	transition: opacity 1s;
+	display: none;
 }
 
 .area-select ul li {
@@ -144,6 +140,12 @@
 	padding-left: 5px;
 	margin-right: -200px;
 	list-style-type: none;
+	transition: background-color 0.5s;
+}
+
+.area-select ul li:hover {
+	background-color: cornflowerblue;
+	color: white;
 }
 
 .content-div {
@@ -163,13 +165,13 @@
 	overflow: auto;
 }
 
-.exit{
+.exit {
 	float: right;
 	margin-top: 25px;
 	margin-right: 20px;
 }
 
-.exit button{
+.exit button {
 	max-height: 50px;
 	width: 80px;
 	background-color: darkgray;
@@ -183,6 +185,6 @@
 	transition: background-color 0.5s;
 }
 
-.exit button:hover{
+.exit button:hover {
 	background-color: red;
 }

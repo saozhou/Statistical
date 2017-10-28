@@ -70,7 +70,7 @@ function register_event() {
 			}
 		}
 		var userType = $(".user-type-bt span").text();
-		var area = $(".country span").text() + " " + $(".province span").text() + " " + $(".city span").text() + " " + $(".county span").text();
+		var area = cur_country + "," + cur_province + "," + cur_city + "," + cur_county;
 		var year = " " + $(".year span").text();
 		if(userType == "管理员") {
 			var url = "html/administrator.html?year="+year;

@@ -2,7 +2,10 @@ package com.zmst.IDao;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.zmst.Domain.ClassTravelTax;
+
 
 public interface ClassTravelTaxMapper {
     int deleteByPrimaryKey(Integer cttid);

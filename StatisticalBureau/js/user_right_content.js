@@ -30,4 +30,5 @@ function year_item_click(year) {
 	$(".year ul").eq(0).css("visibility", "hidden");
 	$(".year ul").eq(0).css("opacity", "0");
 	yearListIsShow = false;
+	$(".cur-year  span").text(year);
 }

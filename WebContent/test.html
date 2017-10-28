@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title></title>
+		<meta charset="UTF-8">
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script>
+			$(document).ready(function() {
+				var url = 'http://192.168.1.102:8080/Statistic/SelfDefineSearch/ClassSearche';
+				var json = '{"type": "16","year": "2015","place": "张家界"}';
+
+				
+				$.ajax({
+					url: url,
+					type: "post",
+					dataType: "json",
+					data: json,
+					cache: false,
+					async: false,
+					contentType: "application/json; charset=utf-8", 
+					success: function(data, textStatus, jqXHR) {
+						if('success' == textStatus) {
+							debugger;
+							layer.msg(data.message, {
+								time: 2000,
+								icon: 6
+							});
+
+							if(1 == data.status) {
+								setTimeout(function() {
+									window.location.href = 'informationTemplateList.do';
+								}, 2000);
+							}
+						}
+						alert(data)
+					},
+					error: function(XMLHttpRequest, textStatus, errorThrown) {
+						alert(errorThrown)
+					//	alert("textStatus = " + textStatus + ", XMLHttpRequest.status = " + XMLHttpRequest.status + ", XMLHttpRequest.readyState = " + XMLHttpRequest.readyState);
+					}
+				});
+			});
+		</script>
+	</head>
+
+	<body>
+		<div></div>
+
+	</body>
+
+</html>

@@ -31,27 +31,27 @@
 					<img src="http://demo.cssmoban.com/cssthemes4/bkt_1_dashgumfree/assets/img/ui-sam.jpg" />
 					<p>管理员</p>
 				</div>
-				<div class="first-tab">
+				<div class="first-tab" onclick="firstTabClick(0)" onmousemove="firstTabMove(0)" onmouseout="firstTabOut(0)">
 					<img class="icon" src="../img/gray_redact.png" /> 审核公式编写
 				</div>
 
-				<div class="first-tab">
+				<div class="first-tab" onclick="firstTabClick(1)" onmousemove="firstTabMove(1)" onmouseout="firstTabOut(1)">
 					<img class="icon" src="../img/gray_contrast.png" /> 特征系数对照表
 				</div>
 
-				<div class="first-tab">
+				<div class="first-tab" onclick="firstTabClick(2)" onmousemove="firstTabMove(2)" onmouseout="firstTabOut(2)">
 					<img class="icon" src="../img/gray_code_storage.png" /> 行业代码库
 				</div>
 
-				<div class="first-tab" data-toggle="collapse" data-target="#user-manage-second-list">
+				<div class="first-tab" onclick="firstTabClick(3)" onmousemove="firstTabMove(3)" onmouseout="firstTabOut(3)" data-toggle="collapse" data-target="#user-manage-second-list">
 					<img class="icon" src="../img/gray_user_manage.png" /> 用户管理
 					<img class="arrow" src="../img/down_arrow.png" />
 				</div>
 				<!--用户管理下拉列表start-->
 				<div id="user-manage-second-list" class="collapse second-tab">
-					<div class="s-tax">信息修改</div>
-					<div class="s-travel-tax">权限设置</div>
-					<div class="s-gdp" onclick="secondTabClick(6)">新加用户</div>
+					<div class="info-change" onclick="secondTabClick(0)">信息修改</div>
+					<div class="right-set" onclick="secondTabClick(1)">权限设置</div>
+					<div class="new-user" onclick="secondTabClick(2)">新加用户</div>
 				</div>
 				<!--用户管理下拉列表end-->
 
@@ -62,8 +62,8 @@
 				<div class="head">
 					<p class="title">管理系统</p>
 					<div class="year-area">
-						<p class="cur-year">当前年份：<span>2015</span></p>
-						<p class="cur-area">当前地区：<span>中国 湖南 张家界</span></p>
+						<p class="cur-year">当前年份：<span> 2015</span></p>
+						<p class="cur-area">当前地区：<span></span><span></span><span></span><span></span></p>
 					</div>
 					<!--退出-->
 					<div class="exit">

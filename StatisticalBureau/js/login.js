@@ -69,11 +69,14 @@ function register_event() {
 				return;
 			}
 		}
+		//登录信息错误返回
+		/*	if(!checkLoginInfo())
+				return;*/
 		var userType = $(".user-type-bt span").text();
 		var area = cur_country + "," + cur_province + "," + cur_city + "," + cur_county;
 		var year = " " + $(".year span").text();
 		if(userType == "管理员") {
-			var url = "html/administrator.html?year="+year;
+			var url = "html/administrator.html?year=" + year;
 			location.assign(encodeURI(url));
 		} else {
 			var url = "html/user.html?userType=" + userType + "?area=" + area + "?year=" + year;
@@ -111,3 +114,42 @@ function closePopWindow() {
 	$(".forget-pw-info").css("margin-top", "-200px");
 	$(".cover").css("visibility", "hidden");
 }
+
+
+//登录信息审核
+function checkLoginInfo() {
+	var url = 'http://192.168.1.102:8080/Statistic/SelfDefineSearch/ClassSearche';
+	var json = '{"type": "16","year": "2015","place": "张家界"}';
+
+	$.ajax({
+		url: url,
+		type: "post",
+		dataType: "json",
+		data: json,
+		cache: false,
+		async: false,
+		contentType: "application/json; charset=utf-8",
+		success: function(data, textStatus, jqXHR) {
+			if('success' == textStatus) {
+				debugger;
+				layer.msg(data.message, {
+					time: 2000,
+					icon: 6
+				});
+
+				if(1 == data.status) {
+					setTimeout(function() {
+						window.location.href = 'informationTemplateList.do';
+					}, 2000);
+				}
+			}
+			return true;
+		},
+		error: function(XMLHttpRequest, textStatus, errorThrown) {
+			alert(errorThrown)
+			return false;
+		}
+	});
+	return false;
+}
+

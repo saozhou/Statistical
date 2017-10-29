@@ -63,11 +63,14 @@
 					<p class="title">管理系统</p>
 					<div class="year-area">
 						<p class="cur-year">当前年份：<span> 2015</span></p>
-						<p class="cur-area">当前地区：<span></span><span></span><span></span><span></span></p>
+						<p class="cur-area">当前地区：<span>请选择</span><span></span><span></span><span></span></p>
 					</div>
 					<!--退出-->
 					<div class="exit">
 						<button onclick="location.href='../login.html'">退出</button>
+					</div>
+					<div class="area">
+						<button class="area-bt" onclick="area_select()">地区<span class="caret"></span></button>
 					</div>
 					<!--地区四级联动start-->
 					<div class="area-select">
@@ -106,6 +109,7 @@
 					<div class="year">
 						<button class="year-bt" onclick="yearSelectClick()">
 								<span>年份</span>
+								<span class="caret"></span>
 						</button>
 						<ul></ul>
 					</div>

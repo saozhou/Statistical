@@ -19,7 +19,7 @@
 			var year = url.split("?")[3].split("=")[1];
 			$(document).ready(function() {
 				if(userType == "普通用户") {
-					$(".area-select").css("display", "none");
+					$(".area").css("display", "none");
 				}
 				$(".cur-year span").text(year);
 				var str = area.split(",");
@@ -39,7 +39,7 @@
 				<!--	logo-->
 				<div class="logo">
 					<img src="http://demo.cssmoban.com/cssthemes4/bkt_1_dashgumfree/assets/img/ui-sam.jpg" />
-					<p>普通用户</p>
+					<p> </p>
 				</div>
 				<!--数据输入下拉列表 start-->
 				<div class="first-tab" onclick="firstTabClick(0)" onmousemove="firstTabMove(0)" onmouseout="firstTabOut(0)" data-toggle="collapse" data-target="#input-second-list">
@@ -150,6 +150,9 @@
 					<div class="exit">
 						<button onclick="location.href='../login.html'">退出</button>
 					</div>
+					<div class="area">
+						<button class="area-bt" onclick="area_select()">地区<span class="caret"></span></button>
+					</div>
 					<!--地区四级联动start-->
 					<div class="area-select">
 						<!--国家-->
@@ -157,7 +160,7 @@
 							<button class="country-bt" onclick="select_bt_click(0)">
 								<span>国家</span>
 							</button>
-							<ul></ul>
+							<ul class="ul"></ul>
 						</div>
 						<!--省级行政区-->
 						<div class="province">
@@ -187,6 +190,7 @@
 					<div class="year">
 						<button class="year-bt" onclick="yearSelectClick()">
 								<span>年份</span>
+								<span class="caret"></span>
 						</button>
 						<ul></ul>
 					</div>

@@ -1,7 +1,7 @@
 .right-content {
 	height: 100%;
-	min-width: 1100px;
-	min-height: 960px;
+	min-width: 900px;
+	min-height: 880px;
 	position: absolute;
 	left: 260px;
 	top: 0px;
@@ -28,14 +28,16 @@
 	font-size: 42px;
 }
 
-.year {
+.year,
+.area {
 	z-index: 2;
 	float: right;
 	margin-right: 20px;
 	margin-top: 25px;
 }
 
-.year-bt {
+.year-bt,
+.area-bt {
 	background-color: rgb(104, 174, 0);
 	color: white;
 	font-size: 16px;
@@ -44,6 +46,13 @@
 	outline: none;
 	border-radius: 5px;
 	transition: background-color 0.5s;
+}
+
+.year-bt .caret,
+.area-bt .caret {
+	position: relative;
+	top: -2px;
+	left: 8px;
 }
 
 .year ul {
@@ -72,7 +81,8 @@
 	background-color: #ccc;
 }
 
-.year-bt:hover {
+.year-bt:hover,
+.area-bt:hover {
 	background-color: cornflowerblue;
 	color: white;
 }
@@ -91,17 +101,18 @@
 	font-size: 18px;
 }
 
-.head .cur-area span ,
-.head .cur-year span{
+.head .cur-area span,
+.head .cur-year span {
 	font-size: 16px;
 	color: #777;
 }
 
 .area-select {
+	position: absolute;
 	z-index: 2;
-	float: right;
-	margin-top: 25px;
-	margin-right: 20px;
+	top: 70px;
+	right: 0px;
+	display: none;
 }
 
 .area-select div {
@@ -133,9 +144,7 @@
 	margin-top: 5px;
 	border-radius: 5px;
 	overflow: auto;
-	opacity: 0;
-	visibility: hidden;
-	transition: opacity 1s;
+	display: none;
 }
 
 .area-select ul li {
@@ -163,13 +172,13 @@
 	overflow: auto;
 }
 
-.exit{
+.exit {
 	float: right;
 	margin-top: 25px;
 	margin-right: 20px;
 }
 
-.exit button{
+.exit button {
 	max-height: 50px;
 	width: 80px;
 	background-color: darkgray;
@@ -183,6 +192,6 @@
 	transition: background-color 0.5s;
 }
 
-.exit button:hover{
+.exit button:hover {
 	background-color: red;
 }

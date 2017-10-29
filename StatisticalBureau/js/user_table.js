@@ -1,20 +1,14 @@
 //初始化
 function init() {
-	register_bt_event();
+	$("body").css("opacity", "1");
 	register_drag_event();
 }
-
-//给底部按钮注册事件
-function register_bt_event() {
-	$(".find").click(function() {
-		$(".download").css("visibility", "visible");
-		$(".download").css("opacity", "1");
-		$(".print").css("visibility", "visible");
-		$(".print").css("opacity", "1");
-		$(".body").css("visibility", "visible");
-		$(".body").css("opacity", "1");
-	});
+//显示内容体
+function showBody() {
+	$(".body").css("visibility", "visible");
+	$(".body").css("opacity", "1");
 }
+
 var isDown = false; //图标是否向下
 //TODO:给上下拉图片注册事件
 function register_drag_event() {
@@ -26,48 +20,52 @@ function register_drag_event() {
 		$("#drag").css("transform", rotate);
 	});
 }
-var checkbox_name = new Array("税收", "旅游税收", "GDP", "旅游GDP");
-var thead;
-//自定义查询复选框点击事件
-function custom_asure() {
-	var checkbox = $(".target input");
-	thead = new Array("行业代码", "行业指标");
-	for(var i = 0; i < checkbox.length; i++) {
-		if(checkbox.eq(i).is(":checked") == true) {
-			thead[thead.length] = checkbox_name[i];
-		}
-	}
 
-	var code = '<tr>';
-	for(var i = 0; i < thead.length; i++) {
-		code += '<th>' + thead[i] + '</th>';
-	}
-	code += '</tr> ';
-	$(".table-div table thead tr").remove();
-	$(".table-div table thead").append(code);
-
-	code = '';
-	code += '<tr>';
-
-	for(var i = 0; i < 58; i++) {
-		code += '<tr>';
-		for(var j = 0; j < thead.length; j++) {
-			code += '<td>' + "Test" + '</td>';
-		}
-		code += '</tr> ';
-	}
-	$(".table-div table tbody tr").remove();
-	$(".table-div  table tbody").append(code);
-	custom_resize();
-
+//TODO:加载失败
+function loadFailure() {
+	window.clearInterval(rotate);
+	$(".tip img").attr("src", "../../img/load_failure.png");
+	$(".tip img").css("transform", "rotate(0deg)");
+	$(".tip p").text("加载失败");
 }
 
-function custom_resize() {
-	var pro = 1 / thead.length;
-	var _width = $('.table-div').width();
-	for(var i = 0; i < thead.length; i++) {
-		$('.table-div th').eq(i).width(_width * pro);
-		$('.table-div td').eq(i).width(_width * pro);
-	}
-	$(".result-body").css("visibility", "visible");
+//TODO:关闭提示信息
+function closeTip() {
+	window.clearInterval(rotate);
+	$(".tip").css("display", "none");
+}
+
+//TODO：加载成功显示表格
+function loadSuccess() {
+	closeTip();
+	$(".table-div table").css("display", "block");
+	$(".table-div table").css("display");
+	$(".table-div table").css("opacity", "1");
+	$(".footer").css("opacity", "1");
+	$(".download").css("visibility", "visible");
+	$(".download").css("opacity", "1");
+	$(".print").css("visibility", "visible");
+	$(".print").css("opacity", "1");
+	resize();
+}
+
+//TODO:上传失败
+function uploadSuccess() {
+	window.clearInterval(rotate);
+	$(".tip img").attr("src", "../../img/load_failure.png");
+	$(".tip img").css("transform", "rotate(0deg)");
+	$(".tip p").text("上传失败");
+}
+
+var rotate;
+
+function rotateLoading() {
+	var deg = 30;
+	var count = 0;
+	rotate = setInterval(function() {
+		$(".tip img").css("transform", "rotate(" + count * deg + "deg)");
+		count++;
+		if(count == 360 / deg)
+			count = 1;
+	}, 100);
 }

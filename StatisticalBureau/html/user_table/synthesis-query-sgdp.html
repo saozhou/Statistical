@@ -9,6 +9,7 @@
 		<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="../../js/user_table.js"></script>
+		<script type="text/javascript" src="../../js/user_table/synthesis-query-sgdp.js"></script>
 		<script>
 			$(document).ready(function() {
 				$("body").css("opacity", "1");
@@ -44,6 +45,11 @@
 
 	<body onresize="resize()">
 		<div class="body">
+			<!--提示信息（正在加载、加载失败）-->
+			<div class="tip">
+				<img src="../../img/loading.png" />
+				<p>正在加载...</p>
+			</div>
 			<div class="table-div">
 				<table cellpadding="0" cellspacing="0">
 					<thead>
@@ -61,9 +67,9 @@
 			</div>
 		</div>
 		<div class="footer">
-			<button class="footer-bt download">下载</button>
-			<button class="footer-bt find">查找</button>
-			<button class="footer-bt print">打印</button>
+			<button class="footer-bt download" onclick="download()">下载</button>
+			<button class="footer-bt find" onclick="find()">查找</button>
+			<button class="footer-bt print" onclick="print()">打印</button>
 		</div>
 	</body>
 

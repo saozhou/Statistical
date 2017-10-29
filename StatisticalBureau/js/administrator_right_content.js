@@ -29,3 +29,11 @@ function year_item_click(year) {
 	yearListIsShow = false;
 	$(".cur-year  span").text(year);
 }
+
+var areaSelectShow = false;
+//地区选择
+function area_select() {
+	var display = areaSelectShow == false ? "block" : "none";
+	areaSelectShow = areaSelectShow == false ? true : false;
+	$(".area-select").css("display", display);
+}

@@ -1,7 +1,7 @@
 html,
 body {
 	width: 100%;
-	min-height: 900px;
+	min-height: 860px;
 	margin: 0;
 	padding: 0;
 	background-color: rgb(246, 245, 250);
@@ -28,6 +28,9 @@ body {
 	font-size: 24px;
 	border: 1px solid #aaa;
 	background-color: white;
+	display: none;
+	opacity: 0;
+	transition: opacity 1.5s;
 }
 
 .table-div table thead {
@@ -40,8 +43,8 @@ body {
 
 .table-div table tbody {
 	width: 100%;
+	max-height: 600px;
 	display: block;
-	max-height: 500px;
 	overflow-y: scroll;
 }
 
@@ -61,13 +64,21 @@ td {
 	font-size: 20px;
 }
 
+.tip {
+	margin-top: 280px;
+}
+
+.tip p {
+	margin-top: 20px;
+	color: #666;
+	font-size: 28px;
+}
+
 .footer {
-	position: absolute;
-	left: 0;
-	right: 0;
-	top: 740px;
-	bottom: 80px;
+	margin-top: 20px;
 	text-align: center;
+	opacity: 0;
+	transition: opacity 1s;
 }
 
 .footer .footer-bt {
@@ -88,7 +99,8 @@ td {
 .footer .calculate:hover,
 .footer .find:hover,
 .footer .download:hover,
-.footer .print:hover {
+.footer .print:hover,
+.footer .save:hover {
 	background-color: rgb(0, 154, 215);
 }
 
@@ -104,6 +116,14 @@ td {
 	visibility: hidden;
 	opacity: 0;
 	transition: opacity 1s;
+}
+
+.footer .upload {
+	margin-right: 60px;
+}
+
+.footer .upload-input {
+	display: none;
 }
 
 .slash {
@@ -141,13 +161,13 @@ td {
 	text-align: center;
 }
 
-.center button{
+.center button {
 	position: relative;
-	top:115px;
+	top: 115px;
 	left: -20px;
 	text-align: center;
 	padding: 5px 20px;
-	background-color:darkgray;
+	background-color: darkgray;
 	border: none;
 	border-radius: 5px;
 	outline: none;
@@ -156,11 +176,11 @@ td {
 	transition: background-color 0.5s;
 }
 
-.center button:hover{
-	background-color:cornflowerblue;
+.center button:hover {
+	background-color: cornflowerblue;
 }
 
-.center label{
+.center label {
 	float: left;
 }
 
@@ -171,9 +191,9 @@ td {
 	margin: 0;
 }
 
-.center .div{
+.center .div {
 	position: relative;
-	top:0px;
+	top: 0px;
 }
 
 .industry-scale {
@@ -188,9 +208,10 @@ td {
 	width: 100%;
 	text-align: center;
 }
- .drag{
- 	transform: rotate(180deg);
- }
+
+.drag {
+	transform: rotate(180deg);
+}
 
 .result-body {
 	position: relative;
@@ -200,12 +221,12 @@ td {
 
 .custom-footer {
 	position: relative;
-	top:30px;
+	top: 30px;
 	margin-bottom: 100px;
 	text-align: center;
 }
 
-.custom-footer button{
+.custom-footer button {
 	width: 200px;
 	padding: 5px 0px;
 	margin-top: 30px;
@@ -219,14 +240,14 @@ td {
 	outline: none;
 }
 
-.custom-footer button:hover{
+.custom-footer button:hover {
 	background-color: rgb(0, 154, 215);
 }
 
-.custom-footer .download{
+.custom-footer .download {
 	margin-right: 30px;
 }
 
-.custom-footer .print{
+.custom-footer .print {
 	margin-left: 30px;
 }

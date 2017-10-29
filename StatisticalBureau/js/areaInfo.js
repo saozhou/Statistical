@@ -103,6 +103,9 @@ function select_bt_click(pos) {
 function country_list_item_click(pos) {
 	var content = $(".country ul li").eq(pos).text();
 	$(".cur-area span").eq(0).text(content);
+	//清空省市区
+	for(var i = 1; i < 4; i++)
+		$(".cur-area span").eq(i).text("");
 	if(content.length > 4)
 		content = content.substring(0, 5);
 	$(".country span").eq(0).text(content);
@@ -119,6 +122,9 @@ function country_list_item_click(pos) {
 function province_list_item_click(pos) {
 	var content = $(".province ul li").eq(pos).text();
 	$(".cur-area span").eq(1).text(content);
+	//清空市区
+	for(var i = 2; i < 4; i++)
+		$(".cur-area span").eq(i).text("");
 	if(content.length > 4)
 		content = content.substring(0, 5);
 	$(".province span").eq(0).text(content);
@@ -133,6 +139,9 @@ function province_list_item_click(pos) {
 function city_list_item_click(pos) {
 	var content = $(".city ul li").eq(pos).text();
 	$(".cur-area span").eq(2).text(content);
+	//清空省区
+	for(var i = 3; i < 4; i++)
+		$(".cur-area span").eq(i).text("");
 	if(content.length > 4)
 		content = content.substring(0, 5);
 	$(".city span").eq(0).text(content);

@@ -14,12 +14,25 @@
   <sql id="Base_Column_List">
     TTCId, Year, Place, LaCode, LaName, Tax, TrTax, Rate
   </sql>
+  
+   <sql id="List_First">
+     LaCode, LaName, Tax, TrTax, Rate
+  </sql>
+  
+  <select id="find"   resultMap="BaseResultMap">
+    select 
+    <include refid="List_First" />
+    from tbl_travellargetaxcontribute
+    where  year=#{0} and place = #{1}
+  </select>
+  
   <select id="findByYearPlace"   resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from tbl_travellargetaxcontribute
     where  year=#{0} and place = #{1}
   </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tbl_travellargetaxcontribute
     where TTCId = #{ttcid,jdbcType=INTEGER}

@@ -264,10 +264,7 @@ public List<TravelIndustryTaxContribute> getIndustryTaxContributeList(
 
 	List<IndustryDictionary> industryLineList = industryLineDao.findAll();
 	List<TravelLargeTaxContribute>largeTaxList = largeTaxContributeDao.findByYearPlace(year, place);
-	List<TravelClassTaxContribute>classTaxList =classTaxContributeDao.findByYearPlace(year, place);
-	System.out.println(classTaxList.size());
-	System.out.println(largeTaxList.size());
-	
+	List<TravelClassTaxContribute>classTaxList =classTaxContributeDao.findByYearPlace(year, place);	
 	ContributeUtil.getIndustryTaxContribute(industryLineList,largeTaxList,classTaxList,industryTaxContributeList,year,place);
 	for(TravelIndustryTaxContribute inContribute:industryTaxContributeList){
 		industryTaxContributeDao.save(inContribute);

@@ -12,9 +12,21 @@
   <sql id="Base_Column_List">
     GdpId, year, place, GdpCode, Gdp, GdpName
   </sql>
+  
+  <sql id="List_First">
+       GdpName,GdpCode,Gdp
+  </sql>
+  
   <select id="findByYearPlace"   resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
+    from tbl_gdp
+    where  year = #{0} and place=#{1}
+  </select>
+  
+   <select id="find"   resultMap="BaseResultMap">
+    select 
+    <include refid="List_First" />
     from tbl_gdp
     where  year = #{0} and place=#{1}
   </select>

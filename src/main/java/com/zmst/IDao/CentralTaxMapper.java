@@ -23,4 +23,6 @@ public interface CentralTaxMapper {
 	void deleteByYearPlace(String year, String place);
 
 	void save(CentralTax ce);
+
+	List<Object> find(String year, String place);
 }

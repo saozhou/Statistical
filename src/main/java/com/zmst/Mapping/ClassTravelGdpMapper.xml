@@ -12,6 +12,18 @@
   <sql id="Base_Column_List">
     CTGId, Year, Place, ClCode, ClName, CTGdp
   </sql>
+  
+   <sql id="List_First">
+    ClCode, ClName, CTGdp
+  </sql>
+  
+   <select id="find"   resultMap="BaseResultMap">
+    select 
+    <include refid="List_First" />
+    from tbl_classtravelgdp
+    where  year = #{0} and place=#{1}
+  </select>
+  
   <select id="findByYearPlace"   resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

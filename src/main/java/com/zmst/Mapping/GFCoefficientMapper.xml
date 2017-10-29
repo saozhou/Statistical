@@ -15,14 +15,28 @@
     <result column="TPSum" jdbcType="DOUBLE" property="tpsum" />
   </resultMap>
   <sql id="Base_Column_List">
-    GFid, Place, Year, AvSpend, SpDay, CPASpend, LiPeople, YSDay, FSta, GSta, TPSum
+    GFid, Place, Year, AvSpend, SpDay, CPASpend, LiPeople,TPSum YSDay, FSta, GSta 
   </sql>
+  
+    <sql id="List_First">
+     AvSpend, SpDay, CPASpend, LiPeople, YSDay,TPSumFSta, GSta 
+  </sql>
+  
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from tbl_gfcoefficient
     where GFid = #{gfid,jdbcType=INTEGER}
   </select>
+  
+  
+    <select id="find"  resultType="com.zmst.Domain.GFCoefficient">
+    select 
+    <include refid="List_First" />
+    from tbl_gfcoefficient
+    where Year = #{0} and place=#{1}
+  </select>
+  
   
    <select id="selectByYearPlace"  resultType="com.zmst.Domain.GFCoefficient">
     select 

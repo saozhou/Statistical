@@ -12,6 +12,19 @@
   <sql id="Base_Column_List">
     LCId, Year, Place, LaCode, LaName, LaGdp
   </sql>
+  
+    <sql id="List_First">
+     LaCode, LaName, LaGdp
+  </sql>
+  
+   
+  <select id="find"  resultMap="BaseResultMap">
+    select 
+    <include refid="List_First" />
+    from tbl_largegdp
+    where  year=#{0} and place = #{1}
+  </select>
+  
   <select id="findByYearPlace"  resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

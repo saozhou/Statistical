@@ -12,6 +12,18 @@
   <sql id="Base_Column_List">
     GFTId, InCode, InName, InCoefficient, Place, Year
   </sql>
+  
+  <sql id="List_First">
+   InCode, InName, InCoefficient 
+  </sql>
+  
+  <select id="find"  resultMap="BaseResultMap">
+    select 
+    <include refid="List_First" />
+    from tbl_gfreference
+    where  year= #{0} and place=#{1}
+  </select>
+  
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

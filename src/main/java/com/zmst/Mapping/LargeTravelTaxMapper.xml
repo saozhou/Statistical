@@ -12,6 +12,19 @@
   <sql id="Base_Column_List">
     LTTId, Year, Place, LaCode, LaName, LTTax
   </sql>
+  
+   <sql id="List_First">
+     LaCode, LaName, LTTax
+  </sql>
+  
+  
+  <select id="find"   resultMap="BaseResultMap">
+    select 
+    <include refid="List_First" />
+    from tbl_largetraveltax
+    where year = #{0} and place = #{1}
+  </select>
+  
   <select id="findByYearPlace"   resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

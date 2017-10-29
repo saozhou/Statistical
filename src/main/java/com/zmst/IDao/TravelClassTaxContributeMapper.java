@@ -23,5 +23,7 @@ public interface TravelClassTaxContributeMapper {
 
 	void save(TravelClassTaxContribute classTaxContribute);
 
+	List<Object> find(String year, String place);
+
  
 }

@@ -13,6 +13,18 @@
   <sql id="Base_Column_List">
     GTId, Year, Place, LaCode, SmCode, SmName, SmTax
   </sql>
+  
+    <sql id="List_First">
+    LaCode, SmCode, SmName, SmTax
+  </sql>
+  
+   <select id="find"  resultMap="BaseResultMap">
+    select 
+    <include refid="List_First" />
+    from tbl_subtax
+    where  year=#{0} and place=#{1}
+  </select>
+  
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

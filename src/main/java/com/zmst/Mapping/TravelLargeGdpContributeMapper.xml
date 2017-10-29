@@ -14,6 +14,18 @@
   <sql id="Base_Column_List">
     ConId, LaCode, LaName, Gdp, TrGdp, Rate, Year, Place
   </sql>
+  
+    <sql id="List_First">
+     LaCode, LaName, Gdp, TrGdp, Rate 
+  </sql>
+  
+   <select id="find"   resultMap="BaseResultMap">
+    select 
+    <include refid="List_First" />
+    from tbl_travellargegdpcontribute
+    where year=#{0} and place = #{1}
+  </select>
+  
   <select id="getByYearPlace"   resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

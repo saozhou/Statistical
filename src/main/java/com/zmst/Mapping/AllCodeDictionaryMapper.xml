@@ -9,6 +9,18 @@
   <sql id="Base_Column_List">
     InId, InCode, InName
   </sql>
+   <sql id="List_First">
+     InCode, InName
+  </sql>
+  
+   
+  <select id="find"  resultMap="BaseResultMap">
+    select 
+    <include refid="List_First" />
+    from tbl_allcodedictionary
+  
+  </select>
+  
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

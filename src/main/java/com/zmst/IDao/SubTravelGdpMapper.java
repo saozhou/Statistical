@@ -22,4 +22,6 @@ public interface SubTravelGdpMapper {
 	List<SubTravelGdp> findByYearPlace(String year, String place);
 
 	void save(SubTravelGdp subTravelGdp);
+
+	List<Object> find(String year, String place);
 }

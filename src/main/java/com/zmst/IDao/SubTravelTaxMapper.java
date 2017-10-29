@@ -22,4 +22,6 @@ public interface SubTravelTaxMapper {
 	List<SubTravelTax> findSubTravelTaxByYearPlace(String year, String place);
 
 	void save(SubTravelTax subTax);
+
+	List<Object> find(String year, String place);
 }

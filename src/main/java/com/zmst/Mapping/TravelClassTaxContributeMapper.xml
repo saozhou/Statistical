@@ -14,6 +14,18 @@
   <sql id="Base_Column_List">
     CTTId, Year, Place, ClCode, ClName, Tax, TrTax, Rate
   </sql>
+  
+   <sql id="List_First">
+      ClCode, ClName, Tax, TrTax, Rate
+  </sql>
+  
+    <select id="find"  resultMap="BaseResultMap">
+    select 
+    <include refid="List_First" />
+    from tbl_travelclasstaxcontribute
+    where  year = #{0} and place=#{1}
+  </select>
+  
   <select id="findByYearPlace"  resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

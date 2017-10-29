@@ -1,6 +1,5 @@
 ﻿package com.zmst.ServiceImpl;
-
-<<<<<<< HEAD
+ 
 import java.util.List;
 
 import javax.annotation.Resource;

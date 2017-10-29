@@ -3,13 +3,13 @@ function init() {
 	createYearList();
 	register_event();
 	area_ganged_spinner();
-}
+}c
 
 //创建年份下拉选择列表
 function createYearList() {
 	var min_year = 1949; //最小可选择年份,默认为1949
 	var date = new Date();
-	//获取当前年
+	//获取当前年份
 	var cur_year = date.getFullYear();
 	var code = "";
 	for(var i = cur_year; i >= min_year; i--) {
@@ -100,13 +100,13 @@ function user_type_item_click(type) {
 	}
 }
 //年份下拉列表项被点击
-function year_item_click(year) {
+function year_item_click(year) {s
 	var str = $(".year span").eq(0).text(year);
 	$(".year ul").eq(0).css("visibility", "hidden");
 	$(".year ul").eq(0).css("opacity", "0");
 	yearListIsShow = false;
 }
-//关闭弹窗
+//关闭忘记密码弹窗
 function closePopWindow() {
 	$(".forget-pw-info").css("margin-top", "-200px");
 	$(".cover").css("visibility", "hidden");

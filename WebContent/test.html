@@ -7,14 +7,14 @@
 		<script type="text/javascript" src="js/jquery.min.js"></script>
 		<script>
 			$(document).ready(function() {
-				var url = 'http://192.168.1.102:8080/Statistic/SelfDefineSearch/ClassSearche';
-				var json = '{"type": "16","year": "2015","place": "张家界"}';
+				var url = 'SelfDefineSearch/Download';
+				var json = '{"type": "17","year": "2017","place": "张家界"}';
 
 				
 				$.ajax({
 					url: url,
-					type: "post",
-					dataType: "json",
+					type: "get",
+					dataType: "text",
 					data: json,
 					cache: false,
 					async: false,

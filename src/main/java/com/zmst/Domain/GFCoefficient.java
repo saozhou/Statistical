@@ -7,21 +7,21 @@ public class GFCoefficient {
 
     private String year;
 
-    private Double avspend;
+    private Double avspend;//旅游人均消费
 
-    private Double spday;
+    private Double spday;//旅游消费天数
 
-    private Double cpaspend;
+    private Double cpaspend;//城乡居民人均消费
 
-    private Double lipeople;
+    private Double lipeople;//常住人口
 
-    private Double ysday;
+    private Double ysday;//年均消费天数
 
-    private Double fsta;
+    private Double fsta;//f系数
 
-    private Double gsta;
+    private Double gsta;//g系数
 
-    private Double tpsum;
+    private Double tpsum;//游客总数
 
     public Integer getGfid() {
         return gfid;

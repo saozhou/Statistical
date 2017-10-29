@@ -14,6 +14,16 @@
   <sql id="Base_Column_List">
     INId, Year, Place, InCode, InName, Gdp, TrGdp, Rate
   </sql>
+  <sql id="List_First">
+     InCode, InName, Gdp, TrGdp, Rate
+  </sql>
+  
+   <select id="find"  resultMap="BaseResultMap">
+    select 
+    <include refid="List_First" />
+    from tbl_travelindustrygdpcontribute
+    where  year = #{0} and place = #{1}
+  </select>
   
   <select id="findByYearPlace"  resultMap="BaseResultMap">
     select 

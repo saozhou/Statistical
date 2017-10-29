@@ -22,4 +22,6 @@ public interface SubGdpMapper {
 	void save(SubGdp sub);
 
 	List<SubGdp> findByYearPlace(String year, String place);
+
+	List<Object> find(String year, String place);
 }

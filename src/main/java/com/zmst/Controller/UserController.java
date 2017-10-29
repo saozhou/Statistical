@@ -42,7 +42,7 @@ public class UserController {
 	   * 用户登陆
 	   */
 	  @RequestMapping(value="/userindex",method=RequestMethod.POST)  
-	  @ResponseBody
+	  
 	  public String index(HttpServletRequest request,@RequestBody String json){
 		  
 		  Map<String, String> map = Json2Map.JSON2Map(json);
@@ -119,7 +119,6 @@ public class UserController {
 			  user.setDamath(Integer.valueOf(map.get("dataMath")));
 			  user.setDasearch(Integer.valueOf(map.get("dataSearch")));
 			  user.setUspower("3");
-			   
 			  userService.login(user);
 		  }
 		  return "loginSuccess";

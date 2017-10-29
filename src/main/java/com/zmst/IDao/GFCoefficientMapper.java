@@ -24,4 +24,6 @@ public interface GFCoefficientMapper {
 	void save(GFCoefficient corfficient);
 
 	GFCoefficient findCorfficient(String year, String place);
+
+	List<Object> find(String year, String place);
 }

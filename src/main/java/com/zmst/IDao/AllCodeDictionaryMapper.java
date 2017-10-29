@@ -26,4 +26,6 @@ public interface AllCodeDictionaryMapper {
 	List<AllCodeDictionary> getLargeLine();
 
 	List<AllCodeDictionary> getClassLine();
+
+	List<Object> find();
 }

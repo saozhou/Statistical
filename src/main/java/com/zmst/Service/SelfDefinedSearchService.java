@@ -1,6 +1,6 @@
 package com.zmst.Service;
 
-import com.alibaba.fastjson.JSONArray;
+import java.util.List;
 
 /**
  * 
@@ -9,10 +9,10 @@ import com.alibaba.fastjson.JSONArray;
  */
 public interface SelfDefinedSearchService {
 
-	JSONArray GetDoor(int type, String year, String place);
+	List<Object> GetDoor(int type, String year, String place);
 
-	JSONArray GetSub(int type, String year, String place);
+	List<Object> GetSub(int type, String year, String place);
 
-	JSONArray GetLarge(int type, String year, String place);
+	List<Object> GetLarge(int type, String year, String place);
 
 }

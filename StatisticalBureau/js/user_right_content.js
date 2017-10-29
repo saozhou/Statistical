@@ -1,6 +1,7 @@
 var yearListIsShow = false; //年份选择下拉框列表项目是否显示
 //年份选择按钮点击事件
-function yearSelectClick() {
+function yearSelectClick(e) {
+	e.stopPropagation()
 	createYearSpinner();
 	var visiblity = yearListIsShow == false ? "visible" : "hidden";
 	var opacity = yearListIsShow == false ? 1 : 0;

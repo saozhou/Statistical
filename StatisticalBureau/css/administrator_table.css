@@ -28,6 +28,9 @@ body {
 	font-size: 24px;
 	border: 1px solid #aaa;
 	background-color: white;
+	display: none;
+	opacity: 0;
+	transition: opacity 2s;
 }
 
 .table-div table thead {
@@ -61,12 +64,21 @@ td {
 	font-size: 20px;
 }
 
+.tip {
+	margin-top: 280px;
+	display: none;
+	opacity: 0;
+	transition: opacity 2s;
+}
+
+.tip p {
+	margin-top: 20px;
+	color: #666;
+	font-size: 28px;
+}
+
 .footer {
-	position: absolute;
-	left: 0;
-	right: 0;
-	top: 740px;
-	bottom: 80px;
+	margin-top: 30px;
 	text-align: center;
 }
 
@@ -130,6 +142,6 @@ td {
 	background-color: rgb(0, 154, 215);
 }
 
-.select-bt-group button:first-child{
+.select-bt-group button:first-child {
 	margin-right: 120px;
 }

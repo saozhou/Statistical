@@ -28,6 +28,17 @@
 				$(".logo p").text(userType);
 				area_ganged_spinner();
 
+				$(document).click(function() {
+					$(".year ul").eq(0).css("visibility", "hidden");
+					$(".year ul").eq(0).css("opacity", "0");
+				});
+
+				$(".year-bt").click(function(e) {
+					e.stopPropagation()
+						createYearSpinner();
+					$(".year ul").eq(0).css("visibility", "visible");
+					$(".year ul").eq(0).css("opacity", "1");
+				});
 			});
 		</script>
 	</head>
@@ -188,7 +199,7 @@
 					<!--地区四级联动end-->
 					<!--	选择年份-->
 					<div class="year">
-						<button class="year-bt" onclick="yearSelectClick()">
+						<button class="year-bt">
 								<span>年份</span>
 								<span class="caret"></span>
 						</button>
@@ -199,6 +210,7 @@
 				<!--主体内容-->
 				<div class="content-div">
 					<iframe></iframe>
+					<div class="cover"></div>
 				</div>
 			</div>
 		</div>

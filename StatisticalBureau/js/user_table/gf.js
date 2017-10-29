@@ -1,19 +1,5 @@
 $(document).ready(function() {
 	$("body").css("opacity", "1");
-	var code = '';
-	for(var i = 0; i < 1; i++) {
-		code += '<tr>';
-		code += '<td contentEditable="true">壹</td>';
-		code += '<td contentEditable="true">贰</td>';
-		code += '<td contentEditable="true">仨</td>';
-		code += '<td contentEditable="true">肆</td>';
-		code += '<td contentEditable="true">伍</td>';
-		code += '<td contentEditable="true">陆</td>';
-		code += '<td contentEditable="true">柒</td>';
-		code += '<td contentEditable="true">捌</td>';
-		code += '</tr> ';
-	}
-	$(".body table tbody").append(code);
 	init();
 	getContent();
 });
@@ -42,8 +28,16 @@ function resize() {
 //TODO：获取表格内容
 function getContent() {
 	rotateLoading();
-	var url = '';
-	var json = '';
+	var code = '';
+	var url = 'http://192.168.1.102:8080/Statistic/FileUpload/gfCorfficientmath';
+	var json = '{';
+	json += 'yearAvergeSpendDay: ' + 1;
+	json += ',avergeSpend: ' + 1;
+	json += ',travelSpendday: ' + 1;
+	json += ',townAvergeSpend: ' + 1;
+	json += ',livePeople: ' + 1;
+	json += ',dayTravlePeople: ' + 1;
+	json += '}';
 
 	$.ajax({
 		url: url,
@@ -52,11 +46,12 @@ function getContent() {
 		data: json,
 		cache: false,
 		async: false,
+		timeout: 20000,
 		contentType: "application/json; charset=utf-8",
-		success: function(data, textStatus, jqXHR) {
-			if('success' == textStatus) {
-				//加载成功
-				loadSuccess();
+		success: function(data) {
+			//加载成功
+			loadSuccess();
+			$.each(data, function(i, n) {
 
 				//遍历数据生成表格
 				code += '<tr>';
@@ -70,17 +65,15 @@ function getContent() {
 				code += '<td contentEditable="true">' + '</td>';
 				code += '</tr> ';
 
-				$(".body table tbody").append(code);
-			}
-			return true;
+			});
+			$(".body table tbody").append(code);
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown) {
 			//加载失败
 			loadFailure();
-			return false;
 		}
 	});
-	return false;
+
 }
 
 //TODO:上传

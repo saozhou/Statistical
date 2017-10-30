@@ -1,6 +1,7 @@
 package com.zmst.Tools;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.zmst.Domain.AllCodeDictionary;
@@ -47,48 +48,147 @@ public class GdpAnalyze {
 		// TODO Auto-generated method stub
 
 		List<Gdp> middleGdp = new ArrayList<Gdp>();
+		List<Gdp> secondGdp = new ArrayList<Gdp>();
+
 		for (Gdp gdp : gdpList) {
 
 			if (gdp.getGdpcode().length() > 4) {
 				middleGdp.add(gdp);
+				secondGdp.add(gdp);
 			}
 		}
-//
-//		for (int i = 0; i < middleGdp.size(); i++) {
-//			String[] inCode = middleGdp.get(i).getGdpcode().split("、");
-//			double gdp = 0;
-//			for (int j = i + 1; j < middleGdp.size(); j++) {
-//				String[] middleCode = middleGdp.get(j).getGdpcode().split("、");
-//
-//				if (inCode.length == 1) {
-//					String[] ouCode = inCode[0].split("-");
-//					int max = Integer.valueOf(ouCode[1]);
-//					int min = Integer.valueOf(ouCode[0]);
-//					if (middleCode.length == 1) {
-//
-//						String[] tou = middleCode[0].split("-");
-//						int tmax = Integer.valueOf(tou[1]);
-//						int tmin = Integer.valueOf(tou[0]);
-//						if (tmax > max || tmin < min) {
-//							continue;
-//						} else if (tmax < max && tmin == min) {
-//
-//							String maxCode = tmax + 1 + "-" + max;
-//							gdp = middleGdp.get(i).getGdp() - middleGdp.get(j).getGdp();
-//							middleGdp.get(i).setGdp(gdp);
-//							middleGdp.get(i).setGdpcode(maxCode);
-//						} else if (tmax < max && tmin > min) {
-//							String maxCode = min + "-" + (tmin-1) + "、" + (tmax + 1) + "-" + max;
-//							gdp = middleGdp.get(i).getGdp() - middleGdp.get(j).getGdp();
-//							middleGdp.get(i).setGdp(gdp);
-//							middleGdp.get(i).setGdpcode(maxCode);
-//						}
-//					} 
-//				} 
-//			}
-//		}
 
-		return middleGdp;
+		int tlog=0;
+		int max = 0;
+		int min = 0;
+		int tmax = 0;
+		int tmin = 0;
+		int ary[] = new int[100];
+		for (int i = 0; i < secondGdp.size(); i++) {
+			tlog=0;
+			String codeName = null;
+			Arrays.fill(ary, 0);
+			String[] inCode = secondGdp.get(i).getGdpcode().split("、");
+			double gdp = 0;
+			int log = 0;
+			if (inCode.length == 1) {
+				String[] ouCode = inCode[0].split("-");
+				max = Integer.valueOf(ouCode[1]);
+				min = Integer.valueOf(ouCode[0]);
+				for (int t = min; t <= max; t++) {
+					ary[t] = 1;
+				}
+
+			} else if (inCode.length > 1) {
+
+				for (int w = 0; w < inCode.length; w++) {
+					String[] ouCode = inCode[0].split("-");
+					max = Integer.valueOf(ouCode[1]);
+					min = Integer.valueOf(ouCode[0]);
+					for (int t = min; t <= max; i++) {
+						ary[t] = 1;
+					}
+				}
+
+			}
+			for (int j = i + 1; j < middleGdp.size(); j++) {
+
+				tmax = 0;
+				tmin = 0;
+
+				String[] middleCode = middleGdp.get(j).getGdpcode().split("、");
+
+				gdp = 0;
+
+				if (middleCode.length == 1) {
+					String[] tou = middleCode[0].split("-");
+					tmax = Integer.valueOf(tou[1]);
+					tmin = Integer.valueOf(tou[0]);
+					if (tmin >= min && tmax <= max) {
+						log = 1;
+						for (int e = tmin; e <= tmax; e++) {
+							ary[e] = 0;
+						}
+						System.out.println(tmin + tmax);
+						gdp = secondGdp.get(i).getGdp() - middleGdp.get(j).getGdp();
+					}
+
+				} else if (middleCode.length > 1) {
+
+					for (int e = 0; e < middleCode.length; e++) {
+						String[] tou = middleCode[e].split("-");
+						tmax = Integer.valueOf(tou[1]);
+						tmin = Integer.valueOf(tou[0]);
+						if (tmin >= min && tmax <= max) {
+							log = 1;
+							for (int q = tmin; q <= tmax; q++) {
+								ary[q] = 0;
+							}
+						}
+					}
+					gdp = secondGdp.get(i).getGdp() - middleGdp.get(j).getGdp();
+
+				}
+
+			}
+
+			if (log == 1) {
+				
+				for (int w = min; w < ary.length; w++) {
+					if(ary[w]==1){
+						if(ary[w-1]==0){
+							min=w;
+						}
+						
+					}
+					
+					if (ary[w] == 0) {
+						if (ary[w - 1] == 1) {
+
+							if (codeName != null) {
+								codeName = codeName + "、" + min + "-" + (w-1);
+					
+							} else {
+								codeName = min + "-" + (w-1);
+							}
+						}
+					}
+
+				}
+
+				secondGdp.get(i).setGdp(gdp);
+				if(codeName==null){
+					secondGdp.get(i).setGdpcode("0");
+				}else{
+					
+				secondGdp.get(i).setGdpcode(codeName);
+				}
+			}
+
+		}
+
+		for (int w = 0; w < secondGdp.size(); w++) {
+			System.out.println(secondGdp.get(w).getGdpcode() + " " + secondGdp.get(w).getGdp());
+		}
+		return secondGdp;
+	}
+
+	private static String[] getCode(String[] split) {
+		// TODO Auto-generated method stub
+		for (int i = 0; i < split.length; i++) {
+			String firstnumber = split[i].substring(0, 1);
+			String secondnumber = split[i].substring(1, 2);
+			int firstcode = Integer.valueOf(firstnumber);
+			String code;
+			if (firstcode == 0) {
+				code = secondnumber;
+			} else {
+				code = split[i];
+			}
+			split[i] = code;
+		}
+
+		return split;
 	}
 
 	/**
@@ -108,7 +208,8 @@ public class GdpAnalyze {
 
 		for (int i = 0; i < middleGdpList.size(); i++) {
 
-			String[] inCode = middleGdpList.get(i).getGdpcode().split("銆�");
+			String[] inCode = middleGdpList.get(i).getGdpcode().split("、");
+
 			double gdp = middleGdpList.get(i).getGdp();
 			if (inCode.length == 1) {// 鍗曚竴闆嗗悎椤�
 
@@ -125,6 +226,10 @@ public class GdpAnalyze {
 						code = Integer.valueOf(secondnumber);
 					} else {
 						code = Integer.valueOf(laCode);
+					}
+
+					if (ouCode.length == 1) {
+						break;
 					}
 					int max = Integer.valueOf(ouCode[1]);
 					int min = Integer.valueOf(ouCode[0]);
@@ -179,7 +284,7 @@ public class GdpAnalyze {
 		}
 
 		for (int i = 0; i < gdpLast.size(); i++) {// 鎵惧嚭闆嗗悎绋庢敹
-			String[] inCode = gdpLast.get(i).getLacode().split("銆�");
+			String[] inCode = gdpLast.get(i).getLacode().split("、");
 			double tax = 0;
 			if (inCode.length == 1) {
 
@@ -272,7 +377,7 @@ public class GdpAnalyze {
 			double gdp = 0;
 			double tax = largeGdpLast.get(j).getTax();
 			for (int i = 0; i < gdpLast.size(); i++) {
-				String[] inCode = gdpLast.get(i).getLacode().split("銆�");
+				String[] inCode = gdpLast.get(i).getLacode().split("、");
 
 				if (inCode.length == 1) {
 
@@ -399,7 +504,7 @@ public class GdpAnalyze {
 				if (classDidctionary.get(i).getLacode().equals(largeGdpList.get(j).getLacode())) {
 					LargeMiddleClass lm = new LargeMiddleClass();
 					lm.setClasscode(classDidctionary.get(i).getClcode());
-					lm.setLacode(classDidctionary.get(j).getLacode());
+					lm.setLacode(classDidctionary.get(i).getLacode());
 					lm.setLagdp(largeGdpList.get(j).getLagdp());
 					largeMiddleGdp.add(lm);
 				} else {

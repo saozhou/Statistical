@@ -156,14 +156,13 @@ public class GdpAnalyze {
 
 				}
 				
-                if(codeName!=null){
-                	secondGdp.get(i).setGdp(gdp);
-    				secondGdp.get(i).setGdpcode(codeName);
-                }else{
-                	secondGdp.get(i).setGdp(gdp);
-    				secondGdp.get(i).setGdpcode("0");
-                }
-				 
+				secondGdp.get(i).setGdp(gdp);
+				if(codeName==null){
+					secondGdp.get(i).setGdpcode("0");
+				}else{
+					
+				secondGdp.get(i).setGdpcode(codeName);
+				}
 
 			}
 

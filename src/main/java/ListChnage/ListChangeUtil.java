@@ -5,11 +5,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletResponse;
+
 import com.zmst.Domain.AllCodeDictionary;
 import com.zmst.Domain.CentralTax;
 import com.zmst.Domain.GFReference;
 import com.zmst.Domain.Gdp;
 import com.zmst.Domain.LandTax;
+import com.zmst.Tools.HttpReturn;
 
 import LCMap.ListChnageMap;
  
@@ -38,6 +41,8 @@ public class ListChangeUtil {
 		 List<GFReference> gfReferenceList = new ArrayList<GFReference>();
 			for(int i=1;i<list.size();i++){
 				List<String>lists=list.get(i);
+               
+                
 				GFReference gfreference = new  GFReference();
 				 String industryCode = lists.get(0);
 				 String industryName = lists.get(1);
@@ -55,7 +60,6 @@ public class ListChangeUtil {
 				 gfreference.setPlace(place);
 				 gfReferenceList.add(gfreference);
 			}
-		 
 		return gfReferenceList;
 	}
 
@@ -73,20 +77,22 @@ public class ListChangeUtil {
 		 List<LandTax> landTaxList = new ArrayList<LandTax>();
 			for(int i=1;i<list.size();i++){
 				List<String>lists=list.get(i);
+				if(lists.size()==2){
 				LandTax landTax = new  LandTax();
 				 if(matchingWay==1){
 					 landTax.setSmcode(lists.get(0));
 				 }else{
 					 landTax.setSmname(lists.get(0));
 				 }
-				 
+				
 					 
 				landTax.setLatax(Double.valueOf(lists.get(1)) );  
 			 
 				 landTax.setYear(year);
 				 landTax.setPlace(place);
 				 landTaxList.add(landTax);
-			}
+				}
+				}
 		 
 		return landTaxList;
 	}
@@ -96,9 +102,12 @@ public class ListChangeUtil {
  * @param codeDictionaryList
  * @param matchingWay
  * 地税表选择性匹配
+ * @param log 
+ * @param response 
+ * @return 
  */
-	public static void matchingLandTax(List<LandTax> landTaxList, List<AllCodeDictionary> codeDictionaryList,
-			int matchingWay) {
+	public static int matchingLandTax(List<LandTax> landTaxList, List<AllCodeDictionary> codeDictionaryList,
+			int matchingWay, int log, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 	 
 		Map<String,String>para =null;
@@ -116,19 +125,32 @@ public class ListChangeUtil {
 		 
 				 if(matchingWay==1){
 						 landTaxList.get(i).setSmname(para.get(landTaxList.get(i).getSmcode()));
-						 landTaxList.get(i).setLacode(landTaxList.get(i).getSmcode().substring(0,2));
+						 if(para.get(landTaxList.get(i).getSmcode())==null){
+							 j=1;
+							HttpReturn.reponseBody(response, landTaxList.get(i).getSmcode()+"与代码库不相符");
+							break;
+						 }else{
+							 landTaxList.get(i).setLacode(landTaxList.get(i).getSmcode().substring(0,2));
+						 }
+						 
 				 }else{
 					 
+					 if(para.get(landTaxList.get(i).getSmname())==null){
+					    j=1;
+						HttpReturn.reponseBody(response, landTaxList.get(i).getSmname()+"与代码库不相符");
+						break;
+					 }else{
 						 landTaxList.get(i).setSmcode(para.get(landTaxList.get(i).getSmname()));
 						 landTaxList.get(i).setLacode(para.get(landTaxList.get(i).getSmname()).substring(0,2));
 						 
-					 
+					 }
 				 }
 				 		 
 					 
 	    	
 	   
 	}
+		return j;
 
   }
 
@@ -138,6 +160,7 @@ public static List<CentralTax> changeCentralTax(List<List<String>> list, String 
 		for(int i=1;i<list.size();i++){
 			List<String>lists=list.get(i);
 			CentralTax centralTax = new  CentralTax();
+			if(lists.size()==2){
 			 if(matchingWay==1){
 				 centralTax.setSmcode(lists.get(0));
 			 }else{
@@ -149,14 +172,15 @@ public static List<CentralTax> changeCentralTax(List<List<String>> list, String 
 			 centralTax.setYear(year);
 			 centralTax.setPlace(place);
 			 CentralTaxList.add(centralTax);
-		}
+			}
+			}
 		return CentralTaxList;
 	 
 	 
     }
 
-public static void matchingCentralTax(List<CentralTax> list, List<AllCodeDictionary> codeDictionaryList,
-		int matchingWay) {
+public static int matchingCentralTax(List<CentralTax> list, List<AllCodeDictionary> codeDictionaryList,
+		int matchingWay, HttpServletResponse response, int w) {
   
 	    Map<String,String>para =null;
 	    if(matchingWay==1){
@@ -164,27 +188,34 @@ public static void matchingCentralTax(List<CentralTax> list, List<AllCodeDiction
 	    }else{
 		      para = ListChnageMap.codeDictionaryChangeSecond(codeDictionaryList);
 	    }
-	 
-
-     
- 
 	      for(int i = 0;i<list.size();i++){
 		 			 
 			 if(matchingWay==1){
 				 list.get(i).setSmname(para.get(list.get(i).getSmcode()));
+				 if(para.get(list.get(i).getSmcode())==null){
+					 w=1;
+					HttpReturn.reponseBody(response, list.get(i).getSmcode()+"与代码库不相符");
+					break;
+				 }
 				 list.get(i).setLacode(list.get(i).getSmcode().substring(0,2));
 			 }else{
 				 
 				 list.get(i).setSmcode(para.get(list.get(i).getSmname()));
-				 list.get(i).setLacode(para.get(list.get(i).getSmname()).substring(0,2));
+				 if(para.get(list.get(i).getSmname())==null){
+					 w=1;
+					HttpReturn.reponseBody(response, list.get(i).getSmname()+"与代码库不相符");
+					break;
+				 }else{
+					 list.get(i).setLacode(para.get(list.get(i).getSmname()).substring(0,2));
+				 }
+				 
+				  
 					 
 				 
 			 }
-			 		 
-				 
-    	
    
-      }
+           }
+		return w;
    	
   }
 
@@ -194,12 +225,16 @@ public static List<Gdp> changeGdp(List<List<String>> list, String year, String p
 		for(int i=1;i<list.size();i++){
 			List<String>lists=list.get(i);
 			Gdp gdp = new  Gdp();
+			if(lists.size()==3){
 			gdp.setGdpname(lists.get(0));
 			gdp.setGdpcode(lists.get(1));
 			gdp.setGdp(Double.valueOf(lists.get(2)));
 			gdp.setYear(year);
 			gdp.setPlace(place);
 			gdpList.add(gdp);
+			}else{
+				continue;
+			}
 			System.out.println(lists.get(1));
 		}
 		 
@@ -207,7 +242,7 @@ public static List<Gdp> changeGdp(List<List<String>> list, String year, String p
 	
 	return gdpList;
 }
-
+ 
 	
 }
 

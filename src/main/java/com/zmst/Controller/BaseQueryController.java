@@ -38,14 +38,13 @@ public class BaseQueryController {
    
 	public void landTaxGet(HttpServletRequest request,HttpServletResponse response){
 		 HttpSession session = request.getSession();		 
-			String year = (String) session.getAttribute("year");
+			String year =null;  
 			String city =null;
 			String county=null; 
 			String place = null;
-			
-			
-			city=(String) session.getAttribute("city");
 			 
+			year = (String) session.getAttribute("year");    
+			city=(String) session.getAttribute("city");
 			county= (String)session.getAttribute("county");
 			 
 			if(county!=null){
@@ -75,14 +74,13 @@ public class BaseQueryController {
    
 	public void centralTaxGet(HttpServletRequest request,HttpServletResponse response){
 		 HttpSession session = request.getSession();		 
-			String year = (String) session.getAttribute("year");
+			String year =null;  
 			String city =null;
 			String county=null; 
 			String place = null;
-			
-			
-			city=(String) session.getAttribute("city");
 			 
+			year = (String) session.getAttribute("year");    
+			city=(String) session.getAttribute("city");
 			county= (String)session.getAttribute("county");
 			 
 			if(county!=null){
@@ -114,14 +112,13 @@ public class BaseQueryController {
 	public void gdpGet(HttpServletRequest request,HttpServletResponse response){
 		 
 		   HttpSession session = request.getSession();		 
-			String year = (String) session.getAttribute("year");
+			String year =null;  
 			String city =null;
 			String county=null; 
 			String place = null;
-			
-			
-			city=(String) session.getAttribute("city");
 			 
+			year = (String) session.getAttribute("year");    
+			city=(String) session.getAttribute("city");
 			county= (String)session.getAttribute("county");
 			 
 			if(county!=null){
@@ -153,12 +150,14 @@ public class BaseQueryController {
    
 	public void gfCoefficientGet(HttpServletRequest request,HttpServletResponse response){
 		 HttpSession session = request.getSession();		 
-			String year = (String) session.getAttribute("year");
+			String year =null;  
 			String city =null;
-			city=(String) session.getAttribute("city");
 			String county=null; 
-			county= (String)session.getAttribute("county");
 			String place = null;
+			 
+			year = (String) session.getAttribute("year");    
+			city=(String) session.getAttribute("city");
+			county= (String)session.getAttribute("county");
 			if(county!=null){
 				 place=county;
 			}else{

@@ -96,17 +96,16 @@ public class IntegratedQueryController {
 	@ResponseBody
 	public void classGdpConrtibute(HttpServletRequest request,HttpServletResponse response){
 
+		   HttpSession session = request.getSession();		 
 		
-		
-		String city ="张家界";
-		String county=null; 
-		String place = null;
-        HttpSession session = request.getSession();		 
-		String year ="2017";// (String) session.getAttribute("year");
-		 
-		//city=(String) session.getAttribute("city");
-	 
-		//county= (String)session.getAttribute("county");
+		   String year =null;  
+			String city =null;
+			String county=null; 
+			String place = null;
+			 
+			year = (String) session.getAttribute("year");    
+			city=(String) session.getAttribute("city");
+			county= (String)session.getAttribute("county");
 		 
 		if(county!=null){
 			 place=county;
@@ -147,14 +146,14 @@ public class IntegratedQueryController {
 	public void industryGdpConrtibute(HttpServletRequest request,HttpServletResponse response){
 
         HttpSession session = request.getSession();		 
-        String city ="张家界";
-        String county=null; 
-        String place = null;
-		String year = "2017";//(String) session.getAttribute("year");
+        String year =null;  
+		String city =null;
+		String county=null; 
+		String place = null;
 		 
-		//city=(String) session.getAttribute("city");
-		 
-		//county= (String)session.getAttribute("county");
+		year = (String) session.getAttribute("year");    
+		city=(String) session.getAttribute("city");
+		county= (String)session.getAttribute("county");
 		 
 		if(county!=null){
 			 place=county;
@@ -195,15 +194,14 @@ public class IntegratedQueryController {
 	public void largeTaxConrtibute(HttpServletRequest request,HttpServletResponse response){
 
         HttpSession session = request.getSession();
-    	String city ="张家界";
-    	String county=null;
-    	String place = null;
-    	String year = "2017";//(String) session.getAttribute("year");
-	 
-		//city=(String) session.getAttribute("city");
-		  
-		//county= (String)session.getAttribute("county");
+        String year =null;  
+		String city =null;
+		String county=null; 
+		String place = null;
 		 
+		year = (String) session.getAttribute("year");    
+		city=(String) session.getAttribute("city");
+		county= (String)session.getAttribute("county");
 		if(county!=null){
 			 place=county;
 		}else{
@@ -246,14 +244,14 @@ public class IntegratedQueryController {
 		
 		 
         HttpSession session = request.getSession();		 
-		String year = "2017";//(String) session.getAttribute("year");
-		String city ="张家界";
-		String county=null;
+        String year =null;  
+		String city =null;
+		String county=null; 
 		String place = null;
-		//city=(String) session.getAttribute("city");
 		 
-		//county= (String)session.getAttribute("county");
-		
+		year = (String) session.getAttribute("year");    
+		city=(String) session.getAttribute("city");
+		county= (String)session.getAttribute("county");
 		if(county!=null){
 			 place=county;
 		}else{
@@ -293,13 +291,14 @@ public class IntegratedQueryController {
 	public void industryTaxConrtibute(HttpServletRequest request,HttpServletResponse response){
 
        HttpSession session = request.getSession();		 
-		String year = "2017";//(String) session.getAttribute("year");
-		String city ="张家界";
-		String county=null;
+       String year =null;  
+		String city =null;
+		String county=null; 
 		String place = null;
-		//city=(String) session.getAttribute("city");
-		  
-		//county= (String)session.getAttribute("county");
+		 
+		year = (String) session.getAttribute("year");    
+		city=(String) session.getAttribute("city");
+		county= (String)session.getAttribute("county");
 		 
 		if(county!=null){
 			 place=county;
@@ -342,13 +341,14 @@ public class IntegratedQueryController {
 
 
 	       HttpSession session = request.getSession();		 
-			String year = "2017";//(String) session.getAttribute("year");
-			String city ="张家界";
-			String county=null;
+	       String year =null;  
+			String city =null;
+			String county=null; 
 			String place = null;
-			//city=(String) session.getAttribute("city");
-			  
-			//county= (String)session.getAttribute("county");
+			 
+			year = (String) session.getAttribute("year");    
+			city=(String) session.getAttribute("city");
+			county= (String)session.getAttribute("county");
 		if(county!=null){
 			 place=county;
 		}else{
@@ -382,13 +382,14 @@ public class IntegratedQueryController {
 	public void subTravelTaxSearch(HttpServletRequest request,HttpServletResponse response){
 
 	       HttpSession session = request.getSession();		 
-			String year = "2017";//(String) session.getAttribute("year");
-			String city ="张家界";
-			String county=null;
+	       String year =null;  
+			String city =null;
+			String county=null; 
 			String place = null;
-			//city=(String) session.getAttribute("city");
-			  
-			//county= (String)session.getAttribute("county");
+			 
+			year = (String) session.getAttribute("year");    
+			city=(String) session.getAttribute("city");
+			county= (String)session.getAttribute("county");
 		if(county!=null){
 			 place=county;
 		}else{
@@ -423,13 +424,14 @@ public class IntegratedQueryController {
 
 
 	       HttpSession session = request.getSession();		 
-			String year = "2017";//(String) session.getAttribute("year");
-			String city ="张家界";
-			String county=null;
+	       String year =null;  
+			String city =null;
+			String county=null; 
 			String place = null;
-			//city=(String) session.getAttribute("city");
-			  
-			//county= (String)session.getAttribute("county");
+			 
+			year = (String) session.getAttribute("year");    
+			city=(String) session.getAttribute("city");
+			county= (String)session.getAttribute("county");
 		if(county!=null){
 			 place=county;
 		}else{
@@ -464,13 +466,14 @@ public class IntegratedQueryController {
 
 
 	       HttpSession session = request.getSession();		 
-			String year = "2017";//(String) session.getAttribute("year");
-			String city ="张家界";
-			String county=null;
+	       String year =null;  
+			String city =null;
+			String county=null; 
 			String place = null;
-			//city=(String) session.getAttribute("city");
-			  
-			//county= (String)session.getAttribute("county");
+			 
+			year = (String) session.getAttribute("year");    
+			city=(String) session.getAttribute("city");
+			county= (String)session.getAttribute("county");
 		if(county!=null){
 			 place=county;
 		}else{

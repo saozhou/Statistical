@@ -9,7 +9,7 @@
 </head>  
 <body>  
 	
-    <form action="http://localhost:8080/Statistic/FileUpload/gdpUpload" method="post" enctype="multipart/form-data">  
+    <form action="http://localhost:8080/Statistic/FileUpload/landTaxUpload" method="post" enctype="multipart/form-data">  
   
            选择文件:<input type="file" name="file" width="120px">  
            城市<input type="text" name="city">

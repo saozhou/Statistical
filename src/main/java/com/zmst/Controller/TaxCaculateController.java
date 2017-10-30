@@ -37,12 +37,14 @@ public class TaxCaculateController {
    
 	public void allTaxManager(HttpServletRequest request,HttpServletResponse response){
 		 HttpSession session = request.getSession();		 
-			String year = "2017";//(String) session.getAttribute("year");
+		 String year =null;  
 			String city =null;
-			city="张家界";//(String) session.getAttribute("city");
 			String county=null; 
-			//county= (String)session.getAttribute("county");
 			String place = null;
+			 
+			year = (String) session.getAttribute("year");    
+			city=(String) session.getAttribute("city");
+			county= (String)session.getAttribute("county");
 			if(county!=null){
 				 place=county;
 			}else{

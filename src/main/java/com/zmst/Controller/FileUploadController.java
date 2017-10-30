@@ -41,6 +41,7 @@ import javax.annotation.Resource;
 @RequestMapping("/FileUpload")
 public class FileUploadController {
 
+	  static int i=0;
 	 @Resource 
 	 private FileUploadService  uploadService;
 	 @Resource
@@ -130,9 +131,9 @@ public class FileUploadController {
 	        List<List<String>>list	= null;
 	        if("xls".equals(fileLevel)) list=POIUtil.readXls(allPath);
 	        if("xlsx".equals(fileLevel)) list = POIUtil.readXlsx(allPath);
-	        System.out.println("s");
 	        List<GFReference>gfReference =  uploadService.changeGFReferenceExcel(list,place,year);
 	        List<GFReference>oldgfReference = uploadService.selectGFReferenceByYP(place,year);
+	        
 	        if(oldgfReference!=null){
 	        	uploadService.deleteGFReference(year,place);
 	        	deleteService.DeleteTravelTax(year, place);  
@@ -195,7 +196,6 @@ public class FileUploadController {
 		  Gcorfficient =middleNumber/(middleNumber+livePeople);	  	 
 		  Fcorfficient=Double.valueOf(df.format(Fcorfficient)); 
 		  Gcorfficient=Double.valueOf(df.format(Gcorfficient)); 
- 
 		  corfficient.setGsta(Gcorfficient);
 		  corfficient.setFsta(Fcorfficient);
 		  corfficient.setAvspend(avergeSpend);
@@ -231,7 +231,7 @@ public class FileUploadController {
 	    @ResponseBody  
 	   
 	    public void landTaxUpload(MultipartFile file,HttpServletRequest request,HttpServletResponse response) throws Exception{  
-			 
+			response.setContentType("text/html;charset=utf-8");
 				String path = "D:\\Users";  
 				  HttpSession session = request.getSession();		 		
 				    String fileName=null;
@@ -244,7 +244,7 @@ public class FileUploadController {
 					//county= (String) session.getAttribute("county");
 					//year=(String)session.getAttribute("year");
 				
-				int matchingWay=2;//Integer.valueOf(request.getParameter("matchingway"));
+				int matchingWay=1;//Integer.valueOf(request.getParameter("matchingway"));
 				if(county!=null){
 					 place=county;
 				}else{
@@ -262,14 +262,16 @@ public class FileUploadController {
 		        }  
 		        //MultipartFile自带的解析方法  
 		        file.transferTo(dir);    
-		        HttpReturn.reponseBody(response, "1");
+		        
 		        List<List<String>>list	= null;
 		        if("xls".equals(fileLevel)) list=POIUtil.readXls(allPath);
 		        if("xlsx".equals(fileLevel)) list = POIUtil.readXlsx(allPath);
-		        List<LandTax>landTax =  uploadService.changeLandTax(list,year,place,matchingWay);
+		        List<LandTax>landTax =  uploadService.changeLandTax(list,year,place,matchingWay,response);
 		        List<LandTax>oldLandTax = null; 
 		        oldLandTax=uploadService.getLandTax(year,place);
-		      
+		       if(landTax!=null){
+		    	   
+		       
 		        if(oldLandTax!=null){     	      	      	  
 		        	  uploadService.updateLandTax(landTax,year,place);
 					  deleteService.DeleteTravelTax(year, place);  
@@ -280,6 +282,7 @@ public class FileUploadController {
 		        	uploadService.saveLandTax(landTax);
 		        }
 				 
+		       }
 			 
 				
 		}
@@ -298,6 +301,7 @@ public class FileUploadController {
 	   
 	    public void centralTaxUpload(MultipartFile file,HttpServletRequest request,HttpServletResponse response) throws Exception{  
 			 
+			response.setContentType("text/html;charset=utf-8");
 				String path = "D:\\Users";  
 				  HttpSession session = request.getSession();		 		
 				    String fileName=null;
@@ -324,17 +328,22 @@ public class FileUploadController {
 		        File dir = new File(path,fileName);          
 		        if(!dir.exists()){  
 		            dir.mkdirs();  
-		        }  
+		        }
+		        
 		        //MultipartFile自带的解析方法  
 		        file.transferTo(dir);    
-		        HttpReturn.reponseBody(response, "1");
 		        List<List<String>>list	= null;
 		        if("xls".equals(fileLevel)) list=POIUtil.readXls(allPath);
 		        if("xlsx".equals(fileLevel)) list = POIUtil.readXlsx(allPath);
-		        List<CentralTax>centralTax =  uploadService.changeCentralTax(list,year,place,matchingWay);
+		        
+		        
+		        List<CentralTax>centralTax =  uploadService.changeCentralTax(list,year,place,matchingWay,response,i);
 		        List<CentralTax>oldCentralTax = null; 
 		        oldCentralTax=uploadService.getCentralTax(year,place);
-		      
+		        
+		        
+		        
+		      if(centralTax!=null){
 		        if(oldCentralTax!=null){     	      	      	  
 		        	  uploadService.updateCentralTax(centralTax,year,place);
 		        	  deleteService.DeleteTravelTax(year, place);  
@@ -344,6 +353,7 @@ public class FileUploadController {
 		        }else{
 		        	uploadService.saveCentralTax(centralTax);
 		        }
+		      }
 				 
 			 
 				

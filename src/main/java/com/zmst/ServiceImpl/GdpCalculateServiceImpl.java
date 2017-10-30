@@ -107,13 +107,15 @@ public class GdpCalculateServiceImpl implements GdpCalculateService {
 	    
 	    largeGdpDao.deleteByYearPlace(year, place);
 	   for(LargeGdp largegdp:largeGdpList){
-		largeGdpDao.save(largegdp);
+		 largeGdpDao.save(largegdp);
+		   System.out.println(largegdp.getLacode()+" "+largegdp.getLaname()+" "+largegdp.getLagdp());
 		}
 		 for(SubGdp sub:subGdpList){
 	    	subGdpDao.save(sub);
 		 }
 		for(ClassGdp cla:classGdpList){
 			classGdpDao.save(cla);
+			 System.out.println(cla.getClcode()+" "+cla.getClname()+" "+cla.getClgdp());
 		}
 		 
 		return subGdpList;

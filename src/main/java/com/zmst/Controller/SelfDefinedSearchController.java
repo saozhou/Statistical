@@ -1,23 +1,24 @@
 package com.zmst.Controller;
 
+import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.ws.Response;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.zmst.Service.SelfDefinedSearchService;
-import com.zmst.ServiceImpl.SelfDefinedSearchServiceImpl;
+import com.zmst.Tools.FileDownloadUtil;
 import com.zmst.Tools.HttpReturn;
 import com.zmst.Tools.Json2Map;
 
@@ -32,21 +33,53 @@ public class SelfDefinedSearchController {
 
 	@Resource
 	private SelfDefinedSearchService sf;
-	@RequestMapping(value="/ClassSearche",method=RequestMethod.POST)
+	@RequestMapping(value="/Searche",method=RequestMethod.POST)
 	@ResponseBody
-	public void ClassSearche( @RequestBody String data,HttpServletRequest request,HttpServletResponse response){
+	public void Searche( @RequestBody String data,HttpServletRequest request,HttpServletResponse response){
 		Map<String, String> json = Json2Map.JSON2Map(data);
 		int type = Integer.parseInt(json.get("type"));
 		String year = json.get("year");
 		String place = json.get("place");
-		
+		JSONArray jsonArray=null;
 		if((type&64)!=0){
-			HttpReturn.reponseBody(response, sf.GetDoor(type, year, place));			
+			 jsonArray = new JSONArray(sf.GetDoor(type, year, place));
+			
 		}else if ((type&32)!=0){
-			HttpReturn.reponseBody(response, sf.GetSub(type, year, place));			
+			 jsonArray = new JSONArray(sf.GetSub(type, year, place));
+					
 		}else if((type&16)!=0){
-			HttpReturn.reponseBody(response, sf.GetLarge(type, year, place));			
+			 jsonArray = new JSONArray(sf.GetLarge(type, year, place));
+		}
+		HttpReturn.reponseBody(response, jsonArray);			
+	}
+	@RequestMapping(value="/Download",method=RequestMethod.GET)
+	@ResponseBody
+	public void DownLoad( HttpServletRequest request,HttpServletResponse response) throws IOException{
+		int type = Integer.parseInt( request.getParameter("type"));
+		String year = "2017";
+		String place ="张家界";
+
+		String sheetname = "自定义查询表";
+		FileDownloadUtil fileDownloadUtil = new FileDownloadUtil();
+		if((type&64)!=0){
+			List<Object> objectList = sf.GetDoor(type, year, place) ;
+			HSSFWorkbook wb = fileDownloadUtil.generateExcel();
+			wb = fileDownloadUtil.generateSheet(wb, sheetname, objectList);
+			fileDownloadUtil.export(sheetname,wb, response);
+		}else if ((type&32)!=0){
+			List<Object> objectList = sf.GetSub(type, year, place) ;
+			HSSFWorkbook wb = fileDownloadUtil.generateExcel();
+			wb = fileDownloadUtil.generateSheet(wb, sheetname, objectList);
+			fileDownloadUtil.export(sheetname,wb, response);	
+		}else if((type&16)!=0){
+			List<Object> objectList = sf.GetLarge(type, year, place) ;
+			for(Object temp:objectList){
+				System.out.println(temp.getClass().getName());
+			}
+			HSSFWorkbook wb = fileDownloadUtil.generateExcel();
+			wb = fileDownloadUtil.generateSheet(wb, sheetname, objectList);
+			fileDownloadUtil.export(sheetname,wb, response);	
 		}
 	}
-	
+	  
 }

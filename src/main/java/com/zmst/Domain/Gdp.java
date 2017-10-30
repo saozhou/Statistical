@@ -60,4 +60,11 @@ public class Gdp {
     public void setGdpname(String gdpname) {
         this.gdpname = gdpname == null ? null : gdpname.trim();
     }
+
+	@Override
+	public String toString() {
+		return "Gdp [gdpid=" + gdpid + ", year=" + year + ", place=" + place + ", gdpcode=" + gdpcode + ", gdp=" + gdp
+				+ ", gdpname=" + gdpname + "]";
+	}
+    
 }

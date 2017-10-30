@@ -45,8 +45,8 @@ function getContent() {
 		dataType: "json",
 		data: json,
 		cache: false,
-		async: false,
-		timeout: 20000,
+		async: true,
+		timeout: 10000,
 		contentType: "application/json; charset=utf-8",
 		success: function(data) {
 			//加载成功

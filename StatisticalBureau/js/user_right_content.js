@@ -1,13 +1,60 @@
+$(document).ready(function() {
+	init();
+});
+//初始化
+function init() {
+	var url = decodeURI(location.href);
+	var userType = url.split("?")[1].split("=")[1];
+	var area = url.split("?")[2].split("=")[1];
+	var year = url.split("?")[3].split("=")[1];
+
+	if(userType == "普通用户") {
+		$(".area").css("display", "none");
+	}
+	$(".cur-year span").text(year);
+	var str = area.split(",");
+	for(var i = 0; i < str.length; i++)
+		$(".cur-area span").eq(i).text(str[i]);
+	$(".logo p").text(userType);
+	register_event();
+	register_area_event();
+	area_ganged_spinner();
+
+}
 var yearListIsShow = false; //年份选择下拉框列表项目是否显示
-//年份选择按钮点击事件
-function yearSelectClick(e) {
-	e.stopPropagation()
-	createYearSpinner();
-	var visiblity = yearListIsShow == false ? "visible" : "hidden";
-	var opacity = yearListIsShow == false ? 1 : 0;
-	yearListIsShow = yearListIsShow == false ? true : false;
-	$(".year ul").eq(0).css("visibility", visiblity);
-	$(".year ul").eq(0).css("opacity", opacity);
+var areaSelectShow = false; //地区选择下拉框是否显示
+//事件注册
+function register_event() {
+	$(document).click(function() {
+		//隐藏年份下拉列表
+		$(".year ul").css("visibility", "hidden");
+		$(".year ul").css("opacity", "0");
+		yearListIsShow = false;
+		//隐藏地区下拉列表
+		$(".area-select").css("display", "none");
+		areaSelectShow = false;
+		
+	});
+	//年份选择
+	$(".year-bt").click(function(e) {
+		e.stopPropagation(); //阻止冒泡
+		createYearSpinner();
+		var visiblity = yearListIsShow == false ? "visible" : "hidden";
+		var opacity = yearListIsShow == false ? 1 : 0;
+		var display = yearListIsShow == false ? "block" : "none";
+		yearListIsShow = yearListIsShow == false ? true : false;
+		$(".year ul").css("visibility", visiblity);
+		$(".year ul").css("opacity", opacity);
+		$(".content-div .cover").css("display", display);
+	});
+	//地区选择
+	$(".area-bt").click(function(e) {
+		e.stopPropagation(); //阻止冒泡
+		var display = areaSelectShow == false ? "block" : "none";
+		areaSelectShow = areaSelectShow == false ? true : false;
+		$(".area-select").css("display", display);
+		$(".content-div .cover").css("display", display);
+	});
 }
 
 //创建年份下拉列表
@@ -32,12 +79,4 @@ function year_item_click(year) {
 	$(".year ul").eq(0).css("opacity", "0");
 	yearListIsShow = false;
 	$(".cur-year  span").text(year);
-}
-
-var areaSelectShow = false;
-//地区选择
-function area_select() {
-	var display = areaSelectShow == false ? "block" : "none";
-	areaSelectShow = areaSelectShow == false ? true : false;
-	$(".area-select").css("display",display);
 }

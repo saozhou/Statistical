@@ -27,7 +27,7 @@ public class SelfDefinedSearchServiceImpl implements SelfDefinedSearchService {
 @Resource
 private BasedQueryService basedQuery;
 
-	public JSONArray GetDoor(int type,String year,String place){
+	public List<Object> GetDoor(int type,String year,String place){
 		
 		List<ClassTravelGdp> ctGdp=null;
 		List<ClassTravelTax> ctTax =null;
@@ -39,13 +39,11 @@ private BasedQueryService basedQuery;
 		if((type&8)!=0) 	 cTax = basedQuery.GetcTax(year, place);
 
 		List<Object> selfSearch =(List<Object>) Class2SelfSearch.ClassDoit(cGdp, cTax, ctGdp, ctTax);
-		JSONArray json = new JSONArray(selfSearch);
-		System.out.println(json);
-		return json;
+		return selfSearch;
 	}
 
 	@Override
-	public JSONArray GetSub(int type, String year, String place) {
+	public List<Object> GetSub(int type, String year, String place) {
 		List<SubTravelGdp> tGdp=null;
 		List<SubTravelTax> tTax =null;
 		List<SubGdp> Gdp =null;
@@ -56,13 +54,11 @@ private BasedQueryService basedQuery;
 		if((type&8)!=0) 	 Tax = basedQuery.GetsTax(year, place);
 
 		List<Object> selfSearch =(List<Object>) Class2SelfSearch.SubDoit(Gdp, Tax, tGdp, tTax);
-		JSONArray json = new JSONArray(selfSearch);
-		System.out.println(json);
-		return json;
+		return selfSearch;
 	}
 
 	@Override
-	public JSONArray GetLarge(int type, String year, String place) {
+	public List<Object> GetLarge(int type, String year, String place) {
 		List<LargeTravelGdp> tGdp=null;
 		List<LargeTravelTax> tTax =null;
 		List<LargeGdp> Gdp =null;
@@ -73,9 +69,7 @@ private BasedQueryService basedQuery;
 		if((type&8)!=0) 	 Tax = basedQuery.GetlTax(year, place);
 
 		List<Object> selfSearch =(List<Object>) Class2SelfSearch.LargeDoit(Gdp, Tax, tGdp, tTax);
-		JSONArray json = new JSONArray(selfSearch);
-		System.out.println(json);
-		return json;
+		return selfSearch;
 	}
 
 }

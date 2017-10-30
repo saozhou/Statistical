@@ -1,0 +1,147 @@
+html,
+body {
+	width: 100%;
+	min-height: 900px;
+	margin: 0;
+	padding: 0;
+	background-color: rgb(246, 245, 250);
+	font-family: 华文楷体;
+}
+
+body {
+	opacity: 0;
+	transition: opacity 1.5s;
+}
+
+.body {
+	width: 96%;
+	overflow: auto;
+	margin: 0 auto;
+	margin-top: 20px;
+	text-align: center;
+}
+
+.table-div table {
+	width: 100%;
+	text-align: center;
+	color: #444;
+	font-size: 24px;
+	border: 1px solid #aaa;
+	background-color: white;
+	display: none;
+	opacity: 0;
+	transition: opacity 2s;
+}
+
+.table-div table thead {
+	width: 100%;
+	display: block;
+	overflow-y: scroll;
+	background-color: rgb(0, 179, 139);
+	color: white;
+}
+
+.table-div table tbody {
+	width: 100%;
+	display: block;
+	max-height: 500px;
+	overflow-y: scroll;
+}
+
+.table-div table th,
+td {
+	border-bottom: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	padding: 5px 0;
+}
+
+.table-div table th {
+	text-align: center;
+}
+
+.table-div table td {
+	padding: 3px 0;
+	font-size: 20px;
+}
+
+.tip {
+	margin-top: 280px;
+	display: none;
+	opacity: 0;
+	transition: opacity 2s;
+}
+
+.tip p {
+	margin-top: 20px;
+	color: #666;
+	font-size: 28px;
+}
+
+.footer {
+	margin-top: 30px;
+	text-align: center;
+}
+
+.footer .footer-bt {
+	width: 200px;
+	padding: 5px 0px;
+	margin-top: 30px;
+	font-size: 28px;
+	font-family: 华文楷体;
+	color: white;
+	background-color: rgb(0, 179, 139);
+	border-radius: 10px;
+	border: none;
+	transition: background-color 0.5s;
+	outline: none;
+}
+
+.footer button:hover {
+	background-color: rgb(0, 154, 215);
+}
+
+.footer .download {
+	margin-right: 60px;
+}
+
+.footer .print {
+	margin-left: 60px;
+	visibility: hidden;
+	opacity: 0;
+	transition: opacity 1s;
+}
+
+.no-result {
+	display: none;
+	position: relative;
+	top: 200px;
+	color: gray;
+	font-size: 48px;
+}
+
+.select-bt-group {
+	position: relative;
+	margin-top: 240px;
+}
+
+.select-bt-group button {
+	width: 300px;
+	padding: 5px 0px;
+	margin-top: 30px;
+	font-size: 32px;
+	font-family: 华文楷体;
+	color: white;
+	background-color: rgb(0, 179, 139);
+	border-radius: 10px;
+	border: none;
+	transition: background-color 0.5s;
+	outline: none;
+}
+
+.select-bt-group button:hover {
+	background-color: rgb(0, 154, 215);
+}
+
+.select-bt-group button:first-child {
+	margin-right: 120px;
+}

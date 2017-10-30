@@ -69,11 +69,30 @@ function register_event() {
 				return;
 			}
 		}
+		var username = $(".account input").val();
+		var password = $(".password input").val();
+		var userpower = 0;
+		switch($(".user-type span").text()) {
+			case '管理员':
+				userpower = 1;
+				break;
+			case '超级用户':
+				userpower = 2;
+				break;
+			case '普通用户':
+				userpower = 0;
+				break;
+			default:
+				break;
+		}
+		//登录信息错误返回
+	/*	if(!checkLoginInfo(username, password, userpower))
+			return;*/
 		var userType = $(".user-type-bt span").text();
 		var area = cur_country + "," + cur_province + "," + cur_city + "," + cur_county;
 		var year = " " + $(".year span").text();
 		if(userType == "管理员") {
-			var url = "html/administrator.html?year="+year;
+			var url = "html/administrator.html?year=" + year;
 			location.assign(encodeURI(url));
 		} else {
 			var url = "html/user.html?userType=" + userType + "?area=" + area + "?year=" + year;
@@ -106,8 +125,38 @@ function year_item_click(year) {
 	$(".year ul").eq(0).css("opacity", "0");
 	yearListIsShow = false;
 }
-//关闭弹窗
+//关闭忘记密码弹窗
 function closePopWindow() {
 	$(".forget-pw-info").css("margin-top", "-200px");
 	$(".cover").css("visibility", "hidden");
+}
+
+//登录信息审核
+function checkLoginInfo(username, password, userpower) {
+	var url = 'http://192.168.1.102:8080/Statistic/User/userindex';
+	var json = '{';
+	json += 'username: ' + username;
+	json += ',password: ' + password;
+	json += ',userpower: ' + userpower;
+	json += '}';
+
+	$.ajax({
+		url: url,
+		type: "post",
+		dataType: "json",
+		data: json,
+		cache: false,
+		async: false,
+		contentType: "application/json; charset=utf-8",
+		success: function(data, textStatus, jqXHR) {
+			if('success' == textStatus) {
+				return true;
+			}
+		},
+		error: function(XMLHttpRequest, textStatus, errorThrown) {
+			alert("登录失败");
+			return false;
+		}
+	});
+	return false;
 }

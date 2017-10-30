@@ -1,0 +1,125 @@
+html,
+body {
+	width: 100%;
+	height: 100%;
+	min-height: 880px;
+	margin: 0;
+	padding: 0;
+	overflow-y: auto;
+	background-color: rgb(236, 237, 240);
+	font-family: 华文楷体;
+}
+
+.wrap-container {
+	width: 100%;
+	height: 100%;
+}
+
+.left-tab {
+	width: 260px;
+	height: 100%;
+	background-color: #333;
+}
+
+.logo {
+	width: 100%;
+	text-align: center;
+	padding-top: 20px;
+	padding-bottom: 10px;
+}
+
+.logo img {
+	width: 60px;
+	height: 60px;
+	border-radius: 30px;
+}
+
+.logo p {
+	margin: 0;
+	padding: 0;
+	margin-top: 10px;
+	color: white;
+	font-size: 24px;
+}
+
+.first-tab {
+	margin: 0 10px;
+	color: #aeb2b7;
+	font-size: 22px;
+	margin-top: 10px;
+	padding: 10px;
+	transition: background-color 0.5s;
+}
+
+.first-tab img {
+	position: relative;
+	top: -3px;
+	margin: 0 10px;
+}
+
+.first-tab .arrow {
+	position: relative;
+	left: 20px;
+}
+
+.first-tab:hover {
+	color: white;
+	background-color: rgb(104, 223, 240);
+}
+
+.second-tab {
+	margin-left: 70px;
+	font-size: 20px;
+}
+
+.second-tab div {
+	padding-top: 15px;
+	color: #aeb2b7;
+	transition: color 0.5s;
+}
+
+.second-tab div:hover {
+	color: white;
+}
+
+.travel-gdp {
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+.travel-gdp img,
+.travel-tax img ,
+.basics-query img,
+.synthesis-query img,
+.custom-query img{
+	position: relative;
+	top: -2px;
+	left: 10px;
+}
+
+.third-tab {
+	display: none;
+}
+
+.third-tab div {
+	margin-left: 10px;
+	padding: 5px;
+	font-size: 18px;
+}
+
+.third-tab div:hover {
+	color: white;
+}
+
+.fourth-tab{
+	display: none;
+}
+
+.fourth-tab div{
+	font-size: 16px;
+	transition: color 0.5s;
+}
+
+.fourth-tab div:hover{
+	color:white;
+}

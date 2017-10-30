@@ -1,4 +1,7 @@
 package com.zmst.Service;
+
+import com.zmst.Domain.Gdp;
+
 /**
  * 
  * @author Zhou
@@ -6,4 +9,5 @@ package com.zmst.Service;
  */
 public interface ChangeToSaveService {
 
+public  int ChangeGdp(Gdp gdp);
 }

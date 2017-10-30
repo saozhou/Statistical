@@ -22,10 +22,6 @@ import com.zmst.Service.FileDownloadService;
  *国税          3   小类旅游税收          7    产业gdp贡献       11    产业税收贡献   14
  *gf系数   4   小类旅游gdp   8 
  *
- *
- *
- *
- *
  */
 @Controller
 @RequestMapping("/FileDownload")

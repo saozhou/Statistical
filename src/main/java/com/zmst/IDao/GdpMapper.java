@@ -14,6 +14,8 @@ public interface GdpMapper {
     Gdp selectByPrimaryKey(Integer gdpid);
 
     int updateByPrimaryKeySelective(Gdp record);
+    
+    int updateByYearPlace(Gdp record);
 
     int updateByPrimaryKey(Gdp record);
 

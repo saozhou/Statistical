@@ -2,6 +2,7 @@ package com.zmst.Controller;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -42,7 +43,6 @@ public class UserController {
 	   * 用户登陆
 	   */
 	  @RequestMapping(value="/userindex",method=RequestMethod.POST)  
-	  @ResponseBody
 	  public String index(HttpServletRequest request,@RequestBody String json){
 		  
 		  Map<String, String> map = Json2Map.JSON2Map(json);
@@ -119,7 +119,6 @@ public class UserController {
 			  user.setDamath(Integer.valueOf(map.get("dataMath")));
 			  user.setDasearch(Integer.valueOf(map.get("dataSearch")));
 			  user.setUspower("3");
-			   
 			  userService.login(user);
 		  }
 		  return "loginSuccess";
@@ -211,5 +210,25 @@ public class UserController {
 	  	  userService.userDelet(username);
 	  	  System.out.println(username);
 	  	  return "deleteSuccess";
+	  }
+	  /**
+	   * 
+	   * @param request
+	   * @param response
+	   * @param json
+	   * Session更改
+	   */
+	  @RequestMapping(value="/sessionchange",method=RequestMethod.POST)
+	  @ResponseBody
+	  public String SessionChange(HttpServletRequest request,HttpServletResponse response,@RequestBody String json){
+	  	  Map<String, String> map = Json2Map.JSON2Map(json);
+	  	  Set<String> key = map.keySet();
+	  	  HttpSession session = request.getSession();
+	  	  String value=null;
+	  	  for(String temp:key){
+	  		  value=map.get(temp);
+	  		  session.setAttribute(temp,value);
+	  	  }
+		return json;
 	  }
 }

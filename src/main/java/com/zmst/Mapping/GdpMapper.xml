@@ -130,6 +130,22 @@
     </set>
     where GdpId = #{gdpid,jdbcType=INTEGER}
   </update>
+    <update id="updateByYearPlace" parameterType="com.zmst.Domain.Gdp">
+    update tbl_gdp
+    <set>
+
+      <if test="gdpcode != null">
+        GdpCode = #{gdpcode,jdbcType=VARCHAR},
+      </if>
+      <if test="gdp != null">
+        Gdp = #{gdp,jdbcType=DOUBLE},
+      </if>
+      <if test="gdpname != null">
+        GdpName = #{gdpname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where year = #{year,jdbcType=VARCHAR} and  place = #{place,jdbcType=VARCHAR}
+  </update>
   <update id="updateByPrimaryKey" parameterType="com.zmst.Domain.Gdp">
     update tbl_gdp
     set year = #{year,jdbcType=VARCHAR},

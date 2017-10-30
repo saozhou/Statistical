@@ -155,21 +155,21 @@ public class GdpAnalyze {
 					}
 
 				}
+				
+                if(codeName!=null){
+                	secondGdp.get(i).setGdp(gdp);
+    				secondGdp.get(i).setGdpcode(codeName);
+                }else{
+                	secondGdp.get(i).setGdp(gdp);
+    				secondGdp.get(i).setGdpcode("0");
+                }
+				 
 
-				secondGdp.get(i).setGdp(gdp);
-				if(codeName==null){
-					secondGdp.get(i).setGdpcode("0");
-				}else{
-					
-				secondGdp.get(i).setGdpcode(codeName);
-				}
 			}
 
 		}
 
-		for (int w = 0; w < secondGdp.size(); w++) {
-			System.out.println(secondGdp.get(w).getGdpcode() + " " + secondGdp.get(w).getGdp());
-		}
+	 
 		return secondGdp;
 	}
 

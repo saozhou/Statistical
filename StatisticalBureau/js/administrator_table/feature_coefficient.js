@@ -3,14 +3,13 @@ $(document).ready(function() {
 	var code = '';
 	for(var i = 0; i < 58; i++) {
 		code += '<tr>';
-		code += '<td contentEditable="true">壹</td>';
-		code += '<td contentEditable="true">贰</td>';
-		code += '<td contentEditable="true">仨</td>';
+		code += '<td>壹</td>';
+		code += '<td>贰</td>';
+		code += '<td>仨</td>';
 		code += '</tr> ';
 	}
 	$(".body table tbody").append(code);
-	init();
-	getContent();
+	resize();
 });
 
 function resize() {
@@ -23,19 +22,12 @@ function resize() {
 	$('.table-div td:nth-child(3)').width(_width * 0.3);
 }
 
-//TODO：获取表格内容
-function getContent() {
+//TODO：查找
+function find() {
+	showTipBox();
 	rotateLoading();
-	var code = '';
-	var url = 'http://192.168.1.102:8080/Statistic/FileUpload/gfCorfficientmath';
-	var json = '{';
-	json += 'yearAvergeSpendDay: ' + 1;
-	json += ',avergeSpend: ' + 1;
-	json += ',travelSpendday: ' + 1;
-	json += ',townAvergeSpend: ' + 1;
-	json += ',livePeople: ' + 1;
-	json += ',dayTravlePeople: ' + 1;
-	json += '}';
+	var url = '';
+	var json = '';
 
 	$.ajax({
 		url: url,
@@ -43,44 +35,41 @@ function getContent() {
 		dataType: "json",
 		data: json,
 		cache: false,
-		async: true,
-		timeout: 10000,
+		async: false,
 		contentType: "application/json; charset=utf-8",
-		success: function(data) {
-			//加载成功
-			loadSuccess();
-			$.each(data, function(i, n) {
+		success: function(data, textStatus, jqXHR) {
+			if('success' == textStatus) {
+				//加载成功
+				loadSuccess();
 
 				//遍历数据生成表格
 				code += '<tr>';
 				code += '<td contentEditable="true">' + '</td>';
 				code += '<td contentEditable="true">' + '</td>';
 				code += '<td contentEditable="true">' + '</td>';
+				code += '<td contentEditable="true">' + '</td>';
+				code += '<td contentEditable="true">' + '</td>';
+				code += '<td contentEditable="true">' + '</td>';
+				code += '<td contentEditable="true">' + '</td>';
+				code += '<td contentEditable="true">' + '</td>';
 				code += '</tr> ';
 
-			});
-			$(".body table tbody").append(code);
+				$(".body table tbody").append(code);
+			}
+			return true;
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown) {
 			//加载失败
 			loadFailure();
+			return false;
 		}
 	});
+	return false;
 }
 
-//TODO:上传
-function upload() {
-	//触发文件选择框
-	$(".upload-input").trigger("click");
-	//获取文件路径
-	var url = '';
-	$(".upload-input").change(function() {
-		url = $(".upload-input").val();
-	});
-
-}
-
-//TODO:保存
-function save() {
-
+//显示提示框
+function showTipBox() {
+	$(".tip").css("display", "block");
+	$(".tip").css("display");
+	$(".tip").css("opacity", "1");
 }

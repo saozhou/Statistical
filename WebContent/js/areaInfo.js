@@ -69,34 +69,48 @@ var provinceListIsShow = false; //省级行政区下拉选择框是否显示
 var cityListIsShow = false; //市级行政区下拉选择框是否显示
 var countyListIsShow = false; //市级行政区下拉选择框是否显示
 //注册事件
-function select_bt_click(pos) {
-	switch(pos) {
-		//国家下拉选择框点击事件
-		case 0:
-			var visiblity = countryListIsShow == false ? "block" : "none";
-			countryListIsShow = countryListIsShow == false ? true : false;
-			$(".country ul").eq(0).css("display", visiblity);
-			break;
-			//省级行政区下拉选择框点击事件
-		case 1:
-			var visiblity = provinceListIsShow == false ? "block" : "none";
-			provinceListIsShow = provinceListIsShow == false ? true : false;
-			$(".province ul").eq(0).css("display", visiblity);
-			break;
-			//市级行政区下拉选择框点击事件
-		case 2:
-			var visiblity = cityListIsShow == false ? "block" : "none";
-			cityListIsShow = cityListIsShow == false ? true : false;
-			$(".city ul").eq(0).css("display", visiblity);
-			break;
-			//县级行政区下拉选择框点击事件
-		case 3:
-			var visiblity = countyListIsShow == false ? "block" : "none";
-			countyListIsShow = countyListIsShow == false ? true : false;
-			$(".county ul").eq(0).css("display", visiblity);
-			break;
-	}
-
+function register_area_event() {
+	//国家下拉选择框点击事件
+	$(".country-bt").click(function(e) {
+		e.stopPropagation();
+		var visiblity = countryListIsShow == false ? "block" : "none";
+		countryListIsShow = countryListIsShow == false ? true : false;
+		$(".country ul").eq(0).css("display", visiblity);
+	});
+	//省级行政区下拉选择框点击事件
+	$(".province-bt").click(function(e) {
+		e.stopPropagation();
+		var visiblity = provinceListIsShow == false ? "block" : "none";
+		provinceListIsShow = provinceListIsShow == false ? true : false;
+		$(".province ul").eq(0).css("display", visiblity);
+	});
+	//市级行政区下拉选择框点击事件
+	$(".city-bt").click(function(e) {
+		e.stopPropagation();
+		var visiblity = cityListIsShow == false ? "block" : "none";
+		cityListIsShow = cityListIsShow == false ? true : false;
+		$(".city ul").eq(0).css("display", visiblity);
+	});
+	//县级行政区下拉选择框点击事件
+	$(".county-bt").click(function(e) {
+		e.stopPropagation();
+		var visiblity = countyListIsShow == false ? "block" : "none";
+		countyListIsShow = countyListIsShow == false ? true : false;
+		$(".county ul").eq(0).css("display", visiblity);
+	});
+	//组织冒泡
+	$(".country ul").click(function(e) {
+		e.stopPropagation(1);
+	});
+	$(".province ul").click(function(e) {
+		e.stopPropagation(1);
+	});
+	$(".city ul").click(function(e) {
+		e.stopPropagation(1);
+	});
+	$(".county ul").click(function(e) {
+		e.stopPropagation(1);
+	});
 }
 
 //国家选择列表选项被点击修改显示值

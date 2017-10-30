@@ -3,13 +3,13 @@ function init() {
 	createYearList();
 	register_event();
 	area_ganged_spinner();
-}c
+}
 
 //创建年份下拉选择列表
 function createYearList() {
 	var min_year = 1949; //最小可选择年份,默认为1949
 	var date = new Date();
-	//获取当前年份
+	//获取当前年
 	var cur_year = date.getFullYear();
 	var code = "";
 	for(var i = cur_year; i >= min_year; i--) {
@@ -69,9 +69,25 @@ function register_event() {
 				return;
 			}
 		}
+		var username = $(".account input").val();
+		var password = $(".password input").val();
+		var userpower = 0;
+		switch($(".user-type span").text()) {
+			case '管理员':
+				userpower = 1;
+				break;
+			case '超级用户':
+				userpower = 2;
+				break;
+			case '普通用户':
+				userpower = 0;
+				break;
+			default:
+				break;
+		}
 		//登录信息错误返回
-		/*	if(!checkLoginInfo())
-				return;*/
+	/*	if(!checkLoginInfo(username, password, userpower))
+			return;*/
 		var userType = $(".user-type-bt span").text();
 		var area = cur_country + "," + cur_province + "," + cur_city + "," + cur_county;
 		var year = " " + $(".year span").text();
@@ -103,7 +119,7 @@ function user_type_item_click(type) {
 	}
 }
 //年份下拉列表项被点击
-function year_item_click(year) {s
+function year_item_click(year) {
 	var str = $(".year span").eq(0).text(year);
 	$(".year ul").eq(0).css("visibility", "hidden");
 	$(".year ul").eq(0).css("opacity", "0");
@@ -115,11 +131,14 @@ function closePopWindow() {
 	$(".cover").css("visibility", "hidden");
 }
 
-
 //登录信息审核
-function checkLoginInfo() {
-	var url = 'http://192.168.1.102:8080/Statistic/SelfDefineSearch/ClassSearche';
-	var json = '{"type": "16","year": "2015","place": "张家界"}';
+function checkLoginInfo(username, password, userpower) {
+	var url = 'http://192.168.1.102:8080/Statistic/User/userindex';
+	var json = '{';
+	json += 'username: ' + username;
+	json += ',password: ' + password;
+	json += ',userpower: ' + userpower;
+	json += '}';
 
 	$.ajax({
 		url: url,
@@ -131,25 +150,13 @@ function checkLoginInfo() {
 		contentType: "application/json; charset=utf-8",
 		success: function(data, textStatus, jqXHR) {
 			if('success' == textStatus) {
-				debugger;
-				layer.msg(data.message, {
-					time: 2000,
-					icon: 6
-				});
-
-				if(1 == data.status) {
-					setTimeout(function() {
-						window.location.href = 'informationTemplateList.do';
-					}, 2000);
-				}
+				return true;
 			}
-			return true;
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown) {
-			alert(errorThrown)
+			alert("登录失败");
 			return false;
 		}
 	});
 	return false;
 }
-

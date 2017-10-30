@@ -62,7 +62,6 @@
 	margin-top: 5px;
 	border-radius: 5px;
 	background-color: white;
-	display: none;
 }
 
 .year ul li {
@@ -174,6 +173,19 @@
 	border: none;
 	background-color: white;
 	overflow: auto;
+}
+
+.content-div .cover {
+	z-index: 1;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	border: none;
+	background-color: transparent;
+	overflow: hidden;
+	display: none;
 }
 
 .exit {

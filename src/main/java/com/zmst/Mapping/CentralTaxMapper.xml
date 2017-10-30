@@ -120,26 +120,13 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.zmst.Domain.CentralTax">
-    update tbl_centraltax
+    update tbl_centraltax 
     <set>
-      <if test="year != null">
-        year = #{year,jdbcType=VARCHAR},
-      </if>
-      <if test="place != null">
-        place = #{place,jdbcType=VARCHAR},
-      </if>
-      <if test="smcode != null">
-        SmCode = #{smcode,jdbcType=VARCHAR},
-      </if>
-      <if test="smname != null">
-        SmName = #{smname,jdbcType=VARCHAR},
-      </if>
       <if test="cntax != null">
         CnTax = #{cntax,jdbcType=DOUBLE},
       </if>
     </set>
-    where CTId = #{ctid,jdbcType=INTEGER}
-      and LaCode = #{lacode,jdbcType=VARCHAR}
+    where  SmCode = #{smcode,jdbcType=VARCHAR} and year = #{year,jdbcType=VARCHAR} and place = #{place,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zmst.Domain.CentralTax">
     update tbl_centraltax

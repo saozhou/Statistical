@@ -1,4 +1,4 @@
-//初始化
+﻿//初始化
 function init() {
 	createYearList();
 	register_event();
@@ -159,4 +159,7 @@ function checkLoginInfo(username, password, userpower) {
 		}
 	});
 	return false;
+
 }
+
+

@@ -112,23 +112,13 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.zmst.Domain.GFReference">
     update tbl_gfreference
     <set>
-      <if test="incode != null">
-        InCode = #{incode,jdbcType=VARCHAR},
-      </if>
-      <if test="inname != null">
-        InName = #{inname,jdbcType=VARCHAR},
-      </if>
+
       <if test="incoefficient != null">
         InCoefficient = #{incoefficient,jdbcType=VARCHAR},
       </if>
-      <if test="place != null">
-        Place = #{place,jdbcType=VARCHAR},
-      </if>
-      <if test="year != null">
-        Year = #{year,jdbcType=VARCHAR},
-      </if>
+
     </set>
-    where GFTId = #{gftid,jdbcType=INTEGER}
+    where InCode = #{smcode,jdbcType=VARCHAR} and year = #{year,jdbcType=VARCHAR} and place = #{place,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zmst.Domain.GFReference">
     update tbl_gfreference

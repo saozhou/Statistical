@@ -151,12 +151,6 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.zmst.Domain.GFCoefficient">
     update tbl_gfcoefficient
     <set>
-      <if test="place != null">
-        Place = #{place,jdbcType=VARCHAR},
-      </if>
-      <if test="year != null">
-        Year = #{year,jdbcType=VARCHAR},
-      </if>
       <if test="avspend != null">
         AvSpend = #{avspend,jdbcType=DOUBLE},
       </if>
@@ -182,7 +176,7 @@
         TPSum = #{tpsum,jdbcType=DOUBLE},
       </if>
     </set>
-    where GFid = #{gfid,jdbcType=INTEGER}
+    where Year = #{year,jdbcType=VARCHAR} and Place = #{place,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zmst.Domain.GFCoefficient">
     update tbl_gfcoefficient

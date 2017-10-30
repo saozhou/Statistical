@@ -50,4 +50,11 @@ public class CentralTax extends CentralTaxKey {
     public void setCntax(Double cntax) {
         this.cntax = cntax;
     }
+
+	@Override
+	public String toString() {
+		return "CentralTax [year=" + year + ", place=" + place + ", smcode=" + smcode + ", smname=" + smname
+				+ ", cntax=" + cntax + "]";
+	}
+    
 }

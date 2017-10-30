@@ -119,26 +119,13 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.zmst.Domain.LandTax">
     update tbl_landtax
     <set>
-      <if test="year != null">
-        Year = #{year,jdbcType=VARCHAR},
-      </if>
-      <if test="place != null">
-        Place = #{place,jdbcType=VARCHAR},
-      </if>
-      <if test="lacode != null">
-        LaCode = #{lacode,jdbcType=VARCHAR},
-      </if>
-      <if test="smcode != null">
-        SmCode = #{smcode,jdbcType=VARCHAR},
-      </if>
-      <if test="smname != null">
-        SmName = #{smname,jdbcType=VARCHAR},
-      </if>
+
+
       <if test="latax != null">
         LaTax = #{latax,jdbcType=DOUBLE},
       </if>
     </set>
-    where LTId = #{ltid,jdbcType=INTEGER}
+    where Year = #{year,jdbcType=VARCHAR} and  Place = #{place,jdbcType=VARCHAR} and SmCode = #{smcode,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zmst.Domain.LandTax">
     update tbl_landtax

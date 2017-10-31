@@ -160,6 +160,7 @@ function checkLoginInfo(username, password, userpower) {
 		}
 	});
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return false;
 
 }
@@ -168,3 +169,6 @@ function checkLoginInfo(username, password, userpower) {
 =======
 }
 >>>>>>> d0bcd141ab1a6f839633cddb133488cacf92267e
+=======
+}
+>>>>>>> 205b7c56a0eb7e9d1b8633ce11c4a1a0aae0269a

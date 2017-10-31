@@ -63,7 +63,7 @@
     <select id="selectAll"  resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from tbl_allcodedictionary  ORDER BY inid desc
+    from tbl_allcodedictionary  ORDER BY inid asc
   </select>
   
    <delete id="deleteAll" >

@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Service;
 
+import com.zmst.Domain.AllCodeDictionary;
+import com.zmst.Domain.GFReference;
 import com.zmst.Domain.SubGdp;
 import com.zmst.Domain.SubTax;
 import com.zmst.Domain.SubTravelGdp;
@@ -66,6 +68,10 @@ public interface IntegratedQueryService {
 	List<SubGdp> getSubGdp(String year, String place, HttpServletResponse response);
 
 	List<SubTravelGdp> getSubTravelGdp(String year, String place, HttpServletResponse response);
+
+	List<AllCodeDictionary> getAllCode(HttpServletResponse response);
+
+	List<GFReference> getReference(String year, String place, HttpServletResponse response);
 
  
 

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 import javax.annotation.*;
+import javax.servlet.http.HttpServletResponse;
 
 import com.zmst.Domain.AllCodeDictionary;
 import com.zmst.Domain.ClassGdp;
@@ -29,6 +30,7 @@ import com.zmst.IDao.LargeTravelGdpMapper;
 import com.zmst.IDao.SubGdpMapper;
 import com.zmst.IDao.SubTravelGdpMapper;
 import com.zmst.Service.TravelGdpCalculateService;
+import com.zmst.Tools.HttpReturn;
 import com.zmst.Tools.TaxCaculateUtil;
 import com.zmst.Tools.TravelGdpCaculate;
 
@@ -62,15 +64,30 @@ public class TravelGdpCalculateServiceImpl implements TravelGdpCalculateService 
 	}
 	
 	
-	public List<SubTravelGdp> getSubTravelGdp(String year, String place) {
+	public List<SubTravelGdp> getSubTravelGdp(String year, String place,HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		List<SubTravelGdp>subTravelGdpList  = new ArrayList<SubTravelGdp>();
 		
 	    List<SubGdp>subGdpList    = subGdpDao.findByYearPlace(year, place);
 	    
+	    if(subGdpList.size()==0){
+	    	HttpReturn.reponseBody(response, "小类gdp未计算");
+	    	return null;
+	    }
+	    
 	    List<GFReference>gfReference=gfReferenceDao.selectByYearAndPlace(year,place);
 	    
+	    if(gfReference.size()==0){
+	    	HttpReturn.reponseBody(response, "当量系数参照表未上传");
+	    	return null;
+	    }
+	    
 	    GFCoefficient coefficient = gfCoefficientDao.selectByYearPlace(year,place);
+	    
+	    if(coefficient.getAvspend()==null){
+	    	HttpReturn.reponseBody(response, "gf系数未添加");
+	    	return null;
+	    }
 		
 	    List<LargeTravelGdp> largeTravelGdpList = new ArrayList<LargeTravelGdp>();
 		 
@@ -78,6 +95,11 @@ public class TravelGdpCalculateServiceImpl implements TravelGdpCalculateService 
 		
         List<AllCodeDictionary>largeLineList = codeDictionaryDao.getLargeLine();
 		
+        if(largeLineList.size()<1){
+        	HttpReturn.reponseBody(response, "代码库未上传");
+            return null;
+        }
+        
 	    List<AllCodeDictionary>classLineList = codeDictionaryDao.getClassLine();
 		
 	    List<LargeAndClassDictionary>classDidctionary = classDao.findAll();

@@ -38,6 +38,9 @@ public class POIUtil {
 						if(cell==null){
 							continue;
 						}
+						if("".equals(cell.toString())||cell.toString().length()<1){
+							continue;
+						}
 						list.add(cell.toString());
 					}
 					lists.add(list);
@@ -69,6 +72,10 @@ public class POIUtil {
 						if(cell==null){
 							continue;
 						}
+						if("".equals(cell.toString())||cell.toString().length()<1){
+							continue;
+						}
+						 
 						list.add(cell.toString());
 					}
 					lists.add(list);

@@ -83,41 +83,57 @@ public class FileDownloadServiceImpl implements FileDownloadService {
 	public boolean export(String year, String place, HttpServletResponse response,int tableNumber) {
 		// TODO Auto-generated method stub
 		List<Object> objectList = new ArrayList<Object>();
-		String tableName ="GdpBiao";
+		String tableName = null;
 		String sheetname = null;
 		// TODO Auto-generated method stub		 
 		 FileDownloadUtil fileDownloadUtil = new FileDownloadUtil();
 		if(tableNumber==1){
+			 tableName="GDP表";
 			 objectList = gdpDao.find(year, place);
 		}else if(tableNumber==2){
+			tableName="地税表";
 			objectList =  landTaxDao.find(year,place);
 		}else if(tableNumber==3){
+			tableName="国税表";
 			objectList =  centralTaxDao.find(year,place);
 		}else if(tableNumber==4){
+			tableName="gf参数";
 			objectList =  gfCoefficientDao.find(year,place);
 		}else if(tableNumber==5){
+			tableName="小类税收表";
 			objectList =  subTaxDao.find(year,place);
 		}else if(tableNumber==6){
+			tableName="小类GDP";
 			objectList =  subGdpDao.find(year,place);
 		}else if(tableNumber==7){
+			tableName = "小类旅游税收";
 			objectList =  subTravelTaxDao.find(year,place);
 		}else if(tableNumber==8){
+			tableName="小类旅游GDP";
 			objectList =  subTraveGdpDao.find(year,place);
 		}else if(tableNumber==9){
+			tableName="大类gdp贡献表";
 			objectList =  largeGdpContributeDao.find(year,place);
 		}else if(tableNumber==10){
+			tableName="门类gdp贡献表";
 			objectList =  classGdpContributeDao.find(year,place);
 		}else if(tableNumber==11){
+			tableName="产业gdp贡献表";
 			objectList =  industryGdpContributeDao.find(year,place);
 		}else if(tableNumber==12){
+			tableName="大类税收贡献表";
 			objectList =  largeTaxContributeDao.find(year,place);
 		}else if(tableNumber==13){
+			tableName = "门类税收贡献表";
 			objectList =  classTaxContributeDao.find(year,place);
 		}else if(tableNumber==14){
+			tableName="产业税收贡献表";
 			objectList =  industryTaxContributeDao.find(year,place);
 		}else if(tableNumber==15){
+			tableName="gf系数对照表";
 			objectList =  gfReferenceDao.find(year,place);
 		}else if(tableNumber==16){
+			tableName="行业代码库";
 			objectList =  allCodeDao.find();
 		}
 		 

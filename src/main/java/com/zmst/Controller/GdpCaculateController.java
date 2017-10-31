@@ -39,14 +39,15 @@ public class GdpCaculateController {
     @ResponseBody
     public void subGdpCaculate(HttpServletRequest request,HttpServletResponse response){		 
 		 HttpSession session = request.getSession();
-		 String city ="张家界";
-		 String county=null;
-		String place = null;
-		String year = "2017";//(String) session.getAttribute("year");
-		 
-	//	city=(String) session.getAttribute("city");
-		 
-		//county= (String)session.getAttribute("county");
+			response.setContentType("text/html;charset=utf-8");
+			String year =null;  
+			String city =null;
+			String county=null; 
+			String place = null;
+			 
+			year = (String) session.getAttribute("year");    
+			city=(String) session.getAttribute("city");
+			county= (String)session.getAttribute("county");
 	 
 		if(county!=null){
 			 place=county;
@@ -57,7 +58,7 @@ public class GdpCaculateController {
 	    subGdpList=gdpService.findSubGdpByYearPlace(year,place);
 	    if(subGdpList.size()==0){
 			 
-			 subGdpList = gdpService.getSubgdp(year,place);  
+			 subGdpList = gdpService.getSubgdp(year,place,response);  
 			
 	    }		    
 		 try {
@@ -68,8 +69,10 @@ public class GdpCaculateController {
 			}  //这里不设置编码会有乱码
 		      response.setContentType("text/html;charset=utf-8");
 			  String json = JSON.toJSONString(subGdpList);
+			  if(subGdpList.size()!=0){
+		
 			  HttpReturn.reponseBody(response, json);
-	
+			  }
 	}
 	
 }

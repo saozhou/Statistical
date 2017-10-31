@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.*;
+import javax.servlet.http.HttpServletResponse;
 
 import com.zmst.Domain.AllCodeDictionary;
 import com.zmst.Domain.CentralTax;
@@ -22,6 +23,7 @@ import com.zmst.IDao.LargeAndClassDictionaryMapper;
 import com.zmst.IDao.LargeTaxMapper;
 import com.zmst.IDao.SubTaxMapper;
 import com.zmst.Service.TaxCalculateService;
+import com.zmst.Tools.HttpReturn;
 import com.zmst.Tools.TaxCaculateUtil;
 @Service("taxService")
 public class TaxCalculateServiceImpl implements TaxCalculateService {
@@ -42,7 +44,7 @@ public class TaxCalculateServiceImpl implements TaxCalculateService {
 	private ClassTaxMapper classTaxDao;
 	
 	
-	public List<SubTax> getSubTaxt(String year, String place) {
+	public List<SubTax> getSubTaxt(String year, String place, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		List<SubTax>subTaxList = null; 
 		subTaxList=subTaxDao.findSubTaxByYearPlace(year,place);
@@ -50,11 +52,28 @@ public class TaxCalculateServiceImpl implements TaxCalculateService {
 		if(subTaxList.size()==0){//如果总税收未计算则进行计算处理
 			subTaxList = new ArrayList<SubTax>();  
 			  List<LandTax>landTaxList= landTaxDao.getAllLandTax(year,place);//获得当年总地税
+			  
+			  if(landTaxList.size()==0){
+				  HttpReturn.reponseBody(response, "地税表未上传");
+				  return null;
+			  }
+			  
 			  List<CentralTax>centralTaxlist=	centralTaxDao.getAllCentralTax(year,place);//获得当年国税
+			  
+			  if(centralTaxlist.size()==0){
+				  HttpReturn.reponseBody(response, "国税表未上传");
+				  return null;
+			  }
+			  
 			  List<LargeTax>largeTaxList = new ArrayList<LargeTax>();
 			  List<ClassTax>classTaxList = new ArrayList<ClassTax>();
 			  TaxCaculateUtil.getSubTax(subTaxList,year,place,landTaxList,centralTaxlist);
 			  List<AllCodeDictionary>largeLineList = codeDictionaryDao.getLargeLine();
+			  
+			  if(largeLineList.size()==0){
+				  HttpReturn.reponseBody(response, "代码库未上传");
+			  }
+			  
 			  List<AllCodeDictionary>classLineList = codeDictionaryDao.getClassLine();
 			  List<LargeAndClassDictionary>classDidctionary = classDao.findAll();
 			  TaxCaculateUtil.getLargeTax(largeLineList,place,year,largeTaxList,subTaxList);

@@ -2,6 +2,8 @@ package com.zmst.Service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.poi.ss.formula.functions.T;
 
 import com.zmst.Domain.AllCodeDictionary;
@@ -43,7 +45,7 @@ public interface FileUploadService {
 
 	void save(GFCoefficient corfficient);
 
-	List<LandTax> changeLandTax(List<List<String>> list, String year, String place, int matchingWay);
+	List<LandTax> changeLandTax(List<List<String>> list, String year, String place, int matchingWay, HttpServletResponse response);
 
 	List<LandTax> getLandTax(String year, String place);
 
@@ -51,7 +53,7 @@ public interface FileUploadService {
 
 	void saveLandTax(List<LandTax> landTax);
 
-	List<CentralTax> changeCentralTax(List<List<String>> list, String year, String place, int matchingWay);
+	List<CentralTax> changeCentralTax(List<List<String>> list, String year, String place, int matchingWay, HttpServletResponse response, int i);
 
 	List<CentralTax> getCentralTax(String year, String place);
 
@@ -68,5 +70,6 @@ public interface FileUploadService {
 	void saveGdp(List<Gdp> gdpList);
 
 	void gdpAnalyze(List<Gdp> gdpList, String year, String place);
+ 
 
 }

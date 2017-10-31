@@ -9,6 +9,8 @@ import org.apache.poi.ss.formula.functions.T;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.*;
+import javax.servlet.http.HttpServletResponse;
+
 import com.zmst.Domain.AllCodeDictionary;
 import com.zmst.Domain.CentralTax;
 import com.zmst.Domain.GFCoefficient;
@@ -132,12 +134,16 @@ public class FileUploadServiceImpl implements FileUploadService {
 		gfCorfficientDao.save(corfficient);
 	}
 
-	public List<LandTax> changeLandTax(List<List<String>> list, String year, String place,int matchingWay) {
+	public List<LandTax> changeLandTax(List<List<String>> list, String year, String place,int matchingWay,HttpServletResponse response) {
 		// TODO Auto-generated method stub
+		int log=0;
 		List<LandTax>landTaxList = ListChangeUtil.changeLandTax(list,year,place, matchingWay);
 		List<AllCodeDictionary>codeDictionary=codeDictionaryDao.selectAll();
 		 
-		ListChangeUtil.matchingLandTax(landTaxList,codeDictionary,matchingWay);
+		log=ListChangeUtil.matchingLandTax(landTaxList,codeDictionary,matchingWay,log, response);
+		if(log==1){
+			return null;
+		}
 		return landTaxList;
 	}
 
@@ -162,11 +168,14 @@ public class FileUploadServiceImpl implements FileUploadService {
 		}
 	}
 
-	public List<CentralTax> changeCentralTax(List<List<String>> list, String year, String place, int matchingWay) {
+	public List<CentralTax> changeCentralTax(List<List<String>> list, String year, String place, int matchingWay,HttpServletResponse response,int i) {
 		// TODO Auto-generated method stub
 		List<CentralTax>centralTaxList = ListChangeUtil.changeCentralTax(list,year,place, matchingWay);
 		List<AllCodeDictionary>codeDictionary=codeDictionaryDao.selectAll();
-		ListChangeUtil.matchingCentralTax(centralTaxList,codeDictionary,matchingWay);
+        i =	ListChangeUtil.matchingCentralTax(centralTaxList,codeDictionary,matchingWay,response,i);
+        if(i==1){
+        	return null;
+        }
 		return centralTaxList;
 	}
 

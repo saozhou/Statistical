@@ -155,7 +155,7 @@ public class GdpAnalyze {
 					}
 
 				}
-
+				
 				secondGdp.get(i).setGdp(gdp);
 				if(codeName==null){
 					secondGdp.get(i).setGdpcode("0");
@@ -163,13 +163,12 @@ public class GdpAnalyze {
 					
 				secondGdp.get(i).setGdpcode(codeName);
 				}
+
 			}
 
 		}
 
-		for (int w = 0; w < secondGdp.size(); w++) {
-			System.out.println(secondGdp.get(w).getGdpcode() + " " + secondGdp.get(w).getGdp());
-		}
+	 
 		return secondGdp;
 	}
 

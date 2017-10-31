@@ -2,6 +2,8 @@ package com.zmst.Service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import com.zmst.Domain.SubTravelTax;
 
 /**
@@ -11,6 +13,6 @@ import com.zmst.Domain.SubTravelTax;
  */
 public interface TravelTaxCalculateService {
 
-	List<SubTravelTax> getSubTravelTaxt(String year, String place);
+	List<SubTravelTax> getSubTravelTaxt(String year, String place, HttpServletResponse response);
 
 }

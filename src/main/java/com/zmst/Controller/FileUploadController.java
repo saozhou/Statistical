@@ -77,7 +77,7 @@ public class FileUploadController {
 	      
 	       
 	        List<AllCodeDictionary>oldCodeDictionary = uploadService.selectAllData();
-	        if(oldCodeDictionary!=null){
+	        if(oldCodeDictionary.size()!=0){
 	        	uploadService.deleteCodeDictionary();
 	        }
 	        uploadService.saveCodeDictionary(codeDictionary);
@@ -127,14 +127,14 @@ public class FileUploadController {
 	        }  
 	        //MultipartFile自带的解析方法  
 	        file.transferTo(dir);    
-	        HttpReturn.reponseBody(response, "1");
+	        HttpReturn.reponseBody(response, "上传成功");
 	        List<List<String>>list	= null;
 	        if("xls".equals(fileLevel)) list=POIUtil.readXls(allPath);
 	        if("xlsx".equals(fileLevel)) list = POIUtil.readXlsx(allPath);
 	        List<GFReference>gfReference =  uploadService.changeGFReferenceExcel(list,place,year);
 	        List<GFReference>oldgfReference = uploadService.selectGFReferenceByYP(place,year);
 	        
-	        if(oldgfReference!=null){
+	        if(oldgfReference.size()!=0){
 	        	uploadService.deleteGFReference(year,place);
 	        	deleteService.DeleteTravelTax(year, place);  
 				deleteService.DeleteTravelGdp(year, place);
@@ -235,16 +235,16 @@ public class FileUploadController {
 				String path = "D:\\Users";  
 				  HttpSession session = request.getSession();		 		
 				    String fileName=null;
-					String city =  "张家界";
-					String county = null;
-					String year = "2017"; 
-					String place=null;
+				    String year =null;  
+					String city =null;
+					String county=null; 
+					String place = null;
+					 
+					year = (String) session.getAttribute("year");    
+					city=(String) session.getAttribute("city");
+					county= (String)session.getAttribute("county");
 					String fileLevel = file.getOriginalFilename();
-					//city = (String) session.getAttribute("city");
-					//county= (String) session.getAttribute("county");
-					//year=(String)session.getAttribute("year");
-				
-				int matchingWay=1;//Integer.valueOf(request.getParameter("matchingway"));
+				int matchingWay=Integer.valueOf(request.getParameter("matchingway"));//匹配方式
 				if(county!=null){
 					 place=county;
 				}else{
@@ -269,10 +269,10 @@ public class FileUploadController {
 		        List<LandTax>landTax =  uploadService.changeLandTax(list,year,place,matchingWay,response);
 		        List<LandTax>oldLandTax = null; 
 		        oldLandTax=uploadService.getLandTax(year,place);
-		       if(landTax!=null){
+		       if(landTax.size()!=0){
 		    	   
 		       
-		        if(oldLandTax!=null){     	      	      	  
+		        if(oldLandTax.size()!=0){     	      	      	  
 		        	  uploadService.updateLandTax(landTax,year,place);
 					  deleteService.DeleteTravelTax(year, place);  
 					  deleteService.DeleteTravelGdp(year, place);
@@ -304,16 +304,17 @@ public class FileUploadController {
 			response.setContentType("text/html;charset=utf-8");
 				String path = "D:\\Users";  
 				  HttpSession session = request.getSession();		 		
-				    String fileName=null;
-					String city =  null;
-					String county ="张家界";// null;
-					String year ="2017"; 
-					String place=null;
+				  String fileName=null;
+				    String year =null;  
+					String city =null;
+					String county=null; 
+					String place = null;
+					 
+					year = (String) session.getAttribute("year");    
+					city=(String) session.getAttribute("city");
+					county= (String)session.getAttribute("county");
 					String fileLevel = file.getOriginalFilename();
-					//city = (String) session.getAttribute("city");
-					//county= (String) session.getAttribute("county");
-					//year=(String)session.getAttribute("year");
-				int matchingWay=  2;//Integer.valueOf(request.getParameter("matchingway"));//匹配fan
+				int matchingWay=Integer.valueOf(request.getParameter("matchingway"));//匹配方式
 				if(county!=null){
 					 place=county;
 				}else{
@@ -343,8 +344,8 @@ public class FileUploadController {
 		        
 		        
 		        
-		      if(centralTax!=null){
-		        if(oldCentralTax!=null){     	      	      	  
+		      if(centralTax.size()!=0){
+		        if(oldCentralTax.size()!=0){     	      	      	  
 		        	  uploadService.updateCentralTax(centralTax,year,place);
 		        	  deleteService.DeleteTravelTax(year, place);  
 					  deleteService.DeleteTravelGdp(year, place);
@@ -374,15 +375,16 @@ public class FileUploadController {
 			 
 			String path = "D:\\Users";  
 			  HttpSession session = request.getSession();		 		
-			    String fileName=null;
-				String city =  null;
-				String county ="张家界";// null;
-				String year ="2017"; 
-				String place=null;
+			  String fileName=null;
+			    String year =null;  
+				String city =null;
+				String county=null; 
+				String place = null;
+				 
+				year = (String) session.getAttribute("year");    
+				city=(String) session.getAttribute("city");
+				county= (String)session.getAttribute("county");
 				String fileLevel = file.getOriginalFilename();
-				//city = (String) session.getAttribute("city");
-				//county= (String) session.getAttribute("county");
-				//year=(String)session.getAttribute("year");
 		 
 			if(county!=null){
 				 place=county;
@@ -408,8 +410,10 @@ public class FileUploadController {
 		        List<Gdp>gdpList =  uploadService.changeGdp(list,year,place);
 		        List<Gdp>oldGdpList = null; 
 		        oldGdpList=uploadService.getOldGdp(year,place);
+		      if(gdpList.size()!=0){
+		    	  
 		      
-		        if(oldGdpList!=null){     	     
+		        if(oldGdpList.size()!=0){     	     
 		        	  deleteService.DeleteTravelGdp(year, place);
 					  deleteService.DeleteGDP(year,place);
 		        	  uploadService.updateGdp(gdpList,year,place);
@@ -419,7 +423,7 @@ public class FileUploadController {
 		        	uploadService.saveGdp(gdpList);
 		        }
 				 
-			 
+		      }
 				
 		}
 	

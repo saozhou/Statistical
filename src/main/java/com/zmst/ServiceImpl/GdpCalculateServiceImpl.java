@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 import javax.annotation.*;
+import javax.servlet.http.HttpServletResponse;
 
 import com.zmst.Domain.AllCodeDictionary;
 import com.zmst.Domain.ClassGdp;
@@ -27,6 +28,7 @@ import com.zmst.IDao.SubGdpMapper;
 import com.zmst.IDao.SubTaxMapper;
 import com.zmst.Service.GdpCalculateService;
 import com.zmst.Tools.GdpAnalyze;
+import com.zmst.Tools.HttpReturn;
 import com.zmst.Tools.TaxCaculateUtil;
 @Service("gdpService")
 public class GdpCalculateServiceImpl implements GdpCalculateService {
@@ -62,7 +64,7 @@ public class GdpCalculateServiceImpl implements GdpCalculateService {
 	 * 小类
 	 * 门类
 	 */
-	public List<SubGdp> getSubgdp(String year, String place) {
+	public List<SubGdp> getSubgdp(String year, String place, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		List<LargeGdp>largeGdpList = new ArrayList<LargeGdp>();
 		
@@ -73,13 +75,21 @@ public class GdpCalculateServiceImpl implements GdpCalculateService {
 		
 		largeGdpList = largeGdpDao.findByYearPlace(year,place);
 		
-	 
 		
 	    List<SubTax>subTaxList = subTaxDao.findSubTaxByYearPlace(year, place);
 	    
+	    if(subTaxList.size()==0){
+	    	 
+	    	HttpReturn.reponseBody(response, "小类税收未计算");
+	    	return null;
+	    }
 		
 		List<Gdp>gdpList = gdpDao.getAllGdp(year,place);
 		
+		  if(gdpList.size()==0){
+		    	HttpReturn.reponseBody(response, "gdp表未上传");
+		    	return null;
+		    }
 		
 		List<Gdp>middleGdpList = GdpAnalyze.getMiddleGdp(gdpList,year,place);
 		

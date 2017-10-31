@@ -36,7 +36,8 @@ public class TravelTaxCaculateController {
 	@RequestMapping(value="/subTravelTaxGet",method=RequestMethod.POST)  
    
 	public void allTaxManager(HttpServletRequest request,HttpServletResponse response){
-		 HttpSession session = request.getSession();	
+		 HttpSession session = request.getSession();
+		 response.setContentType("text/html;charset=utf-8");
 		 String year =null;  
 			String city =null;
 			String county=null; 
@@ -52,7 +53,7 @@ public class TravelTaxCaculateController {
 				place=city;
 			}
 		
-	    List<SubTravelTax> subTravelTax =	travelTaxService.getSubTravelTaxt(year,place);
+	    List<SubTravelTax> subTravelTax =	travelTaxService.getSubTravelTaxt(year,place,response);
 	    
 		 try {
 				request.setCharacterEncoding("utf-8");
@@ -62,6 +63,9 @@ public class TravelTaxCaculateController {
 			}  //这里不设置编码会有乱码
 		      response.setContentType("text/html;charset=utf-8");
 			  String json = JSON.toJSONString(subTravelTax);
-			  HttpReturn.reponseBody(response, json);;
+			  if(subTravelTax.size()==0){
+				  HttpReturn.reponseBody(response, json);
+			  }
+			  
 	}
 }

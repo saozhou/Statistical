@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Service;
 
@@ -32,6 +33,7 @@ import com.zmst.IDao.LargeTravelTaxMapper;
 import com.zmst.IDao.SubTaxMapper;
 import com.zmst.IDao.SubTravelTaxMapper;
 import com.zmst.Service.TravelTaxCalculateService;
+import com.zmst.Tools.HttpReturn;
 import com.zmst.Tools.TaxCaculateUtil;
  
 @Service("travelTaxService")
@@ -62,7 +64,7 @@ public class TravelTaxCalculateServiceImpl implements TravelTaxCalculateService 
 	@Resource
 	private ClassTravelTaxMapper classTravelTaxDao;
 	
-	public List<SubTravelTax> getSubTravelTaxt(String year, String place) {
+	public List<SubTravelTax> getSubTravelTaxt(String year, String place,HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		
 		List<SubTravelTax>subTravelTaxList = null; 
@@ -70,12 +72,34 @@ public class TravelTaxCalculateServiceImpl implements TravelTaxCalculateService 
 		if(subTravelTaxList.size()==0){//如果总税收未计算则进行计算处理
 			  subTravelTaxList = new ArrayList<SubTravelTax>();  
 		      List<SubTax>subTaxList = subTaxDao.findSubTaxByYearPlace(year, place);
+		      if(subTaxList.size()==0){
+		    	  HttpReturn.reponseBody(response, "小类税收未计算");
+		    	  return null;
+		      }
+		      
+		      
 		      List<GFReference>gfReference=gfReferenceDao.selectByYearAndPlace(year,place);
+		      
+		      if(gfReference.size()==0){
+		    	  HttpReturn.reponseBody(response, "当量系数参照表未上传");
+		    	  return null;
+		      }
 		      GFCoefficient coefficient = gfCoefficientDao.selectByYearPlace(year,place);
+		      if(coefficient.getAvspend()==null){
+		    	  HttpReturn.reponseBody(response, "gf系数未计算");
+		    	  return null;
+		      }
+		      
 			  List<LargeTravelTax>largeTravelTaxList = new ArrayList<LargeTravelTax>();
 			  List<ClassTravelTax>classTravelTaxList = new ArrayList<ClassTravelTax>();
 			  TaxCaculateUtil.getSubTravelTax(subTaxList,year,place,subTravelTaxList,gfReference,coefficient);
 			  List<AllCodeDictionary>largeLineList = codeDictionaryDao.getLargeLine();
+			   if(largeLineList.size()<1){
+			    	  HttpReturn.reponseBody(response, "行业代码库未上传");
+			    	  return null;
+			      }
+			  
+			  
 			  List<AllCodeDictionary>classLineList = codeDictionaryDao.getClassLine();
 			  List<LargeAndClassDictionary>classDidctionary = classDao.findAll();
 			  TaxCaculateUtil.getLargeTravelTax(largeLineList,place,year,largeTravelTaxList,subTravelTaxList);

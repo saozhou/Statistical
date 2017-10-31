@@ -34,15 +34,14 @@ public class FileDownloadController {
     @ResponseBody
     public String gdpFileDown(HttpServletRequest request,HttpServletResponse response){
 		HttpSession session = request.getSession();
-		String city =  "张家界";
+		String city =  null;
 		String county = null;
-		String year = "2017"; 
+		String year = null;
 		String place=null;
-		int tableNumber=16;
-		 
-//		city = (String) session.getAttribute("city");
-//		county= (String) session.getAttribute("county");
-//		year=(String)session.getAttribute("year");
+		int type = Integer.parseInt( request.getParameter("type"));
+		city = (String) session.getAttribute("city");
+	    county= (String) session.getAttribute("county");
+		year=(String)session.getAttribute("year");
 		 
 		if(county!=null){
 			 place=county;
@@ -51,7 +50,7 @@ public class FileDownloadController {
 			 
 		    place=city;
 		}
-	    boolean result =	fileDownLoadService.export(year,place,response,tableNumber);
+	    boolean result =	fileDownLoadService.export(year,place,response,type);
 	    if(!result){
 	    	return "fail";
 	    }

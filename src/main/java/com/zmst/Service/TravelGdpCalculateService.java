@@ -2,6 +2,8 @@ package com.zmst.Service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import com.zmst.Domain.SubTravelGdp;
 
 /**
@@ -13,6 +15,6 @@ public interface TravelGdpCalculateService {
 
 	List<SubTravelGdp> findByYearPlace(String year, String place);
 
-	List<SubTravelGdp> getSubTravelGdp(String year, String place);
+	List<SubTravelGdp> getSubTravelGdp(String year, String place, HttpServletResponse response);
 
 }

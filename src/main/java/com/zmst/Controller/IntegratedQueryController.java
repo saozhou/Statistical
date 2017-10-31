@@ -48,17 +48,19 @@ public class IntegratedQueryController {
 	public void largeGdpConrtibute(HttpServletRequest request,HttpServletResponse response){
 
 		
-		
+		response.setContentType("text/html;charset=utf-8");
 		 
         HttpSession session = request.getSession();		 
-		String year = "2017";//(String) session.getAttribute("year");
-		String city ="张家界";
+       
+	    String year =null;  
+		String city =null;
 		String county=null; 
 		String place = null;
-		//city=(String) session.getAttribute("city");
 		 
-		//county= (String)session.getAttribute("county");
-		 
+		year = (String) session.getAttribute("year");    
+		city=(String) session.getAttribute("city");
+		county= (String)session.getAttribute("county");
+	 
 		if(county!=null){
 			 place=county;
 		}else{
@@ -69,7 +71,7 @@ public class IntegratedQueryController {
          
          travelLargeGdpContributeList = integratedQueryService.getTravelLargeGdpContribute(year,place);
 		if(travelLargeGdpContributeList.size()==0){
-			travelLargeGdpContributeList = integratedQueryService.getLargeGdpContribute(travelLargeGdpContributeList,year, place);
+			travelLargeGdpContributeList = integratedQueryService.getLargeGdpContribute(travelLargeGdpContributeList,year, place,response);
 			 
 		 
 			}
@@ -82,8 +84,11 @@ public class IntegratedQueryController {
 			e.printStackTrace();
 		}  //这里不设置编码会有乱码
 	      response.setContentType("text/html;charset=utf-8");
-		  String json = JSON.toJSONString(travelLargeGdpContributeList);
-		  HttpReturn.reponseBody(response, json);
+	     if(travelLargeGdpContributeList!=null){
+	    	 String json = JSON.toJSONString(travelLargeGdpContributeList);
+			  HttpReturn.reponseBody(response, json);
+	     }
+		  
 		 
 	}
 	
@@ -96,6 +101,7 @@ public class IntegratedQueryController {
 	@ResponseBody
 	public void classGdpConrtibute(HttpServletRequest request,HttpServletResponse response){
 
+		response.setContentType("text/html;charset=utf-8");
 		   HttpSession session = request.getSession();		 
 		
 		   String year =null;  
@@ -116,9 +122,8 @@ public class IntegratedQueryController {
          List<TravelClassGdpContribute> classGdpContributeList = new ArrayList<TravelClassGdpContribute>();
          
          classGdpContributeList = integratedQueryService.getClassGdpContribute(year,place,classGdpContributeList);
-         System.out.println(classGdpContributeList.size());
 		if(classGdpContributeList.size()==0){
-			classGdpContributeList = integratedQueryService.getClassGdpContributeList(classGdpContributeList,year, place);
+			classGdpContributeList = integratedQueryService.getClassGdpContributeList(classGdpContributeList,year, place,response);
 			 
 			}
 			
@@ -130,9 +135,11 @@ public class IntegratedQueryController {
 			e.printStackTrace();
 		}  //这里不设置编码会有乱码
 	      response.setContentType("text/html;charset=utf-8");
+	      
+	      if(classGdpContributeList!=null){
 		  String json = JSON.toJSONString(classGdpContributeList);
 		  HttpReturn.reponseBody(response, json);
-		 
+	      }
 	}
 	
 	 /**
@@ -144,7 +151,7 @@ public class IntegratedQueryController {
 	@RequestMapping(value="/industryGdpContributeSearch",method=RequestMethod.POST)
 	@ResponseBody
 	public void industryGdpConrtibute(HttpServletRequest request,HttpServletResponse response){
-
+		response.setContentType("text/html;charset=utf-8");
         HttpSession session = request.getSession();		 
         String year =null;  
 		String city =null;
@@ -166,7 +173,7 @@ public class IntegratedQueryController {
          industryGdpContributeList = integratedQueryService.getIndustryGdpContribute(year,place,industryGdpContributeList);
          
 		if(industryGdpContributeList.size()==0){
-			industryGdpContributeList = integratedQueryService.getIndustryGdpContributeList(industryGdpContributeList,year, place);
+			industryGdpContributeList = integratedQueryService.getIndustryGdpContributeList(industryGdpContributeList,year, place,response);
 			 
 			}
 			
@@ -178,9 +185,10 @@ public class IntegratedQueryController {
 			e.printStackTrace();
 		}  //这里不设置编码会有乱码
 	      response.setContentType("text/html;charset=utf-8");
+	      if(industryGdpContributeList!=null){
 		  String json = JSON.toJSONString(industryGdpContributeList);
 		  HttpReturn.reponseBody(response, json);
-		 
+	      }
 	}
 	
 	/**
@@ -192,7 +200,7 @@ public class IntegratedQueryController {
 	@RequestMapping(value="/largeTaxContributeSearch",method=RequestMethod.POST)
 	@ResponseBody
 	public void largeTaxConrtibute(HttpServletRequest request,HttpServletResponse response){
-
+		response.setContentType("text/html;charset=utf-8");
         HttpSession session = request.getSession();
         String year =null;  
 		String city =null;
@@ -211,7 +219,7 @@ public class IntegratedQueryController {
         
 	    travelLargeTaxContributeList = integratedQueryService.getTravelLargeTaxContribute(year,place,travelLargeTaxContributeList);
 		if(travelLargeTaxContributeList.size()==0){
-			travelLargeTaxContributeList = integratedQueryService.getLargeTaxContribute(travelLargeTaxContributeList,year, place);
+			travelLargeTaxContributeList = integratedQueryService.getLargeTaxContribute(travelLargeTaxContributeList,year, place,response);
 			 
 		 
 			}
@@ -224,9 +232,10 @@ public class IntegratedQueryController {
 			e.printStackTrace();
 		}  //这里不设置编码会有乱码
 	      response.setContentType("text/html;charset=utf-8");
+	      if(travelLargeTaxContributeList!=null){
 		  String json = JSON.toJSONString(travelLargeTaxContributeList);
 		  HttpReturn.reponseBody(response, json);
-		 
+	      }
 	}
 	
 	/**
@@ -263,7 +272,7 @@ public class IntegratedQueryController {
          classTaxContributeList = integratedQueryService.getClassTaxContribute(year,place,classTaxContributeList);
          
 		if(classTaxContributeList.size()==0){
-			classTaxContributeList = integratedQueryService.getClassTaxContributeList(classTaxContributeList,year, place);
+			classTaxContributeList = integratedQueryService.getClassTaxContributeList(classTaxContributeList,year, place,response);
 			 
 			}
 			
@@ -275,9 +284,11 @@ public class IntegratedQueryController {
 			e.printStackTrace();
 		}  //这里不设置编码会有乱码
 	      response.setContentType("text/html;charset=utf-8");
+	      
+	      if(classTaxContributeList!=null){
 		  String json = JSON.toJSONString(classTaxContributeList);
 		  HttpReturn.reponseBody(response, json);
-		 
+	      }
 	}
 	
 	 /**
@@ -311,7 +322,7 @@ public class IntegratedQueryController {
         industryTaxContributeList = integratedQueryService.getIndustryTaxContribute(year,place,industryTaxContributeList);
         
 		if(industryTaxContributeList.size()==0){
-			industryTaxContributeList = integratedQueryService.getIndustryTaxContributeList(industryTaxContributeList,year, place);
+			industryTaxContributeList = integratedQueryService.getIndustryTaxContributeList(industryTaxContributeList,year, place,response);
 			 
 			}
 			
@@ -323,9 +334,10 @@ public class IntegratedQueryController {
 			e.printStackTrace();
 		}  //这里不设置编码会有乱码
 	      response.setContentType("text/html;charset=utf-8");
+	      if(industryTaxContributeList!=null){
 		  String json = JSON.toJSONString(industryTaxContributeList);
 		  HttpReturn.reponseBody(response, json);
-		 
+	      }
 	}
 	
 	/**
@@ -339,7 +351,7 @@ public class IntegratedQueryController {
 	@ResponseBody
 	public void subTaxSearch(HttpServletRequest request,HttpServletResponse response){
 
-
+		response.setContentType("text/html;charset=utf-8");
 	       HttpSession session = request.getSession();		 
 	       String year =null;  
 			String city =null;
@@ -355,7 +367,7 @@ public class IntegratedQueryController {
 			place=city;
 		}
 		
-		 List<SubTax> subTax =	integratedQueryService.getSubTaxt(year,place);
+		 List<SubTax> subTax =	integratedQueryService.getSubTaxt(year,place,response);
 			
 		
 		try {
@@ -365,9 +377,10 @@ public class IntegratedQueryController {
 			e.printStackTrace();
 		}  //杩欓噷涓嶈缃紪鐮佷細鏈変贡鐮�
 	      response.setContentType("text/html;charset=utf-8");
+	      if(subTax!=null){
 		  String json = JSON.toJSONString(subTax);
 		  HttpReturn.reponseBody(response, json);
-		 
+	      }
 	}
 	
 	/**
@@ -396,7 +409,7 @@ public class IntegratedQueryController {
 			place=city;
 		}
 		
-		 List<SubTravelTax> subTravelTax =	integratedQueryService.getSubTravelTaxt(year,place);
+		 List<SubTravelTax> subTravelTax =	integratedQueryService.getSubTravelTaxt(year,place,response);
 			
 		
 		try {
@@ -406,9 +419,10 @@ public class IntegratedQueryController {
 			e.printStackTrace();
 		}  //杩欓噷涓嶈缃紪鐮佷細鏈変贡鐮�
 	      response.setContentType("text/html;charset=utf-8");
+	      if(subTravelTax!=null){
 		  String json = JSON.toJSONString(subTravelTax);
 		  HttpReturn.reponseBody(response, json);
-		 
+	      }
 	}
 	
 	/**
@@ -422,7 +436,7 @@ public class IntegratedQueryController {
 	@ResponseBody
 	public void subGdpSearch(HttpServletRequest request,HttpServletResponse response){
 
-
+		 response.setContentType("text/html;charset=utf-8");
 	       HttpSession session = request.getSession();		 
 	       String year =null;  
 			String city =null;
@@ -438,7 +452,7 @@ public class IntegratedQueryController {
 			place=city;
 		}
 		
-		 List<SubGdp> subGdp=	integratedQueryService.getSubGdp(year,place);
+		 List<SubGdp> subGdp=	integratedQueryService.getSubGdp(year,place,response);
 			
 		
 		try {
@@ -447,10 +461,11 @@ public class IntegratedQueryController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}  //杩欓噷涓嶈缃紪鐮佷細鏈変贡鐮�
-	      response.setContentType("text/html;charset=utf-8");
+	      
+	      if(subGdp!=null){
 		  String json = JSON.toJSONString(subGdp);
 		  HttpReturn.reponseBody(response, json);
-		 
+	      }
 	}
 	
 	/**
@@ -464,7 +479,7 @@ public class IntegratedQueryController {
 	@ResponseBody
 	public void subTravelGdpSearch(HttpServletRequest request,HttpServletResponse response){
 
-
+		response.setContentType("text/html;charset=utf-8");
 	       HttpSession session = request.getSession();		 
 	       String year =null;  
 			String city =null;
@@ -480,7 +495,7 @@ public class IntegratedQueryController {
 			place=city;
 		}
 		
-		 List<SubTravelGdp> subTravelGdp=	integratedQueryService.getSubTravelGdp(year,place);
+		 List<SubTravelGdp> subTravelGdp=	integratedQueryService.getSubTravelGdp(year,place,response);
 			
 		
 		try {
@@ -490,9 +505,10 @@ public class IntegratedQueryController {
 			e.printStackTrace();
 		}  //杩欓噷涓嶈缃紪鐮佷細鏈変贡鐮�
 	      response.setContentType("text/html;charset=utf-8");
+	      if(subTravelGdp!=null){
 		  String json = JSON.toJSONString(subTravelGdp);
 		  HttpReturn.reponseBody(response, json);
-		 
+	      }
 	}
 	
 }

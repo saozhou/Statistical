@@ -37,7 +37,8 @@ public class TravelGdpCalculateController {
 	@RequestMapping(value="/subTravelGdpCaculate",method=RequestMethod.POST)  
     @ResponseBody
     public void subTravelGdpCaculate(HttpServletRequest request,HttpServletResponse response){		 
-		 HttpSession session = request.getSession();		 
+		 HttpSession session = request.getSession();		
+		 response.setContentType("text/html;charset=utf-8");
 		 String year =null;  
 			String city =null;
 			String county=null; 
@@ -56,7 +57,7 @@ public class TravelGdpCalculateController {
 	    subTravelGdpList=travelGdpCalculateService.findByYearPlace(year,place);
 	    if(subTravelGdpList.size()==0){
 			 
-	    	subTravelGdpList = travelGdpCalculateService.getSubTravelGdp(year,place);  
+	    	subTravelGdpList = travelGdpCalculateService.getSubTravelGdp(year,place,response);  
 			
 	    }		    
 		 try {
@@ -67,7 +68,10 @@ public class TravelGdpCalculateController {
 			}  //这里不设置编码会有乱码
 		      response.setContentType("text/html;charset=utf-8");
 			  String json = JSON.toJSONString(subTravelGdpList);
-			  HttpReturn.reponseBody(response, json);
+			  if(subTravelGdpList.size()==0){
+				  HttpReturn.reponseBody(response, json);
+			  }
+			   
 	
 	}
 }

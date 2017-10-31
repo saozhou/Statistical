@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Service;
 
@@ -48,6 +49,7 @@ import com.zmst.IDao.TravelLargeGdpContributeMapper;
 import com.zmst.IDao.TravelLargeTaxContributeMapper;
 import com.zmst.Service.IntegratedQueryService;
 import com.zmst.Tools.ContributeUtil;
+import com.zmst.Tools.HttpReturn;
 
 
 @Service("integratedQueryService")
@@ -106,20 +108,28 @@ public class IntegratedQuaryServiceImpl implements IntegratedQueryService {
  * 大类旅游gdp综合贡献
  */
 	public List<TravelLargeGdpContribute> getLargeGdpContribute(
-			List<TravelLargeGdpContribute> travelLargeGdpContributeList, String year, String place) {
+			List<TravelLargeGdpContribute> travelLargeGdpContributeList, String year, String place, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		   List<LargeTravelGdp> largeTravelGdpList = new  ArrayList<LargeTravelGdp>();
 		   List<LargeGdp>largeGdp = new ArrayList<LargeGdp>();
 		   largeGdp = largeGdpDao.findByYearPlace(year, place);
-		   System.out.println(largeGdp.size());
+		   if(largeGdp.size()==0){
+			   HttpReturn.reponseBody(response, "小类gdp未计算");
+			   return null;
+		   }
 		  
-		   largeTravelGdpList = largeTravelGdpDao.findByYearPlace(year,place);  System.out.println(largeTravelGdpList.size());
+		   largeTravelGdpList = largeTravelGdpDao.findByYearPlace(year,place);   
+		   if(largeTravelGdpList.size()==0){
+			   HttpReturn.reponseBody(response, "小类旅游gdp未计算");
+			   return null;
+		   }
+		   
 		   ContributeUtil.getLargeGdpContribute(year,place,travelLargeGdpContributeList,largeTravelGdpList,largeGdp);
 		
 		    for(TravelLargeGdpContribute travelLargeGdpContribute:travelLargeGdpContributeList){
 		    	largeGdpContributeDao.save(travelLargeGdpContribute);
 		    }
-		   System.out.println(travelLargeGdpContributeList.size());
+		  
 		   
 		return travelLargeGdpContributeList;
 	}
@@ -138,16 +148,23 @@ public List<TravelClassGdpContribute> getClassGdpContribute(String year, String 
  * 门类贡献数据计算
  */
 public List<TravelClassGdpContribute> getClassGdpContributeList(List<TravelClassGdpContribute> classGdpContributeList,
-		String year, String place) {
+		String year, String place,HttpServletResponse response) {
 	// TODO Auto-generated method stub
-	
-	System.out.println(year);
-    System.out.println(place);
+	 
     List<ClassGdp> classGdpList = new ArrayList<ClassGdp>();
     List<ClassTravelGdp> classTravelGdpList = new ArrayList<ClassTravelGdp>();
     classGdpList = classGdpDao.findByYearPlace(year,place);
-    System.out.println(classGdpList.size());
+    if(classGdpList.size()==0){
+		   HttpReturn.reponseBody(response, "小类gdp未计算");
+		   return null;
+	   }
     classTravelGdpList = classTravelGdpDao.findByYearPlace(year,place);
+    
+    if(classTravelGdpList.size()==0){
+		   HttpReturn.reponseBody(response, "小类旅游gdp未计算");
+		   return null;
+	   }
+    
     ContributeUtil.getClassGdpContribute(classGdpList,classTravelGdpList,year,place,classGdpContributeList);
     for(TravelClassGdpContribute  classGdpContribute:classGdpContributeList){
     	classTravelGdpContributeDao.save(classGdpContribute);
@@ -171,12 +188,21 @@ public List<TravelIndustryGdpContribute> getIndustryGdpContribute(String year, S
  * gdp产业贡献计算
  */
 public List<TravelIndustryGdpContribute> getIndustryGdpContributeList(
-		List<TravelIndustryGdpContribute> industryGdpContributeList, String year, String place) {
+		List<TravelIndustryGdpContribute> industryGdpContributeList, String year, String place, HttpServletResponse response) {
 	// TODO Auto-generated method stub
 	
 	List<IndustryDictionary> industryLineList = industryLineDao.findAll();
 	List<TravelLargeGdpContribute>largeGdpList = largeGdpContributeDao.getByYearPlace(year, place);
+	if(largeGdpList.size()==0){
+		   HttpReturn.reponseBody(response, "小类gdp未计算");
+		   return null;
+	   }
 	List<TravelClassGdpContribute>classGdpList =classTravelGdpContributeDao.findByYearPlace(year, place);
+	if(classGdpList.size()==0){
+		   HttpReturn.reponseBody(response, "小类旅游gdp未计算");
+		   return null;
+	   }
+	
 	ContributeUtil.getIndustryGdpContribute(industryLineList,largeGdpList,classGdpList,industryGdpContributeList,year,place);
 	for(TravelIndustryGdpContribute inContribute:industryGdpContributeList){
 		industryGdpDao.save(inContribute);
@@ -201,12 +227,23 @@ public List<TravelLargeTaxContribute> getTravelLargeTaxContribute(String year, S
  * 大类旅游税收贡献计算
  */
 public List<TravelLargeTaxContribute> getLargeTaxContribute(List<TravelLargeTaxContribute> travelLargeTaxContributeList,
-		String year, String place) {
+		String year, String place,HttpServletResponse response) {
 	// TODO Auto-generated method stub
 	   List<LargeTravelTax> largeTravelTaxList = new  ArrayList<LargeTravelTax>();
 	   List<LargeTax>largeTaxList = new ArrayList<LargeTax>();
 	   largeTaxList = largeTaxDao.getByYearPlace(year, place);
+	   if(largeTaxList.size()==0){
+		   HttpReturn.reponseBody(response, "小类税收未计算");
+		   return null;
+	   }
+	
+	   
 	   largeTravelTaxList = largeTravelTaxDao.findByYearPlace(year,place);
+	   
+	   if(largeTravelTaxList.size()==0){
+		   HttpReturn.reponseBody(response, "小类旅游税收未计算");
+		   return null;
+	   }
 	   ContributeUtil.getLargeTaxContribute(year,place,travelLargeTaxContributeList,largeTravelTaxList,largeTaxList);
 	
 	    for(TravelLargeTaxContribute travelLargeTaxContribute:travelLargeTaxContributeList){
@@ -234,14 +271,26 @@ public  List<TravelClassTaxContribute> getClassTaxContribute(String year, String
  * 税收门类贡献计算
  */
 public List<TravelClassTaxContribute> getClassTaxContributeList(List<TravelClassTaxContribute> classTaxContributeList,
-		String year, String place) {
+		String year, String place,HttpServletResponse response) {
 	// TODO Auto-generated method stub
 	
 
     List<ClassTax> classTaxList = new ArrayList<ClassTax>();
     List<ClassTravelTax> classTravelTaxList = new ArrayList<ClassTravelTax>();
     classTaxList = classTaxDao.findByYearPlace(year,place);
+    
+    if(classTaxList.size()==0){
+		   HttpReturn.reponseBody(response, "小类税收未计算");
+		   return null;
+	   }
+    
     classTravelTaxList = classTravelTaxDao.findByYearPlace(year,place);
+    if(classTravelTaxList.size()==0){
+		   HttpReturn.reponseBody(response, "小类旅游税收未计算");
+		   return null;
+	   }
+    
+    
     ContributeUtil.getClassTaxContribute(classTaxList,classTravelTaxList,year,place,classTaxContributeList);
     for(TravelClassTaxContribute  classTaxContribute:classTaxContributeList){
     	classTaxContributeDao.save(classTaxContribute);
@@ -259,12 +308,24 @@ public List<TravelIndustryTaxContribute> getIndustryTaxContribute(String year, S
 }
 
 public List<TravelIndustryTaxContribute> getIndustryTaxContributeList(
-		List<TravelIndustryTaxContribute> industryTaxContributeList, String year, String place) {
+		List<TravelIndustryTaxContribute> industryTaxContributeList, String year, String place, HttpServletResponse response) {
 	// TODO Auto-generated method stub
 
 	List<IndustryDictionary> industryLineList = industryLineDao.findAll();
 	List<TravelLargeTaxContribute>largeTaxList = largeTaxContributeDao.findByYearPlace(year, place);
+	
+	  if(largeTaxList.size()==0){
+		   HttpReturn.reponseBody(response, "小类税收未计算");
+		   return null;
+	   }
+   
+	
 	List<TravelClassTaxContribute>classTaxList =classTaxContributeDao.findByYearPlace(year, place);	
+	
+	  if(classTaxList.size()==0){
+		   HttpReturn.reponseBody(response, "小类旅游税收未计算");
+		   return null;
+	   }
 	ContributeUtil.getIndustryTaxContribute(industryLineList,largeTaxList,classTaxList,industryTaxContributeList,year,place);
 	for(TravelIndustryTaxContribute inContribute:industryTaxContributeList){
 		industryTaxContributeDao.save(inContribute);
@@ -275,30 +336,49 @@ public List<TravelIndustryTaxContribute> getIndustryTaxContributeList(
 }
 	
 
-public List<SubTax> getSubTaxt(String year, String place) {
+public List<SubTax> getSubTaxt(String year, String place,HttpServletResponse response) {
 	// TODO Auto-generated method stub
 	List<SubTax> subTaxList = subTaxDao.findSubTaxByYearPlace(year, place);
+	  if(subTaxList.size()==0){
+		   HttpReturn.reponseBody(response, "小类税收未计算");
+		   return null;
+	   }
 	return subTaxList;
 }
 
-public List<SubTravelTax> getSubTravelTaxt(String year, String place) {
+public List<SubTravelTax> getSubTravelTaxt(String year, String place,HttpServletResponse response) {
 	// TODO Auto-generated method stub
 	List<SubTravelTax> subTravelTax = subTravelTaxDao.findSubTravelTaxByYearPlace(year, place);
+	  if(subTravelTax.size()==0){
+		   HttpReturn.reponseBody(response, "小类旅游税收未计算");
+		   return null;
+	   }
+	
 	return subTravelTax;
 }
 
-public List<SubGdp> getSubGdp(String year, String place) {
+public List<SubGdp> getSubGdp(String year, String place,HttpServletResponse response) {
 	// TODO Auto-generated method stub
 	
 	List<SubGdp> subGdp =subGdpDao.findByYearPlace(year, place);
+	  if(subGdp.size()==0){
+		   HttpReturn.reponseBody(response, "小类gdp税收未计算");
+		   return null;
+	   }
 	return subGdp;
 }
 
-public List<SubTravelGdp> getSubTravelGdp(String year, String place) {
+public List<SubTravelGdp> getSubTravelGdp(String year, String place,HttpServletResponse response) {
 	// TODO Auto-generated method stub
 	 List<SubTravelGdp> subTravelGdp = subTravelGdpDao.findByYearPlace(year, place);
-	return subTravelGdp;
+	  if(subTravelGdp.size()==0){
+		   HttpReturn.reponseBody(response, "小类旅游gdp未计算");
+		   return null;
+	   }
+	 return subTravelGdp;
 }
+
+ 
 
 
 }

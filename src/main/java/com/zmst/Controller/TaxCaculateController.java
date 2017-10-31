@@ -36,7 +36,8 @@ public class TaxCaculateController {
 	@RequestMapping(value="/subTaxGet",method=RequestMethod.POST)  
    
 	public void allTaxManager(HttpServletRequest request,HttpServletResponse response){
-		 HttpSession session = request.getSession();		 
+		 HttpSession session = request.getSession();		
+		 response.setContentType("text/html;charset=utf-8");
 		 String year =null;  
 			String city =null;
 			String county=null; 
@@ -51,7 +52,7 @@ public class TaxCaculateController {
 				place=city;
 			}
 		
-	    List<SubTax> allcentral =	taxService.getSubTaxt(year,place);
+	    List<SubTax> allcentral =	taxService.getSubTaxt(year,place,response);
 	    
 		 try {
 				request.setCharacterEncoding("utf-8");
@@ -61,6 +62,10 @@ public class TaxCaculateController {
 			}  //这里不设置编码会有乱码
 		      response.setContentType("text/html;charset=utf-8");
 			  String json = JSON.toJSONString(allcentral);
+			  if(allcentral.size()==0){
+				  
+			  
 			  HttpReturn.reponseBody(response, json);;
+	}
 	}
 }

@@ -143,7 +143,7 @@ public class BaseQueryController {
 	
 
 	/**
-	 *gdp查询
+	 *查询
 	 * 
 	 */
 	@RequestMapping(value="/gfCoefficientGet",method=RequestMethod.POST)  

@@ -8,10 +8,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Service;
 
+import com.zmst.Domain.AllCodeDictionary;
 import com.zmst.Domain.ClassGdp;
 import com.zmst.Domain.ClassTax;
 import com.zmst.Domain.ClassTravelGdp;
 import com.zmst.Domain.ClassTravelTax;
+import com.zmst.Domain.GFReference;
 import com.zmst.Domain.IndustryDictionary;
 import com.zmst.Domain.LargeGdp;
 import com.zmst.Domain.LargeTax;
@@ -32,6 +34,7 @@ import com.zmst.IDao.ClassGdpMapper;
 import com.zmst.IDao.ClassTaxMapper;
 import com.zmst.IDao.ClassTravelGdpMapper;
 import com.zmst.IDao.ClassTravelTaxMapper;
+import com.zmst.IDao.GFReferenceMapper;
 import com.zmst.IDao.IndustryDictionaryMapper;
 import com.zmst.IDao.LargeGdpMapper;
 import com.zmst.IDao.LargeTaxMapper;
@@ -95,6 +98,8 @@ public class IntegratedQuaryServiceImpl implements IntegratedQueryService {
 	private SubGdpMapper subGdpDao;
 	@Resource
 	private SubTravelGdpMapper subTravelGdpDao;
+	@Resource
+	private GFReferenceMapper gfReferenceDao;
 	/**
 	 * 数据库查询
 	 */
@@ -376,6 +381,29 @@ public List<SubTravelGdp> getSubTravelGdp(String year, String place,HttpServletR
 		   return null;
 	   }
 	 return subTravelGdp;
+}
+
+@Override
+public List<AllCodeDictionary> getAllCode(HttpServletResponse response) {
+	// TODO Auto-generated method stub
+	List<AllCodeDictionary> codelist = codeDictionaryDao.selectAll();
+	if(codelist.size()==0){
+		  HttpReturn.reponseBody(response, "代码库未上传");
+			return null;
+	}
+	return codelist;
+}
+
+@Override
+public List<GFReference> getReference(String year, String place, HttpServletResponse response) {
+	// TODO Auto-generated method stub
+	
+	List<GFReference> gf = gfReferenceDao.selectByYearAndPlace(year, place);
+	if(gf.size()==0){
+	   HttpReturn.reponseBody(response, "当量系数对照表未上传");
+		return null;
+	}
+	return gf;
 }
 
  

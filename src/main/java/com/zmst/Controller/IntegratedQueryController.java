@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.zmst.Domain.AllCodeDictionary;
+import com.zmst.Domain.GFReference;
 import com.zmst.Domain.SubGdp;
 import com.zmst.Domain.SubTax;
 import com.zmst.Domain.SubTravelGdp;
@@ -507,6 +509,68 @@ public class IntegratedQueryController {
 	      response.setContentType("text/html;charset=utf-8");
 	      if(subTravelGdp!=null){
 		  String json = JSON.toJSONString(subTravelGdp);
+		  HttpReturn.reponseBody(response, json);
+	      }
+	}
+	
+	
+	@RequestMapping(value="/allCodeSearch",method=RequestMethod.POST)
+	@ResponseBody
+	public void allCodeGdpSearch(HttpServletRequest request,HttpServletResponse response){
+
+		response.setContentType("text/html;charset=utf-8");
+	       HttpSession session = request.getSession();		 
+	      
+		
+		 List<AllCodeDictionary> code=	integratedQueryService.getAllCode(response);
+			
+		
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  //杩欓噷涓嶈缃紪鐮佷細鏈変贡鐮�
+	      response.setContentType("text/html;charset=utf-8");
+	      if(code!=null){
+		  String json = JSON.toJSONString(code);
+		  HttpReturn.reponseBody(response, json);
+	      }
+	}
+	
+	
+	@RequestMapping(value="/gfReferenceGdpSearch",method=RequestMethod.POST)
+	@ResponseBody
+	public void gfReferenceGdpSearch(HttpServletRequest request,HttpServletResponse response){
+
+		response.setContentType("text/html;charset=utf-8");
+	       HttpSession session = request.getSession();		 
+	       String year =null;  
+			String city =null;
+			String county=null; 
+			String place = null;
+			 
+			year = (String) session.getAttribute("year");    
+			city=(String) session.getAttribute("city");
+			county= (String)session.getAttribute("county");
+		if(county!=null){
+			 place=county;
+		}else{
+			place=city;
+		}
+		
+		 List<GFReference> gfreference=	integratedQueryService.getReference(year,place,response);
+			
+		
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  //杩欓噷涓嶈缃紪鐮佷細鏈変贡鐮�
+	      response.setContentType("text/html;charset=utf-8");
+	      if(gfreference!=null){
+		  String json = JSON.toJSONString(gfreference);
 		  HttpReturn.reponseBody(response, json);
 	      }
 	}

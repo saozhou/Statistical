@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.stereotype.Controller;
@@ -37,9 +38,11 @@ public class SelfDefinedSearchController {
 	@ResponseBody
 	public void Searche( @RequestBody String data,HttpServletRequest request,HttpServletResponse response){
 		Map<String, String> json = Json2Map.JSON2Map(data);
+		HttpSession session = request.getSession();		 
 		int type = Integer.parseInt(json.get("type"));
-		String year = json.get("year");
-		String place = json.get("place");
+		String year = (String) session.getAttribute("year");
+		String place = (String) session.getAttribute("county");
+		if("".equals(place)) place = (String) session.getAttribute("city");
 		JSONArray jsonArray=null;
 		if((type&64)!=0){
 			 jsonArray = new JSONArray(sf.GetDoor(type, year, place));
@@ -50,6 +53,7 @@ public class SelfDefinedSearchController {
 		}else if((type&16)!=0){
 			 jsonArray = new JSONArray(sf.GetLarge(type, year, place));
 		}
+		System.out.println();
 		HttpReturn.reponseBody(response, jsonArray);			
 	}
 	@RequestMapping(value="/Download",method=RequestMethod.GET)

@@ -1,190 +1,223 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-		<link rel="stylesheet" href="../css/bootstrap.min.css" />
-		<link rel="stylesheet" href="../css/user_left_tab.css" />
-		<link rel="stylesheet" href="../css/user_right_content.css" />
-		<script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
-		<script type="text/javascript" src="../js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="../js/areaInfo.js"></script>
-		<script type="text/javascript" src="../js/user_left_tab.js"></script>
-		<script type="text/javascript" src="../js/user_right_content.js"></script>
-	</head>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" href="../css/bootstrap.min.css" />
+<link rel="stylesheet" href="../css/user_left_tab.css" />
+<link rel="stylesheet" href="../css/user_right_content.css" />
+<script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/areaInfo.js"></script>
+<script type="text/javascript" src="../js/user_left_tab.js"></script>
+<script type="text/javascript" src="../js/user_right_content.js"></script>
+</head>
 
-	<body>
-		<div class="wrap-container">
-			<!--	左侧标签栏-->
-			<div class="left-tab">
-				<!--	logo-->
-				<div class="logo">
-					<img src="http://demo.cssmoban.com/cssthemes4/bkt_1_dashgumfree/assets/img/ui-sam.jpg" />
-					<p> </p>
-				</div>
-				<!--数据输入下拉列表 start-->
-				<div class="first-tab" onclick="firstTabClick(0)" onmousemove="firstTabMove(0)" onmouseout="firstTabOut(0)" data-toggle="collapse" data-target="#input-second-list">
-					<img class="icon" src="../img/gray_data_input.png" /> 数据输入
-					<img class="arrow" src="../img/down_arrow.png" />
-				</div>
-				<div id="input-second-list" class="collapse second-tab">
-					<div class="gf" onclick="secondTabClick(0)">g/f系数表</div>
-					<div class="guoshui" onclick="secondTabClick(1)">国税表</div>
-					<div class="dishui" onclick="secondTabClick(2)">地税表</div>
-					<div class="total-gdp" onclick="secondTabClick(3)">总GDP表</div>
-				</div>
-				<!--数据输入下拉列表 end-->
-
-				<!--数据计算下拉列表 start-->
-				<div class="first-tab" onclick="firstTabClick(1)" onmousemove="firstTabMove(1)" onmouseout="firstTabOut(1)" data-toggle="collapse" data-target="#calculate-second-list">
-					<img class="icon" src="../img/gray_data_calculate.png" /> 数据计算
-					<img class="arrow" src="../img/down_arrow.png" />
-				</div>
-				<div id="calculate-second-list" class="collapse second-tab">
-					<div class="s-tax" onclick="secondTabClick(4)">小类税收</div>
-					<div class="s-travel-tax" onclick="secondTabClick(5)">小类旅游税收</div>
-					<div class="s-gdp" onclick="secondTabClick(6)">小类GDP</div>
-					<div class="s-travel-gdp" onclick="secondTabClick(7)">小类旅游GDP</div>
-				</div>
-				<!--数据计算下拉列表 end-->
-
-				<!--数据汇总下拉列表 start-->
-				<div class="first-tab" onclick="firstTabClick(2)" onmousemove="firstTabMove(2)" onmouseout="firstTabOut(2)" data-toggle="collapse" data-target="#gather-second-list">
-					<img class="icon" src="../img/gray_data_gather.png" /> 数据汇总
-					<img class="arrow" src="../img/down_arrow.png" />
-				</div>
-				<div id="gather-second-list" class="collapse second-tab">
-					<!--旅游GDP下拉列表 start-->
-					<div class="travel-gdp" onclick="secondTabClick(8)">旅游GDP<img src="../img/down_arrow.png" /></div>
-					<div class="travel-gdp-list third-tab">
-						<div class="travel-gdp-industry" onclick="thirdTabClick(0)">产业</div>
-						<div class="travel-gdp-class" onclick="thirdTabClick(1)">门类</div>
-						<div class="travel-gdp-big" onclick="thirdTabClick(2)">大类</div>
-					</div>
-					<!--旅游GDP下拉列表 end-->
-
-					<!--旅游税收下拉列表 start-->
-					<div class="travel-tax" onclick="secondTabClick(9)">旅游税收<img src="../img/down_arrow.png" /></div>
-					<div class="travel-tax-list third-tab">
-						<div class="travel-tax-industry" onclick="thirdTabClick(3)">产业</div>
-						<div class="travel-tax-class" onclick="thirdTabClick(4)">门类</div>
-						<div class="travel-tax-big" onclick="thirdTabClick(5)">大类</div>
-					</div>
-					<!--旅游税收下拉列表 end-->
-				</div>
-				<!--数据汇总下拉列表 end-->
-
-				<!--数据查询下拉列表 start-->
-				<div class="first-tab" onclick="firstTabClick(3)" onmousemove="firstTabMove(3)" onmouseout="firstTabOut(3)" data-toggle="collapse" data-target="#query-second-list">
-					<img class="icon" src="../img/gray_data_query.png" /> 数据查询
-					<img class="arrow" src="../img/down_arrow.png" />
-				</div>
-				<div id="query-second-list" class="collapse second-tab">
-					<!--	基础查询下拉列表start-->
-					<div class="basics-query" onclick="secondTabClick(10)">基础查询<img src="../img/down_arrow.png" /></div>
-					<div class="basics-query-list third-tab">
-						<div class="basics-query-guoshui" onclick="thirdTabClick(6)">国税</div>
-						<div class="basics-query-dishui" onclick="thirdTabClick(7)">地税</div>
-						<div class="basics-query-gf" onclick="thirdTabClick(8)">g/f系数</div>
-						<div class="basics-query-totalgdp" onclick="thirdTabClick(9)">总GDP表</div>
-					</div>
-					<!--	基础查询下拉列表end-->
-
-					<!--	综合查询下拉列表start-->
-					<div class="synthesis-query" onclick="secondTabClick(11)">综合查询<img src="../img/down_arrow.png" /></div>
-					<div class="synthesis-query-list third-tab">
-						<div class="synthesis-query-travelgdp" onclick="thirdTabClick(10)">旅游GDP<img src="../img/down_arrow.png" /></div>
-						<div class="synthesis-query-travelgdp-list fourth-tab">
-							<div class="synthesis-query-travelgdp-industry" onclick="fourthTabClick(0)">产业</div>
-							<div class="synthesis-query-travelgdp-class" onclick="fourthTabClick(1)">门类</div>
-							<div class="synthesis-query-travelgdp-big" onclick="fourthTabClick(2)">大类</div>
-						</div>
-						<div class="synthesis-query-traveltax" onclick="thirdTabClick(11)">旅游税收<img src="../img/down_arrow.png" /></div>
-						<div class="synthesis-query-traveltax-list  fourth-tab">
-							<div class="synthesis-query-traveltax-industry" onclick="fourthTabClick(3)">产业</div>
-							<div class="synthesis-query-traveltax-class" onclick="fourthTabClick(4)">门类</div>
-							<div class="synthesis-query-traveltax-big" onclick="fourthTabClick(5)">大类</div>
-						</div>
-						<div class="synthesis-query-sgdp" onclick="thirdTabClick(12)">小类GDP</div>
-						<div class="synthesis-query-stax" onclick="thirdTabClick(13)">小类税收</div>
-						<div class="synthesis-query-straveltax" onclick="thirdTabClick(14)">小类旅游税收</div>
-						<div class="synthesis-query-stravelgdp" onclick="thirdTabClick(15)">小类旅游GDP</div>
-					</div>
-					<!--	综合查询下拉列表end-->
-
-					<!--自定义查询start-->
-					<div class="custom-query" onclick="secondTabClick(12)">自定义查询</div>
-					<!--自定义查询end-->
-				</div>
-				<!--数据查询下拉列表 end-->
+<body>
+	<div class="wrap-container">
+		<!--	左侧标签栏-->
+		<div class="left-tab">
+			<!--	logo-->
+			<div class="logo">
+				<img
+					src="http://demo.cssmoban.com/cssthemes4/bkt_1_dashgumfree/assets/img/ui-sam.jpg" />
+				<p></p>
 			</div>
+			<!--数据输入下拉列表 start-->
+			<div class="first-tab" onclick="firstTabClick(0)"
+				onmousemove="firstTabMove(0)" onmouseout="firstTabOut(0)"
+				data-toggle="collapse" data-target="#input-second-list">
+				<img class="icon" src="../img/gray_data_input.png" /> 数据输入 <img
+					class="arrow" src="../img/down_arrow.png" />
+			</div>
+			<div id="input-second-list" class="collapse second-tab">
+				<div class="gf" onclick="secondTabClick(0)">g/f系数表</div>
+				<div class="guoshui" onclick="secondTabClick(1)">国税表</div>
+				<div class="dishui" onclick="secondTabClick(2)">地税表</div>
+				<div class="total-gdp" onclick="secondTabClick(3)">总GDP表</div>
+			</div>
+			<!--数据输入下拉列表 end-->
 
-			<!--右侧内容框-->
-			<div class="right-content">
-				<div class="head">
-					<p class="title">管理系统</p>
-					<div class="year-area">
-						<p class="cur-year">当前年份：<span>2015</span></p>
-						<p class="cur-area">当前地区：<span></span><span></span><span></span><span></span></p>
+			<!--数据计算下拉列表 start-->
+			<div class="first-tab" onclick="firstTabClick(1)"
+				onmousemove="firstTabMove(1)" onmouseout="firstTabOut(1)"
+				data-toggle="collapse" data-target="#calculate-second-list">
+				<img class="icon" src="../img/gray_data_calculate.png" /> 数据计算 <img
+					class="arrow" src="../img/down_arrow.png" />
+			</div>
+			<div id="calculate-second-list" class="collapse second-tab">
+				<div class="s-tax" onclick="secondTabClick(4)">小类税收</div>
+				<div class="s-travel-tax" onclick="secondTabClick(5)">小类旅游税收</div>
+				<div class="s-gdp" onclick="secondTabClick(6)">小类GDP</div>
+				<div class="s-travel-gdp" onclick="secondTabClick(7)">小类旅游GDP</div>
+			</div>
+			<!--数据计算下拉列表 end-->
+
+			<!--数据汇总下拉列表 start-->
+			<div class="first-tab" onclick="firstTabClick(2)"
+				onmousemove="firstTabMove(2)" onmouseout="firstTabOut(2)"
+				data-toggle="collapse" data-target="#gather-second-list">
+				<img class="icon" src="../img/gray_data_gather.png" /> 数据汇总 <img
+					class="arrow" src="../img/down_arrow.png" />
+			</div>
+			<div id="gather-second-list" class="collapse second-tab">
+				<!--旅游GDP下拉列表 start-->
+				<div class="travel-gdp" onclick="secondTabClick(8)">
+					旅游GDP<img src="../img/down_arrow.png" />
+				</div>
+				<div class="travel-gdp-list third-tab">
+					<div class="travel-gdp-industry" onclick="thirdTabClick(0)">产业</div>
+					<div class="travel-gdp-class" onclick="thirdTabClick(1)">门类</div>
+					<div class="travel-gdp-big" onclick="thirdTabClick(2)">大类</div>
+				</div>
+				<!--旅游GDP下拉列表 end-->
+
+				<!--旅游税收下拉列表 start-->
+				<div class="travel-tax" onclick="secondTabClick(9)">
+					旅游税收<img src="../img/down_arrow.png" />
+				</div>
+				<div class="travel-tax-list third-tab">
+					<div class="travel-tax-industry" onclick="thirdTabClick(3)">产业</div>
+					<div class="travel-tax-class" onclick="thirdTabClick(4)">门类</div>
+					<div class="travel-tax-big" onclick="thirdTabClick(5)">大类</div>
+				</div>
+				<!--旅游税收下拉列表 end-->
+			</div>
+			<!--数据汇总下拉列表 end-->
+
+			<!--数据查询下拉列表 start-->
+			<div class="first-tab" onclick="firstTabClick(3)"
+				onmousemove="firstTabMove(3)" onmouseout="firstTabOut(3)"
+				data-toggle="collapse" data-target="#query-second-list">
+				<img class="icon" src="../img/gray_data_query.png" /> 数据查询 <img
+					class="arrow" src="../img/down_arrow.png" />
+			</div>
+			<div id="query-second-list" class="collapse second-tab">
+				<!--	基础查询下拉列表start-->
+				<div class="basics-query" onclick="secondTabClick(10)">
+					基础查询<img src="../img/down_arrow.png" />
+				</div>
+				<div class="basics-query-list third-tab">
+					<div class="basics-query-guoshui" onclick="thirdTabClick(6)">国税</div>
+					<div class="basics-query-dishui" onclick="thirdTabClick(7)">地税</div>
+					<div class="basics-query-gf" onclick="thirdTabClick(8)">g/f系数</div>
+					<div class="basics-query-totalgdp" onclick="thirdTabClick(9)">总GDP表</div>
+				</div>
+				<!--	基础查询下拉列表end-->
+
+				<!--	综合查询下拉列表start-->
+				<div class="synthesis-query" onclick="secondTabClick(11)">
+					综合查询<img src="../img/down_arrow.png" />
+				</div>
+				<div class="synthesis-query-list third-tab">
+					<div class="synthesis-query-travelgdp" onclick="thirdTabClick(10)">
+						旅游GDP<img src="../img/down_arrow.png" />
 					</div>
-					<!--退出-->
-					<div class="exit">
-						<button onclick="location.href='../login.html'">退出</button>
+					<div class="synthesis-query-travelgdp-list fourth-tab">
+						<div class="synthesis-query-travelgdp-industry"
+							onclick="fourthTabClick(0)">产业</div>
+						<div class="synthesis-query-travelgdp-class"
+							onclick="fourthTabClick(1)">门类</div>
+						<div class="synthesis-query-travelgdp-big"
+							onclick="fourthTabClick(2)">大类</div>
 					</div>
-					<div class="area">
-						<button class="area-bt" >地区<span class="caret"></span></button>
+					<div class="synthesis-query-traveltax" onclick="thirdTabClick(11)">
+						旅游税收<img src="../img/down_arrow.png" />
 					</div>
-					<!--地区四级联动start-->
-					<div class="area-select">
-						<!--国家-->
-						<div class="country">
-							<button class="country-bt">
-								<span>国家</span>
-							</button>
-							<ul></ul>
-						</div>
-						<!--省级行政区-->
-						<div class="province">
-							<button class="province-bt">
-								<span>省份</span>
-							</button>
-							<ul></ul>
-						</div>
-						<!--市级行政区-->
-						<!--省级行政区-->
-						<div class="city">
-							<button class="city-bt">
-								<span>城市</span>
-							</button>
-							<ul></ul>
-						</div>
-						<!--县区-->
-						<div class="county">
-							<button class="county-bt">
-								<span>县区</span>
-							</button>
-							<ul></ul>
-						</div>
+					<div class="synthesis-query-traveltax-list  fourth-tab">
+						<div class="synthesis-query-traveltax-industry"
+							onclick="fourthTabClick(3)">产业</div>
+						<div class="synthesis-query-traveltax-class"
+							onclick="fourthTabClick(4)">门类</div>
+						<div class="synthesis-query-traveltax-big"
+							onclick="fourthTabClick(5)">大类</div>
 					</div>
-					<!--地区四级联动end-->
-					<!--	选择年份-->
-					<div class="year">
-						<button class="year-bt">
-								<span>年份</span>
-								<span class="caret"></span>
+					<div class="synthesis-query-sgdp" onclick="thirdTabClick(12)">小类GDP</div>
+					<div class="synthesis-query-stax" onclick="thirdTabClick(13)">小类税收</div>
+					<div class="synthesis-query-straveltax" onclick="thirdTabClick(14)">小类旅游税收</div>
+					<div class="synthesis-query-stravelgdp" onclick="thirdTabClick(15)">小类旅游GDP</div>
+				</div>
+				<!--	综合查询下拉列表end-->
+
+				<!--自定义查询start-->
+				<div class="custom-query" onclick="secondTabClick(12)">自定义查询</div>
+				<!--自定义查询end-->
+			</div>
+			<!--数据查询下拉列表 end-->
+		</div>
+
+		<!--右侧内容框-->
+		<div class="right-content">
+			<div class="head">
+				<p class="title">管理系统</p>
+				<div class="year-area">
+					<p class="cur-year">
+						当前年份：<span>2015</span>
+					</p>
+					<p class="cur-area">
+						当前地区：<span></span><span></span><span></span><span></span>
+						<button class="area-asure" onclick="areaChangeSave()">确定</button>
+					</p>
+				</div>
+				<!--退出-->
+				<div class="exit">
+					<button onclick="location.href='../login.html'">退出</button>
+				</div>
+				<div class="area">
+					<button class="area-bt">
+						地区<span class="caret"></span>
+					</button>
+				</div>
+				<!--地区四级联动start-->
+				<div class="area-select">
+					<!--国家-->
+					<div class="country">
+						<button class="country-bt">
+							<span>国家</span>
 						</button>
 						<ul></ul>
 					</div>
+					<!--省级行政区-->
+					<div class="province">
+						<button class="province-bt">
+							<span>省份</span>
+						</button>
+						<ul></ul>
+					</div>
+					<!--市级行政区-->
+					<!--省级行政区-->
+					<div class="city">
+						<button class="city-bt">
+							<span>城市</span>
+						</button>
+						<ul></ul>
+					</div>
+					<!--县区-->
+					<div class="county">
+						<button class="county-bt">
+							<span>县区</span>
+						</button>
+						<ul></ul>
+					</div>
+				</div>
+				<!--地区四级联动end-->
+				<!--	选择年份-->
+				<div class="year">
+					<button class="year-bt">
+						<span>年份</span> <span class="caret"></span>
+					</button>
+					<ul></ul>
+				</div>
 
-				</div>
-				<!--主体内容-->
-				<div class="content-div">
-					<iframe></iframe>
-					<div class="cover"></div>
-				</div>
+			</div>
+			<!--主体内容-->
+			<div class="content-div">
+				<iframe id="iframe"></iframe>
+				<div class="cover"></div>
 			</div>
 		</div>
-	</body>
+	</div>
+</body>
 
 </html>

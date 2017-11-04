@@ -71,6 +71,7 @@ function register_event() {
 		}
 		var username = $(".account input").val();
 		var password = $(".password input").val();
+		var year=$(".year-bt span").text();
 		var userpower = 0;
 		switch($(".user-type span").text()) {
 			case '管理员':
@@ -86,7 +87,7 @@ function register_event() {
 				break;
 		}
 		//登录信息错误返回
-	/*	if(!checkLoginInfo(username, password, userpower))
+	/*	if(!checkLoginInfo(username, password, userpower,year))
 			return;*/
 		var userType = $(".user-type-bt span").text();
 		var area = cur_country + "," + cur_province + "," + cur_city + "," + cur_county;
@@ -158,8 +159,16 @@ function checkLoginInfo(username, password, userpower) {
 			return false;
 		}
 	});
+<<<<<<< HEAD
+<<<<<<< HEAD
 	return false;
 
 }
 
 
+=======
+}
+>>>>>>> d0bcd141ab1a6f839633cddb133488cacf92267e
+=======
+}
+>>>>>>> 205b7c56a0eb7e9d1b8633ce11c4a1a0aae0269a

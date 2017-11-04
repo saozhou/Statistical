@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.JSON;
 import com.zmst.Domain.AllCodeDictionary;
 import com.zmst.Domain.CentralTax;
 import com.zmst.Domain.ClassTax;
@@ -73,7 +74,8 @@ public class TravelTaxCalculateServiceImpl implements TravelTaxCalculateService 
 			  subTravelTaxList = new ArrayList<SubTravelTax>();  
 		      List<SubTax>subTaxList = subTaxDao.findSubTaxByYearPlace(year, place);
 		      if(subTaxList.size()==0){
-		    	  HttpReturn.reponseBody(response, "小类税收未计算");
+		    	  String json = JSON.toJSONString("小类税收未计算");
+				   HttpReturn.reponseBody(response, json);
 		    	  return null;
 		      }
 		      
@@ -81,12 +83,19 @@ public class TravelTaxCalculateServiceImpl implements TravelTaxCalculateService 
 		      List<GFReference>gfReference=gfReferenceDao.selectByYearAndPlace(year,place);
 		      
 		      if(gfReference.size()==0){
-		    	  HttpReturn.reponseBody(response, "当量系数参照表未上传");
+		    	  String json = JSON.toJSONString("当量系数参照表未上传");
+		    	  System.out.println(4);
+				   HttpReturn.reponseBody(response, json);
+		    	  
 		    	  return null;
 		      }
 		      GFCoefficient coefficient = gfCoefficientDao.selectByYearPlace(year,place);
-		      if(coefficient.getAvspend()==null){
-		    	  HttpReturn.reponseBody(response, "gf系数未计算");
+		      if(coefficient==null){
+		      	  String json = JSON.toJSONString("gf系数未计算");
+		      	  System.out.println(3);
+				   HttpReturn.reponseBody(response, json);
+		    	  
+		    	 
 		    	  return null;
 		      }
 		      
@@ -95,7 +104,9 @@ public class TravelTaxCalculateServiceImpl implements TravelTaxCalculateService 
 			  TaxCaculateUtil.getSubTravelTax(subTaxList,year,place,subTravelTaxList,gfReference,coefficient);
 			  List<AllCodeDictionary>largeLineList = codeDictionaryDao.getLargeLine();
 			   if(largeLineList.size()<1){
-			    	  HttpReturn.reponseBody(response, "行业代码库未上传");
+ 			     	  String json = JSON.toJSONString("行业代码库未上传");
+					   HttpReturn.reponseBody(response, json);
+			    	  
 			    	  return null;
 			      }
 			  

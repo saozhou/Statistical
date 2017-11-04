@@ -1,127 +1,133 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-		<link rel="stylesheet" href="../css/bootstrap.min.css" />
-		<link rel="stylesheet" href="../css/administrator_left_tab.css" />
-		<link rel="stylesheet" href="../css/administrator_right_content.css" />
-		<script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
-		<script type="text/javascript" src="../js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="../js/areaInfo.js"></script>
-		<script type="text/javascript" src="../js/administrator_left_tab.js"></script>
-		<script type="text/javascript" src="../js/administrator_right_content.js"></script>
-		<script>
-			var url = decodeURI(location.href);
-			var year = url.split("?")[1].split("=")[1];
-			$(document).ready(function() {
-				$(".cur-year span").text(year);
-				area_ganged_spinner();
-			});
-		</script>
-	</head>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" href="../css/bootstrap.min.css" />
+<link rel="stylesheet" href="../css/administrator_left_tab.css" />
+<link rel="stylesheet" href="../css/administrator_right_content.css" />
+<script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/areaInfo.js"></script>
+<script type="text/javascript" src="../js/administrator_left_tab.js"></script>
+<script type="text/javascript"
+	src="../js/administrator_right_content.js"></script>
 
-	<body>
-		<div class="wrap-container">
-			<!--	左侧标签栏-->
-			<div class="left-tab">
-				<!--	logo-->
-				<div class="logo">
-					<img src="http://demo.cssmoban.com/cssthemes4/bkt_1_dashgumfree/assets/img/ui-sam.jpg" />
-					<p>管理员</p>
-				</div>
-				<div class="first-tab" onclick="firstTabClick(0)" onmousemove="firstTabMove(0)" onmouseout="firstTabOut(0)">
-					<img class="icon" src="../img/gray_redact.png" /> 审核公式编写
-				</div>
+</head>
 
-				<div class="first-tab" onclick="firstTabClick(1)" onmousemove="firstTabMove(1)" onmouseout="firstTabOut(1)">
-					<img class="icon" src="../img/gray_contrast.png" /> 特征系数对照表
-				</div>
-
-				<div class="first-tab" onclick="firstTabClick(2)" onmousemove="firstTabMove(2)" onmouseout="firstTabOut(2)">
-					<img class="icon" src="../img/gray_code_storage.png" /> 行业代码库
-				</div>
-
-				<div class="first-tab" onclick="firstTabClick(3)" onmousemove="firstTabMove(3)" onmouseout="firstTabOut(3)" data-toggle="collapse" data-target="#user-manage-second-list">
-					<img class="icon" src="../img/gray_user_manage.png" /> 用户管理
-					<img class="arrow" src="../img/down_arrow.png" />
-				</div>
-				<!--用户管理下拉列表start-->
-				<div id="user-manage-second-list" class="collapse second-tab">
-					<div class="info-change" onclick="secondTabClick(0)">信息修改</div>
-					<div class="right-set" onclick="secondTabClick(1)">权限设置</div>
-					<div class="new-user" onclick="secondTabClick(2)">新加用户</div>
-				</div>
-				<!--用户管理下拉列表end-->
-
+<body>
+	<div class="wrap-container">
+		<!--	左侧标签栏-->
+		<div class="left-tab">
+			<!--	logo-->
+			<div class="logo">
+				<img
+					src="http://demo.cssmoban.com/cssthemes4/bkt_1_dashgumfree/assets/img/ui-sam.jpg" />
+				<p>管理员</p>
+			</div>
+			<div class="first-tab" onclick="firstTabClick(0)"
+				onmousemove="firstTabMove(0)" onmouseout="firstTabOut(0)">
+				<img class="icon" src="../img/gray_redact.png" /> 审核公式编写
 			</div>
 
-			<!--右侧内容框-->
-			<div class="right-content">
-				<div class="head">
-					<p class="title">管理系统</p>
-					<div class="year-area">
-						<p class="cur-year">当前年份：<span> 2015</span></p>
-						<p class="cur-area">当前地区：<span>请选择</span><span></span><span></span><span></span></p>
-					</div>
-					<!--退出-->
-					<div class="exit">
-						<button onclick="location.href='../login.html'">退出</button>
-					</div>
-					<div class="area">
-						<button class="area-bt">地区<span class="caret"></span></button>
-					</div>
-					<!--地区四级联动start-->
-					<div class="area-select">
-						<!--国家-->
-						<div class="country">
-							<button class="country-bt">
-								<span>国家</span>
-							</button>
-							<ul></ul>
-						</div>
-						<!--省级行政区-->
-						<div class="province">
-							<button class="province-bt">
-								<span>省份</span>
-							</button>
-							<ul></ul>
-						</div>
-						<!--市级行政区-->
-						<!--省级行政区-->
-						<div class="city">
-							<button class="city-bt">
-								<span>城市</span>
-							</button>
-							<ul></ul>
-						</div>
-						<!--县区-->
-						<div class="county">
-							<button class="county-bt">
-								<span>县区</span>
-							</button>
-							<ul></ul>
-						</div>
-					</div>
-					<!--地区四级联动end-->
-					<!--	选择年份-->
-					<div class="year">
-						<button class="year-bt">
-								<span>年份</span>
-								<span class="caret"></span>
+			<div class="first-tab" onclick="firstTabClick(1)"
+				onmousemove="firstTabMove(1)" onmouseout="firstTabOut(1)">
+				<img class="icon" src="../img/gray_contrast.png" /> 特征系数对照表
+			</div>
+
+			<div class="first-tab" onclick="firstTabClick(2)"
+				onmousemove="firstTabMove(2)" onmouseout="firstTabOut(2)">
+				<img class="icon" src="../img/gray_code_storage.png" /> 行业代码库
+			</div>
+
+			<div class="first-tab" onclick="firstTabClick(3)"
+				onmousemove="firstTabMove(3)" onmouseout="firstTabOut(3)"
+				data-toggle="collapse" data-target="#user-manage-second-list">
+				<img class="icon" src="../img/gray_user_manage.png" /> 用户管理 <img
+					class="arrow" src="../img/down_arrow.png" />
+			</div>
+			<!--用户管理下拉列表start-->
+			<div id="user-manage-second-list" class="collapse second-tab">
+				<div class="info-change" onclick="secondTabClick(0)">信息修改</div>
+				<div class="right-set" onclick="secondTabClick(1)">权限设置</div>
+				<div class="new-user" onclick="secondTabClick(2)">新加用户</div>
+			</div>
+			<!--用户管理下拉列表end-->
+
+		</div>
+
+		<!--右侧内容框-->
+		<div class="right-content">
+			<div class="head">
+				<p class="title">管理系统</p>
+				<div class="year-area">
+					<p class="cur-year">
+						当前年份：<span> 2015</span>
+					</p>
+					<p class="cur-area">
+						当前地区：<span>国家</span>  <span>省份</span>  <span>城市</span>  <span>县区</span>
+						<button class="area-asure" onclick="areaChangeSave()">确定</button>
+					</p>
+				</div>
+				<!--退出-->
+				<div class="exit">
+					<button onclick="location.href='../login.html'">退出</button>
+				</div>
+				<div class="area">
+					<button class="area-bt">
+						地区<span class="caret"></span>
+					</button>
+				</div>
+				<!--地区四级联动start-->
+				<div class="area-select">
+					<!--国家-->
+					<div class="country">
+						<button class="country-bt">
+							<span>国家</span>
 						</button>
 						<ul></ul>
 					</div>
+					<!--省级行政区-->
+					<div class="province">
+						<button class="province-bt">
+							<span>省份</span>
+						</button>
+						<ul></ul>
+					</div>
+					<!--市级行政区-->
+					<!--省级行政区-->
+					<div class="city">
+						<button class="city-bt">
+							<span>城市</span>
+						</button>
+						<ul></ul>
+					</div>
+					<!--县区-->
+					<div class="county">
+						<button class="county-bt">
+							<span>县区</span>
+						</button>
+						<ul></ul>
+					</div>
+				</div>
+				<!--地区四级联动end-->
+				<!--	选择年份-->
+				<div class="year">
+					<button class="year-bt">
+						<span>年份</span> <span class="caret"></span>
+					</button>
+					<ul></ul>
+				</div>
 
-				</div>
-				<!--主体内容-->
-				<div class="content-div">
-					<iframe></iframe>
-					<div class="cover"></div>
-				</div>
+			</div>
+			<!--主体内容-->
+			<div class="content-div">
+				<iframe></iframe>
+				<div class="cover"></div>
 			</div>
 		</div>
-	</body>
+	</div>
+</body>
 
 </html>

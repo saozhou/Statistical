@@ -1,98 +1,70 @@
 $(document).ready(function() {
-	$(".footer").css("opacity", "1");
-	$("body").css("opacity", "1");
-	var code = '';
-	for(var i = 0; i < 58; i++) {
-		code += '<tr>';
-		code += '<td>壹</td>';
-		code += '<td>贰</td>';
-		code += '<td>仨</td>';
-		code += '<td>肆</td>';
-		code += '</tr> ';
-	}
-	$(".body table tbody").append(code);
+	$(".find").css("display", "initial");
 	init();
-
 });
 
 function resize() {
 	var _width = $('.table-div').width();
-	$('.table-div th:first-child').width(_width * 0.25);
-	$('.table-div td:first-child').width(_width * 0.25);
-	$('.table-div th:nth-child(2)').width(_width * 0.25);
-	$('.table-div td:nth-child(2)').width(_width * 0.25);
-	$('.table-div th:nth-child(3)').width(_width * 0.25);
-	$('.table-div td:nth-child(3)').width(_width * 0.25);
-	$('.table-div th:nth-child(4)').width(_width * 0.25);
-	$('.table-div td:nth-child(4)').width(_width * 0.25);
+	$('.table-div th:first-child').width(_width * 0.1);
+	$('.table-div td:first-child').width(_width * 0.1);
+	$('.table-div th:nth-child(2)').width(_width * 0.3);
+	$('.table-div td:nth-child(2)').width(_width * 0.3);
+	$('.table-div th:nth-child(3)').width(_width * 0.2);
+	$('.table-div td:nth-child(3)').width(_width * 0.2);
+	$('.table-div th:nth-child(4)').width(_width * 0.2);
+	$('.table-div td:nth-child(4)').width(_width * 0.2);
+	$('.table-div th:nth-child(5)').width(_width * 0.2);
+	$('.table-div td:nth-child(5)').width(_width * 0.2);
 }
 
-//TODO：查找
+// TODO：查找
 function find() {
 	showBody();
-	rotateLoading();
-	var url = '';
+	loading("正在查询...");
+	var code = '';
+	var url = '/Statistic/IntegratedQuery/classGdpContributeSearch';
 	var json = '';
 
 	$.ajax({
-		url: url,
-		type: "post",
-		dataType: "json",
-		data: json,
-		cache: false,
-		async: false,
-		contentType: "application/json; charset=utf-8",
-		success: function(data, textStatus, jqXHR) {
-			if('success' == textStatus) {
-				//加载成功
-				loadSuccess();
-
-				//遍历数据生成表格
-				code += '<tr>';
-				code += '<td contentEditable="true">' + '</td>';
-				code += '<td contentEditable="true">' + '</td>';
-				code += '<td contentEditable="true">' + '</td>';
-				code += '</tr> ';
-
+		url : url,
+		type : "post",
+		dataType : "json",
+		data : json,
+		cache : false,
+		async : true,
+		contentType : "application/json; charset=utf-8",
+		success : function(data, textStatus, jqXHR) {
+			if ('success' == textStatus) {
+				if (data == "小类gdp未计算") {
+					failure("小类gdp未计算");
+					return;
+				} else if (data == "小类旅游gdp未计算") {
+					failure("小类旅游gdp未计算");
+					return;
+				}
+				// 遍历数据生成表格
+				$.each(data, function(i, n) {
+					code += '<tr>';
+					code += '<td>' + n.clcode + '</td>';
+					code += '<td>' + n.clname + '</td>';
+					code += '<td>' + n.gdp + '</td>';
+					code += '<td>' + n.trgdp + '</td>';
+					code += '<td>' + n.rate + '</td>';
+					code += '</tr> ';
+				});
+				$(".body table tbody tr").remove();
 				$(".body table tbody").append(code);
-			}
-			return true;
-		},
-		error: function(XMLHttpRequest, textStatus, errorThrown) {
-			//加载失败
-			loadFailure();
-			return false;
-		}
-	});
-	return false;
-}
-
-//TODO:下载
-function download() {
-	var url = '';
-	var json = '';
-
-	$.ajax({
-		url: url,
-		type: "get",
-		dataType: "json",
-		data: json,
-		cache: false,
-		async: false,
-		contentType: "application/json; charset=utf-8",
-		success: function(data, textStatus, jqXHR) {
-			if('success' == textStatus) {
-				//下载成功
+				// 加载成功
+				loadSuccess();
 			}
 		},
-		error: function(XMLHttpRequest, textStatus, errorThrown) {
-			//下载失败
-
+		error : function(XMLHttpRequest, textStatus, errorThrown) {
+			failure("无查询结果");
 		}
 	});
 }
 
-//TODO:打印
+// TODO:打印
 function print() {
 
 }

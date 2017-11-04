@@ -3,6 +3,7 @@
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Service;
 
@@ -31,11 +32,14 @@ import com.zmst.IDao.SubTaxMapper;
 import com.zmst.IDao.SubTravelGdpMapper;
 import com.zmst.IDao.SubTravelTaxMapper;
 import com.zmst.Service.BasedQueryService;
+import com.zmst.Tools.HttpReturn;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.JSON;
 import com.zmst.Domain.CentralTax;
 import com.zmst.Domain.GFCoefficient;
 import com.zmst.Domain.Gdp;
@@ -141,31 +145,58 @@ private ClassTravelTaxMapper ctTaxDao;
 	@Resource
 	private GFCoefficientMapper gfCoefficientDao;
 	
-	public List<LandTax> getLandTax(String year, String place) {
+	public List<LandTax> getLandTax(String year, String place,HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		List<LandTax> landTax = new ArrayList<LandTax>();
-		System.out.println(year);
-		System.out.println(place);
+ 
 		landTax=landTaxDao.getAllLandTax(year, place);
+		   if(landTax.size()==0){
+			   String json = JSON.toJSONString("地税表未上传");
+			   HttpReturn.reponseBody(response, json);
+			    
+			   return null;
+		   }
 		return landTax;
 	}
 
-	public GFCoefficient getGFCoefficient(String year, String place) {
+	public GFCoefficient getGFCoefficient(String year, String place,HttpServletResponse response) {
 		// TODO Auto-generated method stub
-		GFCoefficient gfCoefficient = gfCoefficientDao.findCorfficient(year, place);
+		GFCoefficient gfCoefficient =null;
+		gfCoefficient=	gfCoefficientDao.selectByYearPlace(year, place);
+		if(gfCoefficient==null){
+			 String json = JSON.toJSONString("gf系数未上传");
+			   HttpReturn.reponseBody(response, json);
+
+			   return null;
+		   }
 		return gfCoefficient;
 	}
 
-	public List<Gdp> getGdpTax(String year, String place) {
+	public List<Gdp> getGdpTax(String year, String place,HttpServletResponse response) {
 		// TODO Auto-generated method stub
-		List<Gdp> gdp = gdpDao.findByYearPlace(year, place);
-		
+		List<Gdp> gdp = new ArrayList<Gdp>(); 
+		gdp=gdpDao.findByYearPlace(year, place);
+		if(gdp.size()==0){
+			 String json = JSON.toJSONString("gdp表未上传");
+			   HttpReturn.reponseBody(response, json);
+			  
+			   return null;
+		   }
 		return gdp;
 	}
 
-	public List<CentralTax> getCentralTax(String year, String place) {
+	public List<CentralTax> getCentralTax(String year, String place,HttpServletResponse response) {
 		// TODO Auto-generated method stub
-		List<CentralTax> centralTax =centralTaxDao.getAllCentralTax(year, place);
+		List<CentralTax> centralTax = new ArrayList<CentralTax>();
+		centralTax = centralTaxDao.getAllCentralTax(year, place);
+		if(centralTax.size()==0){
+			
+			 String json = JSON.toJSONString("国税表未上传");
+			   HttpReturn.reponseBody(response, json);
+			  
+ 
+			return null;
+		}
 		return centralTax;
 	}
 

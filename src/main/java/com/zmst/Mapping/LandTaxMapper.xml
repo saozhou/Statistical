@@ -120,7 +120,6 @@
     update tbl_landtax
     <set>
 
-
       <if test="latax != null">
         LaTax = #{latax,jdbcType=DOUBLE},
       </if>

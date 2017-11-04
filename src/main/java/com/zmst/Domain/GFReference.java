@@ -60,4 +60,11 @@ public class GFReference {
     public void setYear(String year) {
         this.year = year == null ? null : year.trim();
     }
+
+	@Override
+	public String toString() {
+		return "GFReference [gftid=" + gftid + ", incode=" + incode + ", inname=" + inname + ", incoefficient="
+				+ incoefficient + ", place=" + place + ", year=" + year + "]";
+	}
+    
 }

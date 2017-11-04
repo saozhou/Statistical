@@ -49,7 +49,7 @@ public class GdpCaculateController {
 			city=(String) session.getAttribute("city");
 			county= (String)session.getAttribute("county");
 	 
-		if(county!=null){
+		if(county.length()>0){
 			 place=county;
 		}else{
 			place=city;
@@ -69,7 +69,7 @@ public class GdpCaculateController {
 			}  //这里不设置编码会有乱码
 		      response.setContentType("text/html;charset=utf-8");
 			  String json = JSON.toJSONString(subGdpList);
-			  if(subGdpList.size()!=0){
+			  if(subGdpList!=null){
 		
 			  HttpReturn.reponseBody(response, json);
 			  }

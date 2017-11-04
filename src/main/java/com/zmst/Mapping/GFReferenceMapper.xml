@@ -118,7 +118,7 @@
       </if>
 
     </set>
-    where InCode = #{smcode,jdbcType=VARCHAR} and year = #{year,jdbcType=VARCHAR} and place = #{place,jdbcType=VARCHAR}
+    where InCode = #{incode,jdbcType=VARCHAR} and year = #{year,jdbcType=VARCHAR} and place = #{place,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zmst.Domain.GFReference">
     update tbl_gfreference

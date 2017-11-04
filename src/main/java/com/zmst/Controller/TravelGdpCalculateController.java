@@ -47,8 +47,10 @@ public class TravelGdpCalculateController {
 			year = (String) session.getAttribute("year");    
 			city=(String) session.getAttribute("city");
 			county= (String)session.getAttribute("county");
-		 
-		if(county!=null){
+		 System.out.println(year);
+		 System.out.println(city);
+		 System.out.println(county);
+		if(county.length()>0){
 			 place=county;
 		}else{
 			place=city;
@@ -68,7 +70,9 @@ public class TravelGdpCalculateController {
 			}  //这里不设置编码会有乱码
 		      response.setContentType("text/html;charset=utf-8");
 			  String json = JSON.toJSONString(subTravelGdpList);
-			  if(subTravelGdpList.size()==0){
+			  if(subTravelGdpList!=null){
+				  System.out.println(subTravelGdpList.size());
+				  	System.out.println(subTravelGdpList.get(1).getStgdp());
 				  HttpReturn.reponseBody(response, json);
 			  }
 			   

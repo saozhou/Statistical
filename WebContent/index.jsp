@@ -12,9 +12,7 @@
     <form action="http://localhost:8080/Statistic/GdpCaculate/subGdpCaculate" method="post" enctype="multipart/form-data">  
   
            选择文件:<input type="file" name="file" width="120px">  
-           城市<input type="text" name="city">
-          县    <input type="text" name="county"> 
-          年<input type="text" name="year">
+ 
         <input type="submit" value="上传">  
     </form>  
     <hr>  

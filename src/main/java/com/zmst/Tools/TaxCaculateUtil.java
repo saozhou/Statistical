@@ -206,7 +206,9 @@ public class TaxCaculateUtil {
 				 subCorfficient= gfReferenceMap.get(subTax.getSmcode());
 				 					
 						       if(subCorfficient==null){
-						    	   continue;
+						    	   System.out.println(11);
+						    	  System.out.println(subTax.getSmcode());
+						    	  traveltaxdata=0;
 						       }else if(subCorfficient.equals("t")){
 									 
 						      		traveltaxdata = subTax.getSmtax();

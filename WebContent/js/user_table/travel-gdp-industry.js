@@ -1,84 +1,65 @@
 $(document).ready(function() {
 	$("body").css("opacity", "1");
-	var code = '';
-	for(var i = 0; i < 58; i++) {
-		code += '<tr>';
-		code += '<td contentEditable="true">壹</td>';
-		code += '<td contentEditable="true">贰</td>';
-		code += '<td contentEditable="true">仨</td>';
-		code += '<td contentEditable="true">肆</td>';
-		code += '</tr> ';
-	}
-	$(".body table tbody").append(code);
+	$(".calculate").css("display", "initial");
 	init();
-	getContent();
 });
 
 function resize() {
 	var _width = $('.table-div').width();
-	$('.table-div th:first-child').width(_width * 0.25);
-	$('.table-div td:first-child').width(_width * 0.25);
-	$('.table-div th:nth-child(2)').width(_width * 0.25);
-	$('.table-div td:nth-child(2)').width(_width * 0.25);
-	$('.table-div th:nth-child(3)').width(_width * 0.25);
-	$('.table-div td:nth-child(3)').width(_width * 0.25);
-	$('.table-div th:nth-child(4)').width(_width * 0.25);
-	$('.table-div td:nth-child(4)').width(_width * 0.25);
+	$('.table-div th:first-child').width(_width * 0.1);
+	$('.table-div td:first-child').width(_width * 0.1);
+	$('.table-div th:nth-child(2)').width(_width * 0.3);
+	$('.table-div td:nth-child(2)').width(_width * 0.3);
+	$('.table-div th:nth-child(3)').width(_width * 0.2);
+	$('.table-div td:nth-child(3)').width(_width * 0.2);
+	$('.table-div th:nth-child(4)').width(_width * 0.2);
+	$('.table-div td:nth-child(4)').width(_width * 0.2);
+	$('.table-div th:nth-child(5)').width(_width * 0.2);
+	$('.table-div td:nth-child(5)').width(_width * 0.2);
 }
 
-//TODO：获取表格内容
-function getContent() {
-	rotateLoading();
-	var url = '';
+// TODO:计算
+function calculate() {
+	loading("正在计算...");
+	var code = '';
+	var url = '/Statistic/IntegratedQuery/industryGdpContributeSearch';
 	var json = '';
 
 	$.ajax({
-		url: url,
-		type: "post",
-		dataType: "json",
-		data: json,
-		cache: false,
-		async: false,
-		contentType: "application/json; charset=utf-8",
-		success: function(data, textStatus, jqXHR) {
-			if('success' == textStatus) {
-				//加载成功
-				loadSuccess();
-
-				//遍历数据生成表格
-				code += '<tr>';
-				code += '<td contentEditable="true">' + '</td>';
-				code += '<td contentEditable="true">' + '</td>';
-				code += '<td contentEditable="true">' + '</td>';
-				code += '<td contentEditable="true">' + '</td>';
-				code += '</tr> ';
-
+		url : url,
+		type : "post",
+		dataType : "json",
+		data : json,
+		cache : false,
+		async : true,
+		contentType : "application/json; charset=utf-8",
+		success : function(data, textStatus, jqXHR) {
+			if ('success' == textStatus) {
+				if (data == "大类gdp未计算") {
+					failure("大类gdp未计算");
+					return;
+				} else if (data == "产业旅游gdp未计算") {
+					failure("产业旅游gdp未计算");
+					return;
+				}
+				// 遍历数据生成表格
+				$.each(data, function(i, n) {
+					code += '<tr>';
+					code += '<td>' + n.incode + '</td>';
+					code += '<td>' + n.inname + '</td>';
+					code += '<td>' + n.gdp + '</td>';
+					code += '<td>' + n.trgdp + '</td>';
+					code += '<td>' + n.rate + '</td>';
+					code += '</tr> ';
+				});
+				$(".body table tbody tr").remove();
 				$(".body table tbody").append(code);
+				// 加载成功
+				loadSuccess();
 			}
-			return true;
 		},
-		error: function(XMLHttpRequest, textStatus, errorThrown) {
-			//加载失败
-			loadFailure();
-			return false;
+		error : function(XMLHttpRequest, textStatus, errorThrown) {
+			failure("计算失败");
 		}
 	});
-	return false;
-}
-
-//TODO:上传
-function upload() {
-	//触发文件选择框
-	$(".upload-input").trigger("click");
-	//获取文件路径
-	var url = '';
-	$(".upload-input").change(function() {
-		url = $(".upload-input").val();
-	});
-
-}
-
-//TODO:保存
-function save() {
-
 }

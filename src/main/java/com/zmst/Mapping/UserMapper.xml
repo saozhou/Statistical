@@ -30,7 +30,12 @@
     from tbl_user
     where UsName=#{0}
   </select>
- 
+  
+   <select id="selectAll" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_user
+  </select>
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tbl_user

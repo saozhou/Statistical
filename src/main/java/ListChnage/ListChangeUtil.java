@@ -75,6 +75,17 @@ public class ListChangeUtil {
 	public static List<LandTax> changeLandTax(List<List<String>> list, String year, String place, int matchingWay) {
 		// TODO Auto-generated method stub
 		 List<LandTax> landTaxList = new ArrayList<LandTax>();
+		 List<String>strList = list.get(1);
+		 if(strList.size()==2){
+			 try{
+			     Integer.parseInt(strList.get(0));
+		         matchingWay=1;
+			  }catch(NumberFormatException e)
+			  {
+				    matchingWay=2;
+			  }
+		 }
+		 
 			for(int i=1;i<list.size();i++){
 				List<String>lists=list.get(i);
 				if(lists.size()==2){
@@ -91,6 +102,15 @@ public class ListChangeUtil {
 				 landTax.setYear(year);
 				 landTax.setPlace(place);
 				 landTaxList.add(landTax);
+				}else if(list.size()==3){
+					LandTax landTax = new  LandTax();
+						 landTax.setSmcode(lists.get(0));
+						 landTax.setSmname(lists.get(1));
+					landTax.setLatax(Double.valueOf(lists.get(1)) );  
+				 
+					 landTax.setYear(year);
+					 landTax.setPlace(place);
+					 landTaxList.add(landTax);
 				}
 				}
 		 
@@ -110,6 +130,13 @@ public class ListChangeUtil {
 			int matchingWay, int log, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 	 
+		 if(landTaxList.get(1).getSmcode()!=null){
+		    	matchingWay=1;
+		    }else{
+		    	matchingWay=2;
+		    } 
+		    
+		
 		Map<String,String>para =null;
 		if(matchingWay==1){
 			para = ListChnageMap.codeDictionaryChangeFirst(codeDictionaryList);
@@ -157,6 +184,21 @@ public class ListChangeUtil {
 public static List<CentralTax> changeCentralTax(List<List<String>> list, String year, String place, int matchingWay) {
 	// TODO Auto-generated method stub
 	 List<CentralTax> CentralTaxList = new ArrayList<CentralTax>();
+	 
+	 List<String>strList = list.get(1);
+
+	 if(strList.size()==2){
+		 try{
+		     Integer.parseInt(strList.get(0));
+	         matchingWay=1;
+	      
+		  }catch(NumberFormatException e)
+		  {
+			    matchingWay=2;
+		      
+		  }
+	 }
+	 
 		for(int i=1;i<list.size();i++){
 			List<String>lists=list.get(i);
 			CentralTax centralTax = new  CentralTax();
@@ -172,6 +214,18 @@ public static List<CentralTax> changeCentralTax(List<List<String>> list, String 
 			 centralTax.setYear(year);
 			 centralTax.setPlace(place);
 			 CentralTaxList.add(centralTax);
+			}else if(lists.size()==3){
+				 
+					 centralTax.setSmcode(lists.get(0));
+ 
+					 centralTax.setSmname(lists.get(0));
+			 
+				 
+					 
+				 centralTax.setCntax(Double.valueOf(lists.get(1)) );  
+				 centralTax.setYear(year);
+				 centralTax.setPlace(place);
+				 CentralTaxList.add(centralTax);
 			}
 			}
 		return CentralTaxList;
@@ -183,6 +237,13 @@ public static int matchingCentralTax(List<CentralTax> list, List<AllCodeDictiona
 		int matchingWay, HttpServletResponse response, int w) {
   
 	    Map<String,String>para =null;
+	    
+	    if(list.get(1).getSmcode()!=null){
+	    	matchingWay=1;
+	    }else{
+	    	matchingWay=2;
+	    } 
+	    
 	    if(matchingWay==1){
 		      para = ListChnageMap.codeDictionaryChangeFirst(codeDictionaryList);
 	    }else{
@@ -192,6 +253,7 @@ public static int matchingCentralTax(List<CentralTax> list, List<AllCodeDictiona
 		 			 
 			 if(matchingWay==1){
 				 list.get(i).setSmname(para.get(list.get(i).getSmcode()));
+				 
 				 if(para.get(list.get(i).getSmcode())==null){
 					 w=1;
 					HttpReturn.reponseBody(response, list.get(i).getSmcode()+"与代码库不相符");
@@ -215,7 +277,9 @@ public static int matchingCentralTax(List<CentralTax> list, List<AllCodeDictiona
 			 }
    
            }
+	  	System.out.println(w);
 		return w;
+	 
    	
   }
 

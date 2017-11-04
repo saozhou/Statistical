@@ -47,7 +47,7 @@ public class ContributeUtil {
 					TravelLargeGdpContribute travelLargeGdpContribute = new TravelLargeGdpContribute();
 					travelLargeGdpContribute.setGdp(largeGdp.get(i).getLagdp());
 					travelLargeGdpContribute.setTrgdp(largeTravelGdpList.get(j).getLtgdp());
-					if(largeGdp.get(j).getLagdp()!=0){
+					if(largeGdp.get(i).getLagdp()!=0){
 					rate=largeTravelGdpList.get(j).getLtgdp()/largeGdp.get(i).getLagdp();
 					}
 					
@@ -345,7 +345,7 @@ public static void getIndustryTaxContribute(List<IndustryDictionary> industryLin
 			 
 		   }else{
 			   tax = largeTaxContributeMap.get(industryLineList.get(i).getIncode()).getTax()+tax;
-			    travelTax = largeTaxContributeMap.get(industryLineList.get(i).getIncode()).getTax()+travelTax;
+			    travelTax = largeTaxContributeMap.get(industryLineList.get(i).getIncode()).getTrtax()+travelTax;
 		   }
 		   
 		   if(tax!=0){

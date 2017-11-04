@@ -1,15 +1,6 @@
 $(document).ready(function() {
 	$("body").css("opacity", "1");
-	var code = '';
-	for(var i = 0; i < 58; i++) {
-		code += '<tr>';
-		code += '<td>壹</td>';
-		code += '<td>贰</td>';
-		code += '<td>仨</td>';
-		code += '</tr> ';
-	}
-	$(".body table tbody").append(code);
-	resize();
+
 });
 
 function resize() {
@@ -25,8 +16,9 @@ function resize() {
 //TODO：查找
 function find() {
 	showTipBox();
-	rotateLoading();
-	var url = '';
+	loading("正在查询...");
+	var code = '';
+	var url = 'http://192.168.1.102:8080/Statistic/BaseQuery/gfCoefficientGet';
 	var json = '';
 
 	$.ajax({
@@ -35,7 +27,7 @@ function find() {
 		dataType: "json",
 		data: json,
 		cache: false,
-		async: false,
+		async: true,
 		contentType: "application/json; charset=utf-8",
 		success: function(data, textStatus, jqXHR) {
 			if('success' == textStatus) {
@@ -44,27 +36,24 @@ function find() {
 
 				//遍历数据生成表格
 				code += '<tr>';
-				code += '<td contentEditable="true">' + '</td>';
-				code += '<td contentEditable="true">' + '</td>';
-				code += '<td contentEditable="true">' + '</td>';
-				code += '<td contentEditable="true">' + '</td>';
-				code += '<td contentEditable="true">' + '</td>';
-				code += '<td contentEditable="true">' + '</td>';
-				code += '<td contentEditable="true">' + '</td>';
-				code += '<td contentEditable="true">' + '</td>';
+				code += '<td contentEditable="true">' +1+ '</td>';
+				code += '<td contentEditable="true">' +2+ '</td>';
+				code += '<td contentEditable="true">' +3+ '</td>';
 				code += '</tr> ';
 
 				$(".body table tbody").append(code);
 			}
-			return true;
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown) {
+<<<<<<< HEAD
 			//加载失败
 			loadFailure();
-			return false;
+=======
+			//查询失败
+			failure("查询失败");
+>>>>>>> 205b7c56a0eb7e9d1b8633ce11c4a1a0aae0269a
 		}
 	});
-	return false;
 }
 
 //显示提示框

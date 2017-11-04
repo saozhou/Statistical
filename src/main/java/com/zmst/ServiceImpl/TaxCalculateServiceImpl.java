@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.fastjson.JSON;
 import com.zmst.Domain.AllCodeDictionary;
 import com.zmst.Domain.CentralTax;
 import com.zmst.Domain.ClassTax;
@@ -52,16 +53,20 @@ public class TaxCalculateServiceImpl implements TaxCalculateService {
 		if(subTaxList.size()==0){//如果总税收未计算则进行计算处理
 			subTaxList = new ArrayList<SubTax>();  
 			  List<LandTax>landTaxList= landTaxDao.getAllLandTax(year,place);//获得当年总地税
-			  
+			  System.out.println(landTaxList.size());
 			  if(landTaxList.size()==0){
-				  HttpReturn.reponseBody(response, "地税表未上传");
+				   String json = JSON.toJSONString("地税表未上传");
+				   HttpReturn.reponseBody(response, json);
+				   
 				  return null;
 			  }
 			  
 			  List<CentralTax>centralTaxlist=	centralTaxDao.getAllCentralTax(year,place);//获得当年国税
 			  
 			  if(centralTaxlist.size()==0){
-				  HttpReturn.reponseBody(response, "国税表未上传");
+				   String json = JSON.toJSONString("国税表未上传");
+				   HttpReturn.reponseBody(response, json);
+ 
 				  return null;
 			  }
 			  
@@ -71,7 +76,10 @@ public class TaxCalculateServiceImpl implements TaxCalculateService {
 			  List<AllCodeDictionary>largeLineList = codeDictionaryDao.getLargeLine();
 			  
 			  if(largeLineList.size()==0){
-				  HttpReturn.reponseBody(response, "代码库未上传");
+				  
+				   String json = JSON.toJSONString("代码库未上传");
+				   HttpReturn.reponseBody(response, json);
+ 
 			  }
 			  
 			  List<AllCodeDictionary>classLineList = codeDictionaryDao.getClassLine();

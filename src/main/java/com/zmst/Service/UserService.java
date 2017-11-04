@@ -1,5 +1,7 @@
 package com.zmst.Service;
 
+import java.util.List;
+
 import com.zmst.Domain.User;
 /**
  * 
@@ -23,5 +25,7 @@ public interface UserService {
 	void userPowerUpdate(User user);//用户权限修改
 
 	void userDelet(String username);//用户删除
+	
+	List<User> getAllUser();
 
 }

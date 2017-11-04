@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.zmst.Domain.SubTax;
@@ -34,7 +35,7 @@ public class TravelTaxCaculateController {
 	 * 
 	 */
 	@RequestMapping(value="/subTravelTaxGet",method=RequestMethod.POST)  
-   
+   @ResponseBody
 	public void allTaxManager(HttpServletRequest request,HttpServletResponse response){
 		 HttpSession session = request.getSession();
 		 response.setContentType("text/html;charset=utf-8");
@@ -47,7 +48,7 @@ public class TravelTaxCaculateController {
 			city=(String) session.getAttribute("city");
 			county= (String)session.getAttribute("county");
 			 
-			if(county!=null){
+			if(county.length()>0){
 				 place=county;
 			}else{
 				place=city;
@@ -62,8 +63,9 @@ public class TravelTaxCaculateController {
 				e.printStackTrace();
 			}  //这里不设置编码会有乱码
 		      response.setContentType("text/html;charset=utf-8");
+
 			  String json = JSON.toJSONString(subTravelTax);
-			  if(subTravelTax.size()==0){
+			  if(subTravelTax!=null){
 				  HttpReturn.reponseBody(response, json);
 			  }
 			  

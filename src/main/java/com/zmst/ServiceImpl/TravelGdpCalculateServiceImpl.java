@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.fastjson.JSON;
 import com.zmst.Domain.AllCodeDictionary;
 import com.zmst.Domain.ClassGdp;
 import com.zmst.Domain.ClassTravelGdp;
@@ -71,21 +72,27 @@ public class TravelGdpCalculateServiceImpl implements TravelGdpCalculateService 
 	    List<SubGdp>subGdpList    = subGdpDao.findByYearPlace(year, place);
 	    
 	    if(subGdpList.size()==0){
-	    	HttpReturn.reponseBody(response, "小类gdp未计算");
-	    	return null;
+	    	   String json = JSON.toJSONString("小类gdp未计算");
+			   HttpReturn.reponseBody(response, json);
+
+ 	    	return null;
 	    }
 	    
 	    List<GFReference>gfReference=gfReferenceDao.selectByYearAndPlace(year,place);
 	    
 	    if(gfReference.size()==0){
-	    	HttpReturn.reponseBody(response, "当量系数参照表未上传");
-	    	return null;
+	 	   String json = JSON.toJSONString("当量系数参照表未上传");
+		   HttpReturn.reponseBody(response, json);
+
+ 	    	return null;
 	    }
 	    
 	    GFCoefficient coefficient = gfCoefficientDao.selectByYearPlace(year,place);
 	    
-	    if(coefficient.getAvspend()==null){
-	    	HttpReturn.reponseBody(response, "gf系数未添加");
+	    if(coefficient==null){
+		 	   String json = JSON.toJSONString("gf系数未添加");
+			   HttpReturn.reponseBody(response, json);
+ 
 	    	return null;
 	    }
 		
@@ -96,7 +103,9 @@ public class TravelGdpCalculateServiceImpl implements TravelGdpCalculateService 
         List<AllCodeDictionary>largeLineList = codeDictionaryDao.getLargeLine();
 		
         if(largeLineList.size()<1){
-        	HttpReturn.reponseBody(response, "代码库未上传");
+      	   String json = JSON.toJSONString("代码库未上传");
+		   HttpReturn.reponseBody(response, json);
+ 
             return null;
         }
         

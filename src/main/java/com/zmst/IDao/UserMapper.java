@@ -1,5 +1,7 @@
 package com.zmst.IDao;
 
+import java.util.List;
+
 import com.zmst.Domain.User;
 
 public interface UserMapper {
@@ -16,6 +18,8 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
 
 	User selectByPrimaryKey(int u);
+	
+	List<User> selectAll();	
  
 	User selectByUser(User users);//根据用户对象查询用户数据
 

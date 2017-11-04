@@ -1,18 +1,6 @@
 $(document).ready(function() {
-	$(".footer").css("opacity", "1");
-	$("body").css("opacity", "1");
-	var code = '';
-	for(var i = 0; i < 58; i++) {
-		code += '<tr>';
-		code += '<td>壹</td>';
-		code += '<td>贰</td>';
-		code += '<td>仨</td>';
-		code += '</tr> ';
-	}
-	$(".body table tbody").append(code);
+	$(".find").css("display", "initial");
 	init();
-
-	resize();
 });
 
 function resize() {
@@ -25,72 +13,58 @@ function resize() {
 	$('.table-div td:nth-child(3)').width(_width * 0.3);
 }
 
-//TODO：查找
+// TODO：查找
 function find() {
 	showBody();
-	rotateLoading();
-	var url = '';
+	loading("正在查询...");
+	var code = '';
+	var url = '/Statistic/TravelGdpCalculate/subTravelGdpCaculate';
 	var json = '';
 
 	$.ajax({
-		url: url,
-		type: "post",
-		dataType: "json",
-		data: json,
-		cache: false,
-		async: false,
-		contentType: "application/json; charset=utf-8",
-		success: function(data, textStatus, jqXHR) {
-			if('success' == textStatus) {
-				//加载成功
-				loadSuccess();
-
-				//遍历数据生成表格
-				code += '<tr>';
-				code += '<td contentEditable="true">' + '</td>';
-				code += '<td contentEditable="true">' + '</td>';
-				code += '<td contentEditable="true">' + '</td>';
-				code += '</tr> ';
-
+		url : url,
+		type : "post",
+		dataType : "json",
+		data : json,
+		cache : false,
+		async : true,
+		contentType : "application/json; charset=utf-8",
+		success : function(data, textStatus, jqXHR) {
+			if ('success' == textStatus) {
+				if (data == "小类gdp未计算") {
+					failure("小类gdp未计算");
+					return;
+				} else if (data == "当量系数参照表未上传") {
+					failure("当量系数参照表未上传");
+					return;
+				} else if (data == "gf系数未添加") {
+					failure("gf系数未添加");
+					return;
+				} else if (data == "代码库未上传") {
+					failure("代码库未上传");
+					return;
+				}
+				// 遍历数据生成表格
+				$.each(data, function(i, n) {
+					code += '<tr>';
+					code += '<td>' + n.smcode + '</td>';
+					code += '<td>' + n.smname + '</td>';
+					code += '<td>' + n.stgdp + '</td>';
+					code += '</tr> ';
+				});
+				$(".body table tbody tr").remove();
 				$(".body table tbody").append(code);
-			}
-			return true;
-		},
-		error: function(XMLHttpRequest, textStatus, errorThrown) {
-			//加载失败
-			loadFailure();
-			return false;
-		}
-	});
-	return false;
-}
-
-//TODO:下载
-function download() {
-	var url = '';
-	var json = '';
-
-	$.ajax({
-		url: url,
-		type: "get",
-		dataType: "json",
-		data: json,
-		cache: false,
-		async: false,
-		contentType: "application/json; charset=utf-8",
-		success: function(data, textStatus, jqXHR) {
-			if('success' == textStatus) {
-				//下载成功
+				// 加载成功
+				loadSuccess();
 			}
 		},
-		error: function(XMLHttpRequest, textStatus, errorThrown) {
-			//下载失败
-
+		error : function(XMLHttpRequest, textStatus, errorThrown) {
+			failure("无查询结果");
 		}
 	});
 }
 
-//TODO:打印
+// TODO:打印
 function print() {
 
 }

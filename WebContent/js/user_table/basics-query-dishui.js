@@ -5,12 +5,12 @@ $(document).ready(function() {
 
 function resize() {
 	var _width = $('.table-div').width();
-	$('.table-div th:first-child').width(_width * 0.4);
-	$('.table-div td:first-child').width(_width * 0.4);
-	$('.table-div th:nth-child(2)').width(_width * 0.3);
-	$('.table-div td:nth-child(2)').width(_width * 0.3);
-	$('.table-div th:nth-child(3)').width(_width * 0.3);
-	$('.table-div td:nth-child(3)').width(_width * 0.3);
+	$('.table-div th:first-child').width(_width * 0.2);
+	$('.table-div td:first-child').width(_width * 0.2);
+	$('.table-div th:nth-child(2)').width(_width * 0.4);
+	$('.table-div td:nth-child(2)').width(_width * 0.4);
+	$('.table-div th:nth-child(3)').width(_width * 0.4);
+	$('.table-div td:nth-child(3)').width(_width * 0.4);
 }
 
 //TODO：查找
@@ -18,7 +18,7 @@ function find() {
 	showBody();
 	loading("正在查询...");
 	var code = '';
-	var url = 'http://192.168.1.102:8080/Statistic/BaseQuery/landTaxGet';
+	var url = '/Statistic/BaseQuery/landTaxGet';
 	var json = '';
 
 	$.ajax({
@@ -31,46 +31,26 @@ function find() {
 		contentType: "application/json; charset=utf-8",
 		success: function(data, textStatus, jqXHR) {
 			if('success' == textStatus) {
-				//加载成功
-				loadSuccess();
-
-				//遍历数据生成表格
-				code += '<tr>';
-				code += '<td contentEditable="true">' + '</td>';
-				code += '<td contentEditable="true">' + '</td>';
-				code += '<td contentEditable="true">' + '</td>';
-				code += '</tr> ';
-
+				if (data == "地税表未上传") {
+					alert("地税表未上传");
+					return;
+				} 
+				// 遍历数据生成表格
+				$.each(data, function(i, n) {
+					code += '<tr>';
+					code += '<td>' + n.smcode + '</td>';
+					code += '<td>' + n.smname + '</td>';
+					code += '<td>' + n.latax + '</td>';
+					code += '</tr> ';
+				});
+				$(".body table tbody tr").remove();
 				$(".body table tbody").append(code);
+				// 加载成功
+				loadSuccess();
 			}
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown) {
 			failure("无查询结果");
-		}
-	});
-}
-
-//TODO:下载
-function download() {
-	var url = '';
-	var json = '';
-
-	$.ajax({
-		url: url,
-		type: "get",
-		dataType: "json",
-		data: json,
-		cache: false,
-		async: false,
-		contentType: "application/json; charset=utf-8",
-		success: function(data, textStatus, jqXHR) {
-			if('success' == textStatus) {
-				//下载成功
-			}
-		},
-		error: function(XMLHttpRequest, textStatus, errorThrown) {
-			//下载失败
-
 		}
 	});
 }

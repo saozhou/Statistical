@@ -1,61 +1,59 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-		<link rel="stylesheet" href="../../css/bootstrap.min.css" />
-		<link rel="stylesheet" href="../../css/user_table.css" />
-		<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
-		<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="../../js/user_table.js"></script>
-		<script type="text/javascript" src="../../js/user_table/basics-query-gf.js"></script>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" href="../../css/bootstrap.min.css" />
+<link rel="stylesheet" href="../../css/user_table.css" />
+<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../js/user_table.js"></script>
+<script type="text/javascript"
+	src="../../js/user_table/basics-query-gf.js"></script>
 
-		<style>
-			.body {
-				visibility: hidden;
-				opacity: 0;
-				transition: opacity 2s;
-			}
-		</style>
-	</head>
+<style>
+.body {
+	visibility: hidden;
+	opacity: 0;
+	transition: opacity 2s;
+}
+</style>
+</head>
 
-	<body onresize="resize()">
-		<div class="body">
-			<!--提示信息（正在加载、加载失败）-->
-			<div class="tip">
-				<img src="../../img/loading.png" />
-				<p>正在加载...</p>
-			</div>
-			<div class="table-div">
-				<table cellpadding="0" cellspacing="0">
-					<thead>
-						<tr>
-							<th colspan="8">g/f系数表</th>
-						</tr>
-						<tr>
-							<th class="slash">
-								<span class="s1">年份</span> </br>
-								<span class="s2">单位</span>
-							</th>
-							<th>人均消费</th>
-							<th>旅游消费天数</th>
-							<th>城乡居民人均消费</th>
-							<th>常住人口</th>
-							<th>游客总数</th>
-							<th>g系数</th>
-							<th>f系数</th>
-						</tr>
-					</thead>
-					<tbody></tbody>
-				</table>
-			</div>
+<body onresize="resize()">
+	<div class="body">
+		<!--提示信息（正在加载、加载失败）-->
+		<div class="tip">
+			<img src="../../img/loading.png" />
+			<p>正在加载...</p>
 		</div>
-		<div class="footer">
-			<button class="footer-bt download" onclick="download()">下载</button>
-			<button class="footer-bt find" onclick="find()">查询</button>
-			<button class="footer-bt print" onclick="print()">打印</button>
+		<div class="table-div">
+			<table cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<th colspan="8">g/f系数表</th>
+					</tr>
+					<tr>
+						<th>年均消费天数(天)</th>
+						<th>人均消费(元)</th>
+						<th>旅游消费天数(天)</th>
+						<th>城乡居民人均消费(元)</th>
+						<th>常住人口(万人)</th>
+						<th>游客总数(人/天)</th>
+						<th>g系数</th>
+						<th>f系数</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
 		</div>
-	</body>
+	</div>
+	<div class="footer">
+		<button class="footer-bt download" onclick="download(4)">下载</button>
+		<button class="footer-bt find" onclick="find()">查询</button>
+		<button class="footer-bt print" onclick="print()">打印</button>
+	</div>
+</body>
 
 </html>

@@ -110,23 +110,17 @@ td {
 
 .footer .download {
 	margin-right: 60px;
-	visibility: hidden;
-	opacity: 0;
-	transition: opacity 1s;
 }
 
 .footer .print {
 	margin-left: 60px;
-	visibility: hidden;
-	opacity: 0;
-	transition: opacity 1s;
 }
 
 .footer .save {
 	margin-left: 60px;
 }
 
-.footer .upload-input {
+.footer .upload-form {
 	display: none;
 }
 

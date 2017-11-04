@@ -1,5 +1,7 @@
 package com.zmst.ServiceImpl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -76,6 +78,12 @@ public class UserServiceImpl implements UserService {
 	public void userDelet(String username) {
 		// TODO Auto-generated method stub
 		userDao.userDelete(username);
+	}
+
+	@Override
+	public List<User> getAllUser() {
+		// TODO Auto-generated method stub
+		return userDao.selectAll();
 	}
 
 }

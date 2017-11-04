@@ -2,6 +2,8 @@
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import com.zmst.Domain.ClassGdp;
 import com.zmst.Domain.ClassTax;
 import com.zmst.Domain.ClassTravelGdp;
@@ -52,13 +54,13 @@ public interface BasedQueryService {
 
 	 
 
-	List<LandTax> getLandTax(String year, String place);
+	List<LandTax> getLandTax(String year, String place, HttpServletResponse response);
 
-	GFCoefficient getGFCoefficient(String year, String place);
+	GFCoefficient getGFCoefficient(String year, String place, HttpServletResponse response);
 
-	List<Gdp> getGdpTax(String year, String place);
+	List<Gdp> getGdpTax(String year, String place, HttpServletResponse response);
 
-	List<CentralTax> getCentralTax(String year, String place);
+	List<CentralTax> getCentralTax(String year, String place, HttpServletResponse response);
  
 
 

@@ -44,12 +44,11 @@ public class FileDownloadController {
 		year=(String)session.getAttribute("year");
 		 
 		if(county!=null){
-			 place=county;
-			 
+			 place=county; 
 		}else{
-			 
 		    place=city;
 		}
+		System.out.println(year+" "+city+" "+type);
 	    boolean result =	fileDownLoadService.export(year,place,response,type);
 	    if(!result){
 	    	return "fail";

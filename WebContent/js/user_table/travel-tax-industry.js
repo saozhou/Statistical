@@ -1,77 +1,65 @@
 $(document).ready(function() {
 	$("body").css("opacity", "1");
+	$(".calculate").css("display", "initial");
 	init();
-	getContent();
 });
 
 function resize() {
 	var _width = $('.table-div').width();
-	$('.table-div th:first-child').width(_width * 0.25);
-	$('.table-div td:first-child').width(_width * 0.25);
-	$('.table-div th:nth-child(2)').width(_width * 0.25);
-	$('.table-div td:nth-child(2)').width(_width * 0.25);
-	$('.table-div th:nth-child(3)').width(_width * 0.25);
-	$('.table-div td:nth-child(3)').width(_width * 0.25);
-	$('.table-div th:nth-child(4)').width(_width * 0.25);
-	$('.table-div td:nth-child(4)').width(_width * 0.25);
+	$('.table-div th:first-child').width(_width * 0.1);
+	$('.table-div td:first-child').width(_width * 0.1);
+	$('.table-div th:nth-child(2)').width(_width * 0.3);
+	$('.table-div td:nth-child(2)').width(_width * 0.3);
+	$('.table-div th:nth-child(3)').width(_width * 0.2);
+	$('.table-div td:nth-child(3)').width(_width * 0.2);
+	$('.table-div th:nth-child(4)').width(_width * 0.2);
+	$('.table-div td:nth-child(4)').width(_width * 0.2);
+	$('.table-div th:nth-child(5)').width(_width * 0.2);
+	$('.table-div td:nth-child(5)').width(_width * 0.2);
 }
-
-//TODO：获取表格内容
-function getContent() {
-	loading("正在加载...");
+// TODO:计算
+function calculate() {
+	loading("正在计算...");
 	var code = '';
-	var url = 'http://192.168.1.102:8080/Statistic/IntegratedQuery/industryTaxContributeSearch';
+	var url = '/Statistic/IntegratedQuery/industryTaxContributeSearch';
 	var json = '';
 
 	$.ajax({
-		url: url,
-		type: "post",
-		dataType: "json",
-		data: json,
-		cache: false,
-		async: true,
-		contentType: "application/json; charset=utf-8",
-		success: function(data, textStatus, jqXHR) {
-			if('success' == textStatus) {
-				//加载成功
-				loadSuccess();
-
-				//遍历数据生成表格
-				code += '<tr>';
-				code += '<td contentEditable="true">' + '</td>';
-				code += '<td contentEditable="true">' + '</td>';
-				code += '<td contentEditable="true">' + '</td>';
-				code += '<td contentEditable="true">' + '</td>';
-				code += '</tr> ';
-
+		url : url,
+		type : "post",
+		dataType : "json",
+		data : json,
+		cache : false,
+		async : true,
+		contentType : "application/json; charset=utf-8",
+		success : function(data, textStatus, jqXHR) {
+			if ('success' == textStatus) {
+				if (data == "小类税收未计算") {
+					failure("小类税收未计算");
+					return;
+				} else if (data == "小类旅游税收未计算") {
+					failure("小类旅游税收未计算");
+					return;
+				} 
+				// 遍历数据生成表格
+				$.each(data, function(i, n) {
+					code += '<tr>';
+					code += '<td>' + n.incode + '</td>';
+					code += '<td>' + n.inname + '</td>';
+					code += '<td>' + n.tax + '</td>';
+					code += '<td>' + n.trtax + '</td>';
+					code += '<td>' + n.rate + '</td>';
+					code += '</tr> ';
+				});
+				$(".body table tbody tr").remove();
 				$(".body table tbody").append(code);
+				// 加载成功
+				loadSuccess();
 			}
 		},
-		error: function(XMLHttpRequest, textStatus, errorThrown) {
-			failure("无内容,请上传");
-			addData();
+		error : function(XMLHttpRequest, textStatus, errorThrown) {
+			failure("计算失败");
 		}
 	});
 }
 
-//TODO:上传
-function upload() {
-	//触发文件选择框
-	$(".upload-input").trigger("click");
-	//获取文件路径
-	var url = '';
-	$(".upload-input").change(function() {
-		url = $(".upload-input").val();
-	});
-
-}
-
-//TODO:保存
-function save() {
-
-}
-
-//TODO:加载无内容,添加数据
-function addData() {
-	showUploadBt();
-}

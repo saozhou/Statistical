@@ -63,7 +63,7 @@ public class IntegratedQueryController {
 		city=(String) session.getAttribute("city");
 		county= (String)session.getAttribute("county");
 	 
-		if(county!=null){
+		if(county.length()>0){
 			 place=county;
 		}else{
 			place=city;
@@ -115,7 +115,7 @@ public class IntegratedQueryController {
 			city=(String) session.getAttribute("city");
 			county= (String)session.getAttribute("county");
 		 
-		if(county!=null){
+		if(county.length()>0){
 			 place=county;
 		}else{
 			place=city;
@@ -163,13 +163,14 @@ public class IntegratedQueryController {
 		year = (String) session.getAttribute("year");    
 		city=(String) session.getAttribute("city");
 		county= (String)session.getAttribute("county");
-		 
-		if(county!=null){
+		System.out.println(year);
+		System.out.println(city);
+		if(county.length()>0){
 			 place=county;
 		}else{
 			place=city;
 		}
-		
+		System.out.println(place);
          List<TravelIndustryGdpContribute> industryGdpContributeList = new ArrayList<TravelIndustryGdpContribute>();
          
          industryGdpContributeList = integratedQueryService.getIndustryGdpContribute(year,place,industryGdpContributeList);
@@ -178,6 +179,8 @@ public class IntegratedQueryController {
 			industryGdpContributeList = integratedQueryService.getIndustryGdpContributeList(industryGdpContributeList,year, place,response);
 			 
 			}
+		
+		
 			
 		
 		try {
@@ -187,7 +190,10 @@ public class IntegratedQueryController {
 			e.printStackTrace();
 		}  //这里不设置编码会有乱码
 	      response.setContentType("text/html;charset=utf-8");
+	     
+	    
 	      if(industryGdpContributeList!=null){
+	     
 		  String json = JSON.toJSONString(industryGdpContributeList);
 		  HttpReturn.reponseBody(response, json);
 	      }
@@ -212,7 +218,7 @@ public class IntegratedQueryController {
 		year = (String) session.getAttribute("year");    
 		city=(String) session.getAttribute("city");
 		county= (String)session.getAttribute("county");
-		if(county!=null){
+		if(county.length()>0){
 			 place=county;
 		}else{
 			place=city;
@@ -263,7 +269,7 @@ public class IntegratedQueryController {
 		year = (String) session.getAttribute("year");    
 		city=(String) session.getAttribute("city");
 		county= (String)session.getAttribute("county");
-		if(county!=null){
+		if(county.length()>0){
 			 place=county;
 		}else{
 			place=city;
@@ -313,7 +319,7 @@ public class IntegratedQueryController {
 		city=(String) session.getAttribute("city");
 		county= (String)session.getAttribute("county");
 		 
-		if(county!=null){
+		if(county.length()>0){
 			 place=county;
 		}else{
 			place=city;
@@ -553,6 +559,9 @@ public class IntegratedQueryController {
 			year = (String) session.getAttribute("year");    
 			city=(String) session.getAttribute("city");
 			county= (String)session.getAttribute("county");
+			System.out.println(year);
+			System.out.println(city);
+			System.out.println(county);
 		if(county!=null){
 			 place=county;
 		}else{
@@ -560,7 +569,7 @@ public class IntegratedQueryController {
 		}
 		
 		 List<GFReference> gfreference=	integratedQueryService.getReference(year,place,response);
-			
+			System.out.println(gfreference.size());
 		
 		try {
 			request.setCharacterEncoding("utf-8");

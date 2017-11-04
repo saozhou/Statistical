@@ -1,6 +1,7 @@
 package com.zmst.Controller;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -46,13 +47,14 @@ public class TaxCaculateController {
 			year = (String) session.getAttribute("year");    
 			city=(String) session.getAttribute("city");
 			county= (String)session.getAttribute("county");
-			if(county!=null){
+	 
+			if(county.length()>0){
 				 place=county;
 			}else{
 				place=city;
 			}
-		
-	    List<SubTax> allcentral =	taxService.getSubTaxt(year,place,response);
+			List<SubTax> allcentral = new ArrayList<SubTax>();
+      allcentral =	taxService.getSubTaxt(year,place,response);
 	    
 		 try {
 				request.setCharacterEncoding("utf-8");
@@ -62,10 +64,11 @@ public class TaxCaculateController {
 			}  //这里不设置编码会有乱码
 		      response.setContentType("text/html;charset=utf-8");
 			  String json = JSON.toJSONString(allcentral);
-			  if(allcentral.size()==0){
+	 
+			  if(allcentral!=null){
 				  
 			  
-			  HttpReturn.reponseBody(response, json);;
+			  HttpReturn.reponseBody(response, json);
 	}
 	}
 }

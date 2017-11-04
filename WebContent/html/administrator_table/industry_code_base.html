@@ -1,51 +1,55 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-		<link rel="stylesheet" href="../../css/bootstrap.min.css" />
-		<link rel="stylesheet" href="../../css/administrator_table.css" />
-		<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
-		<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="../../js/administrator_table.js"></script>
-		<script type="text/javascript" src="../../js/administrator_table/industry_code_base.js"></script>
-		<style>
-			.footer .footer-bt {
-				display: none;
-			}
-		</style>
-	</head>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" href="../../css/bootstrap.min.css" />
+<link rel="stylesheet" href="../../css/administrator_table.css" />
+<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../js/administrator_table.js"></script>
+<script type="text/javascript"
+	src="../../js/administrator_table/industry_code_base.js"></script>
+<style>
+.footer .footer-bt {
+	display: none;
+}
+</style>
+</head>
 
-	<body onresize="resize()">
-		<div class="body">
-			<!--提示信息（正在加载、加载失败）-->
-			<div class="tip">
-				<img src="../../img/loading.png" />
-				<p></p>
-			</div>
-			<div class="table-div">
-				<table cellpadding="0" cellspacing="0">
-					<thead>
-						<tr>
-							<th colspan="3">行业代码库</th>
-						</tr>
-						<tr>
-							<th>行业代码</th>
-							<th>行业名称</th>
-							<th>行业规模</th>
-						</tr>
-					</thead>
+<body onresize="resize()">
+	<div class="body">
+		<!--提示信息（正在加载、加载失败）-->
+		<div class="tip">
+			<img src="../../img/loading.png" />
+			<p></p>
+		</div>
+		<div class="table-div">
+			<table cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<th colspan="2">行业代码库</th>
+					</tr>
+					<tr>
+						<th>行业代码</th>
+						<th>行业指标</th>
+					</tr>
+				</thead>
 
-					<tbody style="max-height: 600px;"></tbody>
-				</table>
-			</div>
+				<tbody></tbody>
+			</table>
 		</div>
-		<div class="footer">
-			<button class="footer-bt download" onclick="download()">下载</button>
-			<button class="footer-bt upload" onclick="upload()">上传</button>
-			<input class="upload-input" type="file" />
-		</div>
-	</body>
+	</div>
+	<div class="footer">
+		<button class="footer-bt download" onclick="download()">下载</button>
+		<button class="footer-bt upload" onclick="upload()">上传</button>
+		<form class="upload-form" action="/Statistic/FileUpload/landTaxUpload"
+			method="post" enctype="multipart/form-data">
+			<input type="file" name="file" class="file" /> <input type="submit"
+				value="上传" class="submit" />
+		</form>
+	</div>
+</body>
 
 </html>

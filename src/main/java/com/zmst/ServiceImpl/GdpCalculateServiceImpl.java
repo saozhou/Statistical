@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.fastjson.JSON;
 import com.zmst.Domain.AllCodeDictionary;
 import com.zmst.Domain.ClassGdp;
 import com.zmst.Domain.ClassTax;
@@ -79,15 +80,19 @@ public class GdpCalculateServiceImpl implements GdpCalculateService {
 	    List<SubTax>subTaxList = subTaxDao.findSubTaxByYearPlace(year, place);
 	    
 	    if(subTaxList.size()==0){
-	    	 
-	    	HttpReturn.reponseBody(response, "小类税收未计算");
+	    	   String json = JSON.toJSONString("小类税收未计算");
+	    	   HttpReturn.reponseBody(response, json);
+	    
 	    	return null;
 	    }
 		
 		List<Gdp>gdpList = gdpDao.getAllGdp(year,place);
 		
 		  if(gdpList.size()==0){
-		    	HttpReturn.reponseBody(response, "gdp表未上传");
+			  
+			  String json = JSON.toJSONString("gdp表未上传");
+	    	   HttpReturn.reponseBody(response, json);
+
 		    	return null;
 		    }
 		

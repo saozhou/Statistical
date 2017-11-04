@@ -27,16 +27,14 @@
 	font-size: 42px;
 }
 
-.year,
-.area {
+.year, .area {
 	z-index: 2;
 	float: right;
 	margin-right: 20px;
 	margin-top: 25px;
 }
 
-.year-bt,
-.area-bt {
+.year-bt, .area-bt {
 	background-color: rgb(104, 174, 0);
 	color: white;
 	font-size: 16px;
@@ -47,8 +45,7 @@
 	transition: background-color 0.5s;
 }
 
-.year-bt .caret,
-.area-bt .caret {
+.year-bt .caret, .area-bt .caret {
 	position: relative;
 	top: -2px;
 	left: 8px;
@@ -77,10 +74,8 @@
 	background-color: #ccc;
 }
 
-.year-bt:hover,
-.area-bt:hover {
+.year-bt:hover, .area-bt:hover {
 	background-color: cornflowerblue;
-	color: white;
 }
 
 .head .year-area {
@@ -88,8 +83,7 @@
 	margin-top: 15px;
 }
 
-.head .cur-year,
-.head .cur-area {
+.head .cur-year, .head .cur-area {
 	margin: 0;
 	padding: 0;
 	margin-left: 30px;
@@ -97,8 +91,23 @@
 	font-size: 18px;
 }
 
-.head .cur-area span,
-.head .cur-year span {
+.head .cur-area .area-asure {
+	font-size: 16px;
+	color: white; border : 1px solid #aaa;
+	border-radius: 5px;
+	margin-left: 20px;
+	background-color: #888;
+	padding: 0px 12px;
+	border: none;
+	transition: background-color 0.5s;
+	outline:none;
+}
+
+.head .cur-area .area-asure:hover {
+	background-color: cornflowerblue;
+}
+
+.head .cur-area span, .head .cur-year span {
 	font-size: 16px;
 	color: #777;
 }

@@ -15,11 +15,11 @@
     <result column="TPSum" jdbcType="DOUBLE" property="tpsum" />
   </resultMap>
   <sql id="Base_Column_List">
-    GFid, Place, Year, AvSpend, SpDay, CPASpend, LiPeople,TPSum YSDay, FSta, GSta 
+    GFid, Place, Year, AvSpend, SpDay, CPASpend, LiPeople,TPSum,YSDay, FSta, GSta 
   </sql>
   
     <sql id="List_First">
-     AvSpend, SpDay, CPASpend, LiPeople, YSDay,TPSumFSta, GSta 
+     AvSpend, SpDay, CPASpend, LiPeople, YSDay,TPSum,FSta, GSta 
   </sql>
   
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">

@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$(".calculate").css("display","initial");
+	$(".calculate").css("display", "initial");
 	init();
 });
 
@@ -13,37 +13,50 @@ function resize() {
 	$('.table-div td:nth-child(3)').width(_width * 0.4);
 }
 
-//TODO:计算
+// TODO:计算
 function calculate() {
 	$(".body").css("display", "block");
 	loading("正在计算...");
-	var url = 'http://192.168.1.102:8080/Statistic/taxCaculate/subTaxGet';
+	var code = '';
+	var url = '/Statistic/taxCaculate/subTaxGet';
 	var json = '';
 
 	$.ajax({
-		url: url,
-		type: "post",
-		dataType: "json",
-		data: json,
-		cache: false,
-		async: true,
-		contentType: "application/json; charset=utf-8",
-		success: function(data, textStatus, jqXHR) {
-			if('success' == textStatus) {
-				//加载成功
-				loadSuccess();
-
-				//遍历数据生成表格
-				code += '<tr>';
-				code += '<td contentEditable="true">' + '</td>';
-				code += '<td contentEditable="true">' + '</td>';
-				code += '<td contentEditable="true">' + '</td>';
-				code += '</tr> ';
-
+		url : url,
+		type : "post",
+		dataType : "json",
+		data : json,
+		cache : false,
+		async : true,
+		contentType : "application/json; charset=utf-8",
+		success : function(data, textStatus, jqXHR) {
+			if ('success' == textStatus) {
+				if (data == "地税表未上传") {
+					failure("地税表未上传");
+					return;
+				} else if (data == "国税表未上传") {
+					failure("国税表未上传");
+					return;
+				}else if (data == "代码库未上传") {
+					failure("代码库未上传");
+					return;
+				}
+				// 遍历数据生成表格
+				$.each(data, function(i, n) {
+					code += '<tr>';
+					code += '<td>' + n.smcode + '</td>';
+					code += '<td>' + n.smname + '</td>';
+					code += '<td>' + n.smtax + '</td>';
+					code += '</tr> ';
+				});
+				$(".body table tbody tr").remove();
 				$(".body table tbody").append(code);
+
+				// 加载成功
+				loadSuccess();
 			}
 		},
-		error: function(XMLHttpRequest, textStatus, errorThrown) {
+		error : function(XMLHttpRequest, textStatus, errorThrown) {
 			failure("计算失败");
 		}
 	});

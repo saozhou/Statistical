@@ -6,7 +6,7 @@ function closeTip() {
 	$(".tip").css("display", "none");
 }
 
-//TODO：加载成功显示表格
+// TODO：加载成功显示表格
 function loadSuccess() {
 	closeTip();
 	$(".table-div").css("visibility", "visible");
@@ -21,10 +21,10 @@ function loadSuccess() {
 	resize();
 }
 
-//TODO:上传失败
+// TODO:上传失败
 function uploadSuccess() {
 }
-//TODO:显示提示信息
+// TODO:显示提示信息
 function showTip() {
 	window.clearInterval(rotate);
 	$(".tip").css("opacity", "1");
@@ -35,7 +35,7 @@ function showTip() {
 var rotate;
 
 function rotateLoading() {
-	if(rotate != null)
+	if (rotate != null)
 		window.clearInterval(rotate);
 }
 function loading(str) {
@@ -48,12 +48,12 @@ function loading(str) {
 	rotate = setInterval(function() {
 		$(".tip img").css("transform", "rotate(" + count * deg + "deg)");
 		count++;
-		if(count == 360 / deg)
+		if (count == 360 / deg)
 			count = 1;
 	}, 100);
 }
 
-//TODO：加载成功
+// TODO：加载成功
 function loadSuccess() {
 	$(".tip img").attr("src", "");
 	$(".tip p").text("加载成功");
@@ -69,18 +69,18 @@ function loadSuccess() {
 	showUploadBt();
 	resize();
 }
-//TODO:失败
+// TODO:失败
 function failure(str) {
 	window.clearInterval(rotate);
 	$(".tip img").attr("src", "../../img/failure.png");
 	$(".tip img").css("transform", "rotate(0deg)");
 	$(".tip p").text(str);
 }
-//TODO:上传成功
+// TODO:上传成功
 function uploadSuccess() {
 	closeTip();
 }
-//TODO:上传失败
+// TODO:上传失败
 function uploadFailure() {
 	window.clearInterval(rotate);
 	$(".tip img").attr("src", "../../img/failure.png");
@@ -88,12 +88,22 @@ function uploadFailure() {
 	$(".tip p").text("上传失败");
 }
 
-//TODO:显示上传按钮
+// TODO:显示上传按钮
 function showUploadBt() {
 	$(".upload").css("display", "initial");
 }
 
-//TODO:显示下载按钮
+// TODO:显示下载按钮
 function showDownloadBt() {
 	$(".download").css("display", "initial");
+}
+
+// TODO:显示打印按钮
+function showPrintBt() {
+	$(".print").css("display", "initial");
+}
+
+// TODO:隐藏打印按钮
+function hiddenPrintBt() {
+	$(".print").css("display", "none");
 }

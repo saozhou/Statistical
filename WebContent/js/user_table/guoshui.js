@@ -13,9 +13,16 @@ function resize() {
 	$('.table-div th:nth-child(3)').width(_width * 0.4);
 	$('.table-div td:nth-child(3)').width(_width * 0.4);
 }
-
+var dataObj;
+var start = 0;
+var end = 100;
 // TODO：获取表格内容
 function getContent() {
+	if (bg_load != null) {
+		start = 0;
+		end = 100;
+		window.clearInterval(bg_load);
+	}
 	loading("正在加载...");
 	var code = '';
 	var url = '/Statistic/BaseQuery/centralTaxGet';
@@ -35,14 +42,21 @@ function getContent() {
 					failure("国税表未上传");
 					showUploadBt();
 					return;
+				} else {
+					dataObj = data;
 				}
 				// 遍历数据生成表格
 				$.each(data, function(i, n) {
-					code += '<tr>';
-					code += '<td>' + n.smcode + '</td>';
-					code += '<td>' + n.smname + '</td>';
-					code += '<td contentEditable="true">' + n.cntax + '</td>';
-					code += '</tr> ';
+					if (i >= start && i <= end) {
+						code += '<tr>';
+						code += '<td>' + n.smcode + '</td>';
+						code += '<td>' + n.smname + '</td>';
+						code += '<td contentEditable="true">' + n.cntax
+								+ '</td>';
+						code += '</tr> ';
+					} else {
+						return;
+					}
 				});
 				$(".body table tbody tr").remove();
 				$(".body table tbody").append(code);
@@ -50,6 +64,9 @@ function getContent() {
 				loadSuccess();
 				showUploadBt();
 				tdChangeEvent();
+				start = end + 1;
+				end += 100;
+				bgLoad();
 			}
 		},
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
@@ -57,6 +74,36 @@ function getContent() {
 			showUploadBt();
 		}
 	});
+}
+
+// TODO:后台继续加载剩余数据
+var bg_load;
+function bgLoad() {
+
+	bg_load = setInterval(function() {
+		var code = '';
+		$.each(dataObj, function(i, n) {
+
+			if (i >= start && i <= end) {
+				code += '<tr>';
+				code += '<td>' + n.smcode + '</td>';
+				code += '<td>' + n.smname + '</td>';
+				code += '<td contentEditable="true">' + n.cntax + '</td>';
+				code += '</tr> ';
+			} else {
+				return;
+			}
+			if (i == dataObj.length - 1) {
+				window.clearInterval(bg_load);
+				return;
+			}
+		});
+		start = end + 1;
+		end += 100;
+		$(".body table tbody").append(code);
+		tdChangeEvent();
+	}, 500);
+
 }
 
 // TODO:上传
@@ -84,6 +131,8 @@ function upload() {
 					getContent();
 				}, 2000);
 				return;
+			} else {
+				failure(res);
 			}
 		}).fail(function(res) {
 			showTip();

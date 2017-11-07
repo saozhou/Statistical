@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="../../css/bootstrap.min.css" />
 <link rel="stylesheet" href="../../css/user_table.css" />
 <script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="../../js/jquery.PrintArea.js"></script>
 <script type="text/javascript" src="../../js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../../js/user_table.js"></script>
 <script type="text/javascript"
@@ -29,6 +30,25 @@
 			<p>正在加载...</p>
 		</div>
 		<div class="table-div">
+			<style>
+table {
+	border: 1px solid #999;
+	border-top: none;
+	text-align: center;
+	font-size: 16px;
+}
+
+th, td {
+	border-bottom: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	padding: 2px 0;
+}
+
+th {
+	border-top: 2px solid #ccc;
+	padding: 5px 0;
+}
+</style>
 			<table cellpadding="0" cellspacing="0">
 				<thead>
 					<tr>
@@ -50,7 +70,7 @@
 	<div class="footer">
 		<button class="footer-bt download" onclick="download(13)">下载</button>
 		<button class="footer-bt find" onclick="find()">查询</button>
-		<button class="footer-bt print" onclick="print()">打印</button>
+		<button class="footer-bt print" onclick="printPager()">打印</button>
 	</div>
 </body>
 

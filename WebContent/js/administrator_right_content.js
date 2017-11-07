@@ -126,8 +126,11 @@ function areaChangeSave() {
 		json += ',"province":"' + province + '"';
 	if (city != "")
 		json += ',"city":"' + city + '"';
-	if (county != "")
+	if (county != "" && county != "县区") {
 		json += ',"county":"' + county + '"';
+	} else {
+		json += ',"county":"' + "" + '"';
+	}
 	json += '}';
 
 	$.ajax({

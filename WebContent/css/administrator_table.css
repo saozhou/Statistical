@@ -97,6 +97,7 @@ body {
 	border: none;
 	transition: background-color 0.5s;
 	outline: none;
+	display: none;
 }
 
 .footer button:hover {
@@ -108,10 +109,11 @@ body {
 }
 
 .footer .print {
+	margin-right: 60px;
+}
+
+.footer .upload {
 	margin-left: 60px;
-	visibility: hidden;
-	opacity: 0;
-	transition: opacity 1s;
 }
 
 .footer .back {
@@ -212,4 +214,84 @@ body {
 .area-select ul li:hover {
 	background-color: cornflowerblue;
 	color: white;
+}
+
+.area-div {
+	width: 40%;
+	margin: 0 auto;
+}
+
+.area-div span {
+	float: left;
+}
+
+.area-div button {
+	float: right;
+	background-color: rgb(0, 179, 139);
+	transition: background-color 0.5s;
+	color: white;
+	border-radius: 5px;
+	padding: 2px 15px;
+	outline: none;
+	border: none;
+}
+
+.area-div button:hover {
+	background-color: cornflowerblue;
+}
+
+.area-select-cover {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(60, 60, 60, 0.5);
+	display: none;
+}
+
+.area-box {
+	width: 720px;
+	height: 360px;
+	margin: 0 auto;
+	margin-top: 160px;
+	border-radius: 10px;
+	background-color: rgb(230, 230, 230);
+}
+
+.ic-area-select {
+	width: 600px;
+	height: 200px;
+	position: relative;
+	margin: 0 auto;
+	top: 20px;
+}
+
+.bt-group {
+	width: 28%;
+	margin: 0 auto;
+	margin-top: 80px;
+	background-color: green;
+}
+
+.bt-group button {
+	background-color: rgb(0, 179, 139);
+	transition: background-color 0.5s;
+	color: white;
+	border-radius: 5px;
+	padding: 5px 20px;
+	outline: none;
+	border: none;
+}
+
+.bt-group button:hover {
+	background-color: cornflowerblue;
+}
+
+.bt-group button:first-child {
+	float: left;
+}
+
+.bt-group button:nth-child(2) {
+	float: right;
 }

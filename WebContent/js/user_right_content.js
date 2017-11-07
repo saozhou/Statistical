@@ -19,8 +19,8 @@ function init() {
 	datamath = url.split("?")[5].split("=")[1];
 	datasearch = url.split("?")[6].split("=")[1];
 	datacheck = url.split("?")[7].split("=")[1];
-	
-	var firstTab=$(".first-tab");
+
+	var firstTab = $(".first-tab");
 	for (var i = 0; i < 4; i++) {
 		switch (i) {
 		case 0:
@@ -54,8 +54,13 @@ function init() {
 	}
 	$(".cur-year span").text(cur_year);
 	var str = area.split(",");
-	for (var i = 0; i < str.length; i++)
+	for (var i = 0; i < str.length; i++) {
+		if (str[i] == "") {
+			$(".cur-area span").eq(i).text("请选择");
+			break;
+		}
 		$(".cur-area span").eq(i).text(str[i] + " ");
+	}
 	$(".logo p").text(userType);
 	register_event();
 	register_area_event();
@@ -174,8 +179,11 @@ function areaChangeSave() {
 		json += ',"province":"' + province + '"';
 	if (city != "")
 		json += ',"city":"' + city + '"';
-	if (county != "")
+	if (county != "" && county != "县区") {
 		json += ',"county":"' + county + '"';
+	} else {
+		json += ',"county":"' + "" + '"';
+	}
 	json += '}';
 
 	$.ajax({

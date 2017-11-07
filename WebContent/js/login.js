@@ -65,7 +65,7 @@ function register_event() {
 				} else if ($(".year span").text() == "年份") {
 					alert("请选择年份");
 					return;
-				} else if ($(".user-type span").text() != "管理员") {
+				} else if ($(".user-type span").text() == "普通用户") {
 					if ($(".city span").text() == "城市") {
 						alert("请选择地区");
 						return;
@@ -75,8 +75,14 @@ function register_event() {
 				var password = $(".password input").val();
 				var year = $(".year-bt span").text();
 				var province = $(".province span").text();
+				if (province == "省份")
+					province = "";
 				var city = $(".city span").text();
+				if (city == "城市")
+					city = "";
 				var county = $(".county span").text();
+				if (county == "县区")
+					county = "";
 				var userpower = 0;
 				switch ($(".user-type span").text()) {
 				case '管理员':
@@ -104,7 +110,7 @@ function user_type_item_click(type) {
 	$(".user-type ul").eq(0).css("opacity", "0");
 	userTypeListIsShow = false;
 	user_type = type;
-	if (type == '管理员') {
+	if (type == '管理员' || type == '超级用户') {
 		$('.area-select').css("height", '0px');
 		$('.area-select button').css("visibility", "hidden");
 		resetSpinner();
@@ -141,52 +147,54 @@ function checkLoginInfo(username, password, userpower, year, province, city,
 	json += ',"county":"' + county + '"';
 	json += '}';
 
-	$.ajax({
-		url : url,
-		type : "post",
-		dataType : "text",
-		data : json,
-		cache : false,
-		async : false,
-		contentType : "application/json; charset=utf-8",
-		success : function(data, textStatus, jqXHR) {
-			if (data == "IndexFail") {
-				alert("密码账号验证失败");
-			} else if (data == "managerView" && userpower != 1) {
-				alert("用户类型错误");
-			} else if (data == "superView" && userpower != 2) {
-				alert("用户类型错误");
-			} else if (data == "normalView" && userpower != 3) {
-				alert("用户类型错误");
-			} else if (data == "failchoise") {
-				alert("地区选择错误");
-			} else {
-				var userType = $(".user-type-bt span").text();
-				var area = $(".country span").text() + ","
-						+ $(".province span").text() + ","
-						+ $(".city span").text() + ","
-						+ $(".county span").text();
-				var year = " " + $(".year span").text();
-				if (userType == "管理员") {
-					var url = "html/administrator.html?year=" + year;
-					location.assign(encodeURI(url));
-				} else {
-					var datainsert = data.substring(0, 1);
-					var datamath = data.substring(1, 2);
-					var datasearch = data.substring(2, 3);
-					var datacheck = data.substring(3, 4);
-					var url = "html/user.html?userType=" + userType + "?area="
-							+ area + "?year=" + year + "?datainsert="
-							+ datainsert + "?datamath=" + datamath
-							+ "?datasearch=" + datasearch + "?datacheck="
-							+ datacheck;
-					location.assign(encodeURI(url));
+	$
+			.ajax({
+				url : url,
+				type : "post",
+				dataType : "text",
+				data : json,
+				cache : false,
+				async : false,
+				contentType : "application/json; charset=utf-8",
+				success : function(data, textStatus, jqXHR) {
+					if (data == "IndexFail") {
+						alert("密码账号验证失败");
+					} else if (data == "managerView" && userpower != 1) {
+						alert("用户类型错误");
+					} else if (data == "superView" && userpower != 2) {
+						alert("用户类型错误");
+					} else if (data == "normalView" && userpower != 3) {
+						alert("用户类型错误");
+					} else if (data == "failchoise") {
+						alert("地区选择错误");
+					} else {
+						var userType = $(".user-type-bt span").text();
+						var country = $(".country span").text();
+						if (country == "国家")
+							country = "";
+						var area = country + "," + province + "," + city + ","
+								+ county;
+						var year = " " + $(".year span").text();
+						if (userType == "管理员") {
+							var url = "html/administrator.html?year=" + year;
+							location.assign(encodeURI(url));
+						} else {
+							var datainsert = data.substring(0, 1);
+							var datamath = data.substring(1, 2);
+							var datasearch = data.substring(2, 3);
+							var datacheck = data.substring(3, 4);
+							var url = "html/user.html?userType=" + userType
+									+ "?area=" + area + "?year=" + year
+									+ "?datainsert=" + datainsert
+									+ "?datamath=" + datamath + "?datasearch="
+									+ datasearch + "?datacheck=" + datacheck;
+							location.assign(encodeURI(url));
+						}
+					}
+
+				},
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+
 				}
-			}
-
-		},
-		error : function(XMLHttpRequest, textStatus, errorThrown) {
-
-		}
-	});
+			});
 }

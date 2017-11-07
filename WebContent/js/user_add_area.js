@@ -157,6 +157,7 @@ function province_list_item_click(pos) {
 // 市级行政区选择列表选项被点击修改显示值
 function city_list_item_click(pos) {
 	var content = $(".city ul li").eq(pos).text();
+	ic_city=content;
 	$(".cur-area span").eq(2).text(content);
 	// 清空省区
 	for(var i = 3; i < 4; i++)
@@ -172,6 +173,7 @@ function city_list_item_click(pos) {
 // 县级行政区选择列表选项被点击修改显示值
 function county_list_item_click(pos) {
 	var content = $(".county ul li").eq(pos).text();
+	ic_county=content;
 	$(".cur-area span").eq(3).text(content);
 	if(content.length > 4)
 		content = content.substring(0, 5);
@@ -199,4 +201,5 @@ function resetSpinner() {
 	$(".city ul").eq(0).css("opacity", "0");
 	$(".county ul").eq(0).css("visibility", "hidden");
 	$(".county ul").eq(0).css("opacity", "0");
+	
 }

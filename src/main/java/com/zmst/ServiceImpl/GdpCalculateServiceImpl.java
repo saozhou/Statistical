@@ -74,7 +74,7 @@ public class GdpCalculateServiceImpl implements GdpCalculateService {
 		
 		 
 		
-		largeGdpList = largeGdpDao.findByYearPlace(year,place);
+		//largeGdpList = largeGdpDao.findByYearPlace(year,place);
 		
 		
 	    List<SubTax>subTaxList = subTaxDao.findSubTaxByYearPlace(year, place);
@@ -88,6 +88,8 @@ public class GdpCalculateServiceImpl implements GdpCalculateService {
 		
 		List<Gdp>gdpList = gdpDao.getAllGdp(year,place);
 		
+		
+		
 		  if(gdpList.size()==0){
 			  
 			  String json = JSON.toJSONString("gdp表未上传");
@@ -95,7 +97,10 @@ public class GdpCalculateServiceImpl implements GdpCalculateService {
 
 		    	return null;
 		    }
+		  
 		
+		 GdpAnalyze.getMiddleLargeGdp(gdpList,largeGdpList,year,place); 
+		  
 		List<Gdp>middleGdpList = GdpAnalyze.getMiddleGdp(gdpList,year,place);
 		
 		
@@ -122,15 +127,15 @@ public class GdpCalculateServiceImpl implements GdpCalculateService {
 	    
 	    largeGdpDao.deleteByYearPlace(year, place);
 	   for(LargeGdp largegdp:largeGdpList){
-		 largeGdpDao.save(largegdp);
-		   System.out.println(largegdp.getLacode()+" "+largegdp.getLaname()+" "+largegdp.getLagdp());
+		    largeGdpDao.save(largegdp);
+		   //System.out.println(largegdp.getLacode()+" "+largegdp.getLaname()+" "+largegdp.getLagdp());
 		}
 		 for(SubGdp sub:subGdpList){
 	    	subGdpDao.save(sub);
 		 }
 		for(ClassGdp cla:classGdpList){
 			classGdpDao.save(cla);
-			 System.out.println(cla.getClcode()+" "+cla.getClname()+" "+cla.getClgdp());
+			 //System.out.println(cla.getClcode()+" "+cla.getClname()+" "+cla.getClgdp());
 		}
 		 
 		return subGdpList;

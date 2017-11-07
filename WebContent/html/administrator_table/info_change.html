@@ -1,43 +1,81 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-		<link rel="stylesheet" href="../../css/bootstrap.min.css" />
-		<link rel="stylesheet" href="../../css/administrator_table.css" />
-		<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
-		<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="../../js/administrator_table.js"></script>
-		<script type="text/javascript" src="../../js/administrator_table/info_change.js"></script>
-	</head>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" href="../../css/bootstrap.min.css" />
+<link rel="stylesheet" href="../../css/administrator_table.css" />
+<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../js/user_add_area.js"></script>
+<script type="text/javascript" src="../../js/administrator_table.js"></script>
+<script type="text/javascript"
+	src="../../js/administrator_table/info_change.js"></script>
+</head>
 
-	<body onresize="resize()">
-		<div class="body">
-			<!--提示信息（正在加载、加载失败）-->
-			<div class="tip">
-				<img src="../../img/loading.png" />
-				<p></p>
-			</div>
-			<div class="table-div">
-				<table cellpadding="0" cellspacing="0">
-					<thead>
-						<tr>
-							<th colspan="3">信息修改</th>
-						</tr>
-						<tr>
-							<th>账号</th>
-							<th>密码</th>
-							<th>地区</th>
-						</tr>
-					</thead>
-					<tbody></tbody>
-				</table>
-			</div>
+<body onresize="resize()">
+	<div class="body">
+		<!--提示信息（正在加载、加载失败）-->
+		<div class="tip">
+			<img src="../../img/loading.png" />
+			<p></p>
 		</div>
-		<div class="footer">
-			
+		<div class="table-div">
+			<table cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<th colspan="3">信息修改</th>
+					</tr>
+					<tr>
+						<th>账号</th>
+						<th>密码</th>
+						<th>地区</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
 		</div>
-	</body>
+	</div>
+	<div class="footer"></div>
+	<div class="area-select-cover">
+		<div class="area-box">
+			<!--地区四级联动start-->
+			<div class="area-select ic-area-select">
+				<!--国家-->
+				<div class="country">
+					<button class="country-bt">
+						<span>国家</span>
+					</button>
+					<ul></ul>
+				</div>
+				<!--省级行政区-->
+				<div class="province">
+					<button class="province-bt">
+						<span>省份</span>
+					</button>
+					<ul></ul>
+				</div>
+				<!--市级行政区-->
+				<!--省级行政区-->
+				<div class="city">
+					<button class="city-bt">
+						<span>城市</span>
+					</button>
+					<ul></ul>
+				</div>
+				<!--县区-->
+				<div class="county">
+					<button class="county-bt">
+						<span>县区</span>
+					</button>
+					<ul></ul>
+				</div>
+			</div>
+			<!--地区四级联动end-->
+			<div class="bt-group"><button onclick="getArea()">确定</button><button onclick="hiddenAreaSelectPop()">返回</button></div>
+		</div>
+	</div>
+</body>
 
 </html>

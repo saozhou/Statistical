@@ -36,29 +36,31 @@ public class ListChangeUtil {
 		 
 	}
 
-	public static List<GFReference> changeGFReference(List<List<String>> list, String year, String place) {
+	public static List<GFReference> changeGFReference(List<List<String>> list, String year, String place, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		 List<GFReference> gfReferenceList = new ArrayList<GFReference>();
 			for(int i=1;i<list.size();i++){
 				List<String>lists=list.get(i);
-               
-                
+              if(lists.size()>=2){
 				GFReference gfreference = new  GFReference();
 				 String industryCode = lists.get(0);
 				 String industryName = lists.get(1);
+				 String coefficient=null;
 				 if(lists.size()==3){
-					 
-				 gfreference.setIncoefficient(lists.get(2));
+					 coefficient=lists.get(2);
+					
+				   gfreference.setIncoefficient(lists.get(2));
 				
 				 }else{
 					 gfreference.setIncoefficient("");
 				 }
 				 gfreference.setIncode(industryCode);
 				 gfreference.setInname(industryName);
-				  
 				 gfreference.setYear(year);
 				 gfreference.setPlace(place);
 				 gfReferenceList.add(gfreference);
+               
+			}
 			}
 		return gfReferenceList;
 	}
@@ -69,13 +71,15 @@ public class ListChangeUtil {
 	 * @param year
 	 * @param place
 	 * @param matchingWay
+	 * @param response 
 	 * @return
 	 * 将地税stringlist转对象list
 	 */
-	public static List<LandTax> changeLandTax(List<List<String>> list, String year, String place, int matchingWay) {
+	public static List<LandTax> changeLandTax(List<List<String>> list, String year, String place, int matchingWay, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		 List<LandTax> landTaxList = new ArrayList<LandTax>();
 		 List<String>strList = list.get(1);
+		 
 		 if(strList.size()==2){
 			 try{
 			     Integer.parseInt(strList.get(0));
@@ -84,9 +88,13 @@ public class ListChangeUtil {
 			  {
 				    matchingWay=2;
 			  }
+		 }else if(strList.size()==3){
+			 matchingWay=3;
 		 }
 		 
+		 double tax;
 			for(int i=1;i<list.size();i++){
+				 tax=0;
 				List<String>lists=list.get(i);
 				if(lists.size()==2){
 				LandTax landTax = new  LandTax();
@@ -95,18 +103,25 @@ public class ListChangeUtil {
 				 }else{
 					 landTax.setSmname(lists.get(0));
 				 }
-				
-					 
-				landTax.setLatax(Double.valueOf(lists.get(1)) );  
-			 
+				   tax=Double.valueOf(lists.get(1));
+				if(tax<0){
+		          HttpReturn.reponseBody(response, lists.get(0)+"税收不可为负数");
+		          return null;
+				}
+				  landTax.setLatax(Double.valueOf(lists.get(1)) );  
 				 landTax.setYear(year);
 				 landTax.setPlace(place);
 				 landTaxList.add(landTax);
-				}else if(list.size()==3){
+				}else if(lists.size()==3){
 					LandTax landTax = new  LandTax();
 						 landTax.setSmcode(lists.get(0));
 						 landTax.setSmname(lists.get(1));
-					landTax.setLatax(Double.valueOf(lists.get(1)) );  
+						 tax=Double.valueOf(lists.get(2));
+						 if(tax<0){
+							 HttpReturn.reponseBody(response,lists.get(0)+"税收不可为负数");
+							 return null;
+						 }
+					landTax.setLatax(Double.valueOf(lists.get(2)) );  
 				 
 					 landTax.setYear(year);
 					 landTax.setPlace(place);
@@ -154,6 +169,7 @@ public class ListChangeUtil {
 						 landTaxList.get(i).setSmname(para.get(landTaxList.get(i).getSmcode()));
 						 if(para.get(landTaxList.get(i).getSmcode())==null){
 							 j=1;
+							 
 							HttpReturn.reponseBody(response, landTaxList.get(i).getSmcode()+"与代码库不相符");
 							break;
 						 }else{
@@ -164,6 +180,7 @@ public class ListChangeUtil {
 					 
 					 if(para.get(landTaxList.get(i).getSmname())==null){
 					    j=1;
+					  
 						HttpReturn.reponseBody(response, landTaxList.get(i).getSmname()+"与代码库不相符");
 						break;
 					 }else{
@@ -181,12 +198,12 @@ public class ListChangeUtil {
 
   }
 
-public static List<CentralTax> changeCentralTax(List<List<String>> list, String year, String place, int matchingWay) {
+public static List<CentralTax> changeCentralTax(List<List<String>> list, String year, String place, int matchingWay, HttpServletResponse response) {
 	// TODO Auto-generated method stub
 	 List<CentralTax> CentralTaxList = new ArrayList<CentralTax>();
 	 
 	 List<String>strList = list.get(1);
-
+    
 	 if(strList.size()==2){
 		 try{
 		     Integer.parseInt(strList.get(0));
@@ -198,8 +215,10 @@ public static List<CentralTax> changeCentralTax(List<List<String>> list, String 
 		      
 		  }
 	 }
-	 
+ 
+	   double tax;
 		for(int i=1;i<list.size();i++){
+			tax=0;
 			List<String>lists=list.get(i);
 			CentralTax centralTax = new  CentralTax();
 			if(lists.size()==2){
@@ -209,7 +228,11 @@ public static List<CentralTax> changeCentralTax(List<List<String>> list, String 
 				 centralTax.setSmname(lists.get(0));
 			 }
 			 
-				 
+			tax = Double.valueOf(lists.get(1));
+			if(tax<0){
+				HttpReturn.reponseBody(response,lists.get(0)+"税收不可为负");
+				return null;
+			}
 			 centralTax.setCntax(Double.valueOf(lists.get(1)) );  
 			 centralTax.setYear(year);
 			 centralTax.setPlace(place);
@@ -218,16 +241,21 @@ public static List<CentralTax> changeCentralTax(List<List<String>> list, String 
 				 
 					 centralTax.setSmcode(lists.get(0));
  
-					 centralTax.setSmname(lists.get(0));
-			 
+					 centralTax.setSmname(lists.get(1));
+			          tax=Double.valueOf(lists.get(2));
+			          if(tax<0){
+			        	  HttpReturn.reponseBody(response,lists.get(0)+"税收不可为负");
+							return null;
+			          }
 				 
 					 
-				 centralTax.setCntax(Double.valueOf(lists.get(1)) );  
+				 centralTax.setCntax(Double.valueOf(lists.get(2)) );  
 				 centralTax.setYear(year);
 				 centralTax.setPlace(place);
 				 CentralTaxList.add(centralTax);
 			}
 			}
+		 
 		return CentralTaxList;
 	 
 	 
@@ -256,6 +284,7 @@ public static int matchingCentralTax(List<CentralTax> list, List<AllCodeDictiona
 				 
 				 if(para.get(list.get(i).getSmcode())==null){
 					 w=1;
+					 
 					HttpReturn.reponseBody(response, list.get(i).getSmcode()+"与代码库不相符");
 					break;
 				 }
@@ -263,6 +292,7 @@ public static int matchingCentralTax(List<CentralTax> list, List<AllCodeDictiona
 			 }else{
 				 
 				 list.get(i).setSmcode(para.get(list.get(i).getSmname()));
+				 System.out.println(list.get(i).getSmname());
 				 if(para.get(list.get(i).getSmname())==null){
 					 w=1;
 					HttpReturn.reponseBody(response, list.get(i).getSmname()+"与代码库不相符");
@@ -277,21 +307,30 @@ public static int matchingCentralTax(List<CentralTax> list, List<AllCodeDictiona
 			 }
    
            }
-	  	System.out.println(w);
+	      
+	  	System.out.println();
 		return w;
 	 
    	
   }
 
-public static List<Gdp> changeGdp(List<List<String>> list, String year, String place) {
+public static List<Gdp> changeGdp(List<List<String>> list, String year, String place, HttpServletResponse response) {
 	// TODO Auto-generated method stub
 	 List<Gdp> gdpList = new ArrayList<Gdp>();
+	 double gdps;
 		for(int i=1;i<list.size();i++){
+			gdps=0;
 			List<String>lists=list.get(i);
 			Gdp gdp = new  Gdp();
 			if(lists.size()==3){
 			gdp.setGdpname(lists.get(0));
 			gdp.setGdpcode(lists.get(1));
+			gdps=Double.valueOf(lists.get(2));
+			if(gdps<0){
+				HttpReturn.reponseBody(response, lists.get(1)+"gdp不能为负");
+				return null;
+			}
+			
 			gdp.setGdp(Double.valueOf(lists.get(2)));
 			gdp.setYear(year);
 			gdp.setPlace(place);
@@ -299,7 +338,7 @@ public static List<Gdp> changeGdp(List<List<String>> list, String year, String p
 			}else{
 				continue;
 			}
-			System.out.println(lists.get(1));
+		
 		}
 		 
 	 

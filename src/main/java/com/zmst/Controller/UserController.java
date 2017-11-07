@@ -4,6 +4,8 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -54,10 +56,11 @@ public class UserController {
 		users.setUsname(username);
 		users.setUspassword(password);
 		users.setUspower(userprower);
-
+       
 		User user = this.userService.findByUser(users);
 		if (user == null) {
 			i = 1;
+		 
 			HttpReturn.reponseBody(response, "IndexFail");
 
 		}
@@ -70,12 +73,13 @@ public class UserController {
 			session.setAttribute("year", map.get("year"));
 			String jsons = String.valueOf(user.getDainsert()) + String.valueOf(user.getDamath())
 					+ String.valueOf(user.getDasearch()) + String.valueOf(user.getDacheck());
+			 
 			if (user.getUspower() == 1) {
 				HttpReturn.reponseBody(response, jsons);
 
 			} else if (user.getUspower() == 2) {
 				HttpReturn.reponseBody(response, jsons);
-
+				 
 			} else {
 
 				String city = map.get("city");
@@ -107,10 +111,12 @@ public class UserController {
 	public void login(HttpServletRequest request, @RequestBody String json, HttpServletResponse response) {
 		Map<String, String> map = Json2Map.JSON2Map(json);
 		String username = map.get("username");
+		String password = map.get("password");
 		int i = 0;
 		int userpower = Integer.valueOf(map.get("userpower"));
+		
 		boolean usernameexit = userService.getSameName(username);
-
+        boolean usernameright = true;
 		String place = map.get("county");
 		if (place == null) {
 			place = map.get("city");
@@ -120,7 +126,18 @@ public class UserController {
 			HttpReturn.reponseBody(response, "用户名已存在");
 			i = 1;
 		}
-		if (i == 0) {
+		
+		if(i==0){
+			Pattern pattern = Pattern.compile("((?=.*[a-zA-Z0-9])(?=.*[@#$%.,]).{6,20})");
+			Matcher matcher = pattern.matcher(password);
+			if(!matcher.find()){
+				HttpReturn.reponseBody(response, "密码不符合规范");
+			   usernameright= false;
+			}
+		 
+		}
+		
+		if (i == 0&&usernameright) {
 			User user = new User();
 			if (userpower == 2) {
 				user.setUspassword(map.get("password"));

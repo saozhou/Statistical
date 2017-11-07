@@ -559,17 +559,16 @@ public class IntegratedQueryController {
 			year = (String) session.getAttribute("year");    
 			city=(String) session.getAttribute("city");
 			county= (String)session.getAttribute("county");
-			System.out.println(year);
-			System.out.println(city);
-			System.out.println(county);
-		if(county!=null){
+			 
+		if(county.length()>0){
 			 place=county;
 		}else{
 			place=city;
 		}
-		
+		System.out.println(city);
+		System.out.println(county);
+		System.out.println(year);
 		 List<GFReference> gfreference=	integratedQueryService.getReference(year,place,response);
-			System.out.println(gfreference.size());
 		
 		try {
 			request.setCharacterEncoding("utf-8");

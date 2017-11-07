@@ -38,7 +38,7 @@ public class TravelGdpCaculate {
 				 subCorfficient=gfReferenceMap.get(subGdp.getSmcode());
 				 					         
 				            if(subCorfficient==null){
-			    	            continue;
+			    	           travelGdpdata=0;
 			                  }else if(subCorfficient.equals("t")){
 									 
 									travelGdpdata = subGdp.getSmgdp();
@@ -117,24 +117,26 @@ public class TravelGdpCaculate {
 		for(int i=0;i<largeMiddleGdp.size();i++){
 			for(int j=0;j<largeTravelGdpList.size();j++){
 				if(largeMiddleGdp.get(i).getLacode().equals(largeTravelGdpList.get(j).getLacode())){
-					largeMiddleGdp.get(i).setLatax(largeTravelGdpList.get(i).getLtgdp());
+					largeMiddleGdp.get(i).setLagdp(largeTravelGdpList.get(j).getLtgdp());
 				}else{
 					continue;
 				}
 			}
 		}
 		
-		double tax=0;
+		double gdp=0;
 		for(int i=0;i<classTravelGdpList.size();i++){
 		
-			tax=0;
+			gdp=0;
 			for(int j=0;j<largeMiddleGdp.size();j++){
 				if(classTravelGdpList.get(i).getClcode().equals(largeMiddleGdp.get(j).getClasscode())){
-					tax=tax+largeMiddleGdp.get(j).getLatax();
+					if(largeMiddleGdp.get(j).getLagdp()!=null)
+					gdp=gdp+largeMiddleGdp.get(j).getLagdp();
+					 
 				}
 			}
-			
-			classTravelGdpList.get(i).setCtgdp(tax);
+			System.out.println(gdp);
+			classTravelGdpList.get(i).setCtgdp(gdp);
 		}
 	}
 

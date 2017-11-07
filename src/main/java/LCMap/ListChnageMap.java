@@ -45,9 +45,10 @@ public class ListChnageMap {
 		 int i=0;
 	      Map<String,String> map=new HashMap<String, String>();  
 	      for(;i<list.size();i++){  
-	    	 
+	    	 if(list.get(i).getIncode().length()==4){
 	        map.put(list.get(i).getInname(), list.get(i).getIncode());  
-	      }  
+	    	 }
+	    	}  
 	      
 	      return map;  
 	}
@@ -57,9 +58,10 @@ public class ListChnageMap {
 		  int i=0;
 	      Map<String,String> map=new HashMap<String, String>();  
 	      for(;i<list.size();i++){  
-	    	 
+	        if(list.get(i).getIncode().length()==4){
 	        map.put(list.get(i).getIncode(), list.get(i).getIncoefficient());  
-	      }  
+	        }
+	        }  
 	      
 	      return map;  
 		 

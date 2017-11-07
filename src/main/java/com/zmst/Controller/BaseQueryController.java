@@ -168,6 +168,9 @@ public class BaseQueryController {
 		year = (String) session.getAttribute("year");
 		city = (String) session.getAttribute("city");
 		county = (String) session.getAttribute("county");
+		System.out.println(year);
+		System.out.println(city);
+		System.out.println(county);
 		System.out.println(4444);
 		if (county.length() > 0) {
 			place = county;

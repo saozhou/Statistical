@@ -28,4 +28,6 @@ public interface GdpMapper {
 	List<Gdp> findByYearPlace(String year, String place);
 
 	List<Object> find(String year, String place);
+
+	void delete(String year, String place);
 }

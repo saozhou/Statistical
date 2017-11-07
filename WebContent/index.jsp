@@ -9,7 +9,7 @@
 </head>  
 <body>  
 	
-    <form action="http://localhost:8080/Statistic/GdpCaculate/subGdpCaculate" method="post" enctype="multipart/form-data">  
+    <form action="http://localhost:8080/Statistic/FileUpload/gfReferenceUpload" method="post" enctype="multipart/form-data">  
   
            选择文件:<input type="file" name="file" width="120px">  
  

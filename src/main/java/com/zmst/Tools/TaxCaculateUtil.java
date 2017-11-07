@@ -289,7 +289,8 @@ public class TaxCaculateUtil {
 		for(int i=0;i<largeMiddleTax.size();i++){
 			for(int j=0;j<largeTravelTaxList.size();j++){
 				if(largeMiddleTax.get(i).getLacode().equals(largeTravelTaxList.get(j).getLacode())){
-					largeMiddleTax.get(i).setLatax(largeTravelTaxList.get(i).getLttax());
+					largeMiddleTax.get(i).setLatax(largeTravelTaxList.get(j).getLttax());
+					System.out.println(largeTravelTaxList.get(j).getLttax());
 				}else{
 					continue;
 				}
@@ -302,6 +303,7 @@ public class TaxCaculateUtil {
 			tax=0;
 			for(int j=0;j<largeMiddleTax.size();j++){
 				if(classTravelTaxList.get(i).getClcode().equals(largeMiddleTax.get(j).getClasscode())){
+				 if(largeMiddleTax.get(j).getLatax()!=null)
 					tax=tax+largeMiddleTax.get(j).getLatax();
 				}
 			}

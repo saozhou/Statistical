@@ -60,9 +60,11 @@ public class SelfDefinedSearchController {
 	@ResponseBody
 	public void DownLoad( HttpServletRequest request,HttpServletResponse response) throws IOException{
 		int type = Integer.parseInt( request.getParameter("type"));
-		String year = "2017";
-		String place ="张家界";
-
+		HttpSession session = request.getSession();	
+		String year = (String) session.getAttribute("year");
+		String place = (String) session.getAttribute("county");
+		if("".equals(place)) place = (String) session.getAttribute("city");
+		
 		String sheetname = "自定义查询表";
 		FileDownloadUtil fileDownloadUtil = new FileDownloadUtil();
 		if((type&64)!=0){

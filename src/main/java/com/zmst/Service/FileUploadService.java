@@ -31,7 +31,7 @@ public interface FileUploadService {
 
 	void saveCodeDictionary(List<AllCodeDictionary> codeDictionary);
 
-	List<GFReference> changeGFReferenceExcel(List<List<String>> list, String place, String year);
+	List<GFReference> changeGFReferenceExcel(List<List<String>> list, String place, String year, HttpServletResponse response);
 
 	List<GFReference> selectGFReferenceByYP(String place, String year);
 
@@ -61,7 +61,7 @@ public interface FileUploadService {
 
 	void saveCentralTax(List<CentralTax> centralTax);
 
-	List<Gdp> changeGdp(List<List<String>> list, String year, String place);
+	List<Gdp> changeGdp(List<List<String>> list, String year, String place, HttpServletResponse response);
 
 	List<Gdp> getOldGdp(String year, String place);
 
@@ -70,6 +70,8 @@ public interface FileUploadService {
 	void saveGdp(List<Gdp> gdpList);
 
 	void gdpAnalyze(List<Gdp> gdpList, String year, String place);
+
+	void deleteGdp(String year, String place);
  
 
 }

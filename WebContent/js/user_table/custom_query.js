@@ -51,6 +51,7 @@ function resize() {
 // TODO：获取表格内容
 var type = 0;
 function getContent() {
+	hiddenPrintBt();
 	$(".tip").css("visibility", "visible");
 	loading("正在查询");
 	// 获取行业规模
@@ -130,6 +131,7 @@ function getContent() {
 				} else {
 					// 加载成功
 					loadSuccess();
+					showPrintBt();
 				}
 
 			}
@@ -165,7 +167,12 @@ function custom_download() {
 	location.href = url;
 }
 
-// TODO:打印
-function print() {
-
+//TODO:打印
+function　printPager(){
+	var link='<link rel="stylesheet" href="../../css/bootstrap.min.css"/>'+
+	'<link rel="stylesheet" href="../../css/user_table.css"/>';
+	$("head link").remove();
+	$("head style").remove();
+	$(".table-div").printArea();
+	$("head").append(link);
 }

@@ -66,7 +66,6 @@ function loadSuccess() {
 	$(".table-div table").css("display");
 	$(".table-div table").css("opacity", "1");
 	showDownloadBt();
-	showPrintBt();
 	resize();
 }
 // TODO:失败
@@ -97,7 +96,10 @@ function showUploadBt() {
 function showDownloadBt() {
 	$(".download").css("display", "initial");
 }
-
+// TODO:显示打印按钮
+function hiddenPrintBt() {
+	$(".print").css("display", "none");
+}
 // TODO:显示打印按钮
 function showPrintBt() {
 	$(".print").css("display", "initial");

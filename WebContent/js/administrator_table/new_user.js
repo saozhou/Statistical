@@ -122,6 +122,9 @@ function su_add() {
 			if (data == "用户名已存在") {
 				failure("用户名已存在");
 				return;
+			} else if (data == "密码不符合规范") {
+				failure("密码不符合规范");
+				return;
 			} else if (data == "添加成功") {
 				$(".tip img").attr("src", "");
 				$(".tip p").text("添加成功");
@@ -144,6 +147,10 @@ function or_add() {
 	var parent = $(".ordinary-user table tbody td");
 	var username = parent.eq(0).text();
 	var password = parent.eq(1).text();
+	if (username == "" || password == "") {
+		alert("用户名和密码不能为空!");
+		return;
+	}
 	var city = $(".ordinary-user table tbody td span").eq(2).text();
 	city = city.replace(" ", "");
 	var county = $(".ordinary-user table tbody td span").eq(3).text();
@@ -182,6 +189,9 @@ function or_add() {
 			isAdding = false;
 			if (data == "用户名已存在") {
 				failure("用户名已存在");
+				return;
+			} else if (data == "密码不符合规范") {
+				failure("密码不符合规范");
 				return;
 			} else if (data == "添加成功") {
 				$(".tip img").attr("src", "");

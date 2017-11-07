@@ -106,6 +106,7 @@ public class FileUploadController {
 		county = (String) session.getAttribute("county");
 		year = (String) session.getAttribute("year");
 
+		
 		fileLevel = fileLevel.substring(fileLevel.indexOf(".") + 1, fileLevel.length());
 		if (county.length()>0) {
 			place = county;
@@ -131,10 +132,10 @@ public class FileUploadController {
 			list = POIUtil.readXls(allPath);
 		if ("xlsx".equals(fileLevel))
 			list = POIUtil.readXlsx(allPath);
-		List<GFReference> gfReference = uploadService.changeGFReferenceExcel(list, place, year);
+		List<GFReference> gfReference = uploadService.changeGFReferenceExcel(list, place, year,response);
 		List<GFReference> oldgfReference = uploadService.selectGFReferenceByYP(place, year);
-
-		if (oldgfReference.size() != 0) {
+        
+		if (oldgfReference != null) {
 			uploadService.deleteGFReference(year, place);
 			deleteService.DeleteTravelTax(year, place);
 			deleteService.DeleteTravelGdp(year, place);
@@ -244,7 +245,8 @@ public class FileUploadController {
 		city = (String) session.getAttribute("city");
 		county = (String) session.getAttribute("county");
 		String fileLevel = file.getOriginalFilename();
-		
+		 
+		 
 		int matchingWay =1;
 		if (county!=null) {
 			place = county;
@@ -271,7 +273,7 @@ public class FileUploadController {
 		List<LandTax> landTax = uploadService.changeLandTax(list, year, place, matchingWay, response);
 		List<LandTax> oldLandTax = null;
 		oldLandTax = uploadService.getLandTax(year, place);
-		if (landTax.size() != 0) {
+		if (landTax != null) {
 
 			if (oldLandTax.size() != 0) {
 				uploadService.updateLandTax(landTax, year, place);
@@ -315,7 +317,7 @@ public class FileUploadController {
 		String fileLevel = file.getOriginalFilename();
 		int matchingWay =1;// 匹配方式
 		
-		System.out.println(1111111);
+	
 		if (county.length() > 0) {
 			place = county;
 		} else {
@@ -343,7 +345,7 @@ public class FileUploadController {
 		List<CentralTax> oldCentralTax = null;
 		oldCentralTax = uploadService.getCentralTax(year, place);
 
-		if (centralTax.size() != 0) {
+		if (centralTax != null) {
 			if (oldCentralTax.size() != 0) {
 				uploadService.updateCentralTax(centralTax, year, place);
 				deleteService.DeleteTravelTax(year, place);
@@ -356,6 +358,7 @@ public class FileUploadController {
 			}
 			HttpReturn.reponseBody(response, "上传成功");
 		}
+		 
 
 	}
 
@@ -406,22 +409,19 @@ public class FileUploadController {
 			list = POIUtil.readXls(allPath);
 		if ("xlsx".equals(fileLevel))
 			list = POIUtil.readXlsx(allPath);
-		System.out.println(list.size());
-		List<Gdp> gdpList = uploadService.changeGdp(list, year, place);
-		List<Gdp> oldGdpList = null;
-		oldGdpList = uploadService.getOldGdp(year, place);
-		if (gdpList.size() != 0) {
+		List<Gdp> gdpList = uploadService.changeGdp(list, year, place,response);
+	 
+		if (gdpList!=null) {
 
-			if (oldGdpList.size() != 0) {
+			 
 				deleteService.DeleteTravelGdp(year, place);
 				deleteService.DeleteGDP(year, place);
-				uploadService.updateGdp(gdpList, year, place);
-				uploadService.gdpAnalyze(gdpList, year, place);
-
-			} else {
+				//uploadService.updateGdp(gdpList, year, place);
+				//uploadService.gdpAnalyze(gdpList, year, place);
+				uploadService.deleteGdp(year,place);
 				uploadService.saveGdp(gdpList);
-			}
-			HttpReturn.reponseBody(response, "上传成功");
+			   
+			    HttpReturn.reponseBody(response, "上传成功");
 
 		}
 

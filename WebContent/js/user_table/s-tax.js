@@ -12,9 +12,16 @@ function resize() {
 	$('.table-div th:nth-child(3)').width(_width * 0.4);
 	$('.table-div td:nth-child(3)').width(_width * 0.4);
 }
-
+var dataObj;
+var start = 0;
+var end = 100;
 // TODO:计算
 function calculate() {
+	if (bg_load != null) {
+		start = 0;
+		end = 100;
+		window.clearInterval(bg_load);
+	}
 	$(".body").css("display", "block");
 	loading("正在计算...");
 	var code = '';
@@ -37,27 +44,66 @@ function calculate() {
 				} else if (data == "国税表未上传") {
 					failure("国税表未上传");
 					return;
-				}else if (data == "代码库未上传") {
+				} else if (data == "代码库未上传") {
 					failure("代码库未上传");
 					return;
+				} else {
+					dataObj = data;
 				}
+
 				// 遍历数据生成表格
 				$.each(data, function(i, n) {
-					code += '<tr>';
-					code += '<td>' + n.smcode + '</td>';
-					code += '<td>' + n.smname + '</td>';
-					code += '<td>' + n.smtax + '</td>';
-					code += '</tr> ';
+					if (i >= start && i <= end) {
+						code += '<tr>';
+						code += '<td>' + n.smcode + '</td>';
+						code += '<td>' + n.smname + '</td>';
+						code += '<td>' + n.smtax + '</td>';
+						code += '</tr> ';
+					} else {
+						return;
+					}
 				});
+
 				$(".body table tbody tr").remove();
 				$(".body table tbody").append(code);
-
 				// 加载成功
 				loadSuccess();
+				start = end + 1;
+				end += 100;
+				bgLoad();
 			}
 		},
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
 			failure("计算失败");
 		}
 	});
+}
+
+// TODO:后台继续加载剩余数据
+var bg_load;
+function bgLoad() {
+
+	bg_load = setInterval(function() {
+		var code = '';
+		$.each(dataObj, function(i, n) {
+
+			if (i >= start && i <= end) {
+				code += '<tr>';
+				code += '<td>' + n.smcode + '</td>';
+				code += '<td>' + n.smname + '</td>';
+				code += '<td>' + n.smtax + '</td>';
+				code += '</tr> ';
+			} else {
+				return;
+			}
+			if (i == dataObj.length - 1) {
+				window.clearInterval(bg_load);
+				return;
+			}
+		});
+		start = end + 1;
+		end += 100;
+		$(".body table tbody").append(code);
+	}, 1500);
+
 }

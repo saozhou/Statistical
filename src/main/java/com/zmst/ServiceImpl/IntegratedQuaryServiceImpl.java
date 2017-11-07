@@ -437,7 +437,7 @@ public List<AllCodeDictionary> getAllCode(HttpServletResponse response) {
 @Override
 public List<GFReference> getReference(String year, String place, HttpServletResponse response) {
 	// TODO Auto-generated method stub
-	
+	System.out.println(year+place);
 	List<GFReference> gf = gfReferenceDao.selectByYearAndPlace(year, place);
 	if(gf.size()==0){
  

@@ -19,6 +19,7 @@ function resize() {
 
 // TODO：查找
 function find() {
+	hiddenPrintBt();
 	showBody();
 	loading("正在查询...");
 	var code = '';
@@ -56,6 +57,7 @@ function find() {
 				$(".body table tbody").append(code);
 				// 加载成功
 				loadSuccess();
+				showPrintBt();
 			}
 		},
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
@@ -65,6 +67,11 @@ function find() {
 }
 
 // TODO:打印
-function print() {
-
+function　printPager(){
+	var link='<link rel="stylesheet" href="../../css/bootstrap.min.css"/>'+
+	'<link rel="stylesheet" href="../../css/user_table.css"/>';
+	$("head link").remove();
+	$("head style").remove();
+	$(".table-div").printArea();
+	$("head").append(link);
 }

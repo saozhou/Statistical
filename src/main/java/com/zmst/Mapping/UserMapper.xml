@@ -21,7 +21,7 @@
     select 
     <include refid="Base_Column_List" />
     from tbl_user
-    where UsName=#{usname,jdbcType=VARCHAR} and UsPassword=#{uspassword,jdbcType=VARCHAR}
+    where UsName=#{usname,jdbcType=VARCHAR} and UsPassword=#{uspassword,jdbcType=VARCHAR} and UsPower=#{uspower,jdbcType=INTEGER}
   </select>
   
   <select id="selectByUserName" parameterType="java.lang.String" resultMap="BaseResultMap">

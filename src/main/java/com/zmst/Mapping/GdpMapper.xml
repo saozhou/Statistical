@@ -39,7 +39,7 @@
   </select>
   
   
-    <delete id="deleteByYearPlace">
+    <delete id="delete">
     delete from tbl_gdp
     where year = #{0} and place=#{1}
     </delete> 

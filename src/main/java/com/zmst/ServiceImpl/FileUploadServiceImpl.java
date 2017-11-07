@@ -85,10 +85,10 @@ public class FileUploadServiceImpl implements FileUploadService {
 		}
 	}
 
-	public List<GFReference> changeGFReferenceExcel(List<List<String>> list,String place,String year) {
+	public List<GFReference> changeGFReferenceExcel(List<List<String>> list,String place,String year,HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		List<GFReference>gfReference = new ArrayList<GFReference>();
-		gfReference = ListChangeUtil.changeGFReference(list,year,place);
+		gfReference = ListChangeUtil.changeGFReference(list,year,place, response);
 		return gfReference;
 		 
 	}
@@ -137,9 +137,13 @@ public class FileUploadServiceImpl implements FileUploadService {
 	public List<LandTax> changeLandTax(List<List<String>> list, String year, String place,int matchingWay,HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		int log=0;
-		List<LandTax>landTaxList = ListChangeUtil.changeLandTax(list,year,place, matchingWay);
-		List<AllCodeDictionary>codeDictionary=codeDictionaryDao.selectAll();
-		 
+		int t=0;
+		List<LandTax>landTaxList = ListChangeUtil.changeLandTax(list,year,place, t,response);
+		if(landTaxList==null){
+			return null;
+		}
+		
+		List<AllCodeDictionary>codeDictionary=codeDictionaryDao.selectAll(); 
 		log=ListChangeUtil.matchingLandTax(landTaxList,codeDictionary,matchingWay,log, response);
 		if(log==1){
 			return null;
@@ -171,8 +175,11 @@ public class FileUploadServiceImpl implements FileUploadService {
 	public List<CentralTax> changeCentralTax(List<List<String>> list, String year, String place, int matchingWay,HttpServletResponse response,int i) {
 		// TODO Auto-generated method stub
 
-		List<CentralTax>centralTaxList = ListChangeUtil.changeCentralTax(list,year,place, matchingWay);
+		List<CentralTax>centralTaxList = ListChangeUtil.changeCentralTax(list,year,place, matchingWay,response);
 		List<AllCodeDictionary>codeDictionary=codeDictionaryDao.selectAll();
+		 if(centralTaxList==null){
+			 return null;
+		 }
         i =	ListChangeUtil.matchingCentralTax(centralTaxList,codeDictionary,matchingWay,response,i);
         if(i==1){
         	return null;
@@ -202,9 +209,9 @@ public class FileUploadServiceImpl implements FileUploadService {
 		}
 	}
 
-	public List<Gdp> changeGdp(List<List<String>> list, String year, String place) {
+	public List<Gdp> changeGdp(List<List<String>> list, String year, String place,HttpServletResponse response) {
 		// TODO Auto-generated method stub
-		List<Gdp>gdplist = ListChangeUtil.changeGdp(list,year,place);
+		List<Gdp>gdplist = ListChangeUtil.changeGdp(list,year,place,response);
 		return gdplist;
 	}
 
@@ -251,6 +258,12 @@ public class FileUploadServiceImpl implements FileUploadService {
 			largeGdpDao.save(largegdp);
 		}
 		 
+	}
+
+	@Override
+	public void deleteGdp(String year, String place) {
+		// TODO Auto-generated method stub
+		gdpDao.delete(year,place);
 	}
     
 	
